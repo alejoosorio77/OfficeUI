@@ -1,0 +1,29 @@
+{
+  "name": "OfficeUI.Beta",
+  "version": "1.0.0",
+  "description": "OfficeUI.Beta aims to recreate the Office User Interface components like Microsoft is using them in their Office applications, but then for web applications.",
+  "keywords": [
+    "Office",
+    "OfficeUI",
+    "User",
+    "Interface",
+    "Microsoft"
+  ],
+  "authors": [
+    "Kevin De Coninck"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "Bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.14",
+    "fontawesome": "~4.3.0",
+    "jquery": "~2.1.3"
+  }
+}
