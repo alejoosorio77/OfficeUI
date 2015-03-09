@@ -1,0 +1,23 @@
+{
+  "name": "NodeJS",
+  "version": "1.0.0",
+  "description": "Contains all the NPM packages which are required by this application.",
+  "main": "index.js",
+  "dependencies": {
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "jspath": "^0.3.1",
+    "jasmine-jquery": "^2.0.6",
+    "karma-jasmine": "^0.3.5",
+    "karma-chrome-launcher": "^0.1.7",
+    "less": "^2.4.0",
+    "karma-jasmine-jquery": "^0.1.1",
+    "yuicompressor": "^2.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
