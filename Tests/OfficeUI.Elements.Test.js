@@ -10,10 +10,11 @@
 describe("Unit: OfficeUI Elements", function() {
     // Provides a section to define code to execute before every test is executed.
     beforeEach(function() {
-    });
-
-    it("A class 'ie-fix' should be added to any 'a href' which is marked with a 'button' class when you click the element.", function() {
         jasmine.getFixtures().fixturesPath = 'base/Tests/Fixtures/';
         loadFixtures('OfficeUI.Elements.Button.Test.html');
     });
+
+    //it("A class 'ie-fix' should be added to any 'a href' which is marked with a 'button' class when you click the element.", function() {
+
+    //});
 });

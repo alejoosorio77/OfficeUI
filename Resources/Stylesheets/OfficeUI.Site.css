@@ -1,0 +1,200 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+/* ====================================================================================================
+ * Filename:      OfficeUI.Site.less
+ * Author:        Kevin De Coninck
+ * Date Created:  10/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Site.less file is the main file in which all the styling for the website
+ *                can be found. You need to keep in mind that everything that can be found in this
+ *                stylesheet doesn't affect the contents of the OfficeUI project. This file is used
+ *                for writing the documentation and API.
+======================================================================================================= */
+/* ----- Import Statements. ---- */
+/* ----- Website contents. ----- */
+/* -- General elements. -- */
+body,
+html {
+  height: 100%;
+  color: #2a2a2a;
+  font-family: 'Segoe UI', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+body {
+  background: #fff;
+  line-height: 1.5;
+}
+a,
+a:visited {
+  color: #1364c4;
+  text-decoration: none;
+}
+a.active {
+  color: #000;
+  cursor: default;
+  font-weight: bold;
+}
+/* Defines the height on all the required elements. This is needed to have a good looking website. */
+#site {
+  height: 100%;
+}
+#content .article {
+  height: 100%;
+}
+/* -- Site Container -- */
+.site-top-bar {
+  padding: 10px 0 0 20px;
+}
+.navigation ul li {
+  height: 25px;
+  vertical-align: top;
+}
+.navigation ul ul,
+.navigation ul ul ul {
+  margin-left: 15px;
+}
+/* -- Header of the site. -- */
+#site header {
+  background-color: #000;
+  height: 64px;
+}
+#site header .logo {
+  color: #fff;
+  font-weight: 600;
+}
+#site header .logo img {
+  height: 16px;
+  vertical-align: middle;
+}
+#site header .logo span {
+  vertical-align: middle;
+}
+#site header .tagline {
+  color: #aaaaaa;
+  font-size: 19px;
+}
+/* -- Content on the website. -- */
+#content {
+  padding: 40px;
+}
+#content .navigation {
+  float: left;
+  width: 250px;
+}
+#content .article {
+  margin-left: 250px;
+  padding-left: 40px;
+  border-left: 1px solid #ababab;
+}
+/* -- Article on the website. -- */
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+  color: #000;
+}
+article h1 {
+  margin-bottom: 20px;
+}
+article h2 {
+  margin-bottom: 18px;
+}
+article h3 {
+  margin-bottom: 16px;
+}
+article h4 {
+  margin-bottom: 14px;
+}
+article h5 {
+  margin-bottom: 12px;
+}
+article h6 {
+  margin-bottom: 10px;
+}
+article h1 {
+  font-size: 35px;
+}
+article h2 {
+  font-size: 28px;
+}
+article h3 {
+  font-size: 25px;
+}
+article h4 {
+  font-size: 22px;
+}
+article h5 {
+  font-size: 19px;
+}
+article h6 {
+  font-size: 16px;
+}
+article p {
+  padding-bottom: 20px;
+}
+article dl dd {
+  padding-left: 30px;
+  margin-bottom: 15px;
+}
+/* Google Prettify Themes.
+ *
+ * Github Theme - Downloaded from: http://jmblog.github.io/color-themes-for-google-code-prettify/css/themes/github.css
+ *              - References from: http://tune2tech101.blogspot.com/2013/11/awesome-color-themes-google-code.html
+ */
+.prettyprint {
+  background: #fbfbfb;
+  border: 1px solid #ccc;
+  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px !important;
+}
+.pln {
+  color: #333333;
+}
+@media screen {
+  .str {
+    color: #dd1144;
+  }
+  .kwd {
+    color: #333333;
+  }
+  .com {
+    color: #999988;
+  }
+  .typ {
+    color: #445588;
+  }
+  .lit {
+    color: #445588;
+  }
+  .pun {
+    color: #333333;
+  }
+  .opn {
+    color: #333333;
+  }
+  .clo {
+    color: #333333;
+  }
+  .tag {
+    color: navy;
+  }
+  .atn {
+    color: teal;
+  }
+  .atv {
+    color: #dd1144;
+  }
+  .dec {
+    color: #333333;
+  }
+  .var {
+    color: teal;
+  }
+  .fun {
+    color: #990000;
+  }
+}

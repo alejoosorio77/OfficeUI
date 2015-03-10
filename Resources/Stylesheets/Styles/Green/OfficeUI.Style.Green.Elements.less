@@ -1,0 +1,46 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.Green.Elements.less
+ * Author:        Kevin De Coninck
+ * Date Created:  10/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.Green.Elements.less file is a file is used to style various
+ *                elements. The classes in this file does only implements style-based style rules
+ *                such as border colors, background colors, ...
+======================================================================================================= */
+
+/* ----- Import statements ----- */
+@import 'OfficeUI.Style.Green';
+
+/* ----- Buttons ----- */
+/* Notes:
+ * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
+ * The section below gives an explanation about every type of button and also given an example on how to render them.
+ *
+ * Some classes have added 'ie-fix' on the end. This is because some functionalities are not available in all browsers.
+ * Therefore that since class is being added because otherwise the element might not render correctly in Internet
+ * Explorer.
+ *
+ * The class is 'ie-fix' is used to solve the following problems:
+ * -  When you have an anchor <a href="#"> with another element in it, the anchor does not become :active when you
+ *    click on the element itself. In other words, the active class is not bubbling up.
+ *
+ * ==================================================== Example ====================================================
+ * Normal button:
+ *
+ *    Provides a normal button that just contains some plain text.
+ *
+ *    <a href="#" class="button">
+ *        <span>Yes</span>
+ *    </a>
+ * ================================================================================================================= */
+/* -- Normal button -- */
+#OfficeUI a.button { border-color: @defaultGray; }
+#OfficeUI a.button.default-button { background-color: @accentLevelOneColor;  border-color: @accentLevelTwoColor; }
+#OfficeUI a.button:hover { background-color: @accentLevelOneColor; border-color: @accentLevelTwoColor; }
+#OfficeUI a.button:active, #OfficeUI a.button.ie-fix { background-color: @accentLevelTwoColor; border-color: @accentLevelThreeColor; }
+
+/* -- Image button -- */
+
+
+/* ----- Input elements ----- */

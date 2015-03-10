@@ -1,0 +1,58 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.Elements.less
+ * Author:        Kevin De Coninck
+ * Date Created:  10/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Elements.less file does contain various elements that can be placed on
+ *                the website such as buttons, input elements and various others.
+======================================================================================================= */
+/* ----- Buttons ----- */
+/* Notes:
+ * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
+ * The section below gives an explanation about every type of button and also given an example on how to render them.
+ *
+ * Some classes have added 'ie-fix' on the end. This is because some functionalities are not available in all browsers.
+ * Therefore that since class is being added because otherwise the element might not render correctly in Internet
+ * Explorer.
+ *
+ * The class is 'ie-fix' is used to solve the following problems:
+ * -  When you have an anchor <a href="#"> with another element in it, the anchor does not become :active when you
+ *    click on the element itself. In other words, the active class is not bubbling up.
+ *
+ * ==================================================== Example ====================================================
+ * Normal button:
+ *
+ *    Provides a normal button that just contains some plain text.
+ *
+ *    <a href="#" class="button">
+ *        <span>Yes</span>
+ *    </a>
+ *
+ * Normal button (defaulted):
+ *
+ *    Provides a normal button, the same as the above one, but a button which is focused by default, indicating
+ *    that this is a default button.
+ *
+ *    <a href="#" class="button default-button">
+ *        <span>Yes</span>
+ *    </a>
+ * ================================================================================================================= */
+/* -- Normal button -- */
+#OfficeUI a.button {
+  color: #444;
+  border-width: 1px;
+  border-style: solid;
+  cursor: default;
+  padding: 0 5px 0 5px;
+  text-decoration: none;
+}
+#OfficeUI a.button:hover {
+  border-width: 1px;
+  border-style: solid;
+}
+#OfficeUI a.button:active,
+#OfficeUI a.button.ie-fix {
+  border-width: 1px;
+  border-style: solid;
+}

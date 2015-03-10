@@ -1,0 +1,74 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.LightBlue.Elements.less
+ * Author:        Kevin De Coninck
+ * Date Created:  10/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.LightBlue.Elements.less file is a file is used to style various
+ *                elements. The classes in this file does only implements style-based style rules
+ *                such as border colors, background colors, ...
+======================================================================================================= */
+/* ----- Import statements ----- */
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.LightBlue.less
+ * Author:        Kevin De Coninck
+ * Date Created:  10/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.LightBlue.less file is a file which on itself doesn't do anything.
+ *                This files does act as a file in which various variables and other items have are
+ *                stored. This does mean that this file does need to be referenced from other files.
+======================================================================================================= */
+/* ----- Import Statements. ---- */
+/* ====================================================================================================
+ * Filename:      OfficeUI.Styles.less
+ * Author:        Kevin De Coninck
+ * Date Created:  10/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Styles.less file is a file which contains a couple of variables that
+ *                are the same for all the styles.
+======================================================================================================= */
+/* ---- Variables. ---- */
+/* ---- Variables. ---- */
+/* ----- Buttons ----- */
+/* Notes:
+ * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
+ * The section below gives an explanation about every type of button and also given an example on how to render them.
+ *
+ * Some classes have added 'ie-fix' on the end. This is because some functionalities are not available in all browsers.
+ * Therefore that since class is being added because otherwise the element might not render correctly in Internet
+ * Explorer.
+ *
+ * The class is 'ie-fix' is used to solve the following problems:
+ * -  When you have an anchor <a href="#"> with another element in it, the anchor does not become :active when you
+ *    click on the element itself. In other words, the active class is not bubbling up.
+ *
+ * ==================================================== Example ====================================================
+ * Normal button:
+ *
+ *    Provides a normal button that just contains some plain text.
+ *
+ *    <a href="#" class="button">
+ *        <span>Yes</span>
+ *    </a>
+ * ================================================================================================================= */
+/* -- Normal button -- */
+#OfficeUI a.button {
+  border-color: #ababab;
+}
+#OfficeUI a.button.default-button {
+  background-color: #cde6f7;
+  border-color: #92c0e0;
+}
+#OfficeUI a.button:hover {
+  background-color: #cde6f7;
+  border-color: #92c0e0;
+}
+#OfficeUI a.button:active,
+#OfficeUI a.button.ie-fix {
+  background-color: #92c0e0;
+  border-color: #2a8dd4;
+}
+/* -- Image button -- */
+/* ----- Input elements ----- */
