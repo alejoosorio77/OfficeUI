@@ -24,9 +24,6 @@
     <!-- Include all the required stylesheets. -->
     <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Core.min.css" />
     <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Site.min.css" />
-
-    <!-- Stylesheets which are imported through AngularJS. -->
-    <link rel="stylesheet" data-ng-href="{{StylesheetController.style.stylesheet}}" data-ng-controller="StylesheetController as StylesheetController" />
 </head>
 <body>
 <section id="site">
@@ -43,22 +40,15 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="index.html">OfficeUI Reference</a>
+                    <a href="/docs/index.html">OfficeUI</a>
                 </li>
                 <li>
                     <ul>
                         <li>
-                            <a href="styling.html" class="active">Styling</a>
+                            <a href="/docs/getting-started.html">OfficeUI Fundamentals</a>
                         </li>
                         <li>
-                            <ul>
-                                <li>
-                                    <a href="changing-styles.html">Changing styles</a>
-                                </li>
-                                <li>
-                                    <a href="creating-styles.html">Creating styles</a>
-                                </li>
-                            </ul>
+                            <a href="/docs/OfficeUI-elements/index.html" class="active">OfficeUI Elements</a>
                         </li>
                     </ul>
                 </li>
@@ -66,24 +56,21 @@
         </div>
         <div class="article">
             <article>
-                <h1>OfficeUI Styling</h1>
+                <h1>OfficeUI Elements</h1>
 
-                <p>OfficeUI comes packed with various styles</p>
+                <p>OfficeUI has a full range of elements such as buttons, image buttons, default buttons and many others.
+                    The table below guides you through all the different elements which are included in OfficeUI.</p>
 
-                <!-- ToDo: Provide link to download package. -->
-                <p>Download the <a href="#">OfficeUI</a>, reference the required packages in your website and start writing professional applications.</p>
+                <p>
 
-                <h2>In this section</h2>
-                <dl>
-                    <dt>
-                        <a href="getting-started.html">Gettings Started</a>
-                    </dt>
-                    <dd>
-                        Provides information on how to get started with the OfficeUI library.
-                    </dd>
-
-
-                </dl>
+                <h4>Usage</h4>
+                <p>
+                    <pre class="prettyprint lang-html">
+&lt;a href=&quot;#&quot; class=&quot;button&quot;&gt;
+    &lt;span&gt;Text&lt;/span&gt;
+&lt;/a&gt;                    </pre>
+                </p>
+                </p>
             </article>
 
         </div>

@@ -24,9 +24,6 @@
     <!-- Include all the required stylesheets. -->
     <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Core.min.css" />
     <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Site.min.css" />
-
-    <!-- Stylesheets which are imported through AngularJS. -->
-    <link rel="stylesheet" data-ng-href="{{StylesheetController.style.stylesheet}}" data-ng-controller="StylesheetController as StylesheetController" />
 </head>
 <body>
 <section id="site">
@@ -43,12 +40,15 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="index.html">OfficeUI Reference</a>
+                    <a href="/docs/index.html">OfficeUI</a>
                 </li>
                 <li>
                     <ul>
                         <li>
-                            <a href="installation.html" class="active">Installation</a>
+                            <a href="/docs/getting-started.html">OfficeUI Fundamentals</a>
+                        </li>
+                        <li>
+                            <a href="/docs/OfficeUI-elements/index.html" class="active">OfficeUI Elements</a>
                         </li>
                     </ul>
                 </li>
@@ -56,19 +56,50 @@
         </div>
         <div class="article">
             <article>
-                <h1>OfficeUI Installation</h1>
+                <h1>OfficeUI Elements</h1>
 
-                <p>This section provides reference material about OfficeUI components, keywords, errors and warnings.</p>
+                <p>OfficeUI has a full range of elements such as buttons, image buttons, default buttons and many others.
+                The table below guides you through all the different elements which are included in OfficeUI.</p>
 
-                <h2>In this section</h2>
-                <dl>
-                    <dt>
-                        <a href="installation.html">Installation</a>
-                    </dt>
-                    <dd>
-                        Contains usefull information on how to checkout the project and the pre-requisites that you need.
-                    </dd>
-                </dl>
+                <h2>Basic Elements</h2>
+                <p>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="/docs/OfficeUI-elements/basic/button.html">Button</a></td>
+                            <td>Defines a normal button.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Image Button</a></td>
+                            <td>Defines a button with an image.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </p>
+
+                <h2>Full featured elements</h2>
+                <p>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Description</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><a href="#">Ribbon</a></td>
+                        <td>Defines a lint shown on the top of the page.</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </p>
             </article>
 
         </div>

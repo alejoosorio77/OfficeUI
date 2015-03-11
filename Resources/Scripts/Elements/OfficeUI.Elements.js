@@ -1,10 +1,10 @@
 /**
- * @filename:       OfficeUI.Elements.js
- * @Author:         Kevin De Coninck
- * @version:        1.0.0
- * @date:           10/03/2016
+ * @filename       OfficeUI.Elements.js
+ * @Author         Kevin De Coninck
+ * @version        1.0.0
+ * @date           10/03/2016
  *
- * @notes:
+ * @notes
  * Defines the script files that's required for various controls for the OfficeUI controls.
  * Those script files does modify page elements to ensure that they work correctly in all modern browsers.
  * The following browsers have been tested:
@@ -14,10 +14,10 @@
  */
 $(function() {
     /**
-     * @type:       Event Handler
-     * @name:       N.A.
+     * @type       Event Handler
+     * @name       N.A.
      *
-     * @notes:
+     * @notes
      * This function is executed whenever you click an a element inside an OfficeUI application which is marked with
      * the class 'button'.
      * The purpose of this Event Handler is to toggle a class named 'ie-fix' on the element being clicked.
@@ -29,6 +29,6 @@ $(function() {
      * marked with the class 'ie-fix'.
      */
     $('#OfficeUI a.button').on('mousedown mouseup', function(e) {
-        $(this).addClass('ie-fix');
+        $(this).toggleClass('ie-fix');
     });
 });

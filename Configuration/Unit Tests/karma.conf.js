@@ -19,6 +19,8 @@
 module.exports = function(config){
     config.set({
         basePath : '../../',
+
+        // List of files / patterns to load in the browser.
         files : [
             // Resources
             'Resources/External/Bower/jquery/dist/jquery.js',

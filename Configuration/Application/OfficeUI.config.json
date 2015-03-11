@@ -1,0 +1,13 @@
+{
+  "Styles": [
+    { "name": "Blue", "stylesheet": "/Resources/Stylesheets/Styles/Blue/OfficeUI.Style.Blue.min.css" },
+    { "name": "Green", "stylesheet": "/Resources/Stylesheets/Styles/Green/OfficeUI.Style.Green.min.css" },
+    { "name": "LightBlue", "stylesheet": "/Resources/Stylesheets/Styles/LightBlue/OfficeUI.Style.LightBlue.min.css" },
+    { "name": "Orange", "stylesheet": "/Resources/Stylesheets/Styles/Orange/OfficeUI.Style.Orange.min.css" },
+    { "name": "Purple", "stylesheet": "/Resources/Stylesheets/Styles/Purple/OfficeUI.Style.Purple.min.css" },
+    { "name": "Red", "stylesheet": "/Resources/Stylesheets/Styles/Red/OfficeUI.Style.Red.min.css" },
+    { "name": "Turquoise", "stylesheet": "/Resources/Stylesheets/Styles/Turquoise/OfficeUI.Style.Turquoise.min.css" }
+  ],
+
+  "DefaultStyle": "LightBlue"
+}
