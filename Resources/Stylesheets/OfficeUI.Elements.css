@@ -88,7 +88,7 @@
 }
 #OfficeUI .dropdown input {
   border-right-style: none;
-  padding-right: 15px;
+  padding: 0 15px 0 5px;
 }
 #OfficeUI .dropdown i {
   border-style: solid;

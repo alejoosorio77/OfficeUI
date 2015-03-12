@@ -150,6 +150,10 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+/* Google Chrome fixes. */
+input {
+  -webkit-appearance: none;
+}
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Elements.less
  * Author:        Kevin De Coninck
@@ -240,7 +244,7 @@ table {
 }
 #OfficeUI .dropdown input {
   border-right-style: none;
-  padding-right: 15px;
+  padding: 0 15px 0 5px;
 }
 #OfficeUI .dropdown i {
   border-style: solid;
