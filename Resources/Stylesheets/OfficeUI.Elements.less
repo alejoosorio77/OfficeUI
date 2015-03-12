@@ -8,6 +8,14 @@
  *                the website such as buttons, input elements and various others.
 ======================================================================================================= */
 
+/* ----- General elements ---- */
+/*
+ * Notes:
+ * In a web application, there are various normal elements such as input elements and dropdown elements.
+ * Those elements are being styles in the section below.
+*/
+#OfficeUI input { font-family: 'Segoe UI'; border-style: solid; border-width: 1px; }
+
 /* ----- Buttons ----- */
 /* Notes:
  * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
@@ -43,3 +51,22 @@
 #OfficeUI a.button { color: #444; border-width: 1px; border-style: solid; cursor: default; padding: 0 5px 0 5px; text-decoration: none; }
 #OfficeUI a.button:hover { border-width: 1px; border-style: solid; }
 #OfficeUI a.button:active, #OfficeUI a.button.ie-fix { border-width: 1px; border-style: solid; }
+
+/* ----- DropDown Elements ----- */
+/* Notes:
+ * The OfficeUI Suite contains various types of DropDowns such as a simple text dropdown and a large item menu
+ * dropdown.
+ * The section below gives an explanation about every type of dropdown and also given an example on how to render them.
+ * ==================================================== Example ====================================================
+ * Simple DropDown Element
+ *
+ *    Provides a simple dropdown.
+ *
+ *    <span class="dropdown">
+ *      <input type="text" />
+ *    </a>
+ * ================================================================================================================= */
+/* -- Dropdown element -- */
+#OfficeUI .dropdown { display: inline-block; position: relative; }
+#OfficeUI .dropdown input { border-right-style: none; padding-right: 15px; }
+#OfficeUI .dropdown i { border-style: solid; border-right-width: 1px; color: #777; height: 100%; line-height: 1.5; padding-right: 2px; position: absolute; right: 0; top: 0; }

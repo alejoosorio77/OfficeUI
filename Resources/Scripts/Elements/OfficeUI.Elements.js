@@ -31,4 +31,53 @@ $(function() {
     $('#OfficeUI a.button').on('mousedown mouseup', function(e) {
         $(this).toggleClass('ie-fix');
     });
+
+    /**
+     * @type            Plugin
+     * @name            OfficeUIDropdown
+     *
+     * @notes
+     * This plugin makes it possible to transform a specific element into an OfficeUI DropDown element. This is done by
+     * adding elements and other information.
+     */
+    $.fn.OfficeUIDropdown = function() {
+        var dropdownElement = $(this); // Gets the element that should be transformed.
+
+        $(dropdownElement).append('<i class="fa fa-sort-desc"></i>'); // Adds the arrow down on the right side.
+
+        // When you click on the input element in the dropdown, add a class active to the arrow down.
+        $('input', dropdownElement).click(function() {
+            $('i', dropdownElement).addClass('active');
+        });
+
+        // When you hover on the element, add a class on the 'i' and on the 'input' element to make it visible that
+        // the element has focus. When we do leave the element, remove the classes, but only when the input element
+        // does not have focus. We don't wan the element to change styles as long as we have focus on the input element.
+        $(dropdownElement).hover(function() {
+            $('input', dropdownElement).addClass('focus');
+            $('i', dropdownElement).addClass('focus');
+        }, function() {
+            if (!$('input', this).is(':focus')) {
+                $('input', dropdownElement).removeClass('focus');
+                $('i', dropdownElement).removeClass('focus');
+            }
+        });
+
+        // When we lose focus on the dropdown element, remove all the classes that causes a style change.
+        // By removing those classes, the style is reverted, meaning no special colors are visible anymore.
+        $(dropdownElement).focusout(function() {
+            $('input', dropdownElement).removeClass('focus')
+            $('i', dropdownElement).removeClass('focus').removeClass('active');
+        })
+    }
+
+    /**
+     * @type        DOM Manipulation.
+     * @name        N.A.
+     *
+     * @notes
+     * This call will transform every element with a class 'dropdown' which is placed inside a container with id
+     * 'OfficeUI' into an OfficeUI DropDown.
+     */
+    $('#OfficeUI .dropdown').OfficeUIDropdown();
 });

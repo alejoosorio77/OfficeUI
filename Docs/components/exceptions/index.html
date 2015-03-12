@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OfficeUI - Developer Network</title>
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <!-- Reference the favicon to use. -->
+    <link rel="shortcut icon" type="image/x-icon" href="/Resources/Images/favicon.ico" />
+
+    <!-- Include all the external script files. -->
+    <script src="/Resources/External/Bower/jquery/dist/jquery.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+    <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Site.min.css" />
+</head>
+<body>
+<section id="site">
+    <header>
+        <div class="site-top-bar">
+            <div class="logo">
+                <img src="/Resources/Images/Application.png" alt="OfficeUI Application" />
+                <span>Office User Interface</span>
+            </div>
+            <div class="tagline">Developer Network</div>
+        </div>
+    </header>
+    <section id="content">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="/docs">OfficeUI Reference</a>
+                </li>
+                <li>
+                    <ul>
+                        <li>
+                            <a href="/docs/components">Components</a>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="/docs/components/exceptions" class="active">Exceptions</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="article">
+            <article>
+                <h1>Exceptions</h1>
+
+                <p>Whenever your application does not work as desired, you can inspect various exceptions which can be thrown by OfficeUI. In order to see the exception messages, you should
+                open a console window in the browser in which you're currently building your application. When an exception is thrown, you'll find it in the console window which can provide
+                usefull information to help you debugging your application.</p>
+
+                <p>
+                    When an exception is thrown, you'll always be provided with the type of the exception and a custom message. Based on those 2 values, you should be able to identify the
+                    issue which is causing the exception.
+                </p>
+
+                <h2>Built-in exception types</h2>
+                <p>
+                    The table below does contain all the various exceptions that can be thrown.
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Type</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="officeuistylesheetexception.html">OfficeUIStylesheetException</a></td>
+                            <td>Indicates an error with an OfficeUI stylesheet.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="officeuiloadingexception.html">OfficeUILoadingException</a></td>
+                            <td>Indicates an error while loading a file which is needed to render the OfficeUI application.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="officeuisconfigurationexception.html">OfficeUIConfigurationException</a></td>
+                            <td>Indicates a configuration error.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+                <h2>Thrown exceptions</h2>
+                <p>
+                    When an exception is being thrown, it's written in the console window of the currently opened browser in a specific format.
+                    Each exception is formatted with the following syntax:
+                    <div class="langauge">
+                        Output
+                    </div>
+                    <pre class="prettyprint">[ExceptionType]: Message</pre>
+                </p>
+
+                <h2>Custom exceptions</h2>
+                <p>
+                    In an OfficeUI application, you can also write custom exception messages, which are automatically formatted with the same syntax as above.<br/>
+                    When you want write a custom exception message, it can be done with the following code:
+                </p>
+
+                <h3>Syntax</h3>
+                <p>
+                    <div class="code">new OfficeUIException(exceptionType, message);</div>
+                </p>
+
+                <h3>Parameters</h3>
+                <dl>
+                    <dt>
+                        <em>exceptionType</em>
+                    </dt>
+                    <dd>
+                        A string defining the type of the exception. Can be any given string.
+                    </dd>
+
+                    <dt>
+                        <em>message</em>
+                    </dt>
+                    <dd>
+                        A message describing the error which occured. Can be any given string.
+                    </dd>
+                </dl>
+
+                <h3>Examples</h3>
+                <div class="langauge">
+                    JavaScript
+                </div>
+                <pre class="prettyprint">
+var exception = 'CustomOfficeUIException'; // String describing the type of the exception.
+var message = 'exception message.'; // Message to pass to the exception.
+new OfficeUIException(message); // Throw the exception to the console window.
+
+// Output: [CustomOfficeUIException]: exception message.
+
+// Shorthand call:
+new OfficeUIException('CustomOfficeUIException', 'exception message');
+
+// Output: [CustomOfficeUIException]: exception message.</pre>
+                </p>
+            </article>
+        </div>
+    </section>
+</section>
+
+<!-- Defines various scripts that needs to be executed once the website has been loaded. -->
+<script type="text/javascript">
+    /**
+     * @type:       Event Handler
+     * @name:       N.A.
+     *
+     * @notes:
+     * This function is executed when the page is loaded or when the window is being resized.
+     * This is because we need the content area to always be at least the height of the window, or when the
+     * content is larger, the required space.
+     */
+    $(window).on('load resize', function() {
+        var windowHeight = $(window).height();
+        var newWindowHeight = windowHeight - 144;
+
+        if ($('#content').height() < newWindowHeight) { $('#content').height(newWindowHeight); }
+    });
+</script>
+</body>
+</html>

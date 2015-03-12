@@ -12,6 +12,15 @@
 /* ----- Import statements ----- */
 @import 'OfficeUI.Style.LightBlue';
 
+/* ----- General elements ---- */
+/*
+ * Notes:
+ * In a web application, there are various normal elements such as input elements and dropdown elements.
+ * Those elements are being styles in the section below.
+*/
+#OfficeUI input, #OfficeUI .dropdown i { border-color: @defaultGray; }
+#OfficeUI input:hover, #OfficeUI input:focus { border-color: @accentLevelTwoColor; }
+
 /* ----- Buttons ----- */
 /* Notes:
  * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
@@ -40,7 +49,19 @@
 #OfficeUI a.button:hover { background-color: @accentLevelOneColor; border-color: @accentLevelTwoColor; }
 #OfficeUI a.button:active, #OfficeUI a.button.ie-fix { background-color: @accentLevelTwoColor; border-color: @accentLevelThreeColor; }
 
-/* -- Image button -- */
-
-
-/* ----- Input elements ----- */
+/* ----- DropDown Elements ----- */
+/* Notes:
+ * The OfficeUI Suite contains various types of DropDowns such as a simple text dropdown and a large item menu
+ * dropdown.
+ * The section below gives an explanation about every type of dropdown and also given an example on how to render them.
+ * ==================================================== Example ====================================================
+ * Simple DropDown Element
+ *
+ *    Provides a simple dropdown.
+ *
+ *    <span class="dropdown">
+ *      <input type="text" />
+ *    </a>
+ * ================================================================================================================= */
+/* -- Dropdown element -- */
+#OfficeUI .dropdown i.focus, #OfficeUI .dropdown input.focus { border-color: @accentLevelTwoColor; }

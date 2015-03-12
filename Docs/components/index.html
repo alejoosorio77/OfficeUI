@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html data-ng-app="OfficeUI">
+<html>
 <head>
-    <title>OfficeUI (Version 1.0.0)</title>
+    <title>OfficeUI - Developer Network</title>
 
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
@@ -9,20 +9,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/Resources/Images/favicon.ico" />
 
     <!-- Include all the external script files. -->
-    <script src="/Resources/External/Bower/angular/angular.js"></script>
     <script src="/Resources/External/Bower/jquery/dist/jquery.js"></script>
-    <script src="/Components/External/NodeJS/node_modules/jspath/jspath.min.js"></script>
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
-    <!-- Include all the internal script files. -->
-    <script src="/Resources/Scripts/Elements/OfficeUI.Elements.js"></script>
-    <script src="/Resources/Scripts/OfficeUI.js"></script>
-
-    <!-- Include all the external stylesheets. -->
-    <link rel="stylesheet" href="/Resources/External/Bower/fontawesome/css/font-awesome.min.css">
-
-    <!-- Include all the required stylesheets. -->
-    <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Core.min.css" />
     <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Site.min.css" />
 </head>
 <body>
@@ -40,15 +29,19 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="/docs/index.html">OfficeUI</a>
+                    <a href="/docs">OfficeUI Reference</a>
                 </li>
                 <li>
                     <ul>
                         <li>
-                            <a href="/docs/getting-started.html">OfficeUI Fundamentals</a>
+                            <a href="/docs/components" class="active">Components</a>
                         </li>
                         <li>
-                            <a href="/docs/OfficeUI-elements/index.html" class="active">OfficeUI Elements</a>
+                            <ul>
+                                <li>
+                                    <a href="/docs/components/exceptions">Exceptions</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -56,23 +49,27 @@
         </div>
         <div class="article">
             <article>
-                <h1>OfficeUI Elements</h1>
+                <h1>OfficeUI Components</h1>
 
-                <p>OfficeUI has a full range of elements such as buttons, image buttons, default buttons and many others.
-                    The table below guides you through all the different elements which are included in OfficeUI.</p>
+                <p>OfficeUI comes with various components that help to make the development and debugging of your application more easy. The table below gives an overview of all the components
+                which are included in OfficeUI. Click any component to see more information about that component.</p>
 
-                <p>
-
-                <h4>Usage</h4>
-                <p>
-                    <pre class="prettyprint lang-html">
-&lt;a href=&quot;#&quot; class=&quot;button&quot;&gt;
-    &lt;span&gt;Text&lt;/span&gt;
-&lt;/a&gt;                    </pre>
-                </p>
-                </p>
+                <h2>Components</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Component</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="/docs/components/exceptions">Exceptions</a></td>
+                            <td>Provides formatted messages that are written into the console to inform the end-user that somehing has gone wrong.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </article>
-
         </div>
     </section>
 </section>

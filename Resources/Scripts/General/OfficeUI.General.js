@@ -9,6 +9,21 @@
  */
 
 /**
+ * @type            Function
+ * @name            OfficeUIException
+ *
+ * @param           exceptionType (string):     The type of the exception to thrown.
+ * @param           message (string):           A message to pass to this exception.
+ *
+ * @notes
+ * When this method is called, an error is written in the console window of the browser which is formatted according
+ * to the following syntax: [{exceptionType}: {message}]
+ */
+var OfficeUIException = function(exceptionType, message) {
+    return console.error('[' + exceptionType + ']: ' + message);
+}
+
+/**
  * @Type            Function
  * @name            OfficeUIStylesheetException
  *
@@ -16,10 +31,10 @@
  *
  * @notes
  * When this method is called an error is written in the console window of the browser which is formatted according
- * to the following syntax: ['OfficeUIStylesheetException:' {message}]
+ * to the following syntax: [OfficeUIStylesheetException]: {message}
  */
 var OfficeUIStylesheetException = function(message) {
-    return console.error('\'OfficeUIStylesheetException:\' ' + message);
+    return console.error('[OfficeUIStylesheetException]: ' + message);
 }
 
 /**
@@ -30,10 +45,10 @@ var OfficeUIStylesheetException = function(message) {
  *
  * @notes
  * When this method is called an error is written in the console window of the browser which is formatted according
- * to the following syntax: ['OfficeUILoadingException:' {message}]
+ * to the following syntax: [OfficeUILoadingException]: {message}
  */
 var OfficeUILoadingException = function(message) {
-    return console.error('\'OfficeUILoadingException:\' ' + message);
+    return console.error('[OfficeUILoadingException]: ' + message);
 }
 
 /**
@@ -44,8 +59,8 @@ var OfficeUILoadingException = function(message) {
  *
  * @notes
  * When this method is called an error is written in the console window of the browser which is formatted according
- * to the following syntax: ['OfficeUIConfigurationException:' {message}]
+ * to the following syntax: [OfficeUIConfigurationException]: {message}
  */
 var OfficeUIConfigurationException = function(message) {
-    return console.error('\'OfficeUILoadingException:\' ' + message);
+    return console.error('[OfficeUILoadingException]: ' + message);
 }
