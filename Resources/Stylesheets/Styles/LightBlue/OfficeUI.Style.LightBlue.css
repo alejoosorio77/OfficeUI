@@ -102,4 +102,10 @@
 #OfficeUI .dropdown input.focus {
   border-color: #92c0e0;
 }
+#OfficeUI .dropdown i:not(.active) {
+  border-left-color: transparent;
+}
+#OfficeUI .dropdown i.active {
+  background-color: #cde6f7;
+}
 /* ---- Variables. ---- */

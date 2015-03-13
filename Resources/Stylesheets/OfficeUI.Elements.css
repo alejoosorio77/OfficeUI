@@ -92,12 +92,18 @@
 }
 #OfficeUI .dropdown i {
   border-style: solid;
-  border-right-width: 1px;
-  color: #777;
+  border-width: 1px;
+  border-left-color: transparent;
+  color: #575757;
+  font-size: 10px;
   height: 100%;
-  line-height: 1.5;
-  padding-right: 2px;
+  padding: 3px 2px 0 0;
   position: absolute;
   right: 0;
+  text-align: center;
   top: 0;
+  width: 13px;
+}
+#OfficeUI .dropdown i.focus {
+  color: #000;
 }

@@ -45,7 +45,9 @@ $(function() {
 
         $(dropdownElement).append('<i class="fa fa-sort-desc"></i>'); // Adds the arrow down on the right side.
 
-        // When you click on the input element in the dropdown, add a class active to the arrow down.
+        // When you click on the input element in the dropdown, add a class 'active' to the down arrow and also to the
+        // input element. The input element is strictly not needed, but should is placed in order to be consistent
+        // throughout the app.
         $('input', dropdownElement).click(function() {
             $('i', dropdownElement).addClass('active');
         });
