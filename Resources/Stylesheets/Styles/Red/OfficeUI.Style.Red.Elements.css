@@ -37,9 +37,13 @@
  * In a web application, there are various normal elements such as input elements and dropdown elements.
  * Those elements are being styles in the section below.
 */
-#OfficeUI input,
-#OfficeUI .dropdown i {
+#OfficeUI input {
   border-color: #ababab;
+}
+#OfficeUI .dropdown i {
+  border-bottom-color: #ababab;
+  border-right-color: #ababab;
+  border-top-color: #ababab;
 }
 #OfficeUI input:hover,
 #OfficeUI input:focus {
@@ -99,13 +103,19 @@
  *    </a>
  * ================================================================================================================= */
 /* -- Dropdown element -- */
-#OfficeUI .dropdown i.focus,
-#OfficeUI .dropdown input.focus {
+#OfficeUI .dropdown.active input {
   border-color: #f7a8ab;
 }
-#OfficeUI .dropdown i:not(.active) {
-  border-left-color: transparent;
-}
-#OfficeUI .dropdown i.active {
+#OfficeUI .dropdown.active i {
   background-color: #fadcdd;
+  border-top-color: #f7a8ab;
+  border-rightcolor: #f7a8ab;
+  border-bottom-color: #f7a8ab;
+}
+#OfficeUI .dropdown.focus input,
+#OfficeUI .dropdown.focus i {
+  border-color: #f7a8ab;
+}
+#OfficeUI .dropdown i.opened {
+  background-color: #f7a8ab;
 }
