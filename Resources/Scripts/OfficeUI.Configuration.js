@@ -13,7 +13,7 @@
         return this;
     }
 
-    // Defaults.
+    // Defaults settings for the OfficeUI website.
     $.fn.OfficeUI.Settings = {
         OfficeUIConfigurationFileLocation: '/Configuration/Application/OfficeUI.config.json'
     };

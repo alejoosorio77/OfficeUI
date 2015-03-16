@@ -18,6 +18,14 @@
   border-style: solid;
   border-width: 1px;
 }
+#OfficeUI .dropdown {
+  height: 21px;
+}
+#OfficeUI .dropdown .legend {
+  font-family: 'Segoe UI';
+  border-style: solid;
+  border-width: 1px;
+}
 /* ----- Buttons ----- */
 /* Notes:
  * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
@@ -86,18 +94,20 @@
   display: inline-block;
   position: relative;
 }
-#OfficeUI .dropdown input {
+#OfficeUI .dropdown .legend {
   border-right-style: none;
   padding: 0 15px 0 5px;
+  width: 100%;
+  height: 100%;
 }
 #OfficeUI .dropdown i {
+  height: 100%;
   border-style: solid;
   border-width: 1px;
   border-left-color: transparent;
   cursor: default;
   color: #575757;
   font-size: 10px;
-  height: 21px;
   padding: 3px 2px 0 0;
   position: absolute;
   right: 0;
@@ -110,6 +120,13 @@
   color: #000;
 }
 #OfficeUI .dropdown .elements {
+  border-style: solid;
+  border-width: 1px;
   display: none;
   position: absolute;
+  width: 100%;
+}
+#OfficeUI .dropdown .elements li {
+  padding: 3px 0 3px 3px;
+  font-family: 'Segoe UI';
 }

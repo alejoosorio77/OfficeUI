@@ -45,8 +45,17 @@
   border-right-color: #ababab;
   border-top-color: #ababab;
 }
+#OfficeUI .dropdown .elements {
+  border-color: #ababab;
+}
+#OfficeUI .dropdown .legend {
+  border-color: #ababab;
+}
 #OfficeUI input:hover,
 #OfficeUI input:focus {
+  border-color: #7cbab2;
+}
+#OfficeUI .dropdown .legend:hover {
   border-color: #7cbab2;
 }
 /* ----- Buttons ----- */
@@ -103,22 +112,24 @@
  *    </a>
  * ================================================================================================================= */
 /* -- Dropdown element -- */
-#OfficeUI .dropdown.active input {
+#OfficeUI .dropdown.active .legend,
+#OfficeUI .dropdown.focus .legend {
   border-color: #7cbab2;
 }
+#OfficeUI .dropdown.focus i,
 #OfficeUI .dropdown.active i {
-  background-color: #d3f0ec;
   border-top-color: #7cbab2;
-  border-rightcolor: #7cbab2;
+  border-right-color: #7cbab2;
   border-bottom-color: #7cbab2;
 }
-#OfficeUI .dropdown.focus input,
+#OfficeUI .dropdown.active i,
 #OfficeUI .dropdown.focus i {
-  border-color: #7cbab2;
-}
-#OfficeUI .dropdown.focus i {
-  border-left-color: transparent;
+  background-color: #d3f0ec;
+  border-left-color: #7cbab2;
 }
 #OfficeUI .dropdown i.opened {
   background-color: #7cbab2;
+}
+#OfficeUI .dropdown .elements li:hover {
+  background-color: #d3f0ec;
 }

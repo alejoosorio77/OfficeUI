@@ -8,7 +8,6 @@
  *                elements. The classes in this file does only implements style-based style rules
  *                such as border colors, background colors, ...
 ======================================================================================================= */
-
 /* ----- Import statements ----- */
 @import 'OfficeUI.Style.Purple';
 
@@ -20,7 +19,10 @@
 */
 #OfficeUI input { border-color: @defaultGray; }
 #OfficeUI .dropdown i { border-bottom-color: @defaultGray; border-right-color: @defaultGray; border-top-color: @defaultGray; }
+#OfficeUI .dropdown .elements { border-color: @defaultGray; }
+#OfficeUI .dropdown .legend { border-color: @defaultGray; }
 #OfficeUI input:hover, #OfficeUI input:focus { border-color: @accentLevelTwoColor; }
+#OfficeUI .dropdown .legend:hover { border-color: @accentLevelTwoColor; }
 
 /* ----- Buttons ----- */
 /* Notes:
@@ -65,7 +67,8 @@
  *    </a>
  * ================================================================================================================= */
 /* -- Dropdown element -- */
-#OfficeUI .dropdown.active input { border-color: @accentLevelTwoColor; }
-#OfficeUI .dropdown.active i { background-color: @accentLevelOneColor; border-top-color: @accentLevelTwoColor; border-rightcolor: @accentLevelTwoColor; border-bottom-color: @accentLevelTwoColor; }
-#OfficeUI .dropdown.focus input, #OfficeUI .dropdown.focus i { border-color: @accentLevelTwoColor; }
+#OfficeUI .dropdown.active .legend, #OfficeUI .dropdown.focus .legend { border-color: @accentLevelTwoColor; }
+#OfficeUI .dropdown.focus i, #OfficeUI .dropdown.active i { border-top-color: @accentLevelTwoColor; border-right-color: @accentLevelTwoColor; border-bottom-color: @accentLevelTwoColor; }
+#OfficeUI .dropdown.active i, #OfficeUI .dropdown.focus i { background-color: @accentLevelOneColor; border-left-color: @accentLevelTwoColor; }
 #OfficeUI .dropdown i.opened { background-color: @accentLevelTwoColor; }
+#OfficeUI .dropdown .elements li:hover { background-color: @accentLevelOneColor; }

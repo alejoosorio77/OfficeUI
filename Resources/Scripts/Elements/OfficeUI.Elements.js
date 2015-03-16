@@ -25,7 +25,7 @@ $(function() {
      * When in Internet Explorer, you have an anchor with another element in it, and you click the element inside the
      * anchor, then the pseudo class ':active', which normally indicates that a link is being active does not bubble.
      * Therefore, this plugin has been written so that even when you click an element inside an anchor, the anchor
-     * itself will be decorated with a class so that it can be styled. In the case of this plugin, the anchor is being
+     * itself will be decorated with a class so that it can be styled. With the usage of this plugin, the anchor is being
      * marked with the class 'ie-fix'.
      */
     $('#OfficeUI a.button').on('mousedown mouseup', function(e) {
@@ -49,7 +49,7 @@ $(function() {
          *
          * @returns     (boolean):  True if the element has focus, false otherwise.
          */
-        $.fn.hasFocus = function() { console.log('demo'); return $(this).hasClass('focus'); };
+        $.fn.hasFocus = function() { return $(dropdownElement).hasClass('focus'); };
 
         /**
          * @type        Function
@@ -57,7 +57,7 @@ $(function() {
          *
          * @returns     (boolean):  True if the element is active, false otherwise.
          */
-        $.fn.isActive = function() { return $(this).hasClass('active'); };
+        $.fn.isActive = function() { return $(dropdownElement).hasClass('active'); };
 
         /**
          * @type        Function
@@ -65,20 +65,25 @@ $(function() {
          *
          * @returns     (boolean):  True if the menu of the DropDownElement is opened, false otherwise.
          */
-        $.fn.isMenuOpened = function() { return $('i', this).hasClass('opened'); };
+        $.fn.isMenuOpened = function() { return $(dropdownElement).hasClass('opened'); };
 
         /**
          * @type        Function
          * @name        Open
          *
          * @notes
-         * When this function is executed, the menu item holding all the items is becomes visible.
+         * When this function is executed, the menu item holding all the items is toggled, and it can have 2 different
+         * states, opened or opened. A class is added or removed from the 'dropdownElement' that helps to find out if
+         * the menu is opened or closed.
          */
         $.fn.ToggleOpen = function() {
-            if ($(this).parent().isMenuOpened()) {
-                $('.elements', $(this).parent()).show('slide', { direction: 'up' }, 100);
+            // Check if the menu is opened or closed, based on that, hide or show the menu.
+            if ($(dropdownElement).isMenuOpened()) {
+                $('.elements', $(dropdownElement)).hide();
+                $(dropdownElement).removeClass('opened');
             } else {
-                $('.elements', $(this).parent()).hide();
+                $('.elements', $(dropdownElement)).show('slide', { direction: 'up' }, 100);
+                $(dropdownElement).addClass('opened');
             }
         }
 
@@ -89,35 +94,45 @@ $(function() {
         // input element. The input element is strictly not needed, but should is placed in order to be consistent
         // throughout the app.
         $('input', dropdownElement).click(function() {
-            $(dropdownElement).addClass('active');
+            $(this).addClass('active');
         });
 
         // When you hover on the element, add a class on the 'i' and on the 'input' element to make it visible that
         // the element has focus. When we do leave the element, remove the classes, but only when the input element
         // does not have focus. We don't wan the element to change styles as long as we have focus on the input element.
         $(dropdownElement).hover(function() {
-            $(this).addClass('focus');
+            $(dropdownElement).addClass('focus');
         }, function() {
-            if (!$(this).is(':focus') && !$(this).isMenuOpened()) {
-                $(this).removeClass('focus');
+            if (!$(dropdownElement).is(':focus') && !$(this).isMenuOpened()) {
+                $(dropdownElement).removeClass('focus');
             }
         });
 
         // When we lose focus on the dropdown element, remove all the classes that causes a style change.
         // By removing those classes, the style is reverted, meaning no special colors are visible anymore.
         $(dropdownElement).focusout(function() {
-            $(this).removeClass('active');
+            $(dropdownElement).removeClass('active');
         })
 
         // When you click on the arrow down icon, it means that either the menu should be showed or hidden.
         // We apply the correct styling by toggling a class named 'opened'.
         $('i', dropdownElement).click(function() {
-            $(this).toggleClass('opened');
-            $(this).ToggleOpen();
+            $(dropdownElement).ToggleOpen();
         })
+
+        // When you click on an item in the dropdown, then the item must be showed in the box of the DropDown.
+        // This is to indicate that the item has been selected.
+        $('.elements li', dropdownElement).click(function() {
+            var selectedLiText = $(this).html();
+            $('.legend', dropdownElement).html(selectedLiText);
+
+            // Toggle the state of the menu, but since you can only click on the element when the menu is opened,
+            // the menu will always be closed.
+            $(dropdownElement).ToggleOpen();
+        });
+
+        return this; // Return this object to ensure that methods can be chained.
     }
-
-
 
     /**
      * @type        DOM Manipulation.
