@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OfficeUI - Developer Network (Installtion / From Source)</title>
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <!-- Reference the favicon to use. -->
+    <link rel="shortcut icon" type="image/x-icon" href="/Resources/Images/favicon.ico" />
+
+    <!-- Include all the external script files. -->
+    <script src="/Resources/External/Bower/jquery/dist/jquery.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+    <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Site.min.css" />
+</head>
+<body>
+<!-- Site Section: The entire site is placed inside this SECTION. -->
+<section id="site">
+
+    <!-- Header of the website. -->
+    <header>
+        <div class="site-top-bar">
+            <div class="logo">
+                <img src="/Resources/Images/Application.png" alt="OfficeUI Application" />
+                <span>Office User Interface</span>
+            </div>
+            <div class="tagline">Developer Network</div>
+        </div>
+    </header>
+
+    <!-- Content of the website. -->
+    <section id="content">
+
+        <!-- Navigation of the website. -->
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="/docs">OfficeUI Reference</a>
+                </li>
+                <li>
+                    <ul>
+                        <li>
+                            <a href="/docs/installation">Installation</a>
+                        </li>
+                        <li>
+                            <ul>
+                                <li>
+                                    <a href="/docs/installation/from-source" class="active">From source</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Article of the website. -->
+        <div class="article">
+            <article>
+                <h1>OfficeUI Installation from source</h1>
+
+                <p>This section describes a step-by-step process on how to install the OfficeUI Suite in your application.</p>
+
+                <h2>In this section</h2>
+                <dl>
+                    <dt>
+                        <a href="docs/installation">From Source</a>
+                    </dt>
+                    <dd>
+                        Provides information on how to compile the project from source.
+                    </dd>
+                </dl>
+            </article>
+        </div>
+    </section>
+</section>
+
+<!-- Defines various scripts that needs to be executed once the website has been loaded. -->
+<script type="text/javascript">
+    /**
+     * @type:       Event Handler
+     * @name:       N.A.
+     *
+     * @notes:
+     * This function is executed when the page is loaded or when the window is being resized.
+     * This is because we need the content area to always be at least the height of the window, or when the
+     * content is larger, the required space.
+     */
+    $(window).on('load resize', function() {
+        var windowHeight = $(window).height();
+        var newWindowHeight = windowHeight - 144;
+
+        if ($('#content').height() < newWindowHeight) { $('#content').height(newWindowHeight); }
+    });
+</script>
+</body>
+</html>

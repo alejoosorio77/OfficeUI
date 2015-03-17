@@ -179,9 +179,7 @@ a.active {
   font-weight: bold;
 }
 /* Defines the height on all the required elements. This is needed to have a good looking website. */
-#site {
-  height: 100%;
-}
+#site,
 #content .article {
   height: 100%;
 }
