@@ -42,6 +42,9 @@ $(function() {
      */
     $.fn.OfficeUIDropdown = function() {
         var dropdownElement = $(this); // Gets the element that should be transformed.
+        $.fn.selectedItem = ''; // Sets the text of the selected item.
+
+        $(dropdownElement).addClass('noselect'); // Adds a class that ensure that text-selection for this element is disabled.
 
         /**
          * @type        Function
@@ -89,7 +92,6 @@ $(function() {
 
         $(dropdownElement).append('<i class="fa fa-sort-desc"></i>'); // Adds the arrow down on the right side.
 
-
         // When you click on the input element in the dropdown, add a class 'active' to the down arrow and also to the
         // input element. The input element is strictly not needed, but should is placed in order to be consistent
         // throughout the app.
@@ -125,6 +127,14 @@ $(function() {
         $('.elements li', dropdownElement).click(function() {
             var selectedLiText = $(this).html();
             $('.legend', dropdownElement).html(selectedLiText);
+
+            $.fn.selectedItem = selectedLiText; // Set a property to we know the item which has been selected.
+
+            // Check if there's an attribute called data-on-change.
+            // If that's attribute correct, check the value in it, try to transform it into a JavaScript function
+            // and execute it.
+            var attribute = $(dropdownElement).attr('data-on-change');
+            if (typeof attribute !== 'undefined' && attribute != '') { eval(attribute); }
 
             // Toggle the state of the menu, but since you can only click on the element when the menu is opened,
             // the menu will always be closed.

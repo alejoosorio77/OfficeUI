@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="OfficeUI" data-ng-controller="OfficeUIController">
+<html data-ng-app="OfficeUI" data-ng-controller="OfficeUIController as OfficeUIController">
     <head>
         <title>OfficeUI (Version 1.0.0)</title>
 
@@ -9,9 +9,9 @@
         <link rel="shortcut icon" type="image/x-icon" href="/Resources/Images/favicon.ico" />
 
         <!-- Include all the external script files. -->
-        <script src="/Resources/External/Bower/angular/angular.js"></script>
         <script src="/Resources/External/Bower/jquery/dist/jquery.js"></script>
         <script src="/Resources/External/Bower/jquery-ui/jquery-ui.js"></script>
+        <script src="/Resources/External/Bower/angular/angular.js"></script>
         <script src="/Components/External/NodeJS/node_modules/jspath/jspath.min.js"></script>
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
@@ -35,34 +35,20 @@
             </a>
 
             <br/><br/>
-            <div class="dropdown" style="height: 20px; width: 100px;">
+            <div class="dropdown" id="dropdownChangeStyle" style="height: 20px; width: 100px;" data-on-change="$('#dropdownChangeStyle').scope().changeStyle(dropdownElement.selectedItem); $('#dropdownChangeStyle').scope().refresh();">
                 <div class="legend"></div>
 
                 <ul class="elements">
-                    <li>11</li>
-                    <li>12</li>
-                    <li>13</li>
-                    <li>14</li>
-                    <li>15</li>
-                    <li>16</li>
-                    <li>17</li>
-                    <li>18</li>
-                    <li>19</li>
-                    <li>20</li>
-                    <li>21</li>
+                    <li>Blue</li>
+                    <li>Green</li>
+                    <li>LightBlue</li>
+                    <li>Orange</li>
+                    <li>Purple</li>
+                    <li>Red</li>
+                    <li>Turquoise</li>
                 </ul>
             </div>
         </div>
-
-        <select>
-            <option data-ng-click="changeStyle('Blue')">Blue</option>
-            <option data-ng-click="changeStyle('Green')">Green</option>
-            <option data-ng-click="changeStyle('LightBlue')">LightBlue</option>
-            <option data-ng-click="changeStyle('Orange')">Orange</option>
-            <option data-ng-click="changeStyle('Purple')">Purple</option>
-            <option data-ng-click="changeStyle('Red')">Red</option>
-            <option data-ng-click="changeStyle('Turquoise')">Turquoise</option>
-        </select>
 
         <script type="text/javascript">
             // Loads the OfficeUI configuration.

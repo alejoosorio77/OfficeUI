@@ -255,6 +255,7 @@ input {
   padding: 0 15px 0 5px;
   width: 100%;
   height: 100%;
+  line-height: 1.5;
 }
 #OfficeUI .dropdown i {
   height: 100%;
@@ -285,6 +286,20 @@ input {
 #OfficeUI .dropdown .elements li {
   padding: 3px 0 3px 3px;
   font-family: 'Segoe UI';
+}
+/* ---- General classes. ---- */
+/* Provides a way to ensure that text-selection of an element is disabled. By adding this class, text-selection of the
+ * becomes disabled. Also the cursor is changed to 'default' to ensure that the cursor doesn't change to a vertical pipe
+ * indicating that the element is text.
+*/
+#OfficeUI .noselect {
+  cursor: default;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 /* ---- General elements. ---- */
 #OfficeUI {

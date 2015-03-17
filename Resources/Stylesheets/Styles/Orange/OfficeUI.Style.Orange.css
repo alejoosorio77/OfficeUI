@@ -126,7 +126,7 @@
   background-color: #fce4dc;
   border-left-color: #f5ba9d;
 }
-#OfficeUI .dropdown i.opened {
+#OfficeUI .dropdown.opened i {
   background-color: #f5ba9d;
 }
 #OfficeUI .dropdown .elements li:hover {

@@ -14,5 +14,12 @@
 @import 'OfficeUI.Reset.less';
 @import 'OfficeUI.elements.less';
 
+/* ---- General classes. ---- */
+/* Provides a way to ensure that text-selection of an element is disabled. By adding this class, text-selection of the
+ * becomes disabled. Also the cursor is changed to 'default' to ensure that the cursor doesn't change to a vertical pipe
+ * indicating that the element is text.
+*/
+#OfficeUI .noselect { cursor: default; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+
 /* ---- General elements. ---- */
 #OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; font-size: 0.75em; }

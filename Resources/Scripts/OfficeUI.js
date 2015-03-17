@@ -150,6 +150,17 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, $sco
     $scope.changeStyle = function(styleName) {
         $scope.style = stylesheetFactory.changeStyle(styleName);
     }
+
+    /**
+     * @type        Function
+     * @name        refresh
+     *
+     * @notes
+     * Refresh the current scope so that changes are visible on the website.
+     */
+    $scope.refresh = function() {
+        $scope.$apply();
+    }
 });
 
 
