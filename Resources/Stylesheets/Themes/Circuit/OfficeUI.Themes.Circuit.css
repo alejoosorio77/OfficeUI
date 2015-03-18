@@ -1,0 +1,12 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Themes.Circuit.less
+ * Author:        Kevin De Coninck
+ * Date Created:  18/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Themes.Circuit.less file is a file is used to style an OfficeUI
+ *                application to match a given theme. In this case, the 'Circuit' theme.
+======================================================================================================= */
+#OfficeUI .application {
+  background: url("/Resources/Images/Themes/Circuit/Background.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+}

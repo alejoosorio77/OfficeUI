@@ -1,0 +1,12 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Themes.Straws.less
+ * Author:        Kevin De Coninck
+ * Date Created:  18/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Themes.Straws.less file is a file is used to style an OfficeUI
+ *                application to match a given theme. In this case, the 'Straws' theme.
+======================================================================================================= */
+#OfficeUI .application {
+  background: url("/Resources/Images/Themes/Straws/Background.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+}

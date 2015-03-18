@@ -1,0 +1,13 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Themes.Circles-And-Stripes.less
+ * Author:        Kevin De Coninck
+ * Date Created:  18/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Themes.Circles-And-Stripes.less file is a file is used to style an
+ *                OfficeUI application to match a given theme. In this case, the
+ *                'Circles And Stripes' theme.
+======================================================================================================= */
+#OfficeUI .application {
+  background: url("/Resources/Images/Themes/Circles And Stripes/Background.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+}

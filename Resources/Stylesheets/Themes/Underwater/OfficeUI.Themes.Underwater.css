@@ -1,0 +1,12 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Themes.Underwater.less
+ * Author:        Kevin De Coninck
+ * Date Created:  18/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Themes.Underwater.less file is a file is used to style an OfficeUI
+ *                application to match a given theme. In this case, the 'Underwater' theme.
+======================================================================================================= */
+#OfficeUI .application {
+  background: url("/Resources/Images/Themes/Underwater/Background.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+}
