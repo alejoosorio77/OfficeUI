@@ -41,10 +41,11 @@ $(function() {
      * adding elements and other information.
      */
     $.fn.OfficeUIDropdown = function() {
-        var dropdownElement = $(this); // Gets the element that should be transformed.
         $.fn.selectedItem = ''; // Gets the text of the selected item.
 
-        $(dropdownElement).addClass('no-select'); // Adds a class that ensure that text-selection for this element is disabled.
+        // Initialization logic.
+        $(this).addClass('no-select'); // Adds a class that ensure that text-selection for this element is disabled.
+        $(this).append('<i class="fa fa-sort-desc"></i>'); // Adds the arrow down on the right side.
 
         /**
          * @type        Function
@@ -52,7 +53,7 @@ $(function() {
          *
          * @returns     (boolean):  True if the element has focus, false otherwise.
          */
-        $.fn.hasFocus = function() { return $(dropdownElement).hasClass('focus'); };
+        $.fn.hasFocus = function() { return this.hasClass('focus'); };
 
         /**
          * @type        Function
@@ -60,7 +61,7 @@ $(function() {
          *
          * @returns     (boolean):  True if the element is active, false otherwise.
          */
-        $.fn.isActive = function() { return $(dropdownElement).hasClass('active'); };
+        $.fn.isActive = function() { return this.hasClass('active'); };
 
         /**
          * @type        Function
@@ -68,7 +69,7 @@ $(function() {
          *
          * @returns     (boolean):  True if the menu of the DropDownElement is opened, false otherwise.
          */
-        $.fn.isMenuOpened = function() { return $(dropdownElement).hasClass('opened'); };
+        $.fn.isMenuOpened = function() { return this.hasClass('opened'); };
 
         /**
          * @type        Function
@@ -81,38 +82,37 @@ $(function() {
          */
         $.fn.ToggleOpen = function() {
             // Check if the menu is opened or closed, based on that, hide or show the menu.
-            if ($(dropdownElement).isMenuOpened()) {
-                $('.elements', dropdownElement).hide();
-                $(dropdownElement).removeClass('opened');
+            if ($(this).isMenuOpened()) {
+                $('.elements', this).hide();
+                this.removeClass('opened');
             } else {
-                $('.elements', dropdownElement).show('slide', { direction: 'up' }, 100);
-                $(dropdownElement).addClass('opened');
+                $('.elements', this).show('slide', { direction: 'up' }, 100);
+                $(this).addClass('opened');
             }
         }
 
-        $(dropdownElement).append('<i class="fa fa-sort-desc"></i>'); // Adds the arrow down on the right side.
 
         // When you hover on the element, add a class on the 'i' and on the 'input' element to make it visible that
         // the element has focus. When we do leave the element, remove the classes, but only when the input element
         // does not have focus. We don't wan the element to change styles as long as we have focus on the input element.
-        $(dropdownElement).hover(function() {
-            $(dropdownElement).addClass('focus');
+        this.hover(function() {
+            $(this).addClass('focus');
         }, function() {
-            if (!$(this).is(':focus') && !$(dropdownElement).isMenuOpened()) {
+            if (!$(this).is(':focus') && !$(this).isMenuOpened()) {
                 $(this).removeClass('focus');
             }
         });
 
         // When we lose focus on the dropdown element, remove all the classes that causes a style change.
         // By removing those classes, the style is reverted, meaning no special colors are visible anymore.
-        $(dropdownElement).focusout(function() {
+        this.focusout(function() {
             $(this).removeClass('active');
-        })
+        });
 
         // When you click on the arrow down icon, it means that either the menu should be showed or hidden.
         // We apply the correct styling by toggling a class named 'opened'.
-        $('i', dropdownElement).click(function() {
-            $(dropdownElement).ToggleOpen(dropdownElement);
+        $('i', this).click(function() {
+            $(this).parent().ToggleOpen(this);
         })
 
         // When you click on an item in the dropdown, then the item must be showed in the box of the DropDown.
@@ -123,27 +123,27 @@ $(function() {
         //          When this event handler is executed, in every browser, the class 'focus' is removed of the
         //          dropdown element, but for some reason, Internet Explorer doesn't clear that class, so we'll be
         //          clearing it manually through a JavaScript call.
-        $('.elements li', dropdownElement).click(function() {
+        $('.elements li', this).click(function() {
             var selectedLiText = $(this).html();
-            $('.legend', dropdownElement).html(selectedLiText);
+            $('.legend', $(this).parent().parent()).html(selectedLiText);
 
             $.fn.selectedItem = selectedLiText; // Set a property to we know the item which has been selected.
 
             // Check if there's an attribute called data-on-change.
             // If that's attribute correct, check the value in it, try to transform it into a JavaScript function
             // and execute it.
-            var attribute = $(dropdownElement).attr('data-on-change');
+            var attribute = $(this).parent().parent().attr('data-on-change');
             if (typeof attribute !== 'undefined' && attribute != '') { eval(attribute); }
 
             // Toggle the state of the menu, but since you can only click on the element when the menu is opened,
             // the menu will always be closed.
-            $(dropdownElement).ToggleOpen();
+            $(this).parent().parent().ToggleOpen();
 
             // IE-Fix: Remove the class 'focus' from the dropdown element.
-            $(dropdownElement).removeClass('focus');
+            $(this).removeClass('focus');
         });
 
-        return dropdownElement; // Return this object to ensure that methods can be chained.
+        return this; // Return this object to ensure that methods can be chained.
     }
 
     /**

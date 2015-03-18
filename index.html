@@ -17,7 +17,7 @@
 
         <!-- Include all the internal script files. -->
         <script src="/Resources/Scripts/Elements/OfficeUI.Elements.js"></script>
-        <script src="/Resources/Scripts/General/OfficeUI.General.min.js"></script>
+        <script src="/Resources/Scripts/General/OfficeUI.General.js"></script>
         <script src="/Resources/Scripts/OfficeUI.js"></script>
         <script src="/Resources/Scripts/OfficeUI.Configuration.js"></script>
 
@@ -41,7 +41,7 @@
                 </a>
 
                 <br/><br/>
-                <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeStyle').scope().changeStyle(dropdownElement.selectedItem); $('#dropdownChangeStyle').scope().refresh();">
+                <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$(this).scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">
                     <div class="legend">LightBlue</div>
 
                     <ul class="elements">
@@ -55,8 +55,8 @@
                     </ul>
                 </div>
 
-                <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$('#dropdownChangeTheme').scope().changeTheme(dropdownElement.selectedItem); $('#dropdownChangeTheme').scope().refresh();">
-                    <div class="legend">Calligraphy</div>
+                <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$(this).scope().changeTheme($(this).selectedItem); $('#dropdownChangeTheme').scope().refresh();">
+                    <div class="legend">Circuit</div>
 
                     <ul class="elements">
                         <li>Calligraphy</li>
