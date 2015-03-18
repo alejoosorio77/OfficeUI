@@ -42,9 +42,9 @@ $(function() {
      */
     $.fn.OfficeUIDropdown = function() {
         var dropdownElement = $(this); // Gets the element that should be transformed.
-        $.fn.selectedItem = ''; // Sets the text of the selected item.
+        $.fn.selectedItem = ''; // Gets the text of the selected item.
 
-        $(dropdownElement).addClass('noselect'); // Adds a class that ensure that text-selection for this element is disabled.
+        $(dropdownElement).addClass('no-select'); // Adds a class that ensure that text-selection for this element is disabled.
 
         /**
          * @type        Function
@@ -124,6 +124,12 @@ $(function() {
 
         // When you click on an item in the dropdown, then the item must be showed in the box of the DropDown.
         // This is to indicate that the item has been selected.
+        //
+        // Note: An Internet Explorer Fix is required for this element.
+        //
+        //          When this event handler is executed, in every browser, the class 'focus' is removed of the
+        //          dropdown element, but for some reason, Internet Explorer doesn't clear that class, so we'll be
+        //          clearing it manually through a JavaScript call.
         $('.elements li', dropdownElement).click(function() {
             var selectedLiText = $(this).html();
             $('.legend', dropdownElement).html(selectedLiText);
@@ -139,6 +145,9 @@ $(function() {
             // Toggle the state of the menu, but since you can only click on the element when the menu is opened,
             // the menu will always be closed.
             $(dropdownElement).ToggleOpen();
+
+            // IE-Fix: Remove the class 'focus' from the dropdown element.
+            $(dropdownElement).removeClass('focus');
         });
 
         return this; // Return this object to ensure that methods can be chained.
