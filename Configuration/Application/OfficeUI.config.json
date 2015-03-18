@@ -9,5 +9,5 @@
     { "name": "Turquoise", "stylesheet": "/Resources/Stylesheets/Styles/Turquoise/OfficeUI.Style.Turquoise.min.css" }
   ],
 
-  "DefaultStyle": "Blue"
+  "DefaultStyle": "LightBlue"
 }

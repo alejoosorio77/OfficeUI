@@ -8,15 +8,17 @@
  *                the website such as buttons, input elements and various others.
 ======================================================================================================= */
 
+/* ----- Import Statements. ---- */
+@import 'OfficeUI.Reset.less';
+@import 'OfficeUI.Core.less';
+
 /* ----- General elements ---- */
 /*
  * Notes:
- * In a web application, there are various normal elements such as input elements and dropdown elements.
- * Those elements are being styles in the section below.
+ * In a web application, there are various normal elements such as input elements, button elements. In fact, all the
+ * elements that can be rendered using a simple HTML tag. The styling of those elements is placed here.
 */
-#OfficeUI input { font-family: 'Segoe UI'; border-style: solid; border-width: 1px; }
-#OfficeUI .dropdown { height: 21px; }
-#OfficeUI .dropdown .legend { font-family: 'Segoe UI'; border-style: solid; border-width: 1px; }
+// ToDo: Add some elements here.
 
 /* ----- Buttons ----- */
 /* Notes:
@@ -50,9 +52,9 @@
  *    </a>
  * ================================================================================================================= */
 /* -- Normal button -- */
-#OfficeUI a.button { color: #444; border-width: 1px; border-style: solid; cursor: default; padding: 0 5px 0 5px; text-decoration: none; }
-#OfficeUI a.button:hover { border-width: 1px; border-style: solid; }
-#OfficeUI a.button:active, #OfficeUI a.button.ie-fix { border-width: 1px; border-style: solid; }
+#OfficeUI a.button { border: 1px solid transparent; color: #444; cursor: default; padding: 0 5px 0 5px; text-decoration: none; }
+#OfficeUI a.button:active, #OfficeUI a.button.ie-fix { border: 1px solid transparent; }
+#OfficeUI a.button:hover { border: 1px solid transparent; }
 
 /* ----- DropDown Elements ----- */
 /* Notes:
@@ -69,9 +71,9 @@
  *    </a>
  * ================================================================================================================= */
 /* -- Dropdown element -- */
-#OfficeUI .dropdown { display: inline-block; position: relative; }
-#OfficeUI .dropdown .legend { border-right-style: none; padding: 0 15px 0 5px; width: 100%; height: 100%; line-height: 1.5; }
-#OfficeUI .dropdown i { height: 100%; border-style: solid; border-width: 1px; border-left-color: transparent; cursor: default; color: #575757; font-size: 10px; padding: 3px 2px 0 0; position: absolute; right: 0; text-align: center; top: 0; width: 13px; }
+#OfficeUI .dropdown { display: inline-block; height: 21px; position: relative; }
+#OfficeUI .dropdown .legend { border: 1px solid transparent; border-right-style: none; height: 100%; line-height: 1.5; padding: 0 15px 0 5px; width: 100%; }
+#OfficeUI .dropdown i { border: 1px solid transparent; height: 100%; color: #575757; cursor: default; font-size: 10px; padding: 3px 2px 0 0; position: absolute; right: 0; text-align: center; top: 0; width: 13px; }
 #OfficeUI .dropdown.active i, #OfficeUI .dropdown.focus i { color: #000; }
-#OfficeUI .dropdown .elements { border-style: solid; border-width: 1px; display: none; position: absolute; width: 100%; }
-#OfficeUI .dropdown .elements li { padding: 3px 0 3px 3px; font-family: 'Segoe UI'; }
+#OfficeUI .dropdown .elements { border: 1px solid transparent; display: none; position: absolute; width: 100%; }
+#OfficeUI .dropdown .elements li { padding: 3px 0 3px 3px; }
