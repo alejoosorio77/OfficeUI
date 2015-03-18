@@ -42,7 +42,9 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
                 .then(function (response) {
                     return {
                         Styles: response.data.Styles,
-                        DefaultStyle: response.data.DefaultStyle
+                        DefaultStyle: response.data.DefaultStyle,
+                        Themes: response.data.Themes,
+                        DefaultTheme: response.data.DefaultTheme
                     };
                 }, function(error) { new OfficeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); });
         }
@@ -64,7 +66,9 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
 
     // Defines the variables which are needed for this service.
     var availableStyles = [];
-    var defaultStyle = "";
+    var defaultStyle = '';
+    var availableThemes = [];
+    var defaultTheme = '';
 
     /**
      * @type        Function
@@ -79,6 +83,8 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
         promise.then(function(response){
             availableStyles = response.Styles;
             defaultStyle = response.DefaultStyle;
+            availableThemes = response.Themes;
+            defaultTheme = response.DefaultTheme
         });
 
         return promise;
@@ -89,7 +95,7 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
      * @name       changeStyle
      *
      * @param      styleName (string):         The name of the style to load. This should be a name which has been
-     *                                          defined in the 'availableStyles' array.
+     *                                         defined in the 'availableStyles' array.
      *
      * @return     string:      The url of the stylesheet to load.
      *
@@ -104,6 +110,27 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
         if (foundStyles.length == 0) { new OfficeUIStylesheetException('A style with name \'' + styleName + '\' could not be found. Is the style defined in the \'availableStyles\' array?'); }
         else if (foundStyles.length > 1) { new OfficeUIStylesheetException('Multiple entries in the \'availableStylesheets\' array matches a style with name \'' + styleName + '\''); }
         else if (foundStyles.length == 1) { return foundStyles[0].stylesheet; }
+    }
+
+    /**
+     * @type        Function
+     * @name        changeTheme
+     *
+     * @param       themeName (string):     The name of the theme to load. This should be a name which has been defined
+     *                                      in the 'availableThemes' array.
+     *
+     * @return     string:      The url of the stylesheet to load.
+     *
+     * @notes
+     * The themes which can be loaded are defined in the variable 'availableThemes'.
+     * When you pass a style which either match multiple entries or no entries, and error is thrown.
+     */
+    stylesheetFactoryServiceIntsance.changeTheme = function(themeName) {
+        var foundThemes = JSPath.apply('.{.name == "' + themeName + '"}', availableThemes);
+
+        if (foundThemes.length == 0) { new OfficeUIStylesheetException('A theme with name \'' + themeName + '\' could not be found. Is the style defined in the \'availableThemes\' array?'); }
+        else if (foundThemes.length > 1) { new OfficeUIStylesheetException('Multiple entries in the \'availableThemes\' array matches a style with name \'' + themeName + '\''); }
+        else if (foundThemes.length == 1) { return foundThemes[0].stylesheet; }
     }
 
     // Return the instance of the service.
@@ -129,10 +156,14 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, $sco
      * @notes
      * Initializes the OfficeUI application by loading the configuration file and adjusting the application to meets
      * the specifications stored in that configuration file.
+     * The changes which are being done here are the following:
+     * - Apply a default style (as defined in the OfficeUI configuration file).
+     * - Apply a default theme (as defined in the OfficeUI configuration file).
      */
     function Initialize() {
         stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
             $scope.style = stylesheetFactory.changeStyle(data.DefaultStyle);
+            $scope.theme = stylesheetFactory.changeTheme(data.DefaultTheme);
         });
     }
 
@@ -149,6 +180,21 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, $sco
      */
     $scope.changeStyle = function(styleName) {
         $scope.style = stylesheetFactory.changeStyle(styleName);
+    }
+
+    /**
+     * @type       Function
+     * @name       changeTheme
+     *
+     * @param      themeName (string):          The name of the theme to load. This should be a name which has been
+     *                                          defined in the 'availableThemes' array.
+     *
+     * @notes
+     * The themes which can be loaded are defined in the variable 'availableThemes'.
+     * When you pass a style which either match multiple entries or no entries an error is thrown.
+     */
+    $scope.changeTheme = function(themeName) {
+        $scope.theme = stylesheetFactory.changeTheme(themeName);
     }
 
     /**

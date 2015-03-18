@@ -8,6 +8,23 @@
     { "name": "Red", "stylesheet": "/Resources/Stylesheets/Styles/Red/OfficeUI.Style.Red.min.css" },
     { "name": "Turquoise", "stylesheet": "/Resources/Stylesheets/Styles/Turquoise/OfficeUI.Style.Turquoise.min.css" }
   ],
+  "DefaultStyle": "LightBlue",
 
-  "DefaultStyle": "LightBlue"
+  "Themes": [
+    { "name": "Calligraphy", "stylesheet": "/Resources/Stylesheets/Themes/Calligraphy/OfficeUI.Themes.Calligraphy.min.css" },
+    { "name": "Circles And Stripes", "stylesheet": "/Resources/Stylesheets/Themes/Circles-And-Stripes/OfficeUI.Themes.Circles-And-Stripes.min.css" },
+    { "name": "Circuit", "stylesheet": "/Resources/Stylesheets/Themes/Circuit/OfficeUI.Themes.Circuit.min.css" },
+    { "name": "Clouds", "stylesheet": "/Resources/Stylesheets/Themes/Clouds/OfficeUI.Themes.Clouds.min.css" },
+    { "name": "Doodle Circles", "stylesheet": "/Resources/Stylesheets/Themes/Doodle-Circles/OfficeUI.Themes.Doodle-Circles.min.css" },
+    { "name": "Doodle Diamonds", "stylesheet": "/Resources/Stylesheets/Themes/Doodle-Diamonds/OfficeUI.Themes.Doodle-Diamonds.min.css" },
+    { "name": "Geometry", "stylesheet": "/Resources/Stylesheets/Themes/Geometry/OfficeUI.Themes.Geometry.min.css" },
+    { "name": "Lunchbox", "stylesheet": "/Resources/Stylesheets/Themes/Lunchbox/OfficeUI.Themes.Lunchbox.min.css" },
+    { "name": "School Supplies", "stylesheet": "/Resources/Stylesheets/Themes/School-Supplies/OfficeUI.Themes.School-Supplies.min.css" },
+    { "name": "Spring", "stylesheet": "/Resources/Stylesheets/Themes/Spring/OfficeUI.Themes.Spring.min.css" },
+    { "name": "Stars", "stylesheet": "/Resources/Stylesheets/Themes/Stars/OfficeUI.Themes.Stars.min.css" },
+    { "name": "Straws", "stylesheet": "/Resources/Stylesheets/Themes/Straws/OfficeUI.Themes.Straws.min.css" },
+    { "name": "Tree Rings", "stylesheet": "/Resources/Stylesheets/Themes/Tree-Rings/OfficeUI.Themes.Tree-Rings.min.css" },
+    { "name": "Underwater", "stylesheet": "/Resources/Stylesheets/Themes/Underwater/OfficeUI.Themes.Underwater.min.css" }
+  ],
+  "DefaultTheme": "Circuit"
 }

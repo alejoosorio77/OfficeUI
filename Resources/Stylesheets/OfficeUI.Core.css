@@ -290,3 +290,9 @@ input {
   -webkit-user-select: none;
   user-select: none;
 }
+/* ---- Application styling. ---- */
+#OfficeUI .application {
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-color: rgba(0, 0, 0, 0);
+}

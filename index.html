@@ -26,27 +26,60 @@
 
         <!-- Include all the required stylesheets. -->
         <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Core.min.css" />
-        <link rel="stylesheet" data-ng-href="{{style}}" />
+
+        <link rel="stylesheet" data-ng-href="{{style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
+        <link rel="stylesheet" data-ng-href="{{theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
     </head>
     <body>
-        <div id="OfficeUI" style="margin: 100px;">
-            <a href="#" class="button">
-                <span>Demo</span>
-            </a>
+        <!-- Defines the OfficeUI container. All OfficeUI components should be placed in here. -->
+        <div id="OfficeUI">
 
-            <br/><br/>
-            <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeStyle').scope().changeStyle(dropdownElement.selectedItem); $('#dropdownChangeStyle').scope().refresh();">
-                <div class="legend"></div>
+            <!-- Defines the OfficeUI application container. -->
+            <div class="application" style="padding: 100px;">
+                <a href="#" class="button">
+                    <span>Demo</span>
+                </a>
 
-                <ul class="elements">
-                    <li>Blue</li>
-                    <li>Green</li>
-                    <li>LightBlue</li>
-                    <li>Orange</li>
-                    <li>Purple</li>
-                    <li>Red</li>
-                    <li>Turquoise</li>
-                </ul>
+                <br/><br/>
+                <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeStyle').scope().changeStyle(dropdownElement.selectedItem); $('#dropdownChangeStyle').scope().refresh();">
+                    <div class="legend">LightBlue</div>
+
+                    <ul class="elements">
+                        <li>Blue</li>
+                        <li>Green</li>
+                        <li>LightBlue</li>
+                        <li>Orange</li>
+                        <li>Purple</li>
+                        <li>Red</li>
+                        <li>Turquoise</li>
+                    </ul>
+                </div>
+
+                <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$('#dropdownChangeTheme').scope().changeTheme(dropdownElement.selectedItem); $('#dropdownChangeTheme').scope().refresh();">
+                    <div class="legend">Calligraphy</div>
+
+                    <ul class="elements">
+                        <li>Calligraphy</li>
+                        <li>Circles And Stripes</li>
+                        <li>Circuit</li>
+                        <li>Clouds</li>
+                        <li>Doodle Circles</li>
+                        <li>Doodle Diamonds</li>
+                        <li>Geometry</li>
+                        <li>Lunchbox</li>
+                        <li>School Supplies</li>
+                        <li>Spring</li>
+                        <li>Stars</li>
+                        <li>Straws</li>
+                        <li>Tree Rings</li>
+                        <li>Underwater</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Defines the OfficeUI backstage container. -->
+            <div class="backstage">
+                &nbsp;
             </div>
         </div>
 
