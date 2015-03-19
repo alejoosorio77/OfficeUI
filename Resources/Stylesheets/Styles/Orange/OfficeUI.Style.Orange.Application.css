@@ -142,6 +142,29 @@
 #OfficeUI .dropdown .elements li:hover {
   background-color: #fce4dc;
 }
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.Orange.Ribbon.less
+ * Author:        Kevin De Coninck
+ * Date Created:  19/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.Orange.Ribbon.less file is a file which is used to an OfficeUI
+ *                ribbon element.
+======================================================================================================= */
+/* ----- Import statements ----- */
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tabs .tab.application {
+  background-color: #d24726;
+  border-color: #d24726;
+}
+#OfficeUI .ribbon .tabs .application:hover {
+  background-color: #f0623e !important;
+  border-color: #f0623e !important;
+}
+#OfficeUI .ribbon .tabs .tab.active,
+#OfficeUI .ribbon .tabs .tab:not(.application):hover {
+  color: #f0623e;
+}
 /* ---- Variables. ---- */
 /* ---- OfficeUI application styling. ---- */
 #OfficeUI .icon:not(.disabled):hover {

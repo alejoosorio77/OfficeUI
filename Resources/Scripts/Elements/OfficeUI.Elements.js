@@ -119,7 +119,7 @@ $(function() {
         // When we lose focus on the dropdown element, remove all the classes that causes a style change.
         // By removing those classes, the style is reverted, meaning no special colors are visible anymore.
         this.focusout(function() {
-            $(this).removeClass('active');
+            $(this).removeClass('active').removeClass('focus');
         });
 
         // When you click on the arrow down icon, it means that either the menu should be showed or hidden.

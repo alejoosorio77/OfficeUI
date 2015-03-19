@@ -47,6 +47,23 @@
 #OfficeUI .icon.active {
   background-color: #92c0e0 !important;
 }
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.LightBlue.Ribbon.less
+ * Author:        Kevin De Coninck
+ * Date Created:  19/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.LightBlue.Ribbon.less file is a file which is used to an OfficeUI
+ *                ribbon element.
+======================================================================================================= */
+/* ----- Import statements ----- */
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tabs .application {
+  background-color: #0072c6 !important;
+}
+#OfficeUI .ribbon .tabs .application:hover {
+  background-color: #92c0e0 !important;
+}
 /* ---- Variables. ---- */
 /* ----- General elements ---- */
 /*

@@ -283,6 +283,8 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
  */
 OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
                                                          ribbonDefinitionFactory, $scope) {
+    var activeTab = null; // Variable that holds the currently active tab.
+
     // Initializes the controller so that the application is configured to work.
     Initialize();
 
@@ -314,6 +316,9 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         ribbonDefinitionFactory.getOfficeUIRibbonDefinition().then(function(data) {
             $scope.Tabs = data.Tabs;
             $scope.ContextualGroups = data.ContextualGroups;
+
+            // Set the first tab (not the application tab, as the currently active tab).
+            activeTab = $scope.Tabs[1].Id;
         });
     }
 
@@ -356,6 +361,36 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     $scope.refresh = function() {
         $scope.$apply();
+    }
+
+    /**
+     * @type        Function
+     * @name        isTabActive
+     *
+     * @param       tabId
+     *              The id of the element that identifies the tab to check.
+     *
+     * @returns     {boolean} True is the given tab is active, false otherwise.
+     *
+     * @notes
+     * Check if a given tab is active, based on it's id.
+     */
+    $scope.isTabActive = function(tabId) {
+        return activeTab == tabId;
+    }
+
+    /**
+     * @type        Function
+     * @name        setActiveTab
+     *
+     * @param       tabId
+     *              The id of the tab which you want to activate.
+     *
+     * @notes
+     * Set a tab as the currently active tab based on it's id.
+     */
+    $scope.setActiveTab = function(tabId) {
+        activeTab = tabId;
     }
 });
 

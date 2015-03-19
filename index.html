@@ -51,7 +51,25 @@
                     <!-- Section: Ribbon of the application. -->
                     <div class="ribbon">
                         <ul class="tabs">
+                            <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)">
+                                <ul>
+                                    <li class="tab label" data-ng-class="{application: $first, active: isTabActive(tab.Id)}">
+                                        <span>{{tab.Label}}</span>
+                                    </li>
+                                </ul>
+                            </li>
 
+                            <!--<li class="contextual-tab-group" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-style="{'background-color': contextualGroup.GroupColor}">
+                                <div data-ng-style="{'background-color': contextualGroup.AccentColor}" class="accent">&nbsp;</div>
+                                <div class="label contextual-group-label" data-ng-style="{'color': contextualGroup.GroupTextColor}">
+                                    <span>{{contextualGroup.Label}}</span>
+                                </div>
+                                <ul>
+                                    <li class="tab label" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}">
+                                        <span>{{tab.Label}}</span>
+                                    </li>
+                                </ul>
+                            </li>-->
                         </ul>
                     </div>
                 </header>
@@ -98,11 +116,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-
-            <!-- Defines the OfficeUI backstage container. -->
-            <div class="backstage">
-                &nbsp;
             </div>
         </div>
 

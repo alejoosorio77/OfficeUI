@@ -215,8 +215,9 @@ input {
   text-align: center;
 }
 #OfficeUI .application .icons {
-  margin: 3px 0 0 5px;
+  margin-left: 5px;
   position: absolute;
+  z-index: 9999;
 }
 #OfficeUI .application .icons img {
   margin: 0 5px 0 2px;
@@ -225,9 +226,44 @@ input {
   margin-right: 6px;
 }
 /* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon {
+  height: 50px;
+  position: relative;
+  top: -30px;
+}
 #OfficeUI .ribbon .tabs {
   border-bottom: 1px solid #d4d4d4;
-  height: 20px;
+  height: 50px;
+}
+#OfficeUI .ribbon .tabs .tab-group {
+  display: inline-block;
+  position: relative;
+  top: 25px;
+}
+#OfficeUI .ribbon .tabs .tab-group .label {
+  height: 25px;
+  line-height: 25px;
+  padding: 0 13px 0 12px;
+  text-align: center;
+  text-transform: uppercase;
+}
+#OfficeUI .ribbon .tabs .tab.application {
+  border-style: solid;
+  border-width: 1px;
+  background-image: none;
+  color: #fff;
+  margin-right: 4px;
+  min-width: 52px;
+  padding: 0 3px 0 2px;
+}
+#OfficeUI .ribbon .tabs .tab.active {
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-bottom: 1px solid #fff;
+}
+#OfficeUI .ribbon .tabs .tab:not(.active) {
+  border: 1px solid #fff;
+  border-bottom: 1px solid #d4d4d4;
 }
 /* ----- General elements ---- */
 /*

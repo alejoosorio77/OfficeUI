@@ -1,4 +1,14 @@
 /* ====================================================================================================
+ * Filename:      OfficeUI.Style.Green.Ribbon.less
+ * Author:        Kevin De Coninck
+ * Date Created:  19/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.Green.Ribbon.less file is a file which is used to an OfficeUI
+ *                ribbon element.
+======================================================================================================= */
+/* ----- Import statements ----- */
+/* ====================================================================================================
  * Filename:      OfficeUI.Style.Green.less
  * Author:        Kevin De Coninck
  * Date Created:  10/03/2015
@@ -149,16 +159,7 @@
 #OfficeUI .icon.active {
   background-color: #86bfa0 !important;
 }
-/* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.Ribbon.less
- * Author:        Kevin De Coninck
- * Date Created:  19/03/2015
- * Media:         Screen
- * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.Ribbon.less file is a file which is used to an OfficeUI
- *                ribbon element.
-======================================================================================================= */
-/* ----- Import statements ----- */
+/* ---- Variables. ---- */
 /* ---- OfficeUI ribbon styling. ---- */
 #OfficeUI .ribbon .tabs .tab.application {
   background-color: #217346;
@@ -172,4 +173,3 @@
 #OfficeUI .ribbon .tabs .tab:not(.application):hover {
   color: #439467;
 }
-/* ---- Variables. ---- */

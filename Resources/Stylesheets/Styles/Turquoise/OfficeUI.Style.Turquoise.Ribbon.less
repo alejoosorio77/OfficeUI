@@ -1,0 +1,16 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.Turquoise.Ribbon.less
+ * Author:        Kevin De Coninck
+ * Date Created:  19/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.Turquoise.Ribbon.less file is a file which is used to an OfficeUI
+ *                ribbon element.
+======================================================================================================= */
+/* ----- Import statements ----- */
+@import 'OfficeUI.Style.Turquoise';
+
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tabs .tab.application { background-color: @linkColor; border-color: @linkColor; }
+#OfficeUI .ribbon .tabs .application:hover { background-color: @linkActive !important; border-color: @linkActive !important; }
+#OfficeUI .ribbon .tabs .tab.active, #OfficeUI .ribbon .tabs .tab:not(.application):hover { color: @linkActive; }

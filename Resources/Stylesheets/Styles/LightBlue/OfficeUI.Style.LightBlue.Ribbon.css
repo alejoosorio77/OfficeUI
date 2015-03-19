@@ -1,10 +1,20 @@
 /* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.less
+ * Filename:      OfficeUI.Style.LightBlue.Ribbon.less
+ * Author:        Kevin De Coninck
+ * Date Created:  19/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.LightBlue.Ribbon.less file is a file which is used to an OfficeUI
+ *                ribbon element.
+======================================================================================================= */
+/* ----- Import statements ----- */
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.LightBlue.less
  * Author:        Kevin De Coninck
  * Date Created:  10/03/2015
  * Media:         Screen
  * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.less file is a file which on itself doesn't do anything.
+ * Notes:         The OfficeUI.Style.LightBlue.less file is a file which on itself doesn't do anything.
  *                This files does act as a file in which various variables and other items have are
  *                stored. This does mean that this file does need to be referenced from other files.
 ======================================================================================================= */
@@ -20,12 +30,12 @@
 ======================================================================================================= */
 /* ---- Variables. ---- */
 /* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.Elements.less
+ * Filename:      OfficeUI.Style.LightBlue.Elements.less
  * Author:        Kevin De Coninck
  * Date Created:  10/03/2015
  * Media:         Screen
  * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.Elements.less file is a file is used to style various
+ * Notes:         The OfficeUI.Style.LightBlue.Elements.less file is a file is used to style various
  *                elements. The classes in this file does only implements style-based style rules
  *                such as border colors, background colors, ...
 ======================================================================================================= */
@@ -52,10 +62,10 @@
 }
 #OfficeUI input:hover,
 #OfficeUI input:focus {
-  border-color: #86bfa0;
+  border-color: #92c0e0;
 }
 #OfficeUI .dropdown .legend:hover {
-  border-color: #86bfa0;
+  border-color: #92c0e0;
 }
 /* ----- Buttons ----- */
 /* Notes:
@@ -84,17 +94,17 @@
   border-color: #ababab;
 }
 #OfficeUI a.button.default-button {
-  background-color: #d3f0e0;
-  border-color: #86bfa0;
+  background-color: #cde6f7;
+  border-color: #92c0e0;
 }
 #OfficeUI a.button:hover {
-  background-color: #d3f0e0;
-  border-color: #86bfa0;
+  background-color: #cde6f7;
+  border-color: #92c0e0;
 }
 #OfficeUI a.button:active,
 #OfficeUI a.button.ie-fix {
-  background-color: #86bfa0;
-  border-color: #439467;
+  background-color: #92c0e0;
+  border-color: #2a8dd4;
 }
 /* ----- DropDown Elements ----- */
 /* Notes:
@@ -113,63 +123,47 @@
 /* -- Dropdown element -- */
 #OfficeUI .dropdown.active .legend,
 #OfficeUI .dropdown.focus .legend {
-  border-color: #86bfa0;
+  border-color: #92c0e0;
 }
 #OfficeUI .dropdown.focus i,
 #OfficeUI .dropdown.active i {
-  border-top-color: #86bfa0;
-  border-right-color: #86bfa0;
-  border-bottom-color: #86bfa0;
+  border-top-color: #92c0e0;
+  border-right-color: #92c0e0;
+  border-bottom-color: #92c0e0;
 }
 #OfficeUI .dropdown.active i,
 #OfficeUI .dropdown.focus i {
-  background-color: #d3f0e0;
-  border-left-color: #86bfa0;
+  background-color: #cde6f7;
+  border-left-color: #92c0e0;
 }
 #OfficeUI .dropdown.opened i {
-  background-color: #86bfa0;
+  background-color: #92c0e0;
 }
 #OfficeUI .dropdown .elements li:hover {
-  background-color: #d3f0e0;
+  background-color: #cde6f7;
 }
 /* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.Application.less
+ * Filename:      OfficeUI.Style.LightBlue.Application.less
  * Author:        Kevin De Coninck
  * Date Created:  19/03/2015
  * Media:         Screen
  * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.Application.less file is a file which is used to style
+ * Notes:         The OfficeUI.Style.LightBlue.Application.less file is a file which is used to style
  *                various OfficeUI elements.
 ======================================================================================================= */
 /* ----- Import statements ----- */
 /* ---- OfficeUI application styling. ---- */
 #OfficeUI .icon:not(.disabled):hover {
-  background-color: #d3f0e0;
+  background-color: #cde6f7;
 }
 #OfficeUI .icon.active {
-  background-color: #86bfa0 !important;
-}
-/* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.Ribbon.less
- * Author:        Kevin De Coninck
- * Date Created:  19/03/2015
- * Media:         Screen
- * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.Ribbon.less file is a file which is used to an OfficeUI
- *                ribbon element.
-======================================================================================================= */
-/* ----- Import statements ----- */
-/* ---- OfficeUI ribbon styling. ---- */
-#OfficeUI .ribbon .tabs .tab.application {
-  background-color: #217346;
-  border-color: #217346;
-}
-#OfficeUI .ribbon .tabs .application:hover {
-  background-color: #439467 !important;
-  border-color: #439467 !important;
-}
-#OfficeUI .ribbon .tabs .tab.active,
-#OfficeUI .ribbon .tabs .tab:not(.application):hover {
-  color: #439467;
+  background-color: #92c0e0 !important;
 }
 /* ---- Variables. ---- */
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tabs .application {
+  background-color: #0072c6 !important;
+}
+#OfficeUI .ribbon .tabs .application:hover {
+  background-color: #92c0e0 !important;
+}
