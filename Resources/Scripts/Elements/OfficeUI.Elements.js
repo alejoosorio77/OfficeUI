@@ -83,14 +83,27 @@ $(function() {
         $.fn.ToggleOpen = function() {
             // Check if the menu is opened or closed, based on that, hide or show the menu.
             if ($(this).isMenuOpened()) {
-                $('.elements', this).hide();
-                this.removeClass('opened');
+                $(this).Close();
             } else {
                 $('.elements', this).show('slide', { direction: 'up' }, 100);
                 $(this).addClass('opened');
             }
         }
 
+        /**
+         * @type        Function
+         * @name        Open
+         *
+         * @notes
+         * When this function is executed, the DropDown element is being closed.
+         */
+        $.fn.Close = function() {
+            $('.elements', this).hide();
+            this.removeClass('opened');
+
+            // IE-Fix: Remove the class 'focus' from the dropdown element.
+            $(this).removeClass('focus');
+        }
 
         // When you hover on the element, add a class on the 'i' and on the 'input' element to make it visible that
         // the element has focus. When we do leave the element, remove the classes, but only when the input element
@@ -111,8 +124,10 @@ $(function() {
 
         // When you click on the arrow down icon, it means that either the menu should be showed or hidden.
         // We apply the correct styling by toggling a class named 'opened'.
-        $('i', this).click(function() {
+        $('i', this).click(function(e) {
             $(this).parent().ToggleOpen(this);
+
+            e.stopPropagation(); // Make sure to stop propagating the event.
         })
 
         // When you click on an item in the dropdown, then the item must be showed in the box of the DropDown.
@@ -155,4 +170,10 @@ $(function() {
      * 'OfficeUI' into an OfficeUI DropDown.
      */
     $('#OfficeUI .dropdown').OfficeUIDropdown();
+
+    $(window).on('click', function(e) {
+        $('#OfficeUI .dropdown').each(function(index, item) {
+            if ($(item).isMenuOpened()) { $(item).Close(); }
+        });
+    });
 });
