@@ -30,6 +30,23 @@
  *                are the same for all the styles.
 ======================================================================================================= */
 /* ---- Variables. ---- */
+/* ====================================================================================================
+ * Filename:      OfficeUI.Style.Purple.Application.less
+ * Author:        Kevin De Coninck
+ * Date Created:  19/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Style.Purple.Application.less file is a file which is used to style
+ *                various OfficeUI elements.
+======================================================================================================= */
+/* ----- Import statements ----- */
+/* ---- OfficeUI application styling. ---- */
+#OfficeUI .icon:not(.disabled):hover {
+  background-color: #eadcf2;
+}
+#OfficeUI .icon.active {
+  background-color: #c3a9d4 !important;
+}
 /* ---- Variables. ---- */
 /* ----- General elements ---- */
 /*

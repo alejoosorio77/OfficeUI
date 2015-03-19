@@ -180,6 +180,14 @@ $(function() {
      */
     $('#OfficeUI .dropdown').OfficeUIDropdown();
 
+    /**
+     * @type        Function
+     * @name        N.A.
+     *
+     * @notes
+     * When you click somewhere on the window, it's necessary to close all open dropdown elements.
+     * This is being done by the method below.
+     */
     $(window).on('click', function(e) {
         $('#OfficeUI .dropdown').each(function(index, item) {
             if ($(item).isMenuOpened()) { $(item).Close(); }

@@ -49,7 +49,37 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
                 }, function(error) { new OfficeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); });
         }
     }
-})
+});
+
+/**
+ * @type        Service
+ * @name        OfficeUIApplicationDefinitionService
+ *
+ * @notes
+ * Provides a service which will read the necessary application definition file. Based on this file, various elements will be placed on the website.
+ */
+OfficeUIModule.factory('OfficeUIApplicationDefinitionService', function($http) {
+    // Defines what needs to be returned by the service.
+    return {
+
+        /**
+         * @type        Function
+         * @name        getOfficeUIConfiguration
+         *
+         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI configuration file.
+         */
+        getOfficeUIApplicationDefinition: function() {
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI application definition file is not defined.'); }
+            return $http.get($.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation)
+                .then(function (response) {
+                    return {
+                        Title: response.data.Title,
+                        Icons: response.data.Icons
+                    };
+                }, function(error) { new OfficeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); });
+        }
+    }
+});
 
 /**
  * @type        Service
@@ -138,6 +168,44 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
 }]);
 
 /**
+ * @type        Service
+ * @name        applicationDefinitionFactory
+ *
+ * @notes
+ * Provides common work to work with an OfficeUI application using the AngularJS way.
+ */
+OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplicationDefinitionService', function($http, OfficeUIApplicationDefinitionService) {
+    // Define the service instance. This one is returned from the factory and it's through this instance that the
+    // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
+    // particular object.
+    var applicationDefinitionFactoryInstance = {};
+
+    // Defines the variables which are needed for this service.
+    var title = [];
+    var icons = '';
+
+    /**
+     * @type        Function
+     * @name        getOfficeUIApplicationDefinition
+     *
+     * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
+     *                                  complete.
+     */
+    applicationDefinitionFactoryInstance.getOfficeUIApplicationDefinition = function() {
+        var promise = OfficeUIApplicationDefinitionService.getOfficeUIApplicationDefinition();
+
+        promise.then(function(response){
+            title = response.Title;
+            icons = response.Icons;
+        });
+
+        return promise;
+    }
+
+    return applicationDefinitionFactoryInstance;
+}]);
+
+/**
  * @type        Controller
  * @name        StylesheetController
  *
@@ -145,7 +213,7 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
  * Defines the 'StylesheetController' controller. This controller is used to render an OfficeUI website in various
  * styles.
  */
-OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, $scope) {
+OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory, $scope) {
     // Initializes the controller so that the application is configured to work.
     Initialize();
 
@@ -161,9 +229,16 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, $sco
      * - Apply a default theme (as defined in the OfficeUI configuration file).
      */
     function Initialize() {
+        // Initialize the stylesheet factory to make sure that all the data has been loaded.
         stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
             $scope.style = stylesheetFactory.changeStyle(data.DefaultStyle);
             $scope.theme = stylesheetFactory.changeTheme(data.DefaultTheme);
+        });
+
+        // Initialize the application definition factory to make sure that all the data has been loaded.
+        applicationDefinitionFactory.getOfficeUIApplicationDefinition().then(function(data) {
+           $scope.Title = data.Title;
+            $scope.Icons = data.Icons;
         });
     }
 
@@ -206,6 +281,28 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, $sco
      */
     $scope.refresh = function() {
         $scope.$apply();
+    }
+});
+
+/**
+ * @type        Directive
+ * @name        toggleClassOnClick
+ *
+ * @notes
+ * Defines the 'toggleClassOnClick' directive. This directive allows us to toggle a specific class when you click on
+ * a certain element.
+ */
+OfficeUIModule.directive('toggleClassOnClick', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes) {
+            var toggleClass = attributes['toggleClassOnClick'];
+
+            // Bind the necessary event handlers and add the toggled class to the correct element.
+            element.bind('mousedown mouseup', function() {
+                element.toggleClass(toggleClass);
+            });
+        }
     }
 });
 

@@ -170,6 +170,10 @@ input {
   font-family: 'Segoe UI', arial, sans-serif;
   font-size: 0.75em;
 }
+#OfficeUI .disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 /* ---- General classes. ---- */
 /* Provides a way to ensure that text-selection of an element is disabled. By adding this class, text-selection of the
  * becomes disabled. Also the cursor is changed to 'default' to ensure that the cursor doesn't change to a vertical pipe
@@ -185,10 +189,29 @@ input {
   user-select: none;
 }
 /* ---- Application styling. ---- */
+#OfficeUI header {
+  position: fixed;
+  width: 100%;
+}
+/* ---- OfficeUI core application styling. ---- */
 #OfficeUI .application {
   background-repeat: no-repeat;
   background-position: right top;
   background-color: rgba(0, 0, 0, 0);
+}
+#OfficeUI .application .title {
+  margin: 8px 2px 0 0;
+  text-align: center;
+}
+#OfficeUI .application .icons {
+  margin: 3px 0 0 5px;
+  position: absolute;
+}
+#OfficeUI .application .icons img {
+  margin: 0 5px 0 2px;
+}
+#OfficeUI .application .icons img:not(:first-child) {
+  margin-right: 6px;
 }
 /* ----- General elements ---- */
 /*

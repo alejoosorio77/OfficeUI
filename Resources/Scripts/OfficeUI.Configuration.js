@@ -15,6 +15,8 @@
 
     // Defaults settings for the OfficeUI website.
     $.fn.OfficeUI.Settings = {
-        OfficeUIConfigurationFileLocation: '/Configuration/Application/OfficeUI.config.json'
+        OfficeUIConfigurationFileLocation: '/Configuration/Application/OfficeUI.config.json',
+        OfficeUIApplicationDefinitionFileLocation: '/Resources/Data/Application.json',
+        OfficeUIRibbonDefinitionFileLocation: '/Resources/Data/Ribbon.json'
     };
 }(jQuery));
