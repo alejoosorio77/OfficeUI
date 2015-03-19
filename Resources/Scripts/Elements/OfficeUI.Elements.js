@@ -125,6 +125,11 @@ $(function() {
         // When you click on the arrow down icon, it means that either the menu should be showed or hidden.
         // We apply the correct styling by toggling a class named 'opened'.
         $('i', this).click(function(e) {
+            // Hide all the open dropdown elements.
+            $('#OfficeUI .dropdown').each(function(index ,item) {
+                if ($(item).isMenuOpened()) { $(item).Close(); }
+            });
+
             $(this).parent().ToggleOpen(this);
 
             e.stopPropagation(); // Make sure to stop propagating the event.
