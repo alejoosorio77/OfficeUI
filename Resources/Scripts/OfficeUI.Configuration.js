@@ -14,6 +14,8 @@
     }
 
     // Defaults settings for the OfficeUI website.
+    // When you want to change the location of the file, it can be done like the following:
+    // $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation = '/Configuration/Application/OfficeUI.config.json';
     $.fn.OfficeUI.Settings = {
         OfficeUIConfigurationFileLocation: '/Configuration/Application/OfficeUI.config.json',
         OfficeUIApplicationDefinitionFileLocation: '/Resources/Data/Application.json',

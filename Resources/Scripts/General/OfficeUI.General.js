@@ -64,3 +64,17 @@ var OfficeUILoadingException = function(message) {
 var OfficeUIConfigurationException = function(message) {
     return console.error('[OfficeUILoadingException]: ' + message);
 }
+
+/**
+ * @Type            Function
+ * @name            OfficeUIDynamicEventHandlingException
+ *
+ * @param           message (string):       A message to pass to this exception type.
+ *
+ * @notes
+ * When this method is called an error is written in the console window of the browser which is formatted according
+ * to the following syntax: [OfficeUIDynamicEventHandlingException]: {message}
+ */
+var OfficeUIDynamicEventHandlingException = function(message) {
+    return console.error('[OfficeUILoadingException]: ' + message);
+}

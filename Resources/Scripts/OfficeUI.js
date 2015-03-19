@@ -381,6 +381,34 @@ OfficeUIModule.directive('toggleClassOnClick', function() {
     }
 });
 
+/**
+ * @type        Directive
+ * @name        dynamicEventHandling
+ *
+ * @notes
+ * Defines the 'dynamicEventHandling' directive. This directive allows us to toggle a specific class when you click on
+ * a certain element.
+ */
+OfficeUIModule.directive('dynamicEventHandling', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes) {
+            var idAttribute = attributes['id'];
+
+            if (typeof idAttribute === 'undefined' || idAttribute == '') { new OfficeUIDynamicEventHandlingException('The directive \'dynamicEventHandling\' could not be placed on an element without an id attribute.'); }
+            else {
+                var registeredEvent = $.fn.OfficeUICore.searchEvent(idAttribute);
+
+                if (registeredEvent != null) {
+                element.on(registeredEvent.handler, function() {
+                    registeredEvent.action();
+                });
+            }
+            }
+        }
+    }
+});
+
 
 
 
