@@ -7,6 +7,7 @@
  * Notes:         The OfficeUI.Themes.Doodle-Circles.less file is a file is used to style an OfficeUI
  *                application to match a given theme. In this case, the 'Doodle Circles' theme.
 ======================================================================================================= */
-#OfficeUI .application {
+#OfficeUI .application,
+#OfficeUI .backstage {
   background: url("/Resources/Images/Themes/Doodle Circles/Background.png") no-repeat scroll right top rgba(0, 0, 0, 0);
 }

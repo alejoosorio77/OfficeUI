@@ -7,6 +7,7 @@
  * Notes:         The OfficeUI.Themes.Spring.less file is a file is used to style an OfficeUI
  *                application to match a given theme. In this case, the 'Spring' theme.
 ======================================================================================================= */
-#OfficeUI .application {
+#OfficeUI .application,
+#OfficeUI .backstage {
   background: url("/Resources/Images/Themes/Spring/Background.png") no-repeat scroll right top rgba(0, 0, 0, 0);
 }

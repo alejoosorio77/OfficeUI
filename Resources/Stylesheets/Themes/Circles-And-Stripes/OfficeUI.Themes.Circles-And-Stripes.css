@@ -8,6 +8,7 @@
  *                OfficeUI application to match a given theme. In this case, the
  *                'Circles And Stripes' theme.
 ======================================================================================================= */
-#OfficeUI .application {
+#OfficeUI .application,
+#OfficeUI .backstage {
   background: url("/Resources/Images/Themes/Circles And Stripes/Background.png") no-repeat scroll right top rgba(0, 0, 0, 0);
 }
