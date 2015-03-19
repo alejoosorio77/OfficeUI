@@ -40,7 +40,7 @@
                 <header>
                     <!-- Section: Icons on the top left of the page. -->
                     <div class="icons no-select">
-                        <img class="application-icon" id="{{icon.Id}}" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-dynamic-event-handling="" />
+                        <img class="application-icon" id="{{icon.Id}}" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
                     </div>
 
                     <!-- Section: Title of the application. -->
