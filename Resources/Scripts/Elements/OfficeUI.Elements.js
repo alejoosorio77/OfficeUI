@@ -154,7 +154,5 @@ $(function() {
      * This call will transform every element with a class 'dropdown' which is placed inside a container with id
      * 'OfficeUI' into an OfficeUI DropDown.
      */
-    $('#OfficeUI .dropdown').each(function(index, item) {
-        $(item).OfficeUIDropdown();
-    });
+    $('#OfficeUI .dropdown').OfficeUIDropdown();
 });
