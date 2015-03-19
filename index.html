@@ -27,8 +27,8 @@
         <!-- Include all the required stylesheets. -->
         <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Core.min.css" />
 
-        <link rel="stylesheet" data-ng-href="{{style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
-        <link rel="stylesheet" data-ng-href="{{theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
+        <link rel="stylesheet" data-ng-href="{{Style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
+        <link rel="stylesheet" data-ng-href="{{Theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
     </head>
     <body>
         <!-- Defines the OfficeUI container. All OfficeUI components should be placed in here. -->
@@ -45,6 +45,13 @@
                     <!-- Section: Title of the application. -->
                     <div class="title">
                         <span>{{Title}}</span>
+                    </div>
+
+                    <!-- Section: Ribbon of the application. -->
+                    <div class="ribbon">
+                        <ul class="tabs">
+
+                        </ul>
                     </div>
                 </header>
 

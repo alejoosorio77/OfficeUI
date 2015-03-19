@@ -164,6 +164,16 @@ input {
  *                that we can use various styles and other elements.
 ======================================================================================================= */
 /* ----- Import Statements. ---- */
+/* ====================================================================================================
+ * Filename:      OfficeUI.Styles.less
+ * Author:        Kevin De Coninck
+ * Date Created:  10/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Styles.less file is a file which contains a couple of variables that
+ *                are the same for all the styles.
+======================================================================================================= */
+/* ---- Variables. ---- */
 /* ---- General elements. ---- */
 #OfficeUI {
   color: #444;
@@ -200,6 +210,7 @@ input {
   background-color: rgba(0, 0, 0, 0);
 }
 #OfficeUI .application .title {
+  height: 22px;
   margin: 8px 2px 0 0;
   text-align: center;
 }
@@ -212,6 +223,11 @@ input {
 }
 #OfficeUI .application .icons img:not(:first-child) {
   margin-right: 6px;
+}
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tabs {
+  border-bottom: 1px solid #d4d4d4;
+  height: 20px;
 }
 /* ----- General elements ---- */
 /*

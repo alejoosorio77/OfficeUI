@@ -13,6 +13,7 @@
 /* ----- Import Statements. ---- */
 @import 'OfficeUI.Reset.less';
 @import 'OfficeUI.Elements.less';
+@import 'Styles/OfficeUI.Styles.less';
 
 /* ---- General elements. ---- */
 #OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; font-size: 0.75em; }
@@ -30,7 +31,10 @@
 
 /* ---- OfficeUI core application styling. ---- */
 #OfficeUI .application { background-repeat: no-repeat; background-position: right top; background-color: rgba(0, 0, 0, 0); }
-#OfficeUI .application .title { margin: 8px 2px 0 0; text-align: center; }
+#OfficeUI .application .title { height: 22px; margin: 8px 2px 0 0; text-align: center; }
 #OfficeUI .application .icons { margin: 3px 0 0 5px; position: absolute; }
 #OfficeUI .application .icons img { margin: 0 5px 0 2px; }
 #OfficeUI .application .icons img:not(:first-child) { margin-right: 6px; }
+
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tabs { border-bottom: 1px solid @defaultGrayRibbon; height: 20px; }

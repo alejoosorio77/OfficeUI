@@ -66,7 +66,7 @@ OfficeUIModule.factory('OfficeUIApplicationDefinitionService', function($http) {
          * @type        Function
          * @name        getOfficeUIConfiguration
          *
-         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI configuration file.
+         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
          */
         getOfficeUIApplicationDefinition: function() {
             if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI application definition file is not defined.'); }
@@ -77,6 +77,36 @@ OfficeUIModule.factory('OfficeUIApplicationDefinitionService', function($http) {
                         Icons: response.data.Icons
                     };
                 }, function(error) { new OfficeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); });
+        }
+    }
+});
+
+/**
+ * @type        Service
+ * @name        OfficeUIRibbonDefinitionService
+ *
+ * @notes
+ * Provides a service which will read the necessary ribbon definition file. Based on this file, various elements will be placed on the website.
+ */
+OfficeUIModule.factory('OfficeUIRibbonDefinitionService', function($http) {
+    // Defines what needs to be returned by the service.
+    return {
+
+        /**
+         * @type        Function
+         * @name        getOfficeUIConfiguration
+         *
+         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI ribbon definition file.
+         */
+        getOfficeUIRibbonDefinition: function() {
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI ribbon definition file is not defined.'); }
+            return $http.get($.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation)
+                .then(function (response) {
+                    return {
+                        Tabs: response.data.Tabs,
+                        ContextualGroups: response.data.ContextualGroups
+                    };
+                }, function(error) { new OfficeUILoadingException('The OfficeUI ribbon definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation + '\' could not be loaded.'); });
         }
     }
 });
@@ -206,6 +236,44 @@ OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplic
 }]);
 
 /**
+ * @type        Service
+ * @name        ribbonDefinitionFactory
+ *
+ * @notes
+ * Provides common work to work with an OfficeUI ribbon using the AngularJS way.
+ */
+OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefinitionService', function($http, OfficeUIRibbonDefinitionService) {
+    // Define the service instance. This one is returned from the factory and it's through this instance that the
+    // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
+    // particular object.
+    var ribbonDefinitionFactoryInstance = {};
+
+    // Defines the variables which are needed for this service.
+    var tabs = [];
+    var contextualGroups = '';
+
+    /**
+     * @type        Function
+     * @name        getOfficeUIRibbonDefinition
+     *
+     * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
+     *                                  complete.
+     */
+    ribbonDefinitionFactoryInstance.getOfficeUIRibbonDefinition = function() {
+        var promise = OfficeUIRibbonDefinitionService.getOfficeUIRibbonDefinition();
+
+        promise.then(function(response){
+            tabs = response.Tabs;
+            contextualGroups = response.ContextualGroups;
+        });
+
+        return promise;
+    }
+
+    return ribbonDefinitionFactoryInstance;
+}]);
+
+/**
  * @type        Controller
  * @name        StylesheetController
  *
@@ -213,7 +281,8 @@ OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplic
  * Defines the 'StylesheetController' controller. This controller is used to render an OfficeUI website in various
  * styles.
  */
-OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory, $scope) {
+OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
+                                                         ribbonDefinitionFactory, $scope) {
     // Initializes the controller so that the application is configured to work.
     Initialize();
 
@@ -231,14 +300,20 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     function Initialize() {
         // Initialize the stylesheet factory to make sure that all the data has been loaded.
         stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
-            $scope.style = stylesheetFactory.changeStyle(data.DefaultStyle);
-            $scope.theme = stylesheetFactory.changeTheme(data.DefaultTheme);
+            $scope.Style = stylesheetFactory.changeStyle(data.DefaultStyle);
+            $scope.Theme = stylesheetFactory.changeTheme(data.DefaultTheme);
         });
 
         // Initialize the application definition factory to make sure that all the data has been loaded.
         applicationDefinitionFactory.getOfficeUIApplicationDefinition().then(function(data) {
-           $scope.Title = data.Title;
+            $scope.Title = data.Title;
             $scope.Icons = data.Icons;
+        });
+
+        // Initialize the ribbon definition factory to make sure that all the data has been loaded.
+        ribbonDefinitionFactory.getOfficeUIRibbonDefinition().then(function(data) {
+            $scope.Tabs = data.Tabs;
+            $scope.ContextualGroups = data.ContextualGroups;
         });
     }
 
@@ -254,7 +329,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeStyle = function(styleName) {
-        $scope.style = stylesheetFactory.changeStyle(styleName);
+        $scope.Style = stylesheetFactory.changeStyle(styleName);
     }
 
     /**
@@ -269,7 +344,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeTheme = function(themeName) {
-        $scope.theme = stylesheetFactory.changeTheme(themeName);
+        $scope.Theme = stylesheetFactory.changeTheme(themeName);
     }
 
     /**
