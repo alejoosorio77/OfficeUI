@@ -11,6 +11,7 @@
   "DefaultStyle": "LightBlue",
 
   "Themes": [
+    { "name": "No Background", "stylesheet": "/Resources/Stylesheets/Themes/No Background/OfficeUI.Themes.No-Background.min.css" },
     { "name": "Calligraphy", "stylesheet": "/Resources/Stylesheets/Themes/Calligraphy/OfficeUI.Themes.Calligraphy.min.css" },
     { "name": "Circles And Stripes", "stylesheet": "/Resources/Stylesheets/Themes/Circles-And-Stripes/OfficeUI.Themes.Circles-And-Stripes.min.css" },
     { "name": "Circuit", "stylesheet": "/Resources/Stylesheets/Themes/Circuit/OfficeUI.Themes.Circuit.min.css" },
