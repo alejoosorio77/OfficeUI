@@ -80,14 +80,14 @@ $(function() {
          * states, opened or opened. A class is added or removed from the 'dropdownElement' that helps to find out if
          * the menu is opened or closed.
          */
-        $.fn.ToggleOpen = function() {
+        $.fn.Open = function() {
             // Check if the menu is opened or closed, based on that, hide or show the menu.
-            if ($(this).isMenuOpened()) {
-                $(this).Close();
-            } else {
+            //if ($(this).isMenuOpened()) {
+            //    $(this).Close();
+            //} else {
                 $('.elements', this).show('slide', { direction: 'up' }, 100);
                 $(this).addClass('opened').addClass('focus');
-            }
+            //}
         }
 
         /**
@@ -125,12 +125,17 @@ $(function() {
         // When you click on the arrow down icon, it means that either the menu should be showed or hidden.
         // We apply the correct styling by toggling a class named 'opened'.
         $('i', this).click(function(e) {
+            var shouldClose = $(this).parent().isMenuOpened(); // Provides a boolean that defines whether or not the menu should be closed.
+
             // Hide all the open dropdown elements.
             $('#OfficeUI .dropdown').each(function(index ,item) {
                 if ($(item).isMenuOpened()) { $(item).Close(); }
             });
 
-            $(this).parent().ToggleOpen(this);
+            // Based on the variable that defines if the menu should be closed or opened, execute the corresponding action.
+            if (shouldClose) {
+                if ($(this).parent().isMenuOpened()) { $(this).parent().Close(); }
+            } else { $(this).parent().Open(); }
 
             e.stopPropagation(); // Make sure to stop propagating the event.
         })
@@ -155,9 +160,8 @@ $(function() {
             var attribute = $(this).parent().parent().attr('data-on-change');
             if (typeof attribute !== 'undefined' && attribute != '') { eval(attribute); }
 
-            // Toggle the state of the menu, but since you can only click on the element when the menu is opened,
-            // the menu will always be closed.
-            $(this).parent().parent().ToggleOpen();
+            // Close the dropdown element.
+            $(this).parent().parent().Close();
 
             // IE-Fix: Remove the class 'focus' from the dropdown element.
             $(this).removeClass('focus');
