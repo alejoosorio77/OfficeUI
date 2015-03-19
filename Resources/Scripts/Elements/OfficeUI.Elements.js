@@ -86,7 +86,7 @@ $(function() {
                 $(this).Close();
             } else {
                 $('.elements', this).show('slide', { direction: 'up' }, 100);
-                $(this).addClass('opened');
+                $(this).addClass('opened').addClass('focus');
             }
         }
 
