@@ -40,7 +40,7 @@
                 <header>
                     <!-- Section: Icons on the top left of the page. -->
                     <div class="icons no-select">
-                        <img class="application-icon" id="{{icon.Id}}" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
+                        <img class="application-icon" id="{{icon.Id}}" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-dynamic-event-handling="" />
                     </div>
 
                     <!-- Section: Title of the application. -->
@@ -59,17 +59,17 @@
                                 </ul>
                             </li>
 
-                            <!--<li class="contextual-tab-group" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-style="{'background-color': contextualGroup.GroupColor}">
+                            <li class="contextual-tab-group" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-style="{'background-color': contextualGroup.GroupColor}">
                                 <div data-ng-style="{'background-color': contextualGroup.AccentColor}" class="accent">&nbsp;</div>
                                 <div class="label contextual-group-label" data-ng-style="{'color': contextualGroup.GroupTextColor}">
                                     <span>{{contextualGroup.Label}}</span>
                                 </div>
                                 <ul>
-                                    <li class="tab label" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}">
+                                    <li class="tab label" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-ng-click="setActiveTab(tab.Id)">
                                         <span>{{tab.Label}}</span>
                                     </li>
                                 </ul>
-                            </li>-->
+                            </li>
                         </ul>
                     </div>
                 </header>
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$(this).scope().changeTheme($(this).selectedItem); $('#dropdownChangeTheme').scope().refresh();">
-                        <div class="legend">Circuit</div>
+                        <div class="legend">Geometry</div>
 
                         <ul class="elements">
                             <li>No Background</li>

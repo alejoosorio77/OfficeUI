@@ -39,21 +39,17 @@
 /* ---- OfficeUI ribbon styling. ---- */
 #OfficeUI .ribbon { height: 50px; position: relative; top: -30px; }
 #OfficeUI .ribbon .tabs { border-bottom: 1px solid @defaultGrayRibbon; height: 50px; }
-#OfficeUI .ribbon .tabs .tab-group { display: inline-block; position: relative; top: 25px; }
-#OfficeUI .ribbon .tabs .tab-group .label { height: 25px; line-height: 25px; padding: 0 13px 0 12px; text-align: center; text-transform: uppercase; }
+#OfficeUI .ribbon .tabs li { display: inline-block; }
+#OfficeUI .ribbon .tabs .tab-group { position: relative; top: 25px; }
+#OfficeUI .ribbon .tabs .tab-group .label { height: 25px; line-height: 24px; padding: 0 13px 0 12px; text-align: center; text-transform: uppercase; }
 #OfficeUI .ribbon .tabs .tab.application { border-style: solid; border-width: 1px; background-image: none; color: #fff; margin-right: 4px; min-width: 52px; padding: 0 3px 0 2px; }
 #OfficeUI .ribbon .tabs .tab.active { background: #fff; border: 1px solid @defaultGrayRibbon; border-bottom: 1px solid #fff; }
-#OfficeUI .ribbon .tabs .tab:not(.active) { border: 1px solid #fff; border-bottom: 1px solid @defaultGrayRibbon; }
-//#OfficeUI .ribbon .tabs li .contextual-group-label { font-size: 0.9em; padding: 0 6px; }
-//#OfficeUI .ribbon .tabs .tab:not(.active) { border-bottom: 1px solid @defaultGrayRibbon !important; }
-//#OfficeUI .ribbon .tabs .tab:not(.application), #OfficeUI .ribbon .tabs .tab:not(.active) { background-color: #fff; }
-//#OfficeUI .ribbon .tabs .tab-group { position: relative; }
-//#OfficeUI .ribbon .tabs .tab-group ul { height: 23px; position: relative; top: 27px; }
-//#OfficeUI .ribbon .tabs .tab-group .tab { border: 1px solid #fff; height: 23px; line-height: 1.5; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group .tab:not(.active) { background-color: transparent; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group { height: 100%; margin-right: 6px; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group .label { margin-top: 4px; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group ul { display: table; width: 100%; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding: 3px 13px 0 12px; }
-//#OfficeUI .ribbon .tabs .accent { height: 4px; }
+#OfficeUI .ribbon .tabs .tab:not(.active) { border: 1px solid transparent; border-bottom: 1px solid @defaultGrayRibbon; }
+#OfficeUI .ribbon .tabs .contextual-tab-group { height: 50px; border-bottom: 1px solid @defaultGrayRibbon; }
+#OfficeUI .ribbon .tabs .accent { height: 4px; }
+#OfficeUI .ribbon .tabs li .contextual-group-label { font-size: 0.9em; height: 15px; margin-top: 4px; padding: 0 6px; text-align: center; text-transform: uppercase; }
+#OfficeUI .ribbon .tabs .contextual-tab-group { margin-right: 6px; }
+#OfficeUI .ribbon .tabs .contextual-tab-group ul { display: table; width: 100%; }
+#OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; height: 25px; line-height: 25px; text-align: center; }
+#OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding: 3px 13px 0 12px; }
+#OfficeUI .ribbon .tabs .contextual-tab-group .tab { text-transform: uppercase; }
