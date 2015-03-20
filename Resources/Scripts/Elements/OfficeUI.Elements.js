@@ -181,6 +181,15 @@ $(function() {
     $('#OfficeUI .dropdown').OfficeUIDropdown();
 
     /**
+     * @type        DOM Manipulation
+     * @name        N.A.
+     *
+     * @notes
+     * This method will add a class on every button to ensure that text-selection on button elements cannot be done.
+     */
+    $('#OfficeUI .button').addClass('no-select');
+
+    /**
      * @type        Function
      * @name        N.A.
      *
