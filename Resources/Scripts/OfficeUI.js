@@ -595,8 +595,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         }
 
         if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }
-
-        if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
+        if (preserveRibbonState && tabToActivate != null) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
     }
 
     /**
