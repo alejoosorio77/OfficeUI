@@ -80,9 +80,9 @@ function setCookie(cookieName, cookieValue, cookieExpiration)
     var expired = null;
 
     date.setTime(date.getTime() + (cookieExpiration * 24 * 60 * 60 * 1000));
-    expires = "expires=" + date.toUTCString();
+    expired = "expires=" + date.toUTCString();
 
-    document.cookie = cookieName + "=" + cookieValue + "; " + cookieExpiration;
+    document.cookie = cookieName + "=" + cookieValue + "; " + expired;
 }
 
 /**
