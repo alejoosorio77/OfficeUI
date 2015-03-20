@@ -149,6 +149,9 @@
 #OfficeUI .icon.active {
   background-color: #7cbab2 !important;
 }
+#OfficeUI #footer {
+  background-color: #077568;
+}
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Turquoise.Ribbon.less
  * Author:        Kevin De Coninck

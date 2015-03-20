@@ -309,6 +309,17 @@ input {
   position: fixed;
   width: 100%;
 }
+#OfficeUI #footer {
+  bottom: 0;
+  color: white;
+  font-weight: 600;
+  height: 21px;
+  line-height: 21px;
+  padding: 0 10px 0 10px;
+  position: fixed;
+  text-transform: uppercase;
+  width: 100%;
+}
 /* ---- OfficeUI core application styling. ---- */
 #OfficeUI .application {
   background-repeat: no-repeat;
@@ -406,4 +417,8 @@ input {
 }
 #OfficeUI .ribbon .tabs .contextual-tab-group .tab {
   text-transform: uppercase;
+}
+#OfficeUI .ribbon .tabs_content {
+  height: 92px;
+  border-bottom: 1px solid #d4d4d4;
 }

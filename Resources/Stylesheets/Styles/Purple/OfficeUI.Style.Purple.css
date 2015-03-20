@@ -149,6 +149,9 @@
 #OfficeUI .icon.active {
   background-color: #c3a9d4 !important;
 }
+#OfficeUI #footer {
+  background-color: #6a3889;
+}
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Purple.Ribbon.less
  * Author:        Kevin De Coninck

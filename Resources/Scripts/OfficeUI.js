@@ -459,6 +459,30 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
     /**
      * @type        Function
+     * @name        ribbonScroll
+     *
+     * @param       scrollEvent     The scroll event, which is passed from the DOMMouseScroll or mousewheel event.
+     *
+     * @notes
+     * Sets the next as active when you're scrolling on the page.
+     */
+    $scope.ribbonScroll = function(scrollEvent) {
+        var activeTab = $('.ribbon .active');
+
+        // Scrolling forward, meaning that the next active tab should be activated.
+        if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
+            var closestTab = $(activeTab).parent().parent();
+            var nextTab = $(closestTab).next();
+            var tabToActivate = $('.tab', nextTab);
+        } else { // Scrolling backward, meaning that the previous active tab should be activated.
+
+        }
+
+        if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }
+    }
+
+    /**
+     * @type        Function
      * @name        setActiveTabOnHover
      *
      * @param       tabId       The id of the tab to activate.
@@ -561,6 +585,31 @@ OfficeUIModule.directive('onHover', function() {
             // Bind the necessary event handlers and add the toggled class to the correct element.
             element.bind('mouseenter', function() {
                 scope.$apply(hoverAttribute);
+            });
+        }
+    }
+});
+
+/**
+ * @type        Directive
+ * @name        onScroll
+ *
+ * @notes
+ * Defines the 'onScroll' directive. This directive allows us to execute a function when we're scrolling on the element.
+ */
+OfficeUIModule.directive('onScroll', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes){
+            var scrollAttribute = attributes['onScroll'];
+
+            // Bind the necessary event handlers and add the toggled class to the correct element.
+            element.on('DOMMouseScroll mousewheel', function (e) {
+                scope.$apply(function(self) {
+                    self[scrollAttribute](e.originalEvent);
+                });
+
+                e.preventDefault();
             });
         }
     }

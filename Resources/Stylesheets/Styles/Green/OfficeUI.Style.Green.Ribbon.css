@@ -159,6 +159,9 @@
 #OfficeUI .icon.active {
   background-color: #86bfa0 !important;
 }
+#OfficeUI #footer {
+  background-color: #217346;
+}
 /* ---- Variables. ---- */
 /* ---- OfficeUI ribbon styling. ---- */
 #OfficeUI .ribbon .tabs .tab.application {

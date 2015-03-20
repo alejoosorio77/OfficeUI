@@ -173,3 +173,6 @@
 #OfficeUI .icon.active {
   background-color: #a3bde3 !important;
 }
+#OfficeUI #footer {
+  background-color: #2b579a;
+}

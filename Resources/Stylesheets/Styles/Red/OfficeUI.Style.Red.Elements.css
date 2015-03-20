@@ -47,6 +47,9 @@
 #OfficeUI .icon.active {
   background-color: #f7a8ab !important;
 }
+#OfficeUI #footer {
+  background-color: #a4373a;
+}
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Red.Ribbon.less
  * Author:        Kevin De Coninck

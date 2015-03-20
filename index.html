@@ -50,10 +50,10 @@
 
                     <!-- Section: Ribbon of the application. -->
                     <div class="ribbon">
-                        <ul class="tabs">
+                        <ul class="tabs" data-on-scroll="ribbonScroll">
                             <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)" data-on-hover="!$first && setActiveTabOnHover(tab.Id)">
                                 <ul>
-                                    <li class="tab label" data-ng-class="{application: $first, active: isTabActive(tab.Id)}">
+                                    <li class="tab label" id="{{tab.Id}}" data-ng-class="{application: $first, active: isTabActive(tab.Id)}">
                                         <span>{{tab.Label}}</span>
                                     </li>
                                 </ul>
@@ -65,17 +65,21 @@
                                     <span>{{contextualGroup.Label}}</span>
                                 </div>
                                 <ul>
-                                    <li class="tab label" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}" data-ng-click="setActiveTab(tab.Id)" data-on-hover="setActiveTabOnHover(tab.Id)">
+                                    <li class="tab label" id="{{tab.Id}}" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}" data-ng-click="setActiveTab(tab.Id)" data-on-hover="setActiveTabOnHover(tab.Id)">
                                         <span>{{tab.Label}}</span>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
+
+                        <ul class="tabs_content" data-on-scroll="ribbonScroll">
+                            <li>test</li>
+                        </ul>
                     </div>
                 </header>
 
                 <br/><br/>
-                <div class="container" style="margin: 100px;">
+                <div class="container" style="margin: 10px; position: relative; top: 120px;">
                     <a href="#" class="button">
                         <span>Demo</span>
                     </a>
@@ -116,6 +120,10 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div id="footer" class="no-select">
+                Items: 1,242
             </div>
         </div>
 
