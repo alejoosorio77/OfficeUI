@@ -65,7 +65,7 @@
                                     <span>{{contextualGroup.Label}}</span>
                                 </div>
                                 <ul>
-                                    <li class="tab label" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-ng-click="setActiveTab(tab.Id)">
+                                    <li class="tab label" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}" data-ng-click="setActiveTab(tab.Id)">
                                         <span>{{tab.Label}}</span>
                                     </li>
                                 </ul>

@@ -392,6 +392,22 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     $scope.setActiveTab = function(tabId) {
         activeTab = tabId;
     }
+
+    /**
+     * @type        Function
+     * @name        setActiveTabColor
+     *
+     * @param       tabId       The id of the tab.
+     * @param       tabColor    The color of the tab.
+     * @returns     {*}         The color of the tab.
+     *
+     * @notes
+     * This method will change the color of the active tab, but only when the tab is active.
+     * Otherwise, no color is returned and the default color is used.
+     */
+    $scope.setActiveTabColor = function(tabId, tabColor) {
+        if (activeTab == tabId) { return tabColor; }
+    }
 });
 
 /**
@@ -411,6 +427,61 @@ OfficeUIModule.directive('toggleClassOnClick', function() {
             // Bind the necessary event handlers and add the toggled class to the correct element.
             element.bind('mousedown mouseup', function() {
                 element.toggleClass(toggleClass);
+            });
+        }
+    }
+});
+
+/**
+ * @type        Directive
+ * @name        toggleStyleAttributeOnHover
+ *
+ * @notes
+ * Defines the 'toggleClassOnHover' directive. This directive allows us to add or remove a specific style on an
+ * element when we hover on it.
+ * Note, the added class will only be removed when the element doesn't have a class 'active'.
+ */
+OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes){
+            var toggleStyleAttribute = attributes['toggleStyleAttributeOnHover'];
+            var toggleStyleAttributes = JSON.parse(toggleStyleAttribute)
+
+            // Bind the necessary event handlers and add the toggled class to the correct element.
+            element.bind('mouseleave', function() {
+                $.each(toggleStyleAttributes, function(key, value){
+                    if (!element.hasClass('active')) {
+                        element.css(key, 'inherit');
+                    }
+                });
+            });
+
+            element.bind('mouseenter', function() {
+                $.each(toggleStyleAttributes, function(key, value){
+                    element.css(key, value);
+                });
+            });
+        }
+    }
+});
+
+/**
+ * @type        Directive
+ * @name        onHover
+ *
+ * @notes
+ * Defines the 'onHover' directive. This directive allows us to execute a function when we hover on the element.
+ */
+OfficeUIModule.directive('onHover', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes){
+            var hoverAttribute = attributes['onHover'];
+
+            // Bind the necessary event handlers and add the toggled class to the correct element.
+            element.bind('mouseenter', function() {
+                scope.$apply(hoverAttribute);
             });
         }
     }
