@@ -468,14 +468,21 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     $scope.ribbonScroll = function(scrollEvent) {
         var activeTab = $('.ribbon .active');
+        var tabToActivate = null;
 
         // Scrolling forward, meaning that the next active tab should be activated.
         if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
-            var closestTab = $(activeTab).parent().parent();
-            var nextTab = $(closestTab).next();
-            var tabToActivate = $('.tab', nextTab);
+            if (activeTab.hasClass('contextual-tab') && activeTab.next().length > 0) { tabToActivate = activeTab.next(); }
+            else {
+                var closestTab = $(activeTab).parent().parent();
+                if ($(closestTab).next().length > 0) { tabToActivate = $('.tab', closestTab.next()); }
+            }
         } else { // Scrolling backward, meaning that the previous active tab should be activated.
-
+            if (activeTab.hasClass('contextual-tab') && activeTab.prev().length > 0) { tabToActivate = activeTab.prev(); }
+            else {
+                var closestTab = $(activeTab).parent().parent();
+                if ($(closestTab).prev().length > 0 && !$('.tab', closestTab.prev()).hasClass('application')) { tabToActivate = $('.tab', closestTab.prev()).last(); }
+            }
         }
 
         if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }

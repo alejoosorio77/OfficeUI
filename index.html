@@ -49,7 +49,7 @@
                     </div>
 
                     <!-- Section: Ribbon of the application. -->
-                    <div class="ribbon">
+                    <div class="ribbon no-select">
                         <ul class="tabs" data-on-scroll="ribbonScroll">
                             <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)" data-on-hover="!$first && setActiveTabOnHover(tab.Id)">
                                 <ul>
@@ -65,7 +65,7 @@
                                     <span>{{contextualGroup.Label}}</span>
                                 </div>
                                 <ul>
-                                    <li class="tab label" id="{{tab.Id}}" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}" data-ng-click="setActiveTab(tab.Id)" data-on-hover="setActiveTabOnHover(tab.Id)">
+                                    <li class="tab contextual-tab label" id="{{tab.Id}}" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}" data-ng-click="setActiveTab(tab.Id)" data-on-hover="setActiveTabOnHover(tab.Id)">
                                         <span>{{tab.Label}}</span>
                                     </li>
                                 </ul>
