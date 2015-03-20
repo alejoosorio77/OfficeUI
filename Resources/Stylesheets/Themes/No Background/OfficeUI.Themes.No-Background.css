@@ -8,6 +8,7 @@
  *                application to match a given theme. In this case, the 'No Background' theme.
 ======================================================================================================= */
 #OfficeUI .application,
-#OfficeUI .backstage {
+#OfficeUI .backstage,
+#OfficeUI .ribbon .tabs {
   background: white;
 }

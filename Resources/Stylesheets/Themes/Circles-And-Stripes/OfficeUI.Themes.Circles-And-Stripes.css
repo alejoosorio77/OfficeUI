@@ -9,6 +9,7 @@
  *                'Circles And Stripes' theme.
 ======================================================================================================= */
 #OfficeUI .application,
-#OfficeUI .backstage {
+#OfficeUI .backstage,
+#OfficeUI .ribbon .tabs {
   background: url("/Resources/Images/Themes/Circles And Stripes/Background.png") no-repeat scroll right top white;
 }

@@ -8,6 +8,7 @@
  *                application to match a given theme. In this case, the 'Tree Rings' theme.
 ======================================================================================================= */
 #OfficeUI .application,
-#OfficeUI .backstage {
+#OfficeUI .backstage,
+#OfficeUI .ribbon .tabs {
   background: url("/Resources/Images/Themes/Tree Rings/Background.png") no-repeat scroll right top white;
 }

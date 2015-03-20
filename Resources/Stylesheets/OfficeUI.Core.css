@@ -306,6 +306,7 @@ input {
 }
 /* ---- Application styling. ---- */
 #OfficeUI header {
+  height: 142px;
   position: fixed;
   width: 100%;
 }
@@ -329,12 +330,14 @@ input {
 #OfficeUI .application .title {
   height: 22px;
   margin: 8px 2px 0 0;
+  position: relative;
   text-align: center;
+  z-index: 150;
 }
 #OfficeUI .application .icons {
   margin-left: 5px;
   position: absolute;
-  z-index: 9999;
+  z-index: 200;
 }
 #OfficeUI .application .icons img {
   margin: 0 5px 0 2px;
@@ -344,13 +347,14 @@ input {
 }
 /* ---- OfficeUI ribbon styling. ---- */
 #OfficeUI .ribbon {
-  height: 50px;
   position: relative;
   top: -30px;
 }
 #OfficeUI .ribbon .tabs {
   border-bottom: 1px solid #d4d4d4;
   height: 50px;
+  position: relative;
+  z-index: 50;
 }
 #OfficeUI .ribbon .tabs li {
   display: inline-block;
@@ -422,6 +426,7 @@ input {
   border-bottom: 1px solid #d4d4d4;
   height: 92px;
   position: relative;
+  z-index: 30;
 }
 #OfficeUI .ribbon .collapse {
   bottom: 0;

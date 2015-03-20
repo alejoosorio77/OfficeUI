@@ -8,6 +8,7 @@
  *                application to match a given theme. In this case, the 'Clouds' theme.
 ======================================================================================================= */
 #OfficeUI .application,
-#OfficeUI .backstage {
+#OfficeUI .backstage,
+#OfficeUI .ribbon .tabs {
   background: url("/Resources/Images/Themes/Clouds/Background.png") no-repeat scroll right top white;
 }
