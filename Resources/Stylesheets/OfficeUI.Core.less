@@ -54,7 +54,9 @@
 #OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; height: 25px; line-height: 25px; text-align: center; }
 #OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding: 3px 13px 0 12px; }
 #OfficeUI .ribbon .tabs .contextual-tab-group .tab { text-transform: uppercase; }
-#OfficeUI .ribbon .tabs_content { height: 92px; border-bottom: 1px solid @defaultGrayRibbon; }
+#OfficeUI .ribbon .tabs_content { border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; }
+
+#OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
 
 /* ---- Animations ---- */
 #OfficeUI .contextual-tab-group { -webkit-animation: fadeInContextualGroup 0.2s; -moz-animation: fadeInContextualGroup 0.2s; -ms-animation: fadeInContextualGroup 0.2s; }

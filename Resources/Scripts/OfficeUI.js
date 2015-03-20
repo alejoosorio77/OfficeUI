@@ -343,6 +343,27 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
 OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
                                                          ribbonDefinitionFactory, officeUIRibbonConfigurationFactory,
                                                          $scope) {
+    /**
+     * @description
+     * Defines the various states that a ribbon can have. A ribbon in an OfficeUI application can have 3 different
+     * states. See the information below to our when the ribbon has which states.
+     *
+     * @type    {{Hidden: number, Visible: number, Showed: number}}
+     *          Hidden:     The ribbon is hidden completely from view. It can only be showed when you click on one
+     *                      of the tabs.
+     *          Visible:    The ribbon is visible for the end-user but does not remain visible.
+     *                      Once the focus from the ribbon has been lost for some time, the ribbon becomes invisible.
+     *          Showed:     The ribbon is showed for the end user and does not collapse when the focus is lost.
+     *
+     * @notes
+     * In a normal flow, when the ribbon is showed by default, this is are the various states through which it travels:
+     * Showed - Hidden.
+     *
+     * In a normal flow, when the ribbon is hidden by default, this are the various states through which is travels.
+     * Hidden - Visible - Showed.
+     */
+    var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3 }
+
     // Constants.
     var COOKIE_NAME_RIBBON_ACTIVE_TAB = 'OfficeUI_Ribbon_ActiveTab';
 
@@ -350,6 +371,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var changeActiveTabOnHover = null; // Variable that defines if an active tab should be changed when hovering on it.
     var preserveRibbonState = null; // Variable that defines if the state of the ribbon should be preserved.
     var activeContextualGroups = []; // Variable that defines all the active contextual groups.
+    var ribbonState = null;
 
     // Get the cookie in which the previous activate state is stored.
     var previousActiveTab = getCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
@@ -404,6 +426,9 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
                 } else { activeTab = $scope.Tabs[1].Id; }
             } else { activeTab = $scope.Tabs[1].Id; }
         });
+
+        // Sets the current state of the ribbon.
+        ribbonState = ribbonStates.Showed;
     }
 
     /**
@@ -603,6 +628,32 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     $scope.setActiveTabColor = function(tabId, tabColor) {
         if (activeTab == tabId) { return tabColor; }
+    }
+
+    /**
+     * @type        Function
+     * @name        isRibbonShowed
+     *
+     * @returns     {boolean}
+     *
+     * @note
+     * Check's the state of the ribbon. Return true if it's showed, false otherwise.
+     */
+    $scope.isRibbonShowed = function(){
+        return ribbonState == ribbonStates.Showed;
+    }
+
+    /**
+     * @type        Function
+     * @name        isRibbonVisible
+     *
+     * @returns     {boolean}
+     *
+     * @note
+     * Check's the state of the ribbon. Return true if it's visible, false otherwise.
+     */
+    $scope.isRibbonVisible = function() {
+        return ribbonState == ribbonStates.Visible;
     }
 });
 

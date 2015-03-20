@@ -75,12 +75,22 @@
                         <ul class="tabs_content" data-on-scroll="ribbonScroll">
                             <li data-ng-repeat="tab in Tabs" data-ng-show="isTabActive(tab.Id)">
                                 Tab with Id: {{tab.Id}}
+
+                                <div class="icon collapse">
+                                    <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
+                                    <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
+                                </div>
                             </li>
                             <li data-ng-repeat="contextualGroup in ContextualGroups" data-ng-show="isContextualGroupActive(contextualGroup.Id)">
                                 <ul>
                                     <li data-ng-repeat="tab in contextualGroup.Tabs" data-ng-show="isTabActive(tab.Id)">
                                         Tab width Id: {{tab.Id}}
                                     </li>
+
+                                    <div class="icon collapse">
+                                        <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
+                                        <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
+                                    </div>
                                 </ul>
                             </li>
                         </ul>

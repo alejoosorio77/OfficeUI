@@ -313,8 +313,18 @@ input {
   text-transform: uppercase;
 }
 #OfficeUI .ribbon .tabs_content {
-  height: 92px;
   border-bottom: 1px solid #d4d4d4;
+  height: 92px;
+  position: relative;
+}
+#OfficeUI .ribbon .collapse {
+  bottom: 0;
+  height: 17px;
+  padding-top: 2px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 29px;
 }
 /* ---- Animations ---- */
 #OfficeUI .contextual-tab-group {
