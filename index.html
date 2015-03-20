@@ -73,7 +73,16 @@
                         </ul>
 
                         <ul class="tabs_content" data-on-scroll="ribbonScroll">
-                            <li>test</li>
+                            <li data-ng-repeat="tab in Tabs" data-ng-show="isTabActive(tab.Id)">
+                                Tab with Id: {{tab.Id}}
+                            </li>
+                            <li data-ng-repeat="contextualGroup in ContextualGroups" data-ng-show="isContextualGroupActive(contextualGroup.Id)">
+                                <ul>
+                                    <li data-ng-repeat="tab in contextualGroup.Tabs" data-ng-show="isTabActive(tab.Id)">
+                                        Tab width Id: {{tab.Id}}
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </header>
