@@ -423,3 +423,16 @@ input {
   border-bottom: 1px solid #d4d4d4;
 }
 /* ---- Animations ---- */
+#OfficeUI .contextual-tab-group {
+  -webkit-animation: fadeInContextualGroup 0.2s;
+  -moz-animation: fadeInContextualGroup 0.2s;
+  -ms-animation: fadeInContextualGroup 0.2s;
+}
+@keyframes fadeInContextualGroup {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
