@@ -70,7 +70,7 @@
   border-color: #f0623e !important;
 }
 #OfficeUI .ribbon .tabs .tab.active,
-#OfficeUI .ribbon .tabs .tab:not(.application):hover {
+#OfficeUI .ribbon .tabs .tab:not(.contextual-tab):not(.application):hover {
   color: #f0623e;
 }
 /* ---- Variables. ---- */
