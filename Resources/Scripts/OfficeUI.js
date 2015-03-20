@@ -499,6 +499,9 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * Set a tab as the currently active tab based on it's id.
      */
     $scope.setActiveTab = function(tabId) {
+        // Set the ribbon state as being showed when it was hidden.
+        if (ribbonState == ribbonStates.Hidden) { ribbonState = ribbonStates.Visible; }
+
         activeTab = tabId;
 
         if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
@@ -561,7 +564,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         })
 
         // Select the first available tab is required.
-        if (match.length > 0) { activeTab = $('.tab:not(.application)', '.ribbon').attr('id'); }
+        if (match.length > 0) { $scope.setActiveTab($('.tab:not(.application)', '.ribbon').attr('id')); }
 
         if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
     }
@@ -653,6 +656,20 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     $scope.isRibbonVisible = function() {
         return ribbonState == ribbonStates.Visible;
+    }
+
+    /**
+     * @type        Function
+     * @name        toggleRibbonState
+     *
+     * @note
+     * The function will toggle the ribbon state.
+     * This means that if the ribbon is visible, it will become showed.
+     * If the ribbon is showed, it will become hidden.
+     */
+    $scope.toggleRibbonState = function() {
+        if (ribbonState == ribbonStates.Showed) { ribbonState = ribbonStates.Hidden; }
+        if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
     }
 });
 
