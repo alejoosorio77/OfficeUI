@@ -37,7 +37,7 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
          * @returns     {HttpPromise}:      A promise which is loading the OfficeUI configuration file.
          */
         getOfficeUIConfiguration: function() {
-        if (typeof $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI configuration file is not defined.'); }
+        if (typeof $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI Configuration file is not defined.'); }
             return $http.get($.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation)
                 .then(function (response) {
                     return {
@@ -47,6 +47,36 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
                         DefaultTheme: response.data.DefaultTheme
                     };
                 }, function(error) { new OfficeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); });
+        }
+    }
+});
+
+/**
+ * @type        Service
+ * @name        OfficeUIRibbonConfigurationService
+ *
+ * @notes
+ * Provides a service which will read the necessary configuration file which is required for the OfficeUI ribbon
+ * to function properly.
+ */
+OfficeUIModule.factory('OfficeUIRibbonConfigurationService', function($http) {
+    // Defines what needs to be returned by the service.
+    return {
+
+        /**
+         * @type        Function
+         * @name        getOfficeUIRibbonConfiguration
+         *
+         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI ribbon configuration file.
+         */
+        getOfficeUIRibbonConfiguration: function() {
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile == '') { new OfficeUIConfigurationException('The OfficeUI Ribbon Configuration file is not defined.'); }
+            return $http.get($.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile)
+                .then(function (response) {
+                    return {
+                        ChangeActiveTabOnHover: response.data.ChangeActiveTabOnHover
+                    };
+                }, function(error) { new OfficeUILoadingException('The OfficeUI Ribbon Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile + '\' could not be loaded.'); });
         }
     }
 });
@@ -204,6 +234,42 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
  * @notes
  * Provides common work to work with an OfficeUI application using the AngularJS way.
  */
+OfficeUIModule.factory('officeUIRibbonConfigurationFactory', ['$http', 'OfficeUIRibbonConfigurationService', function($http, OfficeUIRibbonConfigurationService) {
+    // Define the service instance. This one is returned from the factory and it's through this instance that the
+    // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
+    // particular object.
+    var officeUIRibbonConfigurationFactoryInstance = {};
+
+    // Defines the variables which are needed for this service.
+    var changeActiveTabOnHover = null;
+
+    /**
+     * @type        Function
+     * @name        getOfficeUIApplicationDefinition
+     *
+     * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
+     *                                  complete.
+     */
+    officeUIRibbonConfigurationFactoryInstance.getOfficeUIRibbonConfiguration = function() {
+        var promise = OfficeUIRibbonConfigurationService.getOfficeUIRibbonConfiguration();
+
+        promise.then(function(response){
+            changeActiveTabOnHover = response.ChangeActiveTabOnHover;
+        });
+
+        return promise;
+    }
+
+    return officeUIRibbonConfigurationFactoryInstance;
+}]);
+
+/**
+ * @type        Service
+ * @name        applicationDefinitionFactory
+ *
+ * @notes
+ * Provides common work to work with an OfficeUI application using the AngularJS way.
+ */
 OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplicationDefinitionService', function($http, OfficeUIApplicationDefinitionService) {
     // Define the service instance. This one is returned from the factory and it's through this instance that the
     // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
@@ -282,8 +348,10 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
  * styles.
  */
 OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
-                                                         ribbonDefinitionFactory, $scope) {
+                                                         ribbonDefinitionFactory, officeUIRibbonConfigurationFactory,
+                                                         $scope) {
     var activeTab = null; // Variable that holds the currently active tab.
+    var changeActiveTabOnHover = null; // Variable that defines if an active tab should be changed when hovering on it.
 
     // Initializes the controller so that the application is configured to work.
     Initialize();
@@ -319,6 +387,10 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
             // Set the first tab (not the application tab, as the currently active tab).
             activeTab = $scope.Tabs[1].Id;
+        });
+
+        officeUIRibbonConfigurationFactory.getOfficeUIRibbonConfiguration().then(function(data) {
+            changeActiveTabOnHover = data.ChangeActiveTabOnHover;
         });
     }
 
@@ -391,6 +463,21 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     $scope.setActiveTab = function(tabId) {
         activeTab = tabId;
+    }
+
+    /**
+     * @type        Function
+     * @name        setActiveTabOnHover
+     *
+     * @param       tabId       The id of the tab to activate.
+     *
+     * @notes
+     * Set a tab as being active when hovering onto it.
+     * This function will check if it's allowed to change the active tab on hover. If that's the case, the active tab
+     * is being changed.
+     */
+    $scope.setActiveTabOnHover = function(tabId) {
+        if (changeActiveTabOnHover) { $scope.setActiveTab(tabId); }
     }
 
     /**
