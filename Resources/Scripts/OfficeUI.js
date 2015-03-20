@@ -253,9 +253,7 @@ OfficeUIModule.factory('officeUIRibbonConfigurationFactory', ['$http', 'OfficeUI
     officeUIRibbonConfigurationFactoryInstance.getOfficeUIRibbonConfiguration = function() {
         var promise = OfficeUIRibbonConfigurationService.getOfficeUIRibbonConfiguration();
 
-        promise.then(function(response){
-            changeActiveTabOnHover = response.ChangeActiveTabOnHover;
-        });
+        promise.then(function(response){});
 
         return promise;
     }
@@ -290,10 +288,7 @@ OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplic
     applicationDefinitionFactoryInstance.getOfficeUIApplicationDefinition = function() {
         var promise = OfficeUIApplicationDefinitionService.getOfficeUIApplicationDefinition();
 
-        promise.then(function(response){
-            title = response.Title;
-            icons = response.Icons;
-        });
+        promise.then(function(response){});
 
         return promise;
     }
@@ -328,10 +323,7 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
     ribbonDefinitionFactoryInstance.getOfficeUIRibbonDefinition = function() {
         var promise = OfficeUIRibbonDefinitionService.getOfficeUIRibbonDefinition();
 
-        promise.then(function(response){
-            tabs = response.Tabs;
-            contextualGroups = response.ContextualGroups;
-        });
+        promise.then(function(response){});
 
         return promise;
     }
