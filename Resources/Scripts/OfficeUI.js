@@ -778,10 +778,10 @@ OfficeUIModule.directive('dynamicEventHandling', function() {
                 var registeredEvent = $.fn.OfficeUICore.searchEvent(idAttribute);
 
                 if (registeredEvent != null) {
-                element.on(registeredEvent.handler, function() {
-                    registeredEvent.action();
-                });
-            }
+                    element.on(registeredEvent.handler, function() {
+                        registeredEvent.action();
+                    });
+                }
             }
         }
     }
