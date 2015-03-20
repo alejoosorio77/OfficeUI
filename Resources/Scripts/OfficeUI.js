@@ -509,6 +509,19 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
     /**
      * @type        Function
+     * @name        isAnyContextualGroupActive
+     *
+     * @returns     {boolean}
+     *
+     * @notes
+     * Check if any contextual group is being active or not.
+     */
+    $scope.isAnyContextualGroupActive = function() {
+        return activeContextualGroups.length > 0;
+    }
+
+    /**
+     * @type        Function
      * @name        isContextualGroupActive
      *
      * @param       contextualGroupId       The id of the contextual group which you want to check for being active.

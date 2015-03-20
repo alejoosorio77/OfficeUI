@@ -45,7 +45,7 @@
 
                     <!-- Section: Title of the application. -->
                     <div class="title">
-                        <span>{{Title}}</span>
+                        <span data-ng-show="!isAnyContextualGroupActive()">{{Title}}</span>
                     </div>
 
                     <!-- Section: Ribbon of the application. -->

@@ -332,7 +332,7 @@ input {
   margin: 8px 2px 0 0;
   position: relative;
   text-align: center;
-  z-index: 150;
+  z-index: 200;
 }
 #OfficeUI .application .icons {
   margin-left: 5px;
