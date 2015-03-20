@@ -248,7 +248,7 @@ input {
   border-bottom: 1px solid #d4d4d4;
   height: 50px;
   position: relative;
-  z-index: 50;
+  z-index: 150;
 }
 #OfficeUI .ribbon .tabs li {
   display: inline-block;
