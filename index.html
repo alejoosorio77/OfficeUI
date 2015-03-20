@@ -59,7 +59,7 @@
                                 </ul>
                             </li>
 
-                            <li class="contextual-tab-group" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-style="{'background-color': contextualGroup.GroupColor}">
+                            <li class="contextual-tab-group" id="{{contextualGroup.Id}}" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-if="isContextualGroupActive(contextualGroup.Id)" data-ng-style="{'background-color': contextualGroup.GroupColor}">
                                 <div data-ng-style="{'background-color': contextualGroup.AccentColor}" class="accent">&nbsp;</div>
                                 <div class="label contextual-group-label" data-ng-style="{'color': contextualGroup.GroupTextColor}">
                                     <span>{{contextualGroup.Label}}</span>
@@ -80,8 +80,24 @@
 
                 <br/><br/>
                 <div class="container" style="margin: 10px; position: relative; top: 120px;">
-                    <a href="#" class="button">
-                        <span>Demo</span>
+                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
+                        <span>Activate Contextual Group 'Drawing Tools'</span>
+                    </a>
+                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupTableTools')">
+                        <span>Activate Contextual Group 'Table Tools'</span>
+                    </a>
+                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupSmartTools')">
+                        <span>Activate Contextual Group 'Smart Tools'</span>
+                    </a>
+                    <br/><br/>
+                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupDrawingTools')">
+                        <span>Deactivate Contextual Group 'Drawing Tools'</span>
+                    </a>
+                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupTableTools')">
+                        <span>Deactivate Contextual Group 'Table Tools'</span>
+                    </a>
+                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupSmartTools')">
+                        <span>Deactivate Contextual Group 'Smart Tools'</span>
                     </a>
                     <br/><br/>
                     <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$(this).scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">

@@ -344,6 +344,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
                                                          $scope) {
     var activeTab = null; // Variable that holds the currently active tab.
     var changeActiveTabOnHover = null; // Variable that defines if an active tab should be changed when hovering on it.
+    var activeContextualGroups = []; // Variable that defines all the active contextual groups.
 
     // Initializes the controller so that the application is configured to work.
     Initialize();
@@ -455,6 +456,66 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     $scope.setActiveTab = function(tabId) {
         activeTab = tabId;
+    }
+
+    /**
+     * @type        Function
+     * @name        isContextualGroupActive
+     *
+     * @param       contextualGroupId       The id of the contextual group which you want to check for being active.
+     *
+     * @returns     {boolean}   True if any contextual group is being active, false otherwise.
+     *
+     * @notes
+     * Checks if any contextual group is being marked as active.
+     */
+    $scope.isContextualGroupActive = function(contextualGroupId) {
+        var matches = jQuery.grep(activeContextualGroups, function(item) {
+            return(item === contextualGroupId);
+        });
+
+        return matches.length > 0;
+    }
+
+    /**
+     * @type        Function
+     * @name        activateContextualGroup
+     *
+     * @param       contextualGroupId       The id of the contextual group to activate.
+     *
+     * @notes
+     * Activate a contextual group by it's id.
+     */
+    $scope.activateContextualGroup = function(contextualGroupId) {
+        activeContextualGroups.push(contextualGroupId);
+    }
+
+    /**
+     * @type        Function
+     * @name        deactivateContextualGroup
+     *
+     * @param       contextualGroupId       The id of the contextual group to deactivate.
+     *
+     * @notes
+     * Deactivate a contextual group by it's id.
+     */
+    $scope.deactivateContextualGroup = function(contextualGroupId) {
+        activeContextualGroups = jQuery.grep(activeContextualGroups, function(value) {
+            return value != contextualGroupId;
+        });
+
+        // Check if the group which is being is deactivated does hold a tab which is currently active.
+        // If that's the case, we should activate the first tab in the entire ribbon.
+        var contextualGroup = $('#' + contextualGroupId);
+        var tabs = $('.contextual-tab', contextualGroup);
+
+        var match = jQuery.grep(tabs, function(tab) {
+            var tabId = $(tab).attr('id');
+            return (tabId === activeTab);
+        })
+
+        // Select the first available tab is required.
+        if (match.length > 0) { activeTab = $('.tab:not(.application)', '.ribbon').attr('id'); }
     }
 
     /**
