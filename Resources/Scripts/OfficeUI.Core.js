@@ -62,3 +62,46 @@
 
     return this;
 }(jQuery));
+
+/**
+ * @type        Function
+ * @name        setCookie
+ *
+ * @param       cookieName          The name of the cookie.
+ * @param       cookieValue         The value of the cookie.
+ * @param       cookieExpiration    The expiration, in days, that the cookie should be kept.
+ *
+ * @notes
+ * Sets a cookie by specifying a name, a value and an expiration.
+ */
+function setCookie(cookieName, cookieValue, cookieExpiration)
+{
+    var date = new Date();
+    var expired = null;
+
+    date.setTime(date.getTime() + (cookieExpiration * 24 * 60 * 60 * 1000));
+    expires = "expires=" + date.toUTCString();
+
+    document.cookie = cookieName + "=" + cookieValue + "; " + cookieExpiration;
+}
+
+/**
+ * @type        Function
+ * @name        getCookie
+ *
+ * @param       cookieName      The name of the cookie.
+ *
+ * @notes
+ * Get the value of a cookie based on it's name.
+ */
+function getCookie(cookieName) {
+    var name = cookieName + "=";
+    var ca = document.cookie.split(';');
+
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}

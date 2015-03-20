@@ -385,8 +385,8 @@ input {
   border-bottom: 1px solid #d4d4d4;
 }
 #OfficeUI .ribbon .tabs .contextual-tab-group {
-  height: 50px;
   border-bottom: 1px solid #d4d4d4;
+  height: 50px;
 }
 #OfficeUI .ribbon .tabs .accent {
   height: 4px;
@@ -422,3 +422,4 @@ input {
   height: 92px;
   border-bottom: 1px solid #d4d4d4;
 }
+/* ---- Animations ---- */

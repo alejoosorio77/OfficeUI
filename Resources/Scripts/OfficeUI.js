@@ -74,7 +74,8 @@ OfficeUIModule.factory('OfficeUIRibbonConfigurationService', function($http) {
             return $http.get($.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile)
                 .then(function (response) {
                     return {
-                        ChangeActiveTabOnHover: response.data.ChangeActiveTabOnHover
+                        ChangeActiveTabOnHover: response.data.ChangeActiveTabOnHover,
+                        PreserveRibbonState: response.data.PreserveRibbonState
                     };
                 }, function(error) { new OfficeUILoadingException('The OfficeUI Ribbon Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile + '\' could not be loaded.'); });
         }
@@ -342,9 +343,16 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
 OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
                                                          ribbonDefinitionFactory, officeUIRibbonConfigurationFactory,
                                                          $scope) {
+    // Constants.
+    var COOKIE_NAME_RIBBON_ACTIVE_TAB = 'OfficeUI_Ribbon_ActiveTab';
+
     var activeTab = null; // Variable that holds the currently active tab.
     var changeActiveTabOnHover = null; // Variable that defines if an active tab should be changed when hovering on it.
+    var preserveRibbonState = null; // Variable that defines if the state of the ribbon should be preserved.
     var activeContextualGroups = []; // Variable that defines all the active contextual groups.
+
+    // Get the cookie in which the previous activate state is stored.
+    var previousActiveTab = getCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
 
     // Initializes the controller so that the application is configured to work.
     Initialize();
@@ -373,17 +381,28 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
             $scope.Icons = data.Icons;
         });
 
+        officeUIRibbonConfigurationFactory.getOfficeUIRibbonConfiguration().then(function(data) {
+            changeActiveTabOnHover = data.ChangeActiveTabOnHover;
+            preserveRibbonState = data.PreserveRibbonState;
+        });
+
         // Initialize the ribbon definition factory to make sure that all the data has been loaded.
         ribbonDefinitionFactory.getOfficeUIRibbonDefinition().then(function(data) {
             $scope.Tabs = data.Tabs;
             $scope.ContextualGroups = data.ContextualGroups;
 
             // Set the first tab (not the application tab, as the currently active tab).
-            activeTab = $scope.Tabs[1].Id;
-        });
+            if (preserveRibbonState) {
+                if (previousActiveTab != '')
+                {
+                    var matches = jQuery.grep($scope.Tabs, function(tab) {
+                        return tab.Id === previousActiveTab;
+                    });
 
-        officeUIRibbonConfigurationFactory.getOfficeUIRibbonConfiguration().then(function(data) {
-            changeActiveTabOnHover = data.ChangeActiveTabOnHover;
+                    if (matches.length > 0) { activeTab = previousActiveTab; }
+                    else { activeTab = $scope.Tabs[1].Id; }
+                } else { activeTab = $scope.Tabs[1].Id; }
+            } else { activeTab = $scope.Tabs[1].Id; }
         });
     }
 
@@ -456,6 +475,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     $scope.setActiveTab = function(tabId) {
         activeTab = tabId;
+
+        if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
     }
 
     /**
@@ -516,6 +537,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
         // Select the first available tab is required.
         if (match.length > 0) { activeTab = $('.tab:not(.application)', '.ribbon').attr('id'); }
+
+        if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
     }
 
     /**
@@ -547,6 +570,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         }
 
         if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }
+
+        if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
     }
 
     /**
