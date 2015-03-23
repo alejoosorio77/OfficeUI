@@ -8,13 +8,13 @@
  * Defines the script files that's required for various controls for the OfficeUI controls.
  * Those script files does modify page elements to ensure that they work correctly in all modern browsers.
  * The following browsers have been tested:
- * - Microsoft Internet Explorer
- * - Mozilla FireFox
- * - Google Chrome
+ * - Microsoft Internet Explorer        Version 11 and upwards - Microsoft Windows 8.1 (Update 1).
+ * - Mozilla FireFox                    Version 36 and upwards - Microsoft Windows 8.1 (Update 1).
+ * - Google Chrome                      Version 41 and upwards - Microsoft Windows 8.1 (Update 1).
  *
  * The following plugins an fixes are included in 'OfficeUI.Elements.js'.
  * - Buttons (Fix for Microsoft Internet Explorer).
- * - DropDown element (A DropDown control which matches the DropDown elements which are also used in Microsft Office
+ * - DropDown element (A DropDown control which matches the DropDown elements which are also used in Microsoft Office
  *                     User Applications).
  */
 $(function() {
@@ -25,13 +25,34 @@ $(function() {
      * @notes
      * This function is executed whenever you click an a element inside an OfficeUI application which is marked with
      * the class 'button'.
-     * The purpose of this Event Handler is to toggle a class named 'ie-fix' on the element being clicked.
+     * The purpose of this Event Handler is to toggle a class named 'active-ie-fix' on the element being clicked.
      * This is needed for a bug which causes Internet Explorer to mis behave.
-     * When in Internet Explorer, you have an anchor with another element in it, and you click the element inside the
-     * anchor, then the pseudo class ':active', which normally indicates that a link is being active does not bubble.
-     * Therefore, this plugin has been written so that even when you click an element inside an anchor, the anchor
-     * itself will be decorated with a class so that it can be styled. With the usage of this plugin, the anchor is being
-     * marked with the class 'ie-fix'.
+     *
+     * @bug
+     * In Internet Explorer (tested in version 11), you can have an anchor element which holds a child item.
+     * See the example below:
+     *
+     * <a href="#">
+     *  <img src="/Path/To/Image.png" alt="Image" />
+     * </a>
+     *
+     * Let's view this element with the following CSS applied:
+     *
+     * a:active { background-color: red; }
+     *
+     * Now, when you hover on the element, you would expect the element to have a red background, but in Internet
+     * Explorer, the :active pseudo class does not fire for child elements, so what you'll basically have is the
+     * following:
+     * -    When you 'activate' the 'a' element, the background of the 'a' element is set to red, but not the background
+     *      of any child elements.
+     * -    When you 'activate' any of the child elements under the element on which the ':active' pseudo class is
+     *      applied, the background does not change to red.
+     *
+     * In order to fix this, an additional class is added to the 'top-level' element, in this case, the anchor element
+     * on the event 'mousedown'. On the event 'mouseup' the same class is removed again.
+     * By doing this, we are able to style our element.
+     *
+     * The class which is being applied is 'active-ie-fix'.
      */
     $('#OfficeUI a.button').on('mousedown mouseup', function(e) {
         $(this).toggleClass('ie-fix');

@@ -72,11 +72,11 @@
  * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
  * The section below gives an explanation about every type of button and also given an example on how to render them.
  *
- * Some classes have added 'ie-fix' on the end. This is because some functionalities are not available in all browsers.
+ * Some classes have added 'active-ie-fix' on the end. This is because some functionalities are not available in all browsers.
  * Therefore that since class is being added because otherwise the element might not render correctly in Internet
  * Explorer.
  *
- * The class is 'ie-fix' is used to solve the following problems:
+ * The class is 'active-ie-fix' is used to solve the following problems:
  * -  When you have an anchor <a href="#"> with another element in it, the anchor does not become :active when you
  *    click on the element itself. In other words, the active class is not bubbling up.
  *
@@ -102,7 +102,7 @@
   border-color: #f5ba9d;
 }
 #OfficeUI a.button:active,
-#OfficeUI a.button.ie-fix {
+#OfficeUI a.button.active-ie-fix {
   background-color: #f5ba9d;
   border-color: #f0623e;
 }
