@@ -44,7 +44,9 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
                         Styles: response.data.Styles,
                         DefaultStyle: response.data.DefaultStyle,
                         Themes: response.data.Themes,
-                        DefaultTheme: response.data.DefaultTheme
+                        DefaultTheme: response.data.DefaultTheme,
+                        PreserveRibbonColor: response.data.PreserveRibbonColor,
+                        PreserveRibbonTheme: response.data.PreserveRibbonTheme
                     };
                 }, function(error) { new OfficeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); });
         }
@@ -364,8 +366,10 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3 }
 
-    // Constants.
+    // Constants - The constants below are used for cookies to determine the current state of an OfficeUI application.
     var COOKIE_NAME_RIBBON_ACTIVE_TAB = 'OfficeUI_Ribbon_ActiveTab';
+    var COOKIE_NAME_OFFICEUI_CURRENT_THEME = 'OfficeUI_CurrentTheme';
+    var COOKIE_NAME_OFFICEUI_CURRENT_COLOR = 'OfficeUI_CurrentColor';
 
     var activeTab = null; // Variable that holds the currently active tab.
     var changeActiveTabOnHover = null; // Variable that defines if an active tab should be changed when hovering on it.
@@ -393,8 +397,14 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     function Initialize() {
         // Initialize the stylesheet factory to make sure that all the data has been loaded.
         stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
-            $scope.Style = stylesheetFactory.changeStyle(data.DefaultStyle);
-            $scope.Theme = stylesheetFactory.changeTheme(data.DefaultTheme);
+            var currentTheme = getCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
+            var currentStyle = getCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR);
+
+            if (currentTheme == '') { $scope.Theme = stylesheetFactory.changeTheme(data.DefaultTheme); }
+            else { $scope.Theme = stylesheetFactory.changeTheme(currentTheme); }
+
+            if (currentStyle == '') { $scope.Style = stylesheetFactory.changeStyle(data.DefaultStyle); }
+            else { $scope.Style = stylesheetFactory.changeStyle(currentStyle); }
         });
 
         // Initialize the application definition factory to make sure that all the data has been loaded.
@@ -443,6 +453,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeStyle = function(styleName) {
+        setCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365);
+
         $scope.Style = stylesheetFactory.changeStyle(styleName);
     }
 
@@ -458,6 +470,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeTheme = function(themeName) {
+        setCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365);
+
         $scope.Theme = stylesheetFactory.changeTheme(themeName);
     }
 
