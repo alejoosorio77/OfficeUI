@@ -28,8 +28,8 @@
         <!-- Include all the required stylesheets. -->
         <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Core.min.css" />
 
-        <link rel="stylesheet" data-ng-href="{{Style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
-        <link rel="stylesheet" data-ng-href="{{Theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
+        <link rel="stylesheet" href="#" data-ng-href="{{Style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
+        <link rel="stylesheet" href="#" data-ng-href="{{Theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
     </head>
     <body>
         <!-- Defines the OfficeUI container. All OfficeUI components should be placed in here. -->
@@ -40,7 +40,7 @@
                 <header>
                     <!-- Section: Icons on the top left of the page. -->
                     <div class="icons no-select">
-                        <img class="application-icon" id="{{icon.Id}}" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
+                        <img class="application-icon" id="{{icon.Id}}" src="#" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
                     </div>
 
                     <!-- Section: Title of the application. -->
@@ -72,7 +72,7 @@
                             </li>
                         </ul>
 
-                        <ul class="tabs_content" data-on-scroll="ribbonScroll">
+                        <ul class="tabs_content" data-on-scroll="ribbonScroll" data-ng-class="{'tabs-content-hidden': isRibbonHidden()}">
                             <li data-ng-repeat="tab in Tabs" data-ng-show="isTabActive(tab.Id)">
                                 Tab with Id: {{tab.Id}}
 
@@ -85,12 +85,12 @@
                                 <ul>
                                     <li data-ng-repeat="tab in contextualGroup.Tabs" data-ng-show="isTabActive(tab.Id)">
                                         Tab width Id: {{tab.Id}}
-                                    </li>
 
-                                    <div class="icon collapse">
-                                        <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
-                                        <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
-                                    </div>
+                                        <div class="icon collapse">
+                                            <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
+                                            <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
+                                        </div>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

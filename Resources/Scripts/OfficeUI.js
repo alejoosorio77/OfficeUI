@@ -673,6 +673,19 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
     /**
      * @type        Function
+     * @name        isRibbonHidden
+     *
+     * @returns     {boolean}
+     *
+     * @note
+     * Check's the state of the ribbon. Return true if it's hidden, false otherwise.
+     */
+    $scope.isRibbonHidden = function() {
+        return ribbonState == ribbonStates.Hidden;
+    }
+
+    /**
+     * @type        Function
      * @name        toggleRibbonState
      *
      * @note
