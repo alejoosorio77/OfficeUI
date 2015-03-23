@@ -54,7 +54,7 @@ $(function() {
      *
      * The class which is being applied is 'active-ie-fix'.
      */
-    $('#OfficeUI a.button').on('mousedown mouseup focus focusout', function(e) {
+    $('#OfficeUI a.button').on('mousedown mouseup', function(e) {
         $(this).toggleClass('active-ie-fix');
     });
 
