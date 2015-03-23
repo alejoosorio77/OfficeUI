@@ -98,8 +98,11 @@
                 </header>
 
                 <br/><br/>
-                <div class="container" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}" style="margin: 10px; position: relative; top: 120px;">
-                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
+                <div class="container" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}" style="height: 100%; position: relative; top: 120px;">
+
+                    <div style="float: left; width: 300px; background-color: green; height: 100%; background: linear-gradient(#fff, #f0f0f0); border-right: 1px solid #d4d4d4;">&nbsp;</div>
+                    <div style="float: left; height: 100%;">&nbsp;</div>
+                    <!--<a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
                         <span>Activate Contextual Group 'Drawing Tools'</span>
                     </a>
                     <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupTableTools')">
@@ -154,9 +157,13 @@
                             <li>Underwater</li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
-
+            <div class="footer-navigation no-select">
+                <span>Calendar</span>
+                <span>People</span>
+                <span>Tasks</span>
+            </div>
             <div id="footer" class="no-select">
                 Items: 1,242
             </div>
