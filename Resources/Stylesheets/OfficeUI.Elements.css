@@ -352,7 +352,7 @@ input {
 }
 @keyframes collapseRibbon {
   from {
-    top: 0px;
+    top: 0;
   }
   to {
     top: -92px;
