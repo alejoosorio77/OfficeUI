@@ -119,7 +119,7 @@
                         <span>Deactivate Contextual Group 'Smart Tools'</span>
                     </a>
                     <br/><br/>
-                    <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$(this).scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">
+                    <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeTheme').scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">
                         <div class="legend">LightBlue</div>
 
                         <ul class="elements">
@@ -133,7 +133,7 @@
                         </ul>
                     </div>
 
-                    <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$(this).scope().changeTheme($(this).selectedItem); $('#dropdownChangeTheme').scope().refresh();">
+                    <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$('#dropdownChangeTheme').scope().changeTheme($(this).selectedItem); $('#dropdownChangeTheme').scope().refresh();">
                         <div class="legend">Geometry</div>
 
                         <ul class="elements">
@@ -166,6 +166,10 @@
         <script type="text/javascript">
             // Loads the OfficeUI configuration.
             $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation = '/Configuration/Application/OfficeUI.config.json';
+
+            OfficeUICore.bind('#icoApplication', 'click', function(e) {
+               console.log('I have clicked the element.');
+            });
         </script>
     </body>
 </html>

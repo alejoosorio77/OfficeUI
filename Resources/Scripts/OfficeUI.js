@@ -37,7 +37,7 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
          * @returns     {HttpPromise}:      A promise which is loading the OfficeUI configuration file.
          */
         getOfficeUIConfiguration: function() {
-        if (typeof $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI Configuration file is not defined.'); }
+        if (typeof $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI Configuration file is not defined.'); }
             return $http.get($.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation)
                 .then(function (response) {
                     return {
@@ -48,7 +48,7 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
                         PreserveRibbonColor: response.data.PreserveRibbonColor,
                         PreserveRibbonTheme: response.data.PreserveRibbonTheme
                     };
-                }, function(error) { new OfficeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); });
         }
     }
 });
@@ -72,14 +72,14 @@ OfficeUIModule.factory('OfficeUIRibbonConfigurationService', function($http) {
          * @returns     {HttpPromise}:      A promise which is loading the OfficeUI ribbon configuration file.
          */
         getOfficeUIRibbonConfiguration: function() {
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile == '') { new OfficeUIConfigurationException('The OfficeUI Ribbon Configuration file is not defined.'); }
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI Ribbon Configuration file is not defined.'); }
             return $http.get($.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile)
                 .then(function (response) {
                     return {
                         ChangeActiveTabOnHover: response.data.ChangeActiveTabOnHover,
                         PreserveRibbonState: response.data.PreserveRibbonState
                     };
-                }, function(error) { new OfficeUILoadingException('The OfficeUI Ribbon Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Ribbon Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile + '\' could not be loaded.'); });
         }
     }
 });
@@ -102,14 +102,14 @@ OfficeUIModule.factory('OfficeUIApplicationDefinitionService', function($http) {
          * @returns     {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
          */
         getOfficeUIApplicationDefinition: function() {
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI application definition file is not defined.'); }
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI application definition file is not defined.'); }
             return $http.get($.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation)
                 .then(function (response) {
                     return {
                         Title: response.data.Title,
                         Icons: response.data.Icons
                     };
-                }, function(error) { new OfficeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); });
         }
     }
 });
@@ -132,14 +132,14 @@ OfficeUIModule.factory('OfficeUIRibbonDefinitionService', function($http) {
          * @returns     {HttpPromise}:      A promise which is loading the OfficeUI ribbon definition file.
          */
         getOfficeUIRibbonDefinition: function() {
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation == '') { new OfficeUIConfigurationException('The OfficeUI ribbon definition file is not defined.'); }
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI ribbon definition file is not defined.'); }
             return $http.get($.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation)
                 .then(function (response) {
                     return {
                         Tabs: response.data.Tabs,
                         ContextualGroups: response.data.ContextualGroups
                     };
-                }, function(error) { new OfficeUILoadingException('The OfficeUI ribbon definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI ribbon definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation + '\' could not be loaded.'); });
         }
     }
 });
@@ -200,8 +200,8 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
     stylesheetFactoryServiceIntsance.changeStyle = function(styleName) {
         var foundStyles = JSPath.apply('.{.name == "' + styleName + '"}', availableStyles);
 
-        if (foundStyles.length == 0) { new OfficeUIStylesheetException('A style with name \'' + styleName + '\' could not be found. Is the style defined in the \'availableStyles\' array?'); }
-        else if (foundStyles.length > 1) { new OfficeUIStylesheetException('Multiple entries in the \'availableStylesheets\' array matches a style with name \'' + styleName + '\''); }
+        if (foundStyles.length == 0) { OfficeUICore.Exceptions.officeUIStylesheetException('A style with name \'' + styleName + '\' could not be found. Is the style defined in the \'availableStyles\' array?'); }
+        else if (foundStyles.length > 1) { OfficeUICore.Exceptions.officeUIStylesheetException('Multiple entries in the \'availableStylesheets\' array matches a style with name \'' + styleName + '\''); }
         else if (foundStyles.length == 1) { return foundStyles[0].stylesheet; }
     }
 
@@ -221,8 +221,8 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
     stylesheetFactoryServiceIntsance.changeTheme = function(themeName) {
         var foundThemes = JSPath.apply('.{.name == "' + themeName + '"}', availableThemes);
 
-        if (foundThemes.length == 0) { new OfficeUIStylesheetException('A theme with name \'' + themeName + '\' could not be found. Is the style defined in the \'availableThemes\' array?'); }
-        else if (foundThemes.length > 1) { new OfficeUIStylesheetException('Multiple entries in the \'availableThemes\' array matches a style with name \'' + themeName + '\''); }
+        if (foundThemes.length == 0) { OfficeUICore.Exceptions.officeUIStylesheetException('A theme with name \'' + themeName + '\' could not be found. Is the style defined in the \'availableThemes\' array?'); }
+        else if (foundThemes.length > 1) { OfficeUICore.Exceptions.officeUIStylesheetException('Multiple entries in the \'availableThemes\' array matches a style with name \'' + themeName + '\''); }
         else if (foundThemes.length == 1) { return foundThemes[0].stylesheet; }
     }
 
@@ -375,10 +375,12 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var changeActiveTabOnHover = null; // Variable that defines if an active tab should be changed when hovering on it.
     var preserveRibbonState = null; // Variable that defines if the state of the ribbon should be preserved.
     var activeContextualGroups = []; // Variable that defines all the active contextual groups.
-    var ribbonState = null;
+    var ribbonState = null; // Variable that defines the state of the ribbon.
+    var preserveRibbonColor = null; // Variable that defines if the state of the color should be preserved.
+    var preserveRibbonTheme = null; // Variable that defines if the state of the theme should be preserved.
 
     // Get the cookie in which the previous activate state is stored.
-    var previousActiveTab = getCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
+    var previousActiveTab = OfficeUICore.StateManagement.getCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
 
     // Initializes the controller so that the application is configured to work.
     Initialize();
@@ -397,8 +399,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     function Initialize() {
         // Initialize the stylesheet factory to make sure that all the data has been loaded.
         stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
-            var currentTheme = getCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
-            var currentStyle = getCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR);
+            var currentTheme = OfficeUICore.StateManagement.getCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
+            var currentStyle = OfficeUICore.StateManagement.getCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR);
 
             if (currentTheme == '') { $scope.Theme = stylesheetFactory.changeTheme(data.DefaultTheme); }
             else { $scope.Theme = stylesheetFactory.changeTheme(currentTheme); }
@@ -453,7 +455,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeStyle = function(styleName) {
-        setCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365);
+        if (preserveRibbonColor) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365); }
 
         $scope.Style = stylesheetFactory.changeStyle(styleName);
     }
@@ -470,7 +472,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeTheme = function(themeName) {
-        setCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365);
+        if (preserveRibbonTheme) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365); }
 
         $scope.Theme = stylesheetFactory.changeTheme(themeName);
     }
@@ -518,7 +520,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
         activeTab = tabId;
 
-        if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
+        if (preserveRibbonState) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
     }
 
     /**
@@ -593,7 +595,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         // Select the first available tab is required.
         if (match.length > 0) { $scope.setActiveTab($('.tab:not(.application)', '.ribbon').attr('id')); }
 
-        if (preserveRibbonState) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
+        if (preserveRibbonState) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
     }
 
     /**
@@ -625,7 +627,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         }
 
         if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }
-        if (preserveRibbonState && tabToActivate != null) { setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
+        if (preserveRibbonState && tabToActivate != null) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
     }
 
     /**
@@ -829,9 +831,9 @@ OfficeUIModule.directive('dynamicEventHandling', function() {
         link: function(scope, element, attributes) {
             var idAttribute = attributes['id'];
 
-            if (typeof idAttribute === 'undefined' || idAttribute == '') { new OfficeUIDynamicEventHandlingException('The directive \'dynamicEventHandling\' could not be placed on an element without an id attribute.'); }
+            if (typeof idAttribute === 'undefined' || idAttribute == '') { OfficeUICore.Exceptions.officeUIDynamicEventHandlingException('The directive \'dynamicEventHandling\' could not be placed on an element without an id attribute.'); }
             else {
-                var registeredEvent = $.fn.OfficeUICore.searchEvent(idAttribute);
+                var registeredEvent = OfficeUICore.searchEvent('#' + idAttribute);
 
                 if (registeredEvent != null) {
                     element.on(registeredEvent.handler, function() {

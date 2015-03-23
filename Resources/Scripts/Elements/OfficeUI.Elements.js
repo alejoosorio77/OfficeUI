@@ -81,13 +81,8 @@ $(function() {
          * the menu is opened or closed.
          */
         $.fn.Open = function() {
-            // Check if the menu is opened or closed, based on that, hide or show the menu.
-            //if ($(this).isMenuOpened()) {
-            //    $(this).Close();
-            //} else {
-                $('.elements', this).show('slide', { direction: 'up' }, 100);
-                $(this).addClass('opened').addClass('focus');
-            //}
+            $('.elements', this).show('slide', { direction: 'up' }, 100);
+            $(this).addClass('opened').addClass('focus');
         }
 
         /**
