@@ -35,7 +35,7 @@ html, body { height: 100%; }
 #OfficeUI #footer { bottom: 0; color: white; font-weight: 600; height: 21px; line-height: 21px; padding: 0 10px 0 10px; position: fixed; text-transform: uppercase; width: 100%; }
 
 /* ---- OfficeUI core application styling. ---- */
-#OfficeUI .application { background-repeat: no-repeat; background-position: right top; background-color: rgba(0, 0, 0, 0); }
+#OfficeUI .application { background-repeat: no-repeat; background-position: right top; background-color: rgba(0, 0, 0, 0); height: 100%; }
 #OfficeUI .application .title { height: 22px; margin: 8px 2px 0 0; position: relative; text-align: center; z-index: 200; }
 #OfficeUI .application .icons { margin-left: 5px; position: absolute; z-index: 200;} // Give a high z-index to the element because otherwise an hover will not work anymore.
 #OfficeUI .application .icons img { margin: 0 5px 0 2px; }
@@ -81,53 +81,3 @@ html, body { height: 100%; }
 }
 
 #OfficeUI .tabs-content-hidden { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: hideRibbon; -webkit-animation-duration: 0.4s; animation-name: hideRibbon; animation-duration: 0.4s; }
-
-/* Chrome, Safari, Opera */
-@-webkit-keyframes hideRibbon {
-  from { top: 0; }
-  to { top: -92px; }
-}
-
-@keyframes hideRibbon {
-  from { top: 0; }
-  to { top: -92px; }
-}
-
-#OfficeUI .ribbon-hidden { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentUp; -webkit-animation-duration: 0.4s; animation-name: moveContentUp; animation-duration: 0.4s; }
-
-/* Chrome, Safari, Opera */
-@-webkit-keyframes moveContentUp {
-  from { top: 120px; }
-  to { top: 28px; }
-}
-
-@keyframes moveContentUp {
-  from { top: 120px; }
-  to { top: 28px; }
-}
-
-#OfficeUI .tabs-content-visible { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: showRibbon; -webkit-animation-duration: 0.4s; animation-name: showRibbon; animation-duration: 0.4s; }
-
-/* Chrome, Safari, Opera */
-@-webkit-keyframes showRibbon {
-  from { top: -92px; }
-  to { top: 0; }
-}
-
-@keyframes showRibbon {
-  from { top: -92px; }
-  to { top: 0; }
-}
-
-#OfficeUI .ribbon-showed { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentDown; -webkit-animation-duration: 0.4s; animation-name: moveContentDown; animation-duration: 0.4s; }
-
-/* Chrome, Safari, Opera */
-@-webkit-keyframes moveContentDown {
-  from { top: 28px; }
-  to { top: 120px; }
-}
-
-@keyframes moveContentDown {
-  from { top: 28px; }
-  to { top: 120px; }
-}

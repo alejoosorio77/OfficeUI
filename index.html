@@ -96,75 +96,87 @@
                         </ul>
                     </div>
                 </header>
+                <div class="content-wrapper" style="position: relative; top: 142px;" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}">
+                    <div class="breadcrumb" style="height: 20px; position: relative; border-bottom: 1px solid #d4d4d4; line-height: 20px; padding-left: 10px;">
+                        <span style="padding-right: 5px;">Content Management</span>
+                        <i class="fa fa-caret-right" style="padding-right: 5px;"></i>
+                        <span>Personalization</span>
+                    </div>
 
-                <br/><br/>
-                <div class="container" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}" style="height: 100%; position: relative; top: 120px;">
+                    <div class="site-contents">
+                        <div style="float: left; width: 300px; background-color: green; height: 100%; background: linear-gradient(#fff, #f0f0f0); border-right: 1px solid #d4d4d4;">&nbsp;</div>
+                        <div style="float: left; height: 100%; padding: 20px;">
+                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
+                                <span>Activate Contextual Group 'Drawing Tools'</span>
+                            </a>
+                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupTableTools')">
+                                <span>Activate Contextual Group 'Table Tools'</span>
+                            </a>
+                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupSmartTools')">
+                                <span>Activate Contextual Group 'Smart Tools'</span>
+                            </a>
+                            <br/><br/>
+                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupDrawingTools')">
+                                <span>Deactivate Contextual Group 'Drawing Tools'</span>
+                            </a>
+                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupTableTools')">
+                                <span>Deactivate Contextual Group 'Table Tools'</span>
+                            </a>
+                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupSmartTools')">
+                                <span>Deactivate Contextual Group 'Smart Tools'</span>
+                            </a>
+                            <br/><br/>
+                            <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeTheme').scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">
+                                <div class="legend">LightBlue</div>
+
+                                <ul class="elements">
+                                    <li>Blue</li>
+                                    <li>Green</li>
+                                    <li>LightBlue</li>
+                                    <li>Orange</li>
+                                    <li>Purple</li>
+                                    <li>Red</li>
+                                    <li>Turquoise</li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$('#dropdownChangeTheme').scope().changeTheme($(this).selectedItem); $('#dropdownChangeTheme').scope().refresh();">
+                                <div class="legend">Geometry</div>
+
+                                <ul class="elements">
+                                    <li>No Background</li>
+                                    <li>Calligraphy</li>
+                                    <li>Circles And Stripes</li>
+                                    <li>Circuit</li>
+                                    <li>Clouds</li>
+                                    <li>Doodle Circles</li>
+                                    <li>Doodle Diamonds</li>
+                                    <li>Geometry</li>
+                                    <li>Lunchbox</li>
+                                    <li>School Supplies</li>
+                                    <li>Spring</li>
+                                    <li>Stars</li>
+                                    <li>Straws</li>
+                                    <li>Tree Rings</li>
+                                    <li>Underwater</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="container" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}" style="height: 100%; position: relative; top: 120px;">
 
                     <div style="float: left; width: 300px; background-color: green; height: 100%; background: linear-gradient(#fff, #f0f0f0); border-right: 1px solid #d4d4d4;">&nbsp;</div>
                     <div style="float: left; height: 100%;">&nbsp;</div>
-                    <!--<a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
-                        <span>Activate Contextual Group 'Drawing Tools'</span>
-                    </a>
-                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupTableTools')">
-                        <span>Activate Contextual Group 'Table Tools'</span>
-                    </a>
-                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupSmartTools')">
-                        <span>Activate Contextual Group 'Smart Tools'</span>
-                    </a>
-                    <br/><br/>
-                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupDrawingTools')">
-                        <span>Deactivate Contextual Group 'Drawing Tools'</span>
-                    </a>
-                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupTableTools')">
-                        <span>Deactivate Contextual Group 'Table Tools'</span>
-                    </a>
-                    <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupSmartTools')">
-                        <span>Deactivate Contextual Group 'Smart Tools'</span>
-                    </a>
-                    <br/><br/>
-                    <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeTheme').scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">
-                        <div class="legend">LightBlue</div>
-
-                        <ul class="elements">
-                            <li>Blue</li>
-                            <li>Green</li>
-                            <li>LightBlue</li>
-                            <li>Orange</li>
-                            <li>Purple</li>
-                            <li>Red</li>
-                            <li>Turquoise</li>
-                        </ul>
-                    </div>
-
-                    <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$('#dropdownChangeTheme').scope().changeTheme($(this).selectedItem); $('#dropdownChangeTheme').scope().refresh();">
-                        <div class="legend">Geometry</div>
-
-                        <ul class="elements">
-                            <li>No Background</li>
-                            <li>Calligraphy</li>
-                            <li>Circles And Stripes</li>
-                            <li>Circuit</li>
-                            <li>Clouds</li>
-                            <li>Doodle Circles</li>
-                            <li>Doodle Diamonds</li>
-                            <li>Geometry</li>
-                            <li>Lunchbox</li>
-                            <li>School Supplies</li>
-                            <li>Spring</li>
-                            <li>Stars</li>
-                            <li>Straws</li>
-                            <li>Tree Rings</li>
-                            <li>Underwater</li>
-                        </ul>
-                    </div>
+                    <!--
                 </div>-->
-            </div>
+            <!--</div>-->
             <div class="footer-navigation no-select">
                 <span>Calendar</span>
                 <span>People</span>
                 <span>Tasks</span>
             </div>
-            <div id="footer" class="no-select">
+            <div id="footer" class="footer no-select">
                 Items: 1,242
             </div>
         </div>
@@ -176,6 +188,22 @@
 
             OfficeUICore.Bind('#icoApplication', 'click', function(e) {
                console.log('I have clicked the element.');
+            });
+
+            $(function() {
+                var contentElement = $('#OfficeUI .content-wrapper');
+                var siteContentElement = $('#OfficeUI .site-contents');
+
+                $(window).on('load resize', function(e) {
+                    var windowHeight = $(window).height();
+                    var headerHeight = $('header').height();
+                    var breadcrumbHeight = $('.breadcrumb').height();
+                    var footerNavigationHeight = $('.footer-navigation').height();
+                    var footerNAvigation = $('.footer').height();
+
+                    contentElement.height(windowHeight - (headerHeight + footerNavigationHeight + footerNAvigation));
+                    siteContentElement.height(windowHeight - (headerHeight + footerNavigationHeight + breadcrumbHeight + footerNAvigation));
+                });
             });
         </script>
     </body>

@@ -336,6 +336,7 @@ body {
   background-repeat: no-repeat;
   background-position: right top;
   background-color: rgba(0, 0, 0, 0);
+  height: 100%;
 }
 #OfficeUI .application .title {
   height: 22px;
@@ -500,99 +501,4 @@ body {
   -webkit-animation-duration: 0.4s;
   animation-name: hideRibbon;
   animation-duration: 0.4s;
-}
-/* Chrome, Safari, Opera */
-@-webkit-keyframes hideRibbon {
-  from {
-    top: 0;
-  }
-  to {
-    top: -92px;
-  }
-}
-@keyframes hideRibbon {
-  from {
-    top: 0;
-  }
-  to {
-    top: -92px;
-  }
-}
-#OfficeUI .ribbon-hidden {
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-name: moveContentUp;
-  -webkit-animation-duration: 0.4s;
-  animation-name: moveContentUp;
-  animation-duration: 0.4s;
-}
-/* Chrome, Safari, Opera */
-@-webkit-keyframes moveContentUp {
-  from {
-    top: 120px;
-  }
-  to {
-    top: 28px;
-  }
-}
-@keyframes moveContentUp {
-  from {
-    top: 120px;
-  }
-  to {
-    top: 28px;
-  }
-}
-#OfficeUI .tabs-content-visible {
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-name: showRibbon;
-  -webkit-animation-duration: 0.4s;
-  animation-name: showRibbon;
-  animation-duration: 0.4s;
-}
-/* Chrome, Safari, Opera */
-@-webkit-keyframes showRibbon {
-  from {
-    top: -92px;
-  }
-  to {
-    top: 0;
-  }
-}
-@keyframes showRibbon {
-  from {
-    top: -92px;
-  }
-  to {
-    top: 0;
-  }
-}
-#OfficeUI .ribbon-showed {
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-name: moveContentDown;
-  -webkit-animation-duration: 0.4s;
-  animation-name: moveContentDown;
-  animation-duration: 0.4s;
-}
-/* Chrome, Safari, Opera */
-@-webkit-keyframes moveContentDown {
-  from {
-    top: 28px;
-  }
-  to {
-    top: 120px;
-  }
-}
-@keyframes moveContentDown {
-  from {
-    top: 28px;
-  }
-  to {
-    top: 120px;
-  }
 }
