@@ -29,6 +29,6 @@
   ],
   "DefaultTheme": "Geometry",
 
-  "PreserveRibbonColor": false,
-  "PreserveRibbonTheme": false
+  "PreserveRibbonColor": true,
+  "PreserveRibbonTheme": true
 }
