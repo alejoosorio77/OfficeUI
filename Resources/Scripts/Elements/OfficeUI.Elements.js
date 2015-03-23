@@ -82,6 +82,8 @@ $(function() {
          */
         var isMenuOpened = function(element) { return element.hasClass('opened'); };
 
+        $.fn.isMenuOpened = function() { return isMenuOpened($(this)); };
+
         /**
          * @type        Function
          * @name        Open
@@ -205,7 +207,7 @@ $(function() {
      */
     $(window).on('click', function(e) {
         $('#OfficeUI .dropdown').each(function(index, item) {
-            if (isMenuOpened($(item))) { $(item).Close(); }
+            if ($(item).isMenuOpened()) { $(item).Close(); }
         });
     });
 });

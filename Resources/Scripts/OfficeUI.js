@@ -380,7 +380,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var preserveRibbonTheme = null; // Variable that defines if the state of the theme should be preserved.
 
     // Get the cookie in which the previous activate state is stored.
-    var previousActiveTab = OfficeUICore.StateManagement.getCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
+    var previousActiveTab = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
 
     // Initializes the controller so that the application is configured to work.
     Initialize();
@@ -399,14 +399,17 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     function Initialize() {
         // Initialize the stylesheet factory to make sure that all the data has been loaded.
         stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
-            var currentTheme = OfficeUICore.StateManagement.getCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
-            var currentStyle = OfficeUICore.StateManagement.getCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR);
+            var currentTheme = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
+            var currentStyle = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR);
 
             if (currentTheme == '') { $scope.Theme = stylesheetFactory.changeTheme(data.DefaultTheme); }
             else { $scope.Theme = stylesheetFactory.changeTheme(currentTheme); }
 
             if (currentStyle == '') { $scope.Style = stylesheetFactory.changeStyle(data.DefaultStyle); }
             else { $scope.Style = stylesheetFactory.changeStyle(currentStyle); }
+
+            preserveRibbonColor = data.PreserveRibbonColor;
+            preserveRibbonTheme = data.PreserveRibbonTheme;
         });
 
         // Initialize the application definition factory to make sure that all the data has been loaded.
@@ -455,7 +458,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeStyle = function(styleName) {
-        if (preserveRibbonColor) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365); }
+        if (preserveRibbonColor) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365); }
 
         $scope.Style = stylesheetFactory.changeStyle(styleName);
     }
@@ -472,7 +475,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeTheme = function(themeName) {
-        if (preserveRibbonTheme) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365); }
+        if (preserveRibbonTheme) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365); }
 
         $scope.Theme = stylesheetFactory.changeTheme(themeName);
     }
@@ -520,7 +523,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
         activeTab = tabId;
 
-        if (preserveRibbonState) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
+        if (preserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
     }
 
     /**
@@ -595,7 +598,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         // Select the first available tab is required.
         if (match.length > 0) { $scope.setActiveTab($('.tab:not(.application)', '.ribbon').attr('id')); }
 
-        if (preserveRibbonState) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
+        if (preserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
     }
 
     /**
@@ -627,7 +630,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         }
 
         if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }
-        if (preserveRibbonState && tabToActivate != null) { OfficeUICore.StateManagement.setCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
+        if (preserveRibbonState && tabToActivate != null) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
     }
 
     /**
@@ -833,7 +836,7 @@ OfficeUIModule.directive('dynamicEventHandling', function() {
 
             if (typeof idAttribute === 'undefined' || idAttribute == '') { OfficeUICore.Exceptions.officeUIDynamicEventHandlingException('The directive \'dynamicEventHandling\' could not be placed on an element without an id attribute.'); }
             else {
-                var registeredEvent = OfficeUICore.searchEvent('#' + idAttribute);
+                var registeredEvent = OfficeUICore.SearchEvent('#' + idAttribute);
 
                 if (registeredEvent != null) {
                     element.on(registeredEvent.handler, function() {

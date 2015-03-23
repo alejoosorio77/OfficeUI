@@ -31,7 +31,7 @@
 
         /**
          * @type            Function
-         * @name            isNull
+         * @name            IsNull
          *
          * @param           object          The object to check against null.
          * @returns         {boolean}       True if the given object is null, false otherwise.
@@ -42,30 +42,10 @@
          * @example
          * When you have an object that might be null, you can check if with the following function:
          *
-         * OfficeUICore.isNull(myObject);
+         * OfficeUICore.IsNull(myObject);
          */
-        isNull: function(object) {
+        IsNull: function(object) {
             if (typeof object === 'undefined' || object == '') { return true; }
-            return false;
-        },
-
-        /**
-         * @type            Function
-         * @name            isNull
-         *
-         * @param           object          The object to check against a null-length.
-         * @returns         {boolean}       True if the given object is null, false otherwise.
-         *
-         * @description
-         * Checks if a given object's length is 0.
-         *
-         * @example
-         * When you have an object that can be a length of 0, you can check if with the following function:
-         *
-         * OfficeUICore.isEmpty(myObject);
-         */
-        isEmpty: function(object) {
-            if (object.length == 0) { return true; }
             return false;
         },
 
@@ -73,7 +53,7 @@
 
         /**
          * @type            Function
-         * @name            bind
+         * @name            Bind
          *
          * @param           element         The element to which to bind a specific event.
          * @param           handler         The handler to bind to the event.
@@ -89,11 +69,11 @@
          * console.log(). This message should say 'I have clicked the icon'.
          * In order to execute that function, the following example is needed:
          *
-         * OfficeUICore.bind('#icoApplication', 'click', function(e) {
+         * OfficeUICore.Bind('#icoApplication', 'click', function(e) {
          *    console.log('I have clicked the icon.');
          * });
          */
-        bind: function(element, handler, action) {
+        Bind: function(element, handler, action) {
             // Push the event handler to the array 'eventCollection'.
             // This is required, since it's in this array that a search will be performed to see if the event has
             // a registered event.
@@ -106,7 +86,7 @@
 
         /**
          * @type            Function
-         * @name            searchEvent
+         * @name            SearchEvent
          *
          * @param           selector        The selector to search for the element that should have a registered
          *                                  event.
@@ -119,9 +99,9 @@
          * 'bind(element, handler, action)' method, you can search if this element has any event by executing
          * the following code:
          *
-         * OfficeUICore.searchEvent('#icoApplication');
+         * OfficeUICore.SearchEvent('#icoApplication');
          */
-        searchEvent: function(selector) {
+        SearchEvent: function(selector) {
             // Search if an event is registered by looping over the array that holds all are events.
             // If an event is found, return this.
             var foundElements = $.grep(OfficeUICore.eventCollection, function(item) {
@@ -129,7 +109,7 @@
             });
 
             // Return the correct element if there is any, otherwise, return null.
-            if (OfficeUICore.isEmpty(foundElements)) { return foundElements[0]; }
+            if (!foundElements.length > 0) { return foundElements[0]; }
 
             return null;
         },
@@ -151,7 +131,7 @@
 
             /**
              * @type            Function
-             * @name            setCookie
+             * @name            SetCookie
              *
              * @param           cookieName          The name of the cookie to save.
              * @param           cookieValue         The value of the cookie to save.
@@ -160,14 +140,22 @@
              * Provides a way to save a cookie with a specific name and a specific value.
              * Since there's no expiration date to be passed to this function, the validation of the cookies is
              * limited to the session of the user.
+             *
+             * @example
+             * When you want to save a cookie with the following parameters:
+             * - Name:          OfficeUI
+             * - Value:         Loaded
+             * Then you need to execute the following code:
+             *
+             * OfficeUICore.StateManagement.SetCookie('OfficeUI', 'Loaded');
              */
-            setCookie: function(cookieName, cookieValue) {
-                setCookie(cookieName, cookieValue, null);
+            SetCookie: function(cookieName, cookieValue) {
+                SetCookie(cookieName, cookieValue, null);
             },
 
             /**
              * @type            Function
-             * @name            setCookie
+             * @name            SetCookie
              *
              * @param           cookieName          The name of the cookie to save.
              * @param           cookieValue         The value that the cookie should have.
@@ -185,14 +173,14 @@
              * - Expiration:    1 month
              * Then you need to execute the following code:
              *
-             * OfficeUICore.StateManagement.setCookie('OfficeUI', 'Loaded', 30);
+             * OfficeUICore.StateManagement.SetCookie('OfficeUI', 'Loaded', 30);
              */
-            setCookie: function(cookieName, cookieValue, cookieExpiration) {
+            SetCookie: function(cookieName, cookieValue, cookieExpiration) {
                 var date = new Date();
                 var expired = null;
 
                 // Only set an expiration date when it's required.
-                if (!OfficeUICore.isNull(cookieExpiration)) {
+                if (!OfficeUICore.IsNull(cookieExpiration)) {
                     date.setTime(date.getTime() + (cookieExpiration * 24 * 60 * 60 * 1000));
                     expired = "expires=" + date.toUTCString();
                 }
@@ -202,7 +190,7 @@
 
             /**
              * @type            Function
-             * @name            getCookie
+             * @name            GetCookie
              *
              * @param           cookieName          The name of the cookie to retrieve.
              * @returns         {string}            The value of the cookie.
@@ -214,9 +202,9 @@
              * When you have a cookie named 'OfficeUI', from which you want to load the value, it can be done
              * with the following code:
              *
-             * OfficeUICore.StateManagement.getCookie('OfficeUI');
+             * OfficeUICore.StateManagement.GetCookie('OfficeUI');
              */
-            getCookie: function(cookieName) {
+            GetCookie: function(cookieName) {
                 var name = cookieName + "=";
                 var ca = document.cookie.split(';');
 
