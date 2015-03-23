@@ -312,6 +312,7 @@ input {
   height: 142px;
   position: fixed;
   width: 100%;
+  z-index: 100;
 }
 #OfficeUI #footer {
   bottom: 0;
