@@ -14,7 +14,8 @@
  *
  * The following plugins an fixes are included in 'OfficeUI.Elements.js'.
  * - Buttons (Fix for Microsoft Internet Explorer).
- *
+ * - DropDown element (A DropDown control which matches the DropDown elements which are also used in Microsft Office
+ *                     User Applications).
  */
 $(function() {
     /**
@@ -55,25 +56,31 @@ $(function() {
          * @type        Function
          * @name        hasFocus
          *
+         * @param       element     The element that you want to check for having focus.
+         *
          * @returns     (boolean):  True if the element has focus, false otherwise.
          */
-        $.fn.hasFocus = function() { return this.hasClass('focus'); };
+        var hasFocus = function(element) { return element.hasClass('focus'); };
 
         /**
          * @type        Function
          * @name        isActive
          *
+         * @param       element     The element that you want to check for being active.
+         *
          * @returns     (boolean):  True if the element is active, false otherwise.
          */
-        $.fn.isActive = function() { return this.hasClass('active'); };
+        var isActive = function(element) { return element.hasClass('active'); };
 
         /**
          * @type        Function
          * @name        isMenuOpened
          *
+         * @param       element     The element that you want to check for having an opened menu.
+         *
          * @returns     (boolean):  True if the menu of the DropDownElement is opened, false otherwise.
          */
-        $.fn.isMenuOpened = function() { return this.hasClass('opened'); };
+        var isMenuOpened = function(element) { return element.hasClass('opened'); };
 
         /**
          * @type        Function
@@ -84,9 +91,9 @@ $(function() {
          * states, opened or opened. A class is added or removed from the 'dropdownElement' that helps to find out if
          * the menu is opened or closed.
          */
-        $.fn.Open = function() {
-            $('.elements', this).show('slide', { direction: 'up' }, 100);
-            $(this).addClass('opened').addClass('focus');
+        var Open = function(element) {
+            $('.elements', element).show('slide', { direction: 'up' }, 100);
+            $(element).addClass('opened').addClass('focus');
         }
 
         /**
@@ -110,7 +117,7 @@ $(function() {
         this.hover(function() {
             $(this).addClass('focus');
         }, function() {
-            if (!$(this).is(':focus') && !$(this).isMenuOpened()) {
+            if (!$(this).is(':focus') && !isMenuOpened($(this))) {
                 $(this).removeClass('focus');
             }
         });
@@ -124,17 +131,17 @@ $(function() {
         // When you click on the arrow down icon, it means that either the menu should be showed or hidden.
         // We apply the correct styling by toggling a class named 'opened'.
         $('i', this).click(function(e) {
-            var shouldClose = $(this).parent().isMenuOpened(); // Provides a boolean that defines whether or not the menu should be closed.
+            var shouldClose = isMenuOpened($(this).parent()); // Provides a boolean that defines whether or not the menu should be closed.
 
             // Hide all the open dropdown elements.
             $('#OfficeUI .dropdown').each(function(index ,item) {
-                if ($(item).isMenuOpened()) { $(item).Close(); }
+                if (isMenuOpened($(item))) { $(item).Close(); }
             });
 
             // Based on the variable that defines if the menu should be closed or opened, execute the corresponding action.
             if (shouldClose) {
-                if ($(this).parent().isMenuOpened()) { $(this).parent().Close(); }
-            } else { $(this).parent().Open(); }
+                if (isMenuOpened($(this).parent())) { $(this).parent().Close(); }
+            } else { Open($(this).parent()); }
 
             e.stopPropagation(); // Make sure to stop propagating the event.
         })
@@ -198,7 +205,7 @@ $(function() {
      */
     $(window).on('click', function(e) {
         $('#OfficeUI .dropdown').each(function(index, item) {
-            if ($(item).isMenuOpened()) { $(item).Close(); }
+            if (isMenuOpened($(item))) { $(item).Close(); }
         });
     });
 });
