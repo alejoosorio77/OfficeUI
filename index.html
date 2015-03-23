@@ -53,7 +53,7 @@
                         <ul class="tabs" data-on-scroll="ribbonScroll">
                             <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)" data-on-hover="!$first && setActiveTabOnHover(tab.Id)">
                                 <ul>
-                                    <li class="tab label" id="{{tab.Id}}" data-ng-class="{application: $first, active: isTabActive(tab.Id)}">
+                                    <li class="tab label" id="{{tab.Id}}" data-ng-class="{'application': $first, 'active': isTabActive(tab.Id), 'no-border': isRibbonHidden()}">
                                         <span>{{tab.Label}}</span>
                                     </li>
                                 </ul>
@@ -72,7 +72,7 @@
                             </li>
                         </ul>
 
-                        <ul class="tabs_content" data-on-scroll="ribbonScroll" data-ng-class="{'tabs-content-hidden': isRibbonHidden()}">
+                        <ul class="tabs_content" data-on-scroll="ribbonScroll" data-ng-class="{'tabs-content-hidden': isRibbonHidden(), 'tabs-content-visible': isRibbonVisible()}">
                             <li data-ng-repeat="tab in Tabs" data-ng-show="isTabActive(tab.Id)">
                                 Tab with Id: {{tab.Id}}
 
@@ -98,7 +98,7 @@
                 </header>
 
                 <br/><br/>
-                <div class="container" style="margin: 10px; position: relative; top: 120px;">
+                <div class="container" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}" style="margin: 10px; position: relative; top: 120px;">
                     <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
                         <span>Activate Contextual Group 'Drawing Tools'</span>
                     </a>

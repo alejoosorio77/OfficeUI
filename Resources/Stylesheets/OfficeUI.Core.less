@@ -18,6 +18,7 @@
 /* ---- General elements. ---- */
 #OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; font-size: 0.75em; }
 #OfficeUI .disabled { opacity: 0.5; pointer-events: none; }
+#OfficeUI .no-border { border-color: transparent !important; }
 
 /* ---- General classes. ---- */
 /* Provides a way to ensure that text-selection of an element is disabled. By adding this class, text-selection of the
@@ -45,6 +46,7 @@
 #OfficeUI .ribbon .tabs .tab-group .label { height: 25px; line-height: 24px; padding: 0 13px 0 12px; text-align: center; text-transform: uppercase; }
 #OfficeUI .ribbon .tabs .tab.application { border-style: solid; border-width: 1px; background-image: none; color: #fff; margin-right: 4px; min-width: 52px; padding: 0 3px 0 2px; }
 #OfficeUI .ribbon .tabs .tab.active { background: #fff; border: 1px solid @defaultGrayRibbon; border-bottom: 1px solid #fff; }
+#OfficeUI .ribbon .tabs .tab:not(.application).no-border { border-bottom: 1px solid @defaultGrayRibbon !important; color: #444 !important; }
 #OfficeUI .ribbon .tabs .tab:not(.active) { border: 1px solid transparent; border-bottom: 1px solid @defaultGrayRibbon; }
 #OfficeUI .ribbon .tabs .contextual-tab-group { border-bottom: 1px solid @defaultGrayRibbon; height: 50px; }
 #OfficeUI .ribbon .tabs .accent { height: 4px; }
@@ -54,19 +56,72 @@
 #OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; height: 25px; line-height: 25px; text-align: center; }
 #OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding: 3px 13px 0 12px; }
 #OfficeUI .ribbon .tabs .contextual-tab-group .tab { text-transform: uppercase; }
-#OfficeUI .ribbon .tabs_content { border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
+#OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
 
 #OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
 
 /* ---- Animations ---- */
-#OfficeUI .contextual-tab-group { -webkit-animation: fadeInContextualGroup 0.2s; -moz-animation: fadeInContextualGroup 0.2s; -ms-animation: fadeInContextualGroup 0.2s; }
+#OfficeUI .contextual-tab-group { -webkit-animation-name: fadeInContextualGroup; -webkit-animation-duration: 0.2s; animation-name: fadeInContextualGroup; animation-duration: 0.2s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes fadeInContextualGroup {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @keyframes fadeInContextualGroup {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-#OfficeUI .tabs-content-hidden { -webkit-animation: collapseRibbon 0.2s; -moz-animation: collapseRibbon 0.2s; -ms-animation: collapseRibbon 0.2s; }
-@keyframes collapseRibbon {
+#OfficeUI .tabs-content-hidden { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: hideRibbon; -webkit-animation-duration: 0.4s; animation-name: hideRibbon; animation-duration: 0.4s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes hideRibbon {
   from { top: 0; }
   to { top: -92px; }
+}
+
+@keyframes hideRibbon {
+  from { top: 0; }
+  to { top: -92px; }
+}
+
+#OfficeUI .ribbon-hidden { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentUp; -webkit-animation-duration: 0.4s; animation-name: moveContentUp; animation-duration: 0.4s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes moveContentUp {
+  from { top: 120px; }
+  to { top: 28px; }
+}
+
+@keyframes moveContentUp {
+  from { top: 120px; }
+  to { top: 28px; }
+}
+
+#OfficeUI .tabs-content-visible { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: showRibbon; -webkit-animation-duration: 0.4s; animation-name: showRibbon; animation-duration: 0.4s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes showRibbon {
+  from { top: -92px; }
+  to { top: 0; }
+}
+
+@keyframes showRibbon {
+  from { top: -92px; }
+  to { top: 0; }
+}
+
+#OfficeUI .ribbon-showed { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentDown; -webkit-animation-duration: 0.4s; animation-name: moveContentDown; animation-duration: 0.4s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes moveContentDown {
+  from { top: 28px; }
+  to { top: 120px; }
+}
+
+@keyframes moveContentDown {
+  from { top: 28px; }
+  to { top: 120px; }
 }

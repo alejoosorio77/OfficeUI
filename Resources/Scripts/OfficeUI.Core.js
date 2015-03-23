@@ -11,11 +11,12 @@
  *  - Registering events. (Used for binding functions to AngularJS elements).
  *  - Search for any registered events. (Used for searching bound functions to AngularJS elements).
  *  - Cookie management (set a cookie and retrieve the value of a given cookie).
+ *  - Exception management (throw exceptions to the browser's console window to make debugging more easier).
  *  - Common helper functions that make it more easier to work with JavaScript, jQuery and AngularJS. *
  */
 
     /**
-     * @type {{}}           Namespace
+     * @type                Namespace
      * @name                OfficeUICore
      *
      * @description         Defines the namespace 'OfficeUICore'. This namespace does contain various functions and
@@ -25,6 +26,7 @@
      * @example
      * When you want to call a given function from withing this namespace, your need to write the namespace and then
      * the name of your function as defined in the example below:
+     *
      * OfficeUICore.[functionName](parameters);
      */
     var OfficeUICore = {

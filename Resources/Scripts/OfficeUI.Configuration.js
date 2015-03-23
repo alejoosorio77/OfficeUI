@@ -9,9 +9,7 @@
  */
 (function($) {
     // Defines the OfficeUI plugin.
-    $.fn.OfficeUI = function(options) {
-        return this;
-    }
+    $.fn.OfficeUI = function(options) { return this; }
 
     // Defaults settings for the OfficeUI website.
     // When you want to change the location of the file, it can be done like the following:
