@@ -11,6 +11,10 @@
  * - Microsoft Internet Explorer
  * - Mozilla FireFox
  * - Google Chrome
+ *
+ * The following plugins an fixes are included in 'OfficeUI.Elements.js'.
+ * - Buttons (Fix for Microsoft Internet Explorer).
+ *
  */
 $(function() {
     /**
