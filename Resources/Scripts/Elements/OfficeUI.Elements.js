@@ -40,7 +40,7 @@ $(function() {
      *
      * a:active { background-color: red; }
      *
-     * Now, when you hover on the element, you would expect the element to have a red background, but in Internet
+     * Now, when you click on the element, you would expect the element to have a red background, but in Internet
      * Explorer, the :active pseudo class does not fire for child elements, so what you'll basically have is the
      * following:
      * -    When you 'activate' the 'a' element, the background of the 'a' element is set to red, but not the background
@@ -54,8 +54,8 @@ $(function() {
      *
      * The class which is being applied is 'active-ie-fix'.
      */
-    $('#OfficeUI a.button').on('mousedown mouseup', function(e) {
-        $(this).toggleClass('ie-fix');
+    $('#OfficeUI a.button').on('mousedown mouseup focus focusout', function(e) {
+        $(this).toggleClass('active-ie-fix');
     });
 
     /**

@@ -442,7 +442,7 @@ body {
   text-decoration: none;
 }
 #OfficeUI a.button:active,
-#OfficeUI a.button.ie-fix {
+#OfficeUI a.button.active-ie-fix {
   border: 1px solid transparent;
 }
 #OfficeUI a.button:hover {
