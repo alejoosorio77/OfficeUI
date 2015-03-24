@@ -471,6 +471,9 @@ body {
 }
 /* ---- Animations ---- */
 #OfficeUI .contextual-tab-group {
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
   -webkit-animation-name: fadeInContextualGroup;
   -webkit-animation-duration: 0.2s;
   animation-name: fadeInContextualGroup;
@@ -498,7 +501,50 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: hideRibbon;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: 5.2s;
   animation-name: hideRibbon;
-  animation-duration: 0.4s;
+  animation-duration: 5.2s;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes hideRibbon {
+  from {
+    top: 0;
+  }
+  to {
+    top: -92px;
+  }
+}
+@keyframes hideRibbon {
+  from {
+    top: 0;
+  }
+  to {
+    top: -92px;
+  }
+}
+#OfficeUI .tabs-content-visible {
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: showRibbon;
+  -webkit-animation-duration: 5.2s;
+  animation-name: showRibbon;
+  animation-duration: 5.2s;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes showRibbon {
+  from {
+    top: -92px;
+  }
+  to {
+    top: 0;
+  }
+}
+@keyframes showRibbon {
+  from {
+    top: -92px;
+  }
+  to {
+    top: 0;
+  }
 }

@@ -1030,12 +1030,34 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 /* ---- AngularJS Directives. ---- */
 
 /**
- * @type        Directive
- * @name        toggleClassOnClick
+ * @type            Directive
+ * @usage           Attribute
+ * @name            toggleClassOnClick
  *
- * @notes
+ * @description
  * Defines the 'toggleClassOnClick' directive. This directive allows us to toggle a specific class when you click on
  * a certain element.
+ * Whenever you click on the element, the class provided as an attribute will be added to the element.
+ *
+ * @example
+ * Imagine that we have the following HTML code:
+ *
+ * <div class="icons no-select">
+ *     <img class="application-icon" src="#" />
+ * </div>
+ *
+ * Now, we want to add a class 'active', when you click on the icon. But when you leave the icon again, the class
+ * 'active' should be removed.
+ * Therefore, the following code van be used:
+ *
+ * <div class="icons no-select">
+ *     <img class="application-icon" src="#" data-toggle-class-on-click="active" />
+ * </div>
+ *
+ * @remarks
+ * We're also binding the event handler 'mouseout' on the element. This is, because when you click on the element
+ * and then you move away your mouse, the class 'active-ie-fix' doesn't get removed. It's only get removed if you
+ * click on the element again. Now the class is also removed when your mouse leave the element.
  */
 OfficeUIModule.directive('toggleClassOnClick', function() {
     return {
@@ -1043,22 +1065,48 @@ OfficeUIModule.directive('toggleClassOnClick', function() {
         link: function(scope, element, attributes) {
             var toggleClass = attributes['toggleClassOnClick'];
 
-            // Bind the necessary event handlers and add the toggled class to the correct element.
+            // Bind the mousedown and mouseup event handlers.
             element.bind('mousedown mouseup', function() {
                 element.toggleClass(toggleClass);
             });
+
+            // Bind the 'mouseout' event handler.
+            element.bind('mouseout', function() {
+                if (element.hasClass(toggleClass)) { element.removeClass(toggleClass); }
+            })
         }
     }
 });
 
 /**
- * @type        Directive
- * @name        toggleStyleAttributeOnHover
+ * @type            Directive
+ * @usage           Attribute
+ * @name            toggleStyleAttributeOnHover
  *
- * @notes
- * Defines the 'toggleClassOnHover' directive. This directive allows us to add or remove a specific style on an
+ * @description
+ * Defines the 'toggleStyleAttributeOnHover' directive. This directive allows us to add or remove a specific style on an
  * element when we hover on it.
- * Note, the added class will only be removed when the element doesn't have a class 'active'.
+ *
+ * @example
+ * Imagine that we do have the following Html:
+ *
+ * <li class="tab contextual-tab label">
+ *     <span>{{tab.Label}}</span>
+ * </li>
+ *
+ * Now, let's say that when we hover on the element, we want to have a red background-color.
+ * Therefore, the code above can be adapted like the following:
+ *
+ * <li class="tab contextual-tab label" data-toggle-style-attribute-on-hover='{"background-color": "red"}'>
+ *     <span>{{tab.Label}}</span>
+ * </li>
+ *
+ * When you hover on the element, the background property will turn red.
+ *
+ * @remarks
+ * The string passed to this attribute needs to be a valid Json string.
+ * If it isn't a valid Json string, an error will be throwed.
+ * The added class will only be removed when the element doesn't have a class named 'active'.
  */
 OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
     return {
@@ -1067,7 +1115,7 @@ OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
             var toggleStyleAttribute = attributes['toggleStyleAttributeOnHover'];
             var toggleStyleAttributes = JSON.parse(toggleStyleAttribute)
 
-            // Bind the necessary event handlers and add the toggled class to the correct element.
+            // Bind the mouse leave event handler.
             element.bind('mouseleave', function() {
                 $.each(toggleStyleAttributes, function(key, value){
                     if (!element.hasClass('active')) {
@@ -1076,6 +1124,7 @@ OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
                 });
             });
 
+            // Bind the mouse enter event handler.
             element.bind('mouseenter', function() {
                 $.each(toggleStyleAttributes, function(key, value){
                     element.css(key, value);
@@ -1086,11 +1135,26 @@ OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
 });
 
 /**
- * @type        Directive
- * @name        onHover
+ * @type            Directive
+ * @usage           Attribute
+ * @name            onHover
  *
- * @notes
- * Defines the 'onHover' directive. This directive allows us to execute a function when we hover on the element.
+ * @description
+ * Defines the 'onHover' directive. This directive allows us to execute an AngularJS when we hover on the element.
+ *
+ * @example
+ * Imagine that we have the following Html:
+ *
+ * <li class="tab contextual-tab label">
+ *     <span>{{tab.Label}}</span>
+ * </li>
+ *
+ * Now, let's say that we have a function in AngularJS named 'myFunction()'.
+ * If you want to execute this function, you can modify the HTML to match the following:
+ *
+ * <li class="tab contextual-tab label" data-on-hover="myFunction()">
+ *     <span>{{tab.Label}}</span>
+ * </li>
  */
 OfficeUIModule.directive('onHover', function() {
     return {
@@ -1098,8 +1162,9 @@ OfficeUIModule.directive('onHover', function() {
         link: function(scope, element, attributes){
             var hoverAttribute = attributes['onHover'];
 
-            // Bind the necessary event handlers and add the toggled class to the correct element.
+            // Bind the mouse enter event handler.
             element.bind('mouseenter', function() {
+                console.log(hoverAttribute);
                 scope.$apply(hoverAttribute);
             });
         }
@@ -1107,11 +1172,32 @@ OfficeUIModule.directive('onHover', function() {
 });
 
 /**
- * @type        Directive
- * @name        onScroll
+ * @type            Directive
+ * @usage           Attribute
+ * @name            onScroll
  *
- * @notes
- * Defines the 'onScroll' directive. This directive allows us to execute a function when we're scrolling on the element.
+ * @description
+ * Defines the 'onScroll' directive. This directive allows us to execute an AngularJS function when we're scrolling on
+ * the element.
+ *
+ * @example
+ * Imagine that we have the following Html:
+ *
+ * <ul class="tabs_content">
+ *     <li></li>
+ * </ul>
+ *
+ * Now, let's say that we have a function named 'ribbonScroll' that we want to execute when we scroll on that element,
+ * then the Html can be adapted to match the following:
+ *
+ * <ul class="tabs_content" data-on-scroll="ribbonScroll">
+ *     <li></li>
+ * </ul>
+ *
+ * @remarks
+ * This directive is implementing 'e.preventDefault()'. This does mean that default events are not executed anymore.
+ * In this particular case, it's used to make sure that the page does not scroll when we scroll on the element which
+ * has implemented this directive.
  */
 OfficeUIModule.directive('onScroll', function() {
     return {
@@ -1119,12 +1205,13 @@ OfficeUIModule.directive('onScroll', function() {
         link: function(scope, element, attributes){
             var scrollAttribute = attributes['onScroll'];
 
-            // Bind the necessary event handlers and add the toggled class to the correct element.
+            // Bind the mousewheel event handler.
             element.on('DOMMouseScroll mousewheel', function (e) {
                 scope.$apply(function(self) {
                     self[scrollAttribute](e.originalEvent);
                 });
 
+                // Prevent default actions from happening.
                 e.preventDefault();
             });
         }
@@ -1132,12 +1219,20 @@ OfficeUIModule.directive('onScroll', function() {
 });
 
 /**
- * @type        Directive
- * @name        dynamicEventHandling
+ * @type            Directive
+ * @usage           Attribute
+ * @name            dynamicEventHandling
  *
- * @notes
- * Defines the 'dynamicEventHandling' directive. This directive allows us to toggle a specific class when you click on
- * a certain element.
+ * @description
+ * Defines the 'dynamicEventHandling' directive. This directive allows us to bind events to this element using the
+ * OfficeUI.Core library.
+ *
+ * @remarks
+ * When you want to bind an event handler to a given event, it should be done by using the code:
+ *
+ * $.fn.OfficeUICore.Bind(element, handler, action).
+ *
+ * See the method 'Bind' in 'OfficeUICore' library for more information on how it should be used.
  */
 OfficeUIModule.directive('dynamicEventHandling', function() {
     return {

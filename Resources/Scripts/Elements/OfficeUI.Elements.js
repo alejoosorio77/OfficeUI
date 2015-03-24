@@ -19,10 +19,10 @@
  */
 $(function() {
     /**
-     * @type       Event Handler
-     * @name       N.A.
+     * @type            Event Handler
+     * @name            N.A.
      *
-     * @notes
+     * @description
      * This function is executed whenever you click an a element inside an OfficeUI application which is marked with
      * the class 'button'.
      * The purpose of this Event Handler is to toggle a class named 'active-ie-fix' on the element being clicked.
@@ -53,16 +53,24 @@ $(function() {
      * By doing this, we are able to style our element.
      *
      * The class which is being applied is 'active-ie-fix'.
+     *
+     * We're also binding the event handler 'mouseout' on the element. This is, because when you click on the element
+     * and then you move away your mouse, the class 'active-ie-fix' doesn't get removed. It's only get removed if you
+     * click on the element again. Now the class is also removed when your mouse leave the element.
      */
-    $('#OfficeUI a.button').on('mousedown mouseup', function(e) {
+    $('#OfficeUI a.button').on('mousedown mouseup', function() {
         $(this).toggleClass('active-ie-fix');
+
+        $('#OfficeUI a.button').on('mouseout', function() {
+            if ($(this).hasClass('active-ie-fix')) { $(this).removeClass('active-ie-fix'); }
+        });
     });
 
     /**
      * @type            Plugin
      * @name            OfficeUIDropdown
      *
-     * @notes
+     * @description
      * This plugin makes it possible to transform a specific element into an OfficeUI DropDown element. This is done by
      * adding elements and other information.
      */
@@ -109,7 +117,7 @@ $(function() {
          * @type        Function
          * @name        Open
          *
-         * @notes
+         * @description
          * When this function is executed, the menu item holding all the items is toggled, and it can have 2 different
          * states, opened or opened. A class is added or removed from the 'dropdownElement' that helps to find out if
          * the menu is opened or closed.
@@ -123,7 +131,7 @@ $(function() {
          * @type        Function
          * @name        Open
          *
-         * @notes
+         * @description
          * When this function is executed, the DropDown element is being closed.
          */
         $.fn.Close = function() {
@@ -203,7 +211,7 @@ $(function() {
      * @type        DOM Manipulation.
      * @name        N.A.
      *
-     * @notes
+     * @description
      * This call will transform every element with a class 'dropdown' which is placed inside a container with id
      * 'OfficeUI' into an OfficeUI DropDown.
      */
@@ -213,7 +221,7 @@ $(function() {
      * @type        DOM Manipulation
      * @name        N.A.
      *
-     * @notes
+     * @description
      * This method will add a class on every button to ensure that text-selection on button elements cannot be done.
      */
     $('#OfficeUI .button').addClass('no-select');
@@ -222,7 +230,7 @@ $(function() {
      * @type        Function
      * @name        N.A.
      *
-     * @notes
+     * @description
      * When you click somewhere on the window, it's necessary to close all open dropdown elements.
      * This is being done by the method below.
      */

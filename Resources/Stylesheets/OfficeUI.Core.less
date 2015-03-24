@@ -67,7 +67,7 @@ html, body { height: 100%; }
 #OfficeUI .footer-navigation span { display: inline-block; font-size: 23px; font-weight: lighter; height: 100%; line-height: 45px; margin-right: 15px; }
 
 /* ---- Animations ---- */
-#OfficeUI .contextual-tab-group { -webkit-animation-name: fadeInContextualGroup; -webkit-animation-duration: 0.2s; animation-name: fadeInContextualGroup; animation-duration: 0.2s; }
+#OfficeUI .contextual-tab-group {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards;  -webkit-animation-name: fadeInContextualGroup; -webkit-animation-duration: 0.2s; animation-name: fadeInContextualGroup; animation-duration: 0.2s; }
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes fadeInContextualGroup {
@@ -80,4 +80,28 @@ html, body { height: 100%; }
   to { opacity: 1; }
 }
 
-#OfficeUI .tabs-content-hidden { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: hideRibbon; -webkit-animation-duration: 0.4s; animation-name: hideRibbon; animation-duration: 0.4s; }
+#OfficeUI .tabs-content-hidden {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: hideRibbon; -webkit-animation-duration: 5.2s; animation-name: hideRibbon; animation-duration: 5.2s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes hideRibbon {
+  from { top: 0; }
+  to { top: -92px; }
+}
+
+@keyframes hideRibbon {
+  from { top: 0; }
+  to { top: -92px; }
+}
+
+#OfficeUI .tabs-content-visible {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: showRibbon; -webkit-animation-duration: 5.2s; animation-name: showRibbon; animation-duration: 5.2s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes showRibbon {
+  from { top: -92px; }
+  to { top: 0; }
+}
+
+@keyframes showRibbon {
+  from { top: -92px; }
+  to { top: 0; }
+}
