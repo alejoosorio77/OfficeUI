@@ -105,3 +105,29 @@ html, body { height: 100%; }
   from { top: -92px; }
   to { top: 0; }
 }
+
+#OfficeUI .ribbon-hidden {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentsUp; -webkit-animation-duration: 5.2s; animation-name: moveContentsUp; animation-duration: 5.2s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes moveContentsUp {
+  from { top: 142px; }
+  to { top: 50px; }
+}
+
+@keyframes moveContentsUp {
+  from { top: 142px; }
+  to { top: 50px; }
+}
+
+#OfficeUI .ribbon-showed {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentsDown; -webkit-animation-duration: 5.2s; animation-name: moveContentsDown; animation-duration: 5.2s; }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes moveContentsDown {
+  from { top: 50px; }
+  to { top: 142px; }
+}
+
+@keyframes moveContentsDown {
+  from { top: 50px; }
+  to { top: 142px; }
+}
