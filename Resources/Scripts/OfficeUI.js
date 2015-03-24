@@ -633,31 +633,39 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
 /* ---- AngularJS Controllers. ---- */
 
 /**
- * @type        Controller
- * @name        StylesheetController
+ * @type            Controller
+ * @name            OfficeUIController
  *
- * @notes
- * Defines the 'StylesheetController' controller. This controller is used to render an OfficeUI website in various
- * styles.
+ * @description
+ * Defines the 'OfficeUIController' controller. By this controller, everything for an OfficeUI application is
+ * controlled.
+ *
+ * @dependencies    stylesheetFactory                   The factory which is used to manage stylesheets on the website.
+ *                  applicationDefinitionFactory        Provides the definition for the OfficeUI application.
+ *                  ribbonDefinitionFactory             Provides the definition for the OfficeUI ribbon.
+ *                  officeUIRibbonConfigurationFactory  Provides the configuration for the OfficeUI ribbon.
  */
 OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
                                                          ribbonDefinitionFactory, officeUIRibbonConfigurationFactory,
                                                          $scope) {
-    var isInitializing = true;
-
     /**
      * @description
      * Defines the various states that a ribbon can have. A ribbon in an OfficeUI application can have 3 different
      * states. See the information below to our when the ribbon has which states.
      *
-     * @type    {{Hidden: number, Visible: number, Showed: number}}
-     *          Hidden:     The ribbon is hidden completely from view. It can only be showed when you click on one
-     *                      of the tabs.
-     *          Visible:    The ribbon is visible for the end-user but does not remain visible.
-     *                      Once the focus from the ribbon has been lost for some time, the ribbon becomes invisible.
-     *          Showed:     The ribbon is showed for the end user and does not collapse when the focus is lost.
+     * @type    {{Hidden: number, Visible: number, Showed: number, Showed_Initialized}}
+     *          Hidden:                 The ribbon is hidden completely from view. It can only be showed when you click
+     *                                  on one of the tabs.
+     *          Visible:                The ribbon is visible for the end-user but does not remain visible.
+     *                                  Once the focus from the ribbon has been lost for some time, the ribbon becomes
+     *                                  invisible.
+     *          Showed:                 The ribbon is showed for the end user and does not collapse when the focus is
+     *                                  lost.
+     *          Showed_Initialized:     The default initialization state of the ribbon.
+     *                                  We need this special value to ensure that contents on the website are not being
+     *                                  animated.
      *
-     * @notes
+     * @remarks
      * In a normal flow, when the ribbon is showed by default, this is are the various states through which it travels:
      * Showed - Hidden.
      *
@@ -669,21 +677,23 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3, Showed_Initialized: 99 }
 
-    // Constants - The constants below are used for cookies to determine the current state of an OfficeUI application.
+    // Constants: Various constants of the application.
     var COOKIE_NAME_RIBBON_ACTIVE_TAB = 'OfficeUI_Ribbon_ActiveTab';
+    var COOKIE_NAME_OFFICEUI_CURRENT_STYLE = 'OfficeUI_CurrentStyle';
     var COOKIE_NAME_OFFICEUI_CURRENT_THEME = 'OfficeUI_CurrentTheme';
-    var COOKIE_NAME_OFFICEUI_CURRENT_COLOR = 'OfficeUI_CurrentColor';
+    var COOKIE_VALIDATY = 365;
 
-    var activeTab = null; // Variable that holds the currently active tab.
-    var changeActiveTabOnHover = null; // Variable that defines if an active tab should be changed when hovering on it.
-    var preserveRibbonState = null; // Variable that defines if the state of the ribbon should be preserved.
-    var activeContextualGroups = []; // Variable that defines all the active contextual groups.
-    var ribbonState = null; // Variable that defines the state of the ribbon.
-    var preserveStyle = null; // Variable that defines if the state of the color should be preserved.
-    var preserveTheme = null; // Variable that defines if the state of the theme should be preserved.
+    // Variables: Various variables that are required for the OfficeUIController to execute.
+    var activeTab = null;
+    var stylesheetData = null;
+    var ribbonConfigurationData = null;
+    var activeContextualGroups = [];
+    var ribbonState = null;
 
-    // Get the cookie in which the previous activate state is stored.
+    // Gets the values from the cookies which are used to initialize the ribbon.
     var previousActiveTab = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
+    var previousStyle = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_STYLE);
+    var previousTheme = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
 
     // Initializes the controller so that the application is configured to work.
     Initialize();
@@ -692,68 +702,52 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * @type        Function
      * @name        Initialize
      *
-     * @notes
-     * Initializes the OfficeUI application by loading the configuration file and adjusting the application to meets
-     * the specifications stored in that configuration file.
-     * The changes which are being done here are the following:
-     * - Apply a default style (as defined in the OfficeUI configuration file).
-     * - Apply a default theme (as defined in the OfficeUI configuration file).
+     * @description
+     * Initializes the OfficeUI application by loading all the required files and adjusting the properties as needed.
      */
     function Initialize() {
-        // Initialize the stylesheet factory to make sure that all the data has been loaded.
+        // Load the 'stylesheetFactory' which is used to manage the various styles.
         stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
-            var currentTheme = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
-            var currentStyle = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR);
+            stylesheetData = data;
 
-            if (currentTheme == '') { $scope.Theme = stylesheetFactory.changeTheme(data.DefaultTheme); }
-            else { $scope.Theme = stylesheetFactory.changeTheme(currentTheme); }
+            // Set the style to the previously found style in the cookie or the default style if it's not found.
+            if (previousStyle == '') { $scope.Style = stylesheetFactory.changeStyle(stylesheetData.DefaultStyle); }
+            else { $scope.Style = stylesheetFactory.changeStyle(previousStyle); }
 
-            if (currentStyle == '') { $scope.Style = stylesheetFactory.changeStyle(data.DefaultStyle); }
-            else { $scope.Style = stylesheetFactory.changeStyle(currentStyle); }
-
-            preserveStyle = data.PreserveStyle;
-            preserveTheme = data.PreserveTheme;
+            // Set the theme to the previously found theme in the cookie or the default theme if it's not found.
+            if (previousTheme == '') { $scope.Theme = stylesheetFactory.changeTheme(stylesheetData.DefaultTheme); }
+            else { $scope.Theme = stylesheetFactory.changeTheme(previousTheme); }
         });
 
-        // Initialize the application definition factory to make sure that all the data has been loaded.
+        // Load the 'applicationDefintionFactory' in which the OfficeUI application data is stored.
         applicationDefinitionFactory.getOfficeUIApplicationDefinition().then(function(data) {
             $scope.Title = data.Title;
             $scope.Icons = data.Icons;
         });
 
+        // Load the 'officeUIRibbonConfigurationFactory' in which the OfficeUI ribbon data is stored.
         officeUIRibbonConfigurationFactory.getOfficeUIRibbonConfiguration().then(function(data) {
-            changeActiveTabOnHover = data.ChangeActiveTabOnHover;
-            preserveRibbonState = data.PreserveRibbonState;
+            ribbonConfigurationData = data;
         });
 
-        // Initialize the ribbon definition factory to make sure that all the data has been loaded.
+        // Load the 'ribbonDefinitionFactory' in which the configuration for the ribbon is found.
         ribbonDefinitionFactory.getOfficeUIRibbonDefinition().then(function(data) {
             $scope.Tabs = data.Tabs;
             $scope.ContextualGroups = data.ContextualGroups;
 
             // Set the first tab (not the application tab, as the currently active tab).
-            if (preserveRibbonState) {
-                if (previousActiveTab != '')
-                {
-                    var matches = jQuery.grep($scope.Tabs, function(tab) {
-                        return tab.Id === previousActiveTab;
-                    });
+            if (ribbonConfigurationData.PreserveRibbonState && previousActiveTab != '') {
+                var matches = jQuery.grep($scope.Tabs, function(tab) {
+                    return tab.Id === previousActiveTab;
+                });
 
-                    if (matches.length > 0) { activeTab = previousActiveTab; }
-                    else { activeTab = $scope.Tabs[1].Id; }
-                } else { activeTab = $scope.Tabs[1].Id; }
+                if (matches.length > 0) { activeTab = previousActiveTab; }
+                else { activeTab = $scope.Tabs[1].Id; }
             } else { activeTab = $scope.Tabs[1].Id; }
         });
 
         // Sets the current state of the ribbon.
         ribbonState = ribbonStates.Showed_Initialized;
-
-        $scope.isInitializing = false;
-    }
-
-
-    $scope.isLoading = function() {
-        return isInitializing;
     }
 
     /**
@@ -768,7 +762,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeStyle = function(styleName) {
-        if (preserveStyle) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365); }
+        if (stylesheetData.PreserveStyle) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_STYLE, styleName, COOKIE_VALIDATY); }
 
         $scope.Style = stylesheetFactory.changeStyle(styleName);
     }
@@ -785,7 +779,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeTheme = function(themeName) {
-        if (preserveTheme) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365); }
+        if (stylesheetData.PreserveTheme) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, COOKIE_VALIDATY); }
 
         $scope.Theme = stylesheetFactory.changeTheme(themeName);
     }
@@ -833,7 +827,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
         activeTab = tabId;
 
-        if (preserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
+        if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, COOKIE_VALIDATY); }
     }
 
     /**
@@ -908,7 +902,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         // Select the first available tab is required.
         if (match.length > 0) { $scope.setActiveTab($('.tab:not(.application)', '.ribbon').attr('id')); }
 
-        if (preserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, 365); }
+        if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, COOKIE_VALIDATY); }
     }
 
     /**
@@ -940,7 +934,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         }
 
         if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }
-        if (preserveRibbonState && tabToActivate != null) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), 365); }
+        if (ribbonConfigurationData.PreserveRibbonState && tabToActivate != null) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), COOKIE_VALIDATY); }
     }
 
     /**
@@ -955,7 +949,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * is being changed.
      */
     $scope.setActiveTabOnHover = function(tabId) {
-        if (changeActiveTabOnHover) { $scope.setActiveTab(tabId); }
+        if (ribbonConfigurationData.ChangeActiveTabOnHover) { $scope.setActiveTab(tabId); }
     }
 
     /**
@@ -1290,11 +1284,3 @@ OfficeUIModule.directive('stopPropagation', function () {
 });
 
 /* ---- End: AngularJS Directives. ---- */
-
-
-
-
-
-
-
-
