@@ -1030,6 +1030,24 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
         if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
     }
+
+    /**
+     * @type            Event Handler
+     * @name            N.A.
+     *
+     * @description
+     * Makes sure that when you click on the window and the state of the ribbon is set to 'Visible', that the ribbon
+     * becomes hidden again.
+     * This is done to mimic the same look-and-feel of a native Microsoft Office Application.
+     */
+    $(window).on('click', function(e) {
+        console.log(ribbonState);
+        if ($scope.isRibbonVisible()) {
+            ribbonState = ribbonStates.Hidden;
+        }
+
+        $scope.$apply();
+    });
 });
 
 /* ---- End: AngularJS Controllers. ---- */
@@ -1258,6 +1276,17 @@ OfficeUIModule.directive('dynamicEventHandling', function() {
             }
         }
     }
+});
+
+OfficeUIModule.directive('stopPropagation', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            element.bind(attr.stopPropagation, function (e) {
+                e.stopPropagation();
+            });
+        }
+    };
 });
 
 /* ---- End: AngularJS Directives. ---- */

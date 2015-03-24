@@ -40,15 +40,15 @@
                 <!-- Defines that the OfficeUI Application should be rendered here. -->
                 <div officeui-application=""></div>
 
-                <div class="content-wrapper" style="position: relative; top: 142px;" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}">
+                <div class="content-wrapper" style="position: absolute; top: 142px; bottom: 66px; width: 100%;" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}">
                     <div class="breadcrumb" style="height: 20px; position: relative; border-bottom: 1px solid #d4d4d4; line-height: 20px; padding-left: 10px;">
                         <span style="padding-right: 5px;">Content Management</span>
                         <i class="fa fa-caret-right" style="padding-right: 5px;"></i>
                         <span>Personalization</span>
                     </div>
 
-                    <div class="site-contents">
-                        <div style="float: left; width: 300px; background-color: green; height: 100%; background: linear-gradient(#fff, #f0f0f0); border-right: 1px solid #d4d4d4;">&nbsp;</div>
+                    <div class="site-contents" style="height: 100%;">
+                        <div style="float: left; width: 250px; background-color: green; height: 100%; background: linear-gradient(#fff, #f0f0f0); border-right: 1px solid #d4d4d4;">&nbsp;</div>
                         <div style="float: left; height: 100%; padding: 20px;">
                             <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
                                 <span>Activate Contextual Group 'Drawing Tools'</span>
@@ -127,28 +127,24 @@
 
         <!-- Scripts which should be executed at startup. -->
         <script type="text/javascript">
-            // Loads the OfficeUI configuration.
-            $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation = '/Configuration/Application/OfficeUI.config.json';
+            //$(function() {
+            //    var contentElement = $('#OfficeUI .content-wrapper');
+            //    var siteContentElement = $('#OfficeUI .site-contents');
 
-            OfficeUICore.Bind('#icoApplication', 'click', function(e) {
-               console.log('I have clicked the element.');
-            });
+            //    $(window).on('load resize', function(e) {
 
-            $(function() {
-                var contentElement = $('#OfficeUI .content-wrapper');
-                var siteContentElement = $('#OfficeUI .site-contents');
+            //        var windowHeight = $('body').height();
+            //        var headerHeight = $('header').height();
+            //        var breadcrumbHeight = $('.breadcrumb').height();
+            //        var footerNavigationHeight = $('.footer-navigation').height();
+            //        var footerHeight = $('.footer').height();
 
-                $(window).on('load resize', function(e) {
-                    var windowHeight = $(window).height();
-                    var headerHeight = $('header').height();
-                    var breadcrumbHeight = $('.breadcrumb').height();
-                    var footerNavigationHeight = $('.footer-navigation').height();
-                    var footerNAvigation = $('.footer').height();
+            //        console.log(windowHeight - (headerHeight + footerNavigationHeight + footerHeight));
 
-                    contentElement.height(windowHeight - (headerHeight + footerNavigationHeight + footerNAvigation));
-                    siteContentElement.height(windowHeight - (headerHeight + footerNavigationHeight + breadcrumbHeight + footerNAvigation));
-                });
-            });
+            //        contentElement.height(windowHeight - (headerHeight + footerNavigationHeight + footerHeight));
+            //        siteContentElement.height(windowHeight - (headerHeight + footerNavigationHeight + breadcrumbHeight + footerNavigationHeight));
+            //    });
+            //});
         </script>
     </body>
 </html>

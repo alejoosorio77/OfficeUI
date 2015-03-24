@@ -11,7 +11,7 @@
 
     <!-- Section: Ribbon of the application. -->
     <div class="ribbon no-select">
-        <ul class="tabs" data-on-scroll="ribbonScroll">
+        <ul class="tabs" data-on-scroll="ribbonScroll" data-stop-propagation="click">
             <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)" data-on-hover="!$first && setActiveTabOnHover(tab.Id)">
                 <ul>
                     <li class="tab label" id="{{tab.Id}}" data-ng-class="{'application': $first, 'active': isTabActive(tab.Id), 'no-border': isRibbonHidden()}">

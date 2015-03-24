@@ -395,9 +395,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: hideRibbon;
-  -webkit-animation-duration: 5.2s;
+  -webkit-animation-duration: 0.4s;
   animation-name: hideRibbon;
-  animation-duration: 5.2s;
+  animation-duration: 0.4s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes hideRibbon {
@@ -421,9 +421,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: showRibbon;
-  -webkit-animation-duration: 5.2s;
+  -webkit-animation-duration: 0.4s;
   animation-name: showRibbon;
-  animation-duration: 5.2s;
+  animation-duration: 0.4s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes showRibbon {
@@ -447,9 +447,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: moveContentsUp;
-  -webkit-animation-duration: 5.2s;
+  -webkit-animation-duration: 0.4s;
   animation-name: moveContentsUp;
-  animation-duration: 5.2s;
+  animation-duration: 0.4s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes moveContentsUp {
@@ -473,9 +473,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: moveContentsDown;
-  -webkit-animation-duration: 5.2s;
+  -webkit-animation-duration: 0.4s;
   animation-name: moveContentsDown;
-  animation-duration: 5.2s;
+  animation-duration: 0.4s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes moveContentsDown {
