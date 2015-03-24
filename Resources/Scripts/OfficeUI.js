@@ -345,6 +345,8 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
 OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
                                                          ribbonDefinitionFactory, officeUIRibbonConfigurationFactory,
                                                          $scope) {
+    var isInitializing = true;
+
     /**
      * @description
      * Defines the various states that a ribbon can have. A ribbon in an OfficeUI application can have 3 different
@@ -444,6 +446,13 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
         // Sets the current state of the ribbon.
         ribbonState = ribbonStates.Showed;
+
+        $scope.isInitializing = false;
+    }
+
+
+    $scope.isLoading = function() {
+        console.log('Is initializing: ' + isInitializing);
     }
 
     /**

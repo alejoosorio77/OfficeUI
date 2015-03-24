@@ -12,7 +12,7 @@
  * - Mozilla FireFox                    Version 36 and upwards - Microsoft Windows 8.1 (Update 1).
  * - Google Chrome                      Version 41 and upwards - Microsoft Windows 8.1 (Update 1).
  *
- * The following plugins an fixes are included in 'OfficeUI.Elements.js'.
+ * The following plugins and fixes are included in 'OfficeUI.Elements.js'.
  * - Buttons (Fix for Microsoft Internet Explorer).
  * - DropDown element (A DropDown control which matches the DropDown elements which are also used in Microsoft Office
  *                     User Applications).

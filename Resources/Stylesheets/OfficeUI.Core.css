@@ -348,7 +348,7 @@ body {
 #OfficeUI .application .icons {
   margin-left: 5px;
   position: absolute;
-  z-index: 200;
+  z-index: 300;
 }
 #OfficeUI .application .icons img {
   margin: 0 5px 0 2px;
