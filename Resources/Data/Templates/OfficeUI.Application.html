@@ -38,7 +38,7 @@
                 Tab with Id: {{tab.Id}}
 
                 <div class="icon collapse" data-ng-click="toggleRibbonState()">
-                    <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
+                    <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed() || isRibbonInitialized()" alt="Toggle Ribbon State" />
                     <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
                 </div>
             </li>
@@ -48,7 +48,7 @@
                         Tab width Id: {{tab.Id}}
 
                         <div class="icon collapse">
-                            <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
+                            <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed() || isRibbonInitialized()" alt="Toggle Ribbon State" />
                             <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
                         </div>
                     </li>

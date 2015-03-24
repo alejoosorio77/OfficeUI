@@ -663,8 +663,11 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      *
      * In a normal flow, when the ribbon is hidden by default, this are the various states through which is travels.
      * Hidden - Visible - Showed.
+     *
+     * There's an additional state with the name 'Showed_Initialized'. But that's the state that the ribbon will get
+     * when the page is being loaded. This is to prevent animations from being executed.
      */
-    var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3 }
+    var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3, Showed_Initialized: 99 }
 
     // Constants - The constants below are used for cookies to determine the current state of an OfficeUI application.
     var COOKIE_NAME_RIBBON_ACTIVE_TAB = 'OfficeUI_Ribbon_ActiveTab';
@@ -743,7 +746,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         });
 
         // Sets the current state of the ribbon.
-        ribbonState = ribbonStates.Showed;
+        ribbonState = ribbonStates.Showed_Initialized;
 
         $scope.isInitializing = false;
     }
@@ -980,8 +983,12 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * @note
      * Check's the state of the ribbon. Return true if it's showed, false otherwise.
      */
-    $scope.isRibbonShowed = function(){
+    $scope.isRibbonShowed = function() {
         return ribbonState == ribbonStates.Showed;
+    }
+
+    $scope.isRibbonInitialized = function() {
+        return ribbonState == ribbonStates.Showed_Initialized;
     }
 
     /**
@@ -1020,7 +1027,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * If the ribbon is showed, it will become hidden.
      */
     $scope.toggleRibbonState = function() {
-        if (ribbonState == ribbonStates.Showed) { ribbonState = ribbonStates.Hidden; }
+        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
         if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
     }
 });
@@ -1164,7 +1171,6 @@ OfficeUIModule.directive('onHover', function() {
 
             // Bind the mouse enter event handler.
             element.bind('mouseenter', function() {
-                console.log(hoverAttribute);
                 scope.$apply(hoverAttribute);
             });
         }
