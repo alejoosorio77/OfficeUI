@@ -397,7 +397,6 @@ body {
 }
 #OfficeUI .ribbon .tabs .tab:not(.application).no-border {
   border-bottom: 1px solid #d4d4d4 !important;
-  color: #444 !important;
 }
 #OfficeUI .ribbon .tabs .tab:not(.active) {
   border: 1px solid transparent;
@@ -501,9 +500,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: hideRibbon;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: 0.25s;
   animation-name: hideRibbon;
-  animation-duration: 0.4s;
+  animation-duration: 0.25s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes hideRibbon {
@@ -527,9 +526,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: showRibbon;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: 0.25s;
   animation-name: showRibbon;
-  animation-duration: 0.4s;
+  animation-duration: 0.25s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes showRibbon {
@@ -553,9 +552,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: moveContentsUp;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: 0.25s;
   animation-name: moveContentsUp;
-  animation-duration: 0.4s;
+  animation-duration: 0.25s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes moveContentsUp {
@@ -579,9 +578,9 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: moveContentsDown;
-  -webkit-animation-duration: 0.4s;
+  -webkit-animation-duration: 0.25s;
   animation-name: moveContentsDown;
-  animation-duration: 0.4s;
+  animation-duration: 0.25s;
 }
 /* Chrome, Safari, Opera */
 @-webkit-keyframes moveContentsDown {

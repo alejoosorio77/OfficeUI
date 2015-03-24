@@ -14,7 +14,7 @@
         <ul class="tabs" data-on-scroll="ribbonScroll" data-stop-propagation="click">
             <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)" data-on-hover="!$first && setActiveTabOnHover(tab.Id)">
                 <ul>
-                    <li class="tab label" id="{{tab.Id}}" data-ng-class="{'application': $first, 'active': isTabActive(tab.Id), 'no-border': isRibbonHidden()}">
+                    <li class="tab label" id="{{tab.Id}}" data-ng-class="{'application': $first, 'active': isTabActive(tab.Id) && !isRibbonHidden(), 'no-border': isRibbonHidden()}">
                         <span>{{tab.Label}}</span>
                     </li>
                 </ul>
