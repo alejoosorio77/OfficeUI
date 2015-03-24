@@ -1,0 +1,59 @@
+<header>
+    <!-- Section: Icons on the top left of the page. -->
+    <div class="icons no-select">
+        <img class="application-icon" id="{{icon.Id}}" src="#" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
+    </div>
+
+    <!-- Section: Title of the application. -->
+    <div class="title">
+        <span data-ng-show="!isAnyContextualGroupActive()">{{Title}}</span>
+    </div>
+
+    <!-- Section: Ribbon of the application. -->
+    <div class="ribbon no-select">
+        <ul class="tabs" data-on-scroll="ribbonScroll">
+            <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)" data-on-hover="!$first && setActiveTabOnHover(tab.Id)">
+                <ul>
+                    <li class="tab label" id="{{tab.Id}}" data-ng-class="{'application': $first, 'active': isTabActive(tab.Id), 'no-border': isRibbonHidden()}">
+                        <span>{{tab.Label}}</span>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="contextual-tab-group" id="{{contextualGroup.Id}}" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-if="isContextualGroupActive(contextualGroup.Id)" data-ng-style="{'background-color': contextualGroup.GroupColor}">
+                <div data-ng-style="{'background-color': contextualGroup.AccentColor}" class="accent">&nbsp;</div>
+                <div class="label contextual-group-label" data-ng-style="{'color': contextualGroup.GroupTextColor}">
+                    <span>{{contextualGroup.Label}}</span>
+                </div>
+                <ul>
+                    <li class="tab contextual-tab label" id="{{tab.Id}}" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}" data-ng-click="setActiveTab(tab.Id)" data-on-hover="setActiveTabOnHover(tab.Id)">
+                        <span>{{tab.Label}}</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul class="tabs_content" data-on-scroll="ribbonScroll" data-ng-class="{'tabs-content-hidden': isRibbonHidden(), 'tabs-content-visible': isRibbonVisible()}">
+            <li data-ng-repeat="tab in Tabs" data-ng-show="isTabActive(tab.Id)">
+                Tab with Id: {{tab.Id}}
+
+                <div class="icon collapse" data-ng-click="toggleRibbonState()">
+                    <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
+                    <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
+                </div>
+            </li>
+            <li data-ng-repeat="contextualGroup in ContextualGroups" data-ng-show="isContextualGroupActive(contextualGroup.Id)">
+                <ul>
+                    <li data-ng-repeat="tab in contextualGroup.Tabs" data-ng-show="isTabActive(tab.Id)">
+                        Tab width Id: {{tab.Id}}
+
+                        <div class="icon collapse">
+                            <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed()" alt="Toggle Ribbon State" />
+                            <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>

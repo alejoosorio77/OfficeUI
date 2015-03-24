@@ -9,35 +9,155 @@
  * In this file all the required AngularJS code will be placed (Modules, Controller, Directives, ...)
  */
 
+/* ---- AngularJS Modules. ---- */
+
 /**
- * @type       Module
- * @name       OfficeUI
+ * @type            Module
+ * @name            OfficeUI
  *
- * @notes
+ * @description
  * Defines the AngularJS module 'OfficeUI' which groups all the actions for the OfficeUI web application.
+ * It's on the module 'OfficeUI', that all the hooks needs to be connector.
+ * By the hooks, we do mean the controllers, filters, directives, ...
  */
 var OfficeUIModule = angular.module('OfficeUI', []);
 
+/* ---- End: AngularJS Modules. ---- */
+
+/* ----  AngularJS Directives. ---- */
+
 /**
- * @type        Service
- * @name        OfficeUIConfigurationService
+ * @type            Directive
+ * @name            officeuiApplication
  *
- * @notes
- * Provides a service which will read the necessary configuration file which is required for the OfficeUI application
+ * @description
+ * Defines the OfficeUIApplication directive. This directive allows us, by placing an HTML tag to render the entire
+ * OfficeUI applications, which does include the ribbon.
+ *
+ * @remarks
+ * The template file itself is saved in the following location: '/Resources/Data/Templates/OfficeUI.Application.html'.
+ * This location is hardcoded and cannot be changed.
+ *
+ * @example
+ * Imagine the following HTML code which is placed on a page.
+ *
+ * <body>
+ *    <div id="OfficeUI">
+ *        <!-- We want to render the OfficeUI Suite here. -->
+ *    </div>
+ * </body>
+ *
+ * Now, we want to render the OfficeUI controls on the place of the comment.
+ * There are 2 options, or we can either replace the entire section with the OfficeUI controls, but that makes that the
+ * HTML does become very cluttered and it's not easy to maintain.
+ * Therefore, you can also replace the section with this directive as showed in the example below:
+ *
+ * <body>
+ *    <div id="OfficeUI">
+ *        <div officeui-application=""></div>
+ *    </div>
+ * </body>
+ */
+OfficeUIModule.directive('officeuiApplication', function() {
+    return {
+        restrict: 'AE',
+        replace: true,
+        templateUrl: '/Resources/Data/Templates/OfficeUI.Application.html'
+    }
+});
+
+/* ----  End: AngularJS Directives. ---- */
+
+/* ---- AngularJS Services. ---- */
+
+/**
+ * @type            Service
+ * @name            OfficeUIConfigurationService
+ *
+ * @description
+ * Provides a service which will read the necessary configuration file which is required for an OfficeUI application
  * to function properly.
+ *
+ * @remarks
+ * By default, the location of the configuration file to read is stored in a JavaScript library which can be accessed
+ * with the following code:
+ *
+ * $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation
+ *
+ * The default location for the file which this service will try to read is the following:
+ *
+ * '/Configuration/Application/OfficeUI.config.json'
+ *
+ * To change the location of this file, you have 2 options:
+ *
+ * 1.   Change the default path in the JavaScript file (OfficeUI.Configuration.js) or the minified version of it
+ *      if you're using the minified release.
+ *      This JavaScript file location is: '/Resources/Scripts/OfficeUI.Configuration.js'.
+ *      Caution: Modifying 'core' files can make an application unusable when updating to a new version.
+ *               This because the modified file might get overridden.
+ *
+ * 2.   Another option would be to change the location of the file on page load.
+ *      Doing this makes sure that you don't need to mess with the 'core' files, meaning that the project can be
+ *      updated at all times.
+ *      In order to change the location of the configuration file on page load, you can execute the following code:
+ *
+ *      $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation = '/path/to/configuration/file.json'
+ *
+ * The section below gives an overview of the configuration file.
+ *
+ * The OfficeUI configuration file does have 5 different properties which can be exposed:
+ *
+ *  - Styles:               An array containing the various styles. A style in the OfficeUI is a color scheme.
+ *                          In here you need to pass objects that does contain the name and the css file to load.
+ *
+ *  - DefaultStyle:         A name that represents the style to use when the page is being loaded.
+ *                          The value of this field must match a value in the 'Styles' property.
+ *
+ *  - Themes:               An array containing the various themes. A theme in the OfficeUI is a background to use on
+ *                          the application. In here you need to pass objects that does contain the name and the css
+ *                          file to load.
+ *
+ *  - DefaultTheme:         A name that represents the theme to use when the page is being loaded.
+ *                          The value of this field must match a value in the 'Themes' property.
+ *
+ *  - PreserveStyle:        A boolean that indicates whether the latest chosen style should be preserved on a
+ *                          page refresh or not. This is done by using cookies.
+ *                          When this value is set to 'true' and there's a cookie that defines the latest chosen style,
+ *                          then this style will be used instead of the one defined in the 'DefaultStyle' property.
+ *
+ *  - PreserveTheme:        A boolean that indicates whether the latest chosen theme should be preserved on a page
+ *                          refresh or not. This is done by using cookies.
+ *                          When this value is set to 'true' and there's a cookie that defines the latest chosen theme,
+ *                          then this theme will be used instead of the one defined in the 'DefaultTheme' property.
  */
 OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
-    // Defines what needs to be returned by the service.
+    // Defines the object that this service needs to return.
     return {
 
         /**
-         * @type        Function
-         * @name        getOfficeUIConfiguration
+         * @type            Function
+         * @name            getOfficeUIConfiguration
          *
-         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI configuration file.
+         * @returns         {HttpPromise}:      A promise which is loading the OfficeUI configuration file.
+         *
+         * @remarks
+         * This method can throw exceptions when an error occurred during the loading of this file.
+         * The explanation below provides some information about which exception can occur when:
+         *
+         * OfficeUIConfigurationException:      This exception is throwed when the value of the field
+         *                                      '$.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation' is not
+         *                                      provided. This does mean that the configuration file cannot be loaded.
+         *
+         * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
+         *                                      or when there's an error in the configuration file.
          */
         getOfficeUIConfiguration: function() {
-        if (typeof $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI Configuration file is not defined.'); }
+            // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation == '') {
+                OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI Configuration file is not defined.');
+            }
+
+            // Returns the 'httpPromise' which is required for further processing.
             return $http.get($.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation)
                 .then(function (response) {
                     return {
@@ -45,116 +165,256 @@ OfficeUIModule.factory('OfficeUIConfigurationService', function($http) {
                         DefaultStyle: response.data.DefaultStyle,
                         Themes: response.data.Themes,
                         DefaultTheme: response.data.DefaultTheme,
-                        PreserveRibbonColor: response.data.PreserveRibbonColor,
-                        PreserveRibbonTheme: response.data.PreserveRibbonTheme
+                        PreserveStyle: response.data.PreserveStyle,
+                        PreserveTheme: response.data.PreserveTheme
                     };
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); }
+            );
         }
     }
 });
 
 /**
- * @type        Service
- * @name        OfficeUIRibbonConfigurationService
+ * @type            Service
+ * @name            OfficeUIRibbonConfigurationService
  *
- * @notes
+ * @description
  * Provides a service which will read the necessary configuration file which is required for the OfficeUI ribbon
  * to function properly.
+ *
+ * @remarks
+ * By default, the location of the configuration file to read is stored in a JavaScript library which can be accessed
+ * with the following code:
+ *
+ * $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile
+ *
+ * The default location for the file which this service will try to read is the following:
+ *
+ * '/Configuration/Application/OfficeUI.Ribbon.config.json'
+ *
+ * To change the location of this file, you have 2 options:
+ *
+ * 1.   Change the default path in the JavaScript file (OfficeUI.Configuration.js) or the minified version of it
+ *      if you're using the minified release.
+ *      This JavaScript file location is: '/Resources/Scripts/OfficeUI.Configuration.js'.
+ *      Caution: Modifying 'core' files can make an application unusable when updating to a new version.
+ *               This because the modified file might get overridden.
+ *
+ * 2.   Another option would be to change the location of the file on page load.
+ *      Doing this makes sure that you don't need to mess with the 'core' files, meaning that the project can be
+ *      updated at all times.
+ *      In order to change the location of the configuration file on page load, you can execute the following code:
+ *
+ *      $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile = '/path/to/configuration/file.json'
+ *
+ * The section below gives an overview of the configuration file.
+ *
+ * The OfficeUI Ribbon configuration file does have 2 different properties which can be exposed:
+ *
+ *  - ChangeActiveTabOnHover:       A boolean that indicates if the currently active tab should be change on hover.
+ *                                  By setting the value to 'true', a tab becomes active when you hover on the tab
+ *                                  element.
+ *
+ *  - PreserveRibbonState:          A boolean that indicates if the ribbon state should be preserved. The ribbon state
+ *                                  is how the ribbon is showed on the page. (Showed or Hidden).
  */
 OfficeUIModule.factory('OfficeUIRibbonConfigurationService', function($http) {
-    // Defines what needs to be returned by the service.
+    // Defines the object that this service needs to return.
     return {
 
         /**
-         * @type        Function
-         * @name        getOfficeUIRibbonConfiguration
+         * @type            Function
+         * @name            getOfficeUIRibbonConfiguration
          *
-         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI ribbon configuration file.
+         * @returns         {HttpPromise}:      A promise which is loading the OfficeUI ribbon configuration file.
+         *
+         * @remarks
+         * This method can throw exceptions when an error occurred during the loading of this file.
+         * The explanation below provides some information about which exception can occur when:
+         *
+         * OfficeUIConfigurationException:      This exception is throwed when the value of the field
+         *                                      '$.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile' is not
+         *                                      provided. This does mean that the configuration file cannot be loaded.
+         *
+         * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
+         *                                      or when there's an error in the configuration file.
          */
         getOfficeUIRibbonConfiguration: function() {
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI Ribbon Configuration file is not defined.'); }
+            // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile == '') {
+                OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI Ribbon Configuration file is not defined.');
+            }
+
+            // Returns the 'httpPromise' which is required for further processing.
             return $http.get($.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile)
                 .then(function (response) {
                     return {
                         ChangeActiveTabOnHover: response.data.ChangeActiveTabOnHover,
                         PreserveRibbonState: response.data.PreserveRibbonState
                     };
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Ribbon Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Ribbon Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonConfigurationFile + '\' could not be loaded.'); }
+            );
         }
     }
 });
 
 /**
- * @type        Service
- * @name        OfficeUIApplicationDefinitionService
+ * @type            Service
+ * @name            OfficeUIApplicationDefinitionService
  *
- * @notes
- * Provides a service which will read the necessary application definition file. Based on this file, various elements will be placed on the website.
+ * @description
+ * Provides a service which will read the necessary data file for an OfficeUI application to function properly.
+ *
+ * @remarks
+ * By default, the location of the configuration file to read is stored in a JavaScript library which can be accessed
+ * with the following code:
+ *
+ * $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation
+ *
+ * The default location for the file which this service will try to read is the following:
+ *
+ * '/Resources/Data/Application.json'
+ *
+ * To change the location of this file, you have 2 options:
+ *
+ * 1.   Change the default path in the JavaScript file (OfficeUI.Configuration.js) or the minified version of it
+ *      if you're using the minified release.
+ *      This JavaScript file location is: '/Resources/Scripts/OfficeUI.Configuration.js'.
+ *      Caution: Modifying 'core' files can make an application unusable when updating to a new version.
+ *               This because the modified file might get overridden.
+ *
+ * 2.   Another option would be to change the location of the file on page load.
+ *      Doing this makes sure that you don't need to mess with the 'core' files, meaning that the project can be
+ *      updated at all times.
+ *      In order to change the location of the configuration file on page load, you can execute the following code:
+ *
+ *      $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation = '/path/to/data/file.json'
  */
 OfficeUIModule.factory('OfficeUIApplicationDefinitionService', function($http) {
-    // Defines what needs to be returned by the service.
+    // Defines the object that this service needs to return.
     return {
 
         /**
-         * @type        Function
-         * @name        getOfficeUIConfiguration
+         * @type            Function
+         * @name            getOfficeUIApplicationDefinition
          *
-         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
+         * @returns         {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
+         *
+         * @remarks
+         * This method can throw exceptions when an error occurred during the loading of this file.
+         * The explanation below provides some information about which exception can occur when:
+         *
+         * OfficeUIConfigurationException:      This exception is throwed when the value of the field
+         *                                      '$.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation' is
+         *                                      not provided. This does mean that the configuration cannot be loaded.
+         *
+         * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
+         *                                      or when there's an error in the configuration file.
          */
         getOfficeUIApplicationDefinition: function() {
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI application definition file is not defined.'); }
+            // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') {
+                OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI application definition file is not defined.');
+            }
+
+            // Returns the 'httpPromise' which is required for further processing.
             return $http.get($.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation)
                 .then(function (response) {
                     return {
                         Title: response.data.Title,
                         Icons: response.data.Icons
                     };
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); }
+            );
         }
     }
 });
 
 /**
- * @type        Service
- * @name        OfficeUIRibbonDefinitionService
+ * @type            Service
+ * @name            OfficeUIRibbonDefinitionService
  *
- * @notes
- * Provides a service which will read the necessary ribbon definition file. Based on this file, various elements will be placed on the website.
+ * @description
+ * Provides a service which will read the necessary data file for an OfficeUI application to function properly.
+ *
+ * @remarks
+ * By default, the location of the configuration file to read is stored in a JavaScript library which can be accessed
+ * with the following code:
+ *
+ * $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation
+ *
+ * The default location for the file which this service will try to read is the following:
+ *
+ * '/Resources/Data/Ribbon.json'
+ *
+ * To change the location of this file, you have 2 options:
+ *
+ * 1.   Change the default path in the JavaScript file (OfficeUI.Configuration.js) or the minified version of it
+ *      if you're using the minified release.
+ *      This JavaScript file location is: '/Resources/Scripts/OfficeUI.Configuration.js'.
+ *      Caution: Modifying 'core' files can make an application unusable when updating to a new version.
+ *               This because the modified file might get overridden.
+ *
+ * 2.   Another option would be to change the location of the file on page load.
+ *      Doing this makes sure that you don't need to mess with the 'core' files, meaning that the project can be
+ *      updated at all times.
+ *      In order to change the location of the configuration file on page load, you can execute the following code:
+ *
+ *      $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation = '/path/to/data/file.json'
  */
 OfficeUIModule.factory('OfficeUIRibbonDefinitionService', function($http) {
-    // Defines what needs to be returned by the service.
+    // Defines the object that this service needs to return.
     return {
 
         /**
-         * @type        Function
-         * @name        getOfficeUIConfiguration
+         * @type            Function
+         * @name            getOfficeUIRibbonDefinition
          *
-         * @returns     {HttpPromise}:      A promise which is loading the OfficeUI ribbon definition file.
+         * @returns         {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
+         *
+         * @remarks
+         * This method can throw exceptions when an error occurred during the loading of this file.
+         * The explanation below provides some information about which exception can occur when:
+         *
+         * OfficeUIConfigurationException:      This exception is throwed when the value of the field
+         *                                      '$.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation' is
+         *                                      not provided. This does mean that the configuration cannot be loaded.
+         *
+         * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
+         *                                      or when there's an error in the configuration file.
          */
         getOfficeUIRibbonDefinition: function() {
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation == '') { OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI ribbon definition file is not defined.'); }
+            // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
+            if (typeof $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation == '') {
+                OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI ribbon definition file is not defined.');
+            }
+
+            // Returns the 'httpPromise' which is required for further processing.
             return $http.get($.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation)
                 .then(function (response) {
                     return {
                         Tabs: response.data.Tabs,
                         ContextualGroups: response.data.ContextualGroups
                     };
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI ribbon definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation + '\' could not be loaded.'); });
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI ribbon definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIRibbonDefinitionFileLocation + '\' could not be loaded.'); }
+            );
         }
     }
 });
 
 /**
- * @type        Service
- * @name        stylesheetFactory
+ * @type            Service
+ * @name            stylesheetFactory
  *
- * @notes
- * Provides common work to work with stylesheets using the AngularJS way.
+ * @description
+ * Provides various ways to work with stylesheets using the AngularJS way.
+ *
+ * @dependencies    $http, OfficeUIConfigurationService.
  */
 OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationService', function($http, OfficeUIConfigurationService) {
-    // Define the service instance. This one is returned from the factory and it's through this instance that the
-    // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
-    // particular object.
+    /* Define the service instance. This one is returned from the factory and it's through this instance that the
+       required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
+       particular object. */
     var stylesheetFactoryServiceIntsance = {};
 
     // Defines the variables which are needed for this service.
@@ -164,11 +424,14 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
     var defaultTheme = '';
 
     /**
-     * @type        Function
-     * @name        getOfficeUIConfiguration
+     * @type            Function
+     * @name            getOfficeUIConfiguration
      *
-     * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
-     *                                  complete.
+     * @description
+     * Retrieved the OfficeUIConfiguration file and parse the data so it can be used further in the application.
+     *
+     * @returns         {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous
+     *                                      calls to complete.
      */
     stylesheetFactoryServiceIntsance.getOfficeUIConfiguration = function() {
         var promise = OfficeUIConfigurationService.getOfficeUIConfiguration();
@@ -184,18 +447,27 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
     }
 
     /**
-     * @type       Function
-     * @name       changeStyle
+     * @type            Function
+     * @name            changeStyle
      *
-     * @param      styleName (string):         The name of the style to load. This should be a name which has been
-     *                                         defined in the 'availableStyles' array.
+     * @description
+     * Change the current style of the application. In OfficeUI, a style is a color scheme. So, by calling this method
+     * you'll change the current color of the application.
      *
-     * @return     string:      The url of the stylesheet to load.
+     * @param           styleName (string):         The name of the style to load. This should be a name which has been
+     *                                              defined in the 'availableStyles' array.
      *
-     * @notes
+     * @return          string:                     The url of the stylesheet to load.
+     *
+     * @remarks
      * The styles which can be loaded are defined in the variable 'availableStyles'.
      * When you pass a style which either match multiple entries or no entries an error is thrown.
+     * The following errors can be throwed:
      *
+     *  - OfficeUIStylesheetException:              This exception is throwed when you're passing a 'styleName' which
+     *                                              cannot be found.
+     *                                              This exception can also be throwed when you're passing a 'styleName'
+     *                                              that causes multiple matches in the 'AvailableStyles' array.
      */
     stylesheetFactoryServiceIntsance.changeStyle = function(styleName) {
         var foundStyles = JSPath.apply('.{.name == "' + styleName + '"}', availableStyles);
@@ -206,17 +478,27 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
     }
 
     /**
-     * @type        Function
-     * @name        changeTheme
+     * @type            Function
+     * @name            changeTheme
      *
-     * @param       themeName (string):     The name of the theme to load. This should be a name which has been defined
-     *                                      in the 'availableThemes' array.
+     * @description
+     * Change the current theme of the application. In OfficeUI, a theme is a background. So, by calling this method
+     * you'll change the current background of the application.
      *
-     * @return     string:      The url of the stylesheet to load.
+     * @param           themeName (string):     The name of the theme to load. This should be a name which has been defined
+     *                                          in the 'availableThemes' array.
      *
-     * @notes
+     * @return          string:                 The url of the stylesheet to load.
+     *
+     * @remarks
      * The themes which can be loaded are defined in the variable 'availableThemes'.
-     * When you pass a style which either match multiple entries or no entries, and error is thrown.
+     * When you pass a theme which either match multiple entries or no entries an error is thrown.
+     * The following errors can be throwed:
+     *
+     *  - OfficeUIStylesheetException:              This exception is throwed when you're passing a 'themeName' which
+     *                                              cannot be found.
+     *                                              This exception can also be throwed when you're passing a 'themeName'
+     *                                              that causes multiple matches in the 'availableThemes' array.
      */
     stylesheetFactoryServiceIntsance.changeTheme = function(themeName) {
         var foundThemes = JSPath.apply('.{.name == "' + themeName + '"}', availableThemes);
@@ -231,27 +513,32 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
 }]);
 
 /**
- * @type        Service
- * @name        applicationDefinitionFactory
+ * @type            Service
+ * @name            officeUIRibbonConfigurationFactory
  *
- * @notes
- * Provides common work to work with an OfficeUI application using the AngularJS way.
+ * @description
+ * Provides various ways to work with an OfficeUI Ribbon using the AngularJS way.
+ *
+ * @dependencies    $http, OfficeUIRibbonConfigurationService.
  */
 OfficeUIModule.factory('officeUIRibbonConfigurationFactory', ['$http', 'OfficeUIRibbonConfigurationService', function($http, OfficeUIRibbonConfigurationService) {
-    // Define the service instance. This one is returned from the factory and it's through this instance that the
-    // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
-    // particular object.
+    /* Define the service instance. This one is returned from the factory and it's through this instance that the
+     required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
+     particular object. */
     var officeUIRibbonConfigurationFactoryInstance = {};
 
     // Defines the variables which are needed for this service.
     var changeActiveTabOnHover = null;
 
     /**
-     * @type        Function
-     * @name        getOfficeUIApplicationDefinition
+     * @type            Function
+     * @name            getOfficeUIRibbonConfiguration
      *
-     * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
-     *                                  complete.
+     * @description
+     * Retrieved the OfficeUIRibbonConfiguration file and parse the data so it can be used further in the application.
+     *
+     * @returns         {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous
+     *                                      calls to complete.
      */
     officeUIRibbonConfigurationFactoryInstance.getOfficeUIRibbonConfiguration = function() {
         var promise = OfficeUIRibbonConfigurationService.getOfficeUIRibbonConfiguration();
@@ -261,20 +548,23 @@ OfficeUIModule.factory('officeUIRibbonConfigurationFactory', ['$http', 'OfficeUI
         return promise;
     }
 
+    // Return the instance of the service.
     return officeUIRibbonConfigurationFactoryInstance;
 }]);
 
 /**
- * @type        Service
- * @name        applicationDefinitionFactory
+ * @type            Service
+ * @name            applicationDefinitionFactory
  *
- * @notes
- * Provides common work to work with an OfficeUI application using the AngularJS way.
+ * @description
+ * Provides various ways to work with an OfficeUI application using the AngularJS way.
+ *
+ * @dependencies    $http, OfficeUIApplicationDefinitionService.
  */
 OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplicationDefinitionService', function($http, OfficeUIApplicationDefinitionService) {
-    // Define the service instance. This one is returned from the factory and it's through this instance that the
-    // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
-    // particular object.
+    /* Define the service instance. This one is returned from the factory and it's through this instance that the
+     required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
+     particular object. */
     var applicationDefinitionFactoryInstance = {};
 
     // Defines the variables which are needed for this service.
@@ -296,20 +586,23 @@ OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplic
         return promise;
     }
 
+    // Returns the instance of the service.
     return applicationDefinitionFactoryInstance;
 }]);
 
 /**
- * @type        Service
- * @name        ribbonDefinitionFactory
+ * @type            Service
+ * @name            ribbonDefinitionFactory
  *
- * @notes
- * Provides common work to work with an OfficeUI ribbon using the AngularJS way.
+ * @description
+ * Provides various ways to work with an OfficeUI Ribbon using the AngularJS way.
+ *
+ * @dependencies    $http, OfficeUIRibbonDefinitionService.
  */
 OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefinitionService', function($http, OfficeUIRibbonDefinitionService) {
-    // Define the service instance. This one is returned from the factory and it's through this instance that the
-    // required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
-    // particular object.
+    /* Define the service instance. This one is returned from the factory and it's through this instance that the
+     required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
+     particular object. */
     var ribbonDefinitionFactoryInstance = {};
 
     // Defines the variables which are needed for this service.
@@ -318,7 +611,7 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
 
     /**
      * @type        Function
-     * @name        getOfficeUIRibbonDefinition
+     * @name        getOfficeUIApplicationDefinition
      *
      * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
      *                                  complete.
@@ -331,8 +624,13 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
         return promise;
     }
 
+    // Returns the instance of the service.
     return ribbonDefinitionFactoryInstance;
 }]);
+
+/* ---- End: AngularJS Services. ---- */
+
+/* ---- AngularJS Controllers. ---- */
 
 /**
  * @type        Controller
@@ -378,8 +676,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var preserveRibbonState = null; // Variable that defines if the state of the ribbon should be preserved.
     var activeContextualGroups = []; // Variable that defines all the active contextual groups.
     var ribbonState = null; // Variable that defines the state of the ribbon.
-    var preserveRibbonColor = null; // Variable that defines if the state of the color should be preserved.
-    var preserveRibbonTheme = null; // Variable that defines if the state of the theme should be preserved.
+    var preserveStyle = null; // Variable that defines if the state of the color should be preserved.
+    var preserveTheme = null; // Variable that defines if the state of the theme should be preserved.
 
     // Get the cookie in which the previous activate state is stored.
     var previousActiveTab = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
@@ -410,8 +708,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
             if (currentStyle == '') { $scope.Style = stylesheetFactory.changeStyle(data.DefaultStyle); }
             else { $scope.Style = stylesheetFactory.changeStyle(currentStyle); }
 
-            preserveRibbonColor = data.PreserveRibbonColor;
-            preserveRibbonTheme = data.PreserveRibbonTheme;
+            preserveStyle = data.PreserveStyle;
+            preserveTheme = data.PreserveTheme;
         });
 
         // Initialize the application definition factory to make sure that all the data has been loaded.
@@ -452,7 +750,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
 
     $scope.isLoading = function() {
-        console.log('Is initializing: ' + isInitializing);
+        return isInitializing;
     }
 
     /**
@@ -467,7 +765,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeStyle = function(styleName) {
-        if (preserveRibbonColor) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365); }
+        if (preserveStyle) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_COLOR, styleName, 365); }
 
         $scope.Style = stylesheetFactory.changeStyle(styleName);
     }
@@ -484,7 +782,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * When you pass a style which either match multiple entries or no entries an error is thrown.
      */
     $scope.changeTheme = function(themeName) {
-        if (preserveRibbonTheme) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365); }
+        if (preserveTheme) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, 365); }
 
         $scope.Theme = stylesheetFactory.changeTheme(themeName);
     }
@@ -727,6 +1025,10 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     }
 });
 
+/* ---- End: AngularJS Controllers. ---- */
+
+/* ---- AngularJS Directives. ---- */
+
 /**
  * @type        Directive
  * @name        toggleClassOnClick
@@ -856,6 +1158,8 @@ OfficeUIModule.directive('dynamicEventHandling', function() {
         }
     }
 });
+
+/* ---- End: AngularJS Directives. ---- */
 
 
 
