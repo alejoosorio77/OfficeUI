@@ -3,6 +3,7 @@
     <head>
         <title>OfficeUI (Version 1.0.0)</title>
 
+        <!-- Enable universal character encoding. -->
         <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
         <!-- Reference the favicon to use. -->
@@ -32,10 +33,10 @@
     </head>
     <body>
         <!-- Defines the OfficeUI container. All OfficeUI components should be placed in here. -->
-        <div id="OfficeUI" ng-class="{'isLoading': isLoading()}">
+        <div id="OfficeUI">
 
             <!-- Defines the OfficeUI application container. -->
-            <div class="application">
+            <div>
 
                 <!-- Defines that the OfficeUI Application should be rendered here. -->
                 <div officeui-application=""></div>
@@ -110,21 +111,24 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="container" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}" style="height: 100%; position: relative; top: 120px;">
+                <div class="container" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}" style="height: 100%; position: relative; top: 120px;">
 
                     <div style="float: left; width: 300px; background-color: green; height: 100%; background: linear-gradient(#fff, #f0f0f0); border-right: 1px solid #d4d4d4;">&nbsp;</div>
                     <div style="float: left; height: 100%;">&nbsp;</div>
-                    <!--
-                </div>-->
-            <!--</div>-->
-            <div class="footer-navigation no-select" style="z-index: 100;">
-                <span>Calendar</span>
-                <span>People</span>
-                <span>Tasks</span>
+                </div>
             </div>
-            <div id="footer" class="footer no-select">
-                Items: 1,242
-            </div>
+            <footer>
+                <div class="navigation no-select" style="z-index: 100;">
+                    <ul>
+                        <li>Calendar</li>
+                        <li>People</li>
+                        <li>Tasks</li>
+                    </ul>
+                </div>
+                <div class="notification-area no-select">
+                    Items: 1,242
+                </div>
+            </footer>
         </div>
 
         <!-- Scripts which should be executed at startup. -->

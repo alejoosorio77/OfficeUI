@@ -143,13 +143,13 @@
 ======================================================================================================= */
 /* ----- Import statements ----- */
 /* ---- OfficeUI application styling. ---- */
-#OfficeUI .icon:not(.disabled):hover {
+#OfficeUI .icon:not(.application-icon):not(.disabled):hover {
   background-color: #fce4dc;
 }
-#OfficeUI .icon.active {
+#OfficeUI .icon:not(.application-icon).active {
   background-color: #f5ba9d !important;
 }
-#OfficeUI #footer {
+#OfficeUI footer .notification-area {
   background-color: #d24726;
 }
 /* ====================================================================================================

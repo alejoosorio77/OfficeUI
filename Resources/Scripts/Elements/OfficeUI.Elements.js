@@ -53,17 +53,9 @@ $(function() {
      * By doing this, we are able to style our element.
      *
      * The class which is being applied is 'active-ie-fix'.
-     *
-     * We're also binding the event handler 'mouseout' on the element. This is, because when you click on the element
-     * and then you move away your mouse, the class 'active-ie-fix' doesn't get removed. It's only get removed if you
-     * click on the element again. Now the class is also removed when your mouse leave the element.
      */
     $('#OfficeUI a.button').on('mousedown mouseup', function() {
         $(this).toggleClass('active-ie-fix');
-
-        $('#OfficeUI a.button').on('mouseout', function() {
-            if ($(this).hasClass('active-ie-fix')) { $(this).removeClass('active-ie-fix'); }
-        });
     });
 
     /**

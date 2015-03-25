@@ -1,11 +1,11 @@
 <header>
     <!-- Section: Icons on the top left of the page. -->
-    <div class="icons no-select">
-        <img class="application-icon" id="{{icon.Id}}" src="#" alt="{{icon.Alt}}" data-ng-class="{'icon': !$first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
+    <div class="application-icons no-select">
+        <img class="icon" id="{{icon.Id}}" src="#" alt="{{icon.Alt}}" data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
     </div>
 
     <!-- Section: Title of the application. -->
-    <div class="title">
+    <div class="application-title">
         <span data-ng-show="!isAnyContextualGroupActive()">{{Title}}</span>
     </div>
 
