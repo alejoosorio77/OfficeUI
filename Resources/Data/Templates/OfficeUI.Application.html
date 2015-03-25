@@ -33,7 +33,7 @@
             </li>
         </ul>
 
-        <ul class="tabs_content" data-on-scroll="ribbonScroll" data-ng-class="{'tabs-content-hidden': isRibbonHidden(), 'tabs-content-visible': isRibbonVisible()}">
+        <ul class="tabs_content" data-on-scroll="ribbonScroll" data-ng-class="{'tabs-content-hidden': isRibbonHidden(), 'tabs-content-visible': isRibbonVisible()}" data-stop-propagation="click">
             <li data-ng-repeat="tab in Tabs" data-ng-show="isTabActive(tab.Id)">
                 Tab with Id: {{tab.Id}}
 

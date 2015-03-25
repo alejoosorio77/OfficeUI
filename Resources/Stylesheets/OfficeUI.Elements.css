@@ -175,6 +175,7 @@ input {
  *                  - Application Title (200).
  *                  - Ribbon Tabs (150).
  *                  - Header (100).
+ *                  - Tabs Content (30).
 ======================================================================================================= */
 /* ----- Import Statements. ---- */
 /* ====================================================================================================
@@ -298,7 +299,7 @@ body {
 }
 #OfficeUI .ribbon .tab-group .label {
   height: 25px;
-  line-height: 25px;
+  line-height: 24px;
   padding: 0 13px 0 12px;
 }
 #OfficeUI .ribbon .contextual-group-label {
@@ -322,12 +323,13 @@ body {
 }
 #OfficeUI .ribbon .tabs .contextual-tab-group ul li {
   display: table-cell;
-  height: 23px;
   line-height: 23px;
 }
 #OfficeUI .ribbon .tabs .contextual-tab-group ul li span {
   padding-right: 13px;
   padding-left: 12px;
+  position: relative;
+  top: 1px;
 }
 /* -- Styling of the tabs itself. -- */
 #OfficeUI .ribbon .tab {
@@ -349,6 +351,199 @@ body {
 #OfficeUI .ribbon .tab:not(.active) {
   border: 1px solid transparent;
   border-bottom-color: #d4d4d4;
+}
+/* -- Styling of the contents of the tabs. -- */
+#OfficeUI .ribbon .tabs_content {
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+  height: 92px;
+  position: relative;
+  z-index: 30;
+}
+/* -- Styling of the collapse icon. -- */
+#OfficeUI .ribbon .collapse {
+  bottom: 0;
+  height: 17px;
+  padding-top: 2px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 29px;
+}
+/* ---- Animations ---- */
+/* -- Less classes to include in other animations. -- */
+.noAnimationRepeat {
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+.animation-time-020 {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.20s;
+}
+.animation-time-025 {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
+}
+/* -- Classes which should trigger the animation. -- */
+/* ===================================================================================================================
+   * There are various animations that are executed in an OfficeUI application.
+   * All the classes, the animations and what they are doing are explained in the section below.
+   *
+   * .contextual-tab-group (fadeInContextualGroup):
+   *
+   *      When an element does have this class, it will trigger an animation named 'fadeInContextualGroup', which,
+   *      as the names explains, does fade in the element.
+   *
+   * .tabs-content-hidden (hideRibbon):
+   *
+   *      When an element does have this class, it will trigger an animated named 'hideRibbon', which, as the name
+   *      explains, hide the ribbon by moving it op.
+   *
+   * .tabs-content-visible (showRibbon):
+   *
+   *      When an element does have this class, it will trigger an animated named 'showRibbon', which, as the name
+   *      explains, show the ribbon by moving it down.
+   *
+   * .ribbon-hidden (moveContentsUp):
+   *
+   *      When an element does have this class, it will trigger an animated named 'moveContentsUp', which, as the name
+   *      explains, move the contents up since there is available space. This class should be used in combination with
+   *      'hideRibbon' on another element.
+   *
+   * .ribbon-hidden (moveContentsUp):
+   *
+   *      When an element does have this class, it will trigger an animated named 'moveContentsUp', which, as the name
+   *      explains, move the contents down since there is available space. This class should be used in combination with
+   *      'showRibbon' on another element.
+  =================================================================================================================== */
+#OfficeUI .contextual-tab-group {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.20s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: fadeInContextualGroup;
+  -webkit-animation-duration: 0.2s;
+  animation-name: fadeInContextualGroup;
+  animation-duration: 0.2s;
+}
+#OfficeUI .tabs-content-hidden {
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: hideRibbon;
+  -webkit-animation-duration: 0.25s;
+  animation-name: hideRibbon;
+  animation-duration: 0.25s;
+}
+#OfficeUI .tabs-content-visible {
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: showRibbon;
+  -webkit-animation-duration: 0.25s;
+  animation-name: showRibbon;
+  animation-duration: 0.25s;
+}
+#OfficeUI .ribbon-hidden {
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: moveContentsUp;
+  -webkit-animation-duration: 0.25s;
+  animation-name: moveContentsUp;
+  animation-duration: 0.25s;
+}
+#OfficeUI .ribbon-showed {
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: moveContentsDown;
+  -webkit-animation-duration: 0.25s;
+  animation-name: moveContentsDown;
+  animation-duration: 0.25s;
+}
+/* -- Animations itself. Each animation is written double due to a special syntax needed for Google, Safari and Opera. -- */
+@-webkit-keyframes fadeInContextualGroup {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInContextualGroup {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes hideRibbon {
+  from {
+    top: 0;
+  }
+  to {
+    top: -92px;
+  }
+}
+@keyframes hideRibbon {
+  from {
+    top: 0;
+  }
+  to {
+    top: -92px;
+  }
+}
+@-webkit-keyframes showRibbon {
+  from {
+    top: -92px;
+  }
+  to {
+    top: 0;
+  }
+}
+@keyframes showRibbon {
+  from {
+    top: -92px;
+  }
+  to {
+    top: 0;
+  }
+}
+@-webkit-keyframes moveContentsUp {
+  from {
+    top: 142px;
+  }
+  to {
+    top: 50px;
+  }
+}
+@keyframes moveContentsUp {
+  from {
+    top: 142px;
+  }
+  to {
+    top: 50px;
+  }
+}
+@-webkit-keyframes moveContentsDown {
+  from {
+    top: 50px;
+  }
+  to {
+    top: 142px;
+  }
+}
+@keyframes moveContentsDown {
+  from {
+    top: 50px;
+  }
+  to {
+    top: 142px;
+  }
 }
 /* ----- General elements ---- */
 /*

@@ -21,6 +21,7 @@
  *                  - Application Title (200).
  *                  - Ribbon Tabs (150).
  *                  - Header (100).
+ *                  - Tabs Content (30).
 ======================================================================================================= */
 
 /* ----- Import Statements. ---- */
@@ -61,137 +62,84 @@ body { font-size: 1em; }
 #OfficeUI .ribbon .tabs li { display: inline-block; }
 #OfficeUI .ribbon .tabs .label { text-align: center; text-transform: uppercase; }
 #OfficeUI .ribbon .tab-group { position: relative; top: 25px; }
-#OfficeUI .ribbon .tab-group .label { height: 25px; line-height: 25px; padding: 0 13px 0 12px; }
+#OfficeUI .ribbon .tab-group .label { height: 25px; line-height: 24px; padding: 0 13px 0 12px; }
 #OfficeUI .ribbon .contextual-group-label { font-size: 0.9em; height: 17px; margin-top: 4px; padding: 0 4px; }
 
   /* -- Contextual tabs & tab groups. -- */
   #OfficeUI .ribbon .tabs .accent { height: 4px; }
   #OfficeUI .ribbon .tabs .contextual-tab-group { height: 50px; margin-right: 6px; }
   #OfficeUI .ribbon .tabs .contextual-tab-group ul { display: table; position: relative; width: 100%; }
-  #OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; height: 23px; line-height: 23px; }
-  #OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding-right: 13px; padding-left: 12px; }
+  #OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; line-height: 23px; }
+  #OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding-right: 13px; padding-left: 12px; position: relative; top: 1px; }
 
   /* -- Styling of the tabs itself. -- */
   #OfficeUI .ribbon .tab { height: 25px; }
   #OfficeUI .ribbon .tab.application { background-image: none; border: 1px solid transparent; color: #fff; margin-right: 4px; min-width: 52px; padding: 0 3px 0 2px; }
   #OfficeUI .ribbon .tab.active { background: #fff; border: 1px solid @defaultGrayRibbon; border-bottom-color: #fff; }
   #OfficeUI .ribbon .tab:not(.active) { border: 1px solid transparent; border-bottom-color: @defaultGrayRibbon; }
-///* ---- OfficeUI ribbon styling. ---- */
-//#OfficeUI .ribbon .tabs .tab:not(.application).no-border { border-bottom: 1px solid @defaultGrayRibbon !important; }
-//#OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
-///* ---- Elements which are used for the whole application. ---- */
-//html, body { height: 100%; }
-//
-///* ---- General elements. ---- */
-//#OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; font-size: 0.75em; height: 100%; }
-//#OfficeUI .disabled { opacity: 0.5; pointer-events: none; }
-//#OfficeUI .no-border { border-color: transparent !important; }
-//
-///* ---- General classes. ---- */
-///* Provides a way to ensure that text-selection of an element is disabled. By adding this class, text-selection of the
-// * becomes disabled. Also the cursor is changed to 'default' to ensure that the cursor doesn't change to a vertical pipe
-// * indicating that the element is text.
-//*/
-//#OfficeUI .no-select { cursor: default; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
-//
-///* ---- Application styling. ---- */
-//#OfficeUI header { height: 142px; position: fixed; width: 100%; z-index: 100; }
-//#OfficeUI #footer { bottom: 0; color: white; font-weight: 600; height: 21px; line-height: 21px; padding: 0 10px 0 10px; position: fixed; text-transform: uppercase; width: 100%; }
-//
-///* ---- OfficeUI core application styling. ---- */
-//#OfficeUI .application { background-repeat: no-repeat; background-position: right top; background-color: rgba(0, 0, 0, 0); height: 100%; }
-//#OfficeUI .application .title { height: 22px; margin: 8px 2px 0 0; position: relative; text-align: center; z-index: 200; }
-//#OfficeUI .application .icons { margin-left: 5px; position: absolute; z-index: 300;}
-//#OfficeUI .application .icons img { margin: 0 5px 0 2px; }
-//#OfficeUI .application .icons img:not(:first-child) { margin-right: 6px; }
-//
-///* ---- OfficeUI ribbon styling. ---- */
-//#OfficeUI .ribbon { position: relative; top: -30px; }
-//#OfficeUI .ribbon .tabs { border-bottom: 1px solid @defaultGrayRibbon; height: 50px; position: relative; z-index: 150; }
-//#OfficeUI .ribbon .tabs li { display: inline-block; }
-//#OfficeUI .ribbon .tabs .tab-group { position: relative; top: 25px; }
-//#OfficeUI .ribbon .tabs .tab-group .label { height: 25px; line-height: 24px; padding: 0 13px 0 12px; text-align: center; text-transform: uppercase; }
-//#OfficeUI .ribbon .tabs .tab.application { border-style: solid; border-width: 1px; background-image: none; color: #fff; margin-right: 4px; min-width: 52px; padding: 0 3px 0 2px; }
-//#OfficeUI .ribbon .tabs .tab.active { background: #fff; border: 1px solid @defaultGrayRibbon; border-bottom: 1px solid #fff; }
-//#OfficeUI .ribbon .tabs .tab:not(.application).no-border { border-bottom: 1px solid @defaultGrayRibbon !important; }
-//#OfficeUI .ribbon .tabs .tab:not(.active) { border: 1px solid transparent; border-bottom: 1px solid @defaultGrayRibbon; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group { border-bottom: 1px solid @defaultGrayRibbon; height: 50px; }
-//#OfficeUI .ribbon .tabs .accent { height: 4px; }
-//#OfficeUI .ribbon .tabs li .contextual-group-label { font-size: 0.9em; height: 15px; margin-top: 4px; padding: 0 6px; text-align: center; text-transform: uppercase; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group { margin-right: 6px; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group ul { display: table; width: 100%; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; height: 25px; line-height: 25px; text-align: center; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding: 3px 13px 0 12px; }
-//#OfficeUI .ribbon .tabs .contextual-tab-group .tab { text-transform: uppercase; }
-//#OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
-//
-//#OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
-//
-//#OfficeUI .footer-navigation { background-color: #e4e4e4; height: 45px; position: fixed; bottom: 21px; width: 100%; padding-left: 15px; }
-//#OfficeUI .footer-navigation span { display: inline-block; font-size: 23px; font-weight: lighter; height: 100%; line-height: 45px; margin-right: 15px; }
-//
-///* ---- Animations ---- */
-//#OfficeUI .contextual-tab-group {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards;  -webkit-animation-name: fadeInContextualGroup; -webkit-animation-duration: 0.2s; animation-name: fadeInContextualGroup; animation-duration: 0.2s; }
-//
-///* Chrome, Safari, Opera */
-//@-webkit-keyframes fadeInContextualGroup {
-//  from { opacity: 0; }
-//  to { opacity: 1; }
-//}
-//
-//@keyframes fadeInContextualGroup {
-//  from { opacity: 0; }
-//  to { opacity: 1; }
-//}
-//
-//#OfficeUI .tabs-content-hidden {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: hideRibbon; -webkit-animation-duration: 0.25s; animation-name: hideRibbon; animation-duration: 0.25s; }
-//
-///* Chrome, Safari, Opera */
-//@-webkit-keyframes hideRibbon {
-//  from { top: 0; }
-//  to { top: -92px; }
-//}
-//
-//@keyframes hideRibbon {
-//  from { top: 0; }
-//  to { top: -92px; }
-//}
-//
-//#OfficeUI .tabs-content-visible {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: showRibbon; -webkit-animation-duration: 0.25s; animation-name: showRibbon; animation-duration: 0.25s; }
-//
-///* Chrome, Safari, Opera */
-//@-webkit-keyframes showRibbon {
-//  from { top: -92px; }
-//  to { top: 0; }
-//}
-//
-//@keyframes showRibbon {
-//  from { top: -92px; }
-//  to { top: 0; }
-//}
-//
-//#OfficeUI .ribbon-hidden {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentsUp; -webkit-animation-duration: 0.25s; animation-name: moveContentsUp; animation-duration: 0.25s; }
-//
-///* Chrome, Safari, Opera */
-//@-webkit-keyframes moveContentsUp {
-//  from { top: 142px; }
-//  to { top: 50px; }
-//}
-//
-//@keyframes moveContentsUp {
-//  from { top: 142px; }
-//  to { top: 50px; }
-//}
-//
-//#OfficeUI .ribbon-showed {  -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; -webkit-animation-name: moveContentsDown; -webkit-animation-duration: 0.25s; animation-name: moveContentsDown; animation-duration: 0.25s; }
-//
-///* Chrome, Safari, Opera */
-//@-webkit-keyframes moveContentsDown {
-//  from { top: 50px; }
-//  to { top: 142px; }
-//}
-//
-//@keyframes moveContentsDown {
-//  from { top: 50px; }
-//  to { top: 142px; }
-//}
+
+  /* -- Styling of the contents of the tabs. -- */
+  #OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
+  /* -- Styling of the collapse icon. -- */
+  #OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
+
+/* ---- Animations ---- */
+
+  /* -- Less classes to include in other animations. -- */
+  .noAnimationRepeat { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; }
+  .animation-time-020 { -webkit-animation-duration: 0.25s; animation-duration: 0.20s; }
+  .animation-time-025 { -webkit-animation-duration: 0.25s; animation-duration: 0.25s; }
+
+  /* -- Classes which should trigger the animation. -- */
+  /* ===================================================================================================================
+   * There are various animations that are executed in an OfficeUI application.
+   * All the classes, the animations and what they are doing are explained in the section below.
+   *
+   * .contextual-tab-group (fadeInContextualGroup):
+   *
+   *      When an element does have this class, it will trigger an animation named 'fadeInContextualGroup', which,
+   *      as the names explains, does fade in the element.
+   *
+   * .tabs-content-hidden (hideRibbon):
+   *
+   *      When an element does have this class, it will trigger an animated named 'hideRibbon', which, as the name
+   *      explains, hide the ribbon by moving it op.
+   *
+   * .tabs-content-visible (showRibbon):
+   *
+   *      When an element does have this class, it will trigger an animated named 'showRibbon', which, as the name
+   *      explains, show the ribbon by moving it down.
+   *
+   * .ribbon-hidden (moveContentsUp):
+   *
+   *      When an element does have this class, it will trigger an animated named 'moveContentsUp', which, as the name
+   *      explains, move the contents up since there is available space. This class should be used in combination with
+   *      'hideRibbon' on another element.
+   *
+   * .ribbon-hidden (moveContentsUp):
+   *
+   *      When an element does have this class, it will trigger an animated named 'moveContentsUp', which, as the name
+   *      explains, move the contents down since there is available space. This class should be used in combination with
+   *      'showRibbon' on another element.
+  =================================================================================================================== */
+  #OfficeUI .contextual-tab-group { .animation-time-020; .noAnimationRepeat;  -webkit-animation-name: fadeInContextualGroup; -webkit-animation-duration: 0.2s; animation-name: fadeInContextualGroup; animation-duration: 0.2s; }
+  #OfficeUI .tabs-content-hidden { .animation-time-025; .noAnimationRepeat; -webkit-animation-name: hideRibbon; -webkit-animation-duration: 0.25s; animation-name: hideRibbon; animation-duration: 0.25s; }
+  #OfficeUI .tabs-content-visible { .animation-time-025; .noAnimationRepeat; -webkit-animation-name: showRibbon; -webkit-animation-duration: 0.25s; animation-name: showRibbon; animation-duration: 0.25s; }
+  #OfficeUI .ribbon-hidden { .animation-time-025; .noAnimationRepeat; -webkit-animation-name: moveContentsUp; -webkit-animation-duration: 0.25s; animation-name: moveContentsUp; animation-duration: 0.25s; }
+  #OfficeUI .ribbon-showed { .animation-time-025; .noAnimationRepeat; -webkit-animation-name: moveContentsDown; -webkit-animation-duration: 0.25s; animation-name: moveContentsDown; animation-duration: 0.25s; }
+
+  /* -- Animations itself. Each animation is written double due to a special syntax needed for Google, Safari and Opera. -- */
+  @-webkit-keyframes fadeInContextualGroup { from { opacity: 1; } to { opacity: 1; } }
+  @keyframes fadeInContextualGroup { from { opacity: 0; } to { opacity: 1; } }
+
+  @-webkit-keyframes hideRibbon { from { top: 0; } to { top: -92px; } }
+  @keyframes hideRibbon { from { top: 0; } to { top: -92px; } }
+
+  @-webkit-keyframes showRibbon { from { top: -92px; } to { top: 0; } }
+  @keyframes showRibbon { from { top: -92px; } to { top: 0; } }
+
+  @-webkit-keyframes moveContentsUp { from { top: 142px; } to { top: 50px; } }
+  @keyframes moveContentsUp { from { top: 142px; } to { top: 50px; } }
+
+  @-webkit-keyframes moveContentsDown { from { top: 50px; } to { top: 142px; } }
+  @keyframes moveContentsDown { from { top: 50px; } to { top: 142px; } }
