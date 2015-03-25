@@ -89,8 +89,8 @@ body { font-size: 1em; }
       #OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
 
       /* -- Groups. --*/
-      #OfficeUI .ribbon .group { display: inline-block; height: 90px; margin-left: 4px; margin-top: 3px; position: relative; vertical-align: top; }
-      #OfficeUI .ribbon .group .legend { bottom: 2px; color: #666; font-size: 0.9em; margin-left: -1px; overflow: hidden; position: absolute; text-align: center; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
+      #OfficeUI .ribbon .group { display: inline-block; height: 85px; margin-left: 4px; margin-top: 3px; position: relative; vertical-align: top; }
+      #OfficeUI .ribbon .group .legend { height: 12px; bottom: 0; color: #666; font-size: 0.9em; overflow: hidden; position: absolute; text-align: center; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
       #OfficeUI .pipe { border-right: 1px solid #d4d4d4; display: inline-block; height: 84px; margin-left: 1px; margin-top: 4px; vertical-align: top; }
 
       /* -- Areas. -- */
@@ -98,11 +98,17 @@ body { font-size: 1em; }
       #OfficeUI .ribbon .group .area .actions-holder { position: relative; }
 
       /* -- Actions. -- */
-      .group .area > div { vertical-align: top; }
-      .group .area > div .icon { display: inline-block; height: 66px; margin-right: 0; padding-top: 3px; vertical-align: top; }
-      .group .area > div .icon img { padding: 0 5px 0 5px; }
-      .group .area > div .big-icon { text-align: center; }
-      .group .area > div .big-icon .label { line-height: 15px; padding: 0 3px 0 2px; text-align: center; top: -2px; }
+      #OfficeUI .ribbon .actions-holder { vertical-align: top; }
+      #OfficeUI .ribbon .actions-holder .icon { display: inline-block; height: 68px; margin-right: 0; padding-top: 3px; vertical-align: top; }
+      #OfficeUI .ribbon .actions-holder .icon img { padding: 0 5px 0 5px; }
+      #OfficeUI .ribbon .actions-holder .big-icon-holder { height: 68px;}
+      #OfficeUI .ribbon .actions-holder .big-icon-holder a { display: block; height: 100%; }
+      #OfficeUI .ribbon .actions-holder .big-icon { text-align: center; }
+      #OfficeUI .ribbon .actions-holder .big-icon .label { line-height: 15px; padding: 0 3px 0 2px; text-align: center; top: -2px; }
+      #OfficeUI .ribbon .actions-holder .small-icon-holder { height: 23px; }
+      #OfficeUI .ribbon .actions-holder .small-icon { height: 100%; margin-right: 0; padding: 3px 7px 0 0; text-align: left; }
+      #OfficeUI .ribbon .actions-holder .small-icon .label { display: inline-block; padding-top: 3px; text-align: left; vertical-align: top; }
+      #OfficeUI .ribbon .actions-holder .small-icon img { padding: 0 0 0 3px; }
 
 /* ---- Animations ---- */
 

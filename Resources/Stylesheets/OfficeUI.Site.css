@@ -152,8 +152,8 @@ table {
   border-spacing: 0;
 }
 /* Google Chrome fixes. */
-input {
-  -webkit-appearance: none;
+input[type="text"]:focus {
+  outline: none;
 }
 /* ----- Website contents. ----- */
 /* -- General elements. -- */

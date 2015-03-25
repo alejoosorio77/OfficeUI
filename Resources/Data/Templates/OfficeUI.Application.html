@@ -39,15 +39,38 @@
                 <div class="group" data-ng-repeat-start="group in tab.Groups">
                     <div class="area" data-ng-repeat="area in group.Areas">
                         <div data-ng-repeat="action in area.Actions" class="actions-holder" data-ng-class="{'displayBlock': action.Type == 'sIcon', 'displayInlineBlock': action.Type == 'bIcon'}">
+
                             <!-- This is what is being rendered if it's a big icon. -->
-                            <div data-ng-if="action.Type == 'bIcon'" data-ngc-menu data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
+                            <div class="big-icon-holder" data-ng-if="action.Type == 'bIcon'" data-ngc-menu data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
                                 <a data-ng-href="{{action.Uri}}" data-ng-click="defaultActionClick(action);">
-                                    <div id="{{action.Id}}" class="icon big-icon" data-dynamic-event-handling="action.Id" data-ng-class="{'no-hover': isMenuOpened(), 'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}">
+                                    <div id="{{action.Id}}" class="icon big-icon" data-dynamic-event-handling="action.Id" data-toggle-class-on-click="active" data-ng-class="{'no-hover': isMenuOpened(), 'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}">
                                         <img data-ng-src="{{action.Resource}}" />
 
                                         <div class="label" data-ng-bind-html="action |actionLegend"></div>
                                     </div>
                                 </a>
+                            </div>
+
+                            <!-- This is what is being rendered if it's a small icon. -->
+                            <div class="small-icon-holder" data-ng-if="action.Type == 'sIcon'" data-ngc-menu data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
+                                <a data-ng-href="{{action.Uri}}" data-ng-click="defaultActionClick(action);">
+                                    <div id="{{action.Id}}" class="icon small-icon" data-dynamic-event-handling="action.Id" data-toggle-class-on-click="active" data-ng-class="{'no-hover': isMenuOpened(), 'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}">
+                                        <img data-ng-src="{{action.Resource}}" />
+
+                                        <div class="label" data-ng-bind-html="action |actionLegend"></div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- This is what is being rendered if it's an input element (Checkbox). -->
+                            <div data-ng-show="action.Type == 'Checkbox'" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
+                                <input type="checkbox" id="{{action.Id}}" />
+                                <div class="displayInlineBlock">{{action.Legend}}</div>
+                            </div>
+
+                            <!-- This is what is being rendered if it's an input element (Text). -->
+                            <div data-ng-if="action.Type == 'Input'" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
+                                <input type="text" id="{{action.Id}}" placeholder="{{action.Legend}}" data-ng-style="{width:'{{action.Width}}'}"/>
                             </div>
                         </div>
                     </div>

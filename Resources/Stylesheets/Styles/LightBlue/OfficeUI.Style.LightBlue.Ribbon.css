@@ -46,20 +46,6 @@
  * In a web application, there are various normal elements such as input elements and dropdown elements.
  * Those elements are being styles in the section below.
 */
-#OfficeUI input {
-  border-color: #ababab;
-}
-#OfficeUI .dropdown i {
-  border-bottom-color: #ababab;
-  border-right-color: #ababab;
-  border-top-color: #ababab;
-}
-#OfficeUI .dropdown .elements {
-  border-color: #ababab;
-}
-#OfficeUI .dropdown .legend {
-  border-color: #ababab;
-}
 #OfficeUI input:hover,
 #OfficeUI input:focus {
   border-color: #92c0e0;

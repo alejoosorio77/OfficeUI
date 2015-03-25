@@ -26,4 +26,4 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: n
 table { border-collapse: collapse; border-spacing: 0; }
 
 /* Google Chrome fixes. */
-input { -webkit-appearance: none } // Make sure that a TextBox (input element) does not have the default Google Chrome style when the element is selected.
+input[type="text"]:focus { outline: none; }

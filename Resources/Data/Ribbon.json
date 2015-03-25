@@ -560,7 +560,7 @@
                   "Id": "txtSearchPeople",
                   "Legend": "Search People",
                   "Type": "Input",
-                  "Width": "93px"
+                  "Width": "105px"
                 },
                 {
                   "Id": "icoAddressBook",
