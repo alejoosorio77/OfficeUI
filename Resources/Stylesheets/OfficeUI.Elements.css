@@ -470,7 +470,7 @@ body {
   animation-fill-mode: forwards;
 }
 .animation-time-020 {
-  -webkit-animation-duration: 0.25s;
+  -webkit-animation-duration: 0.20s;
   animation-duration: 0.20s;
 }
 .animation-time-025 {
@@ -510,7 +510,7 @@ body {
    *      'showRibbon' on another element.
   =================================================================================================================== */
 #OfficeUI .contextual-tab-group {
-  -webkit-animation-duration: 0.25s;
+  -webkit-animation-duration: 0.20s;
   animation-duration: 0.20s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;

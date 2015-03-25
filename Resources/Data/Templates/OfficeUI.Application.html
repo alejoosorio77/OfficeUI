@@ -63,13 +63,13 @@
                             </div>
 
                             <!-- This is what is being rendered if it's an input element (Checkbox). -->
-                            <div data-ng-show="action.Type == 'Checkbox'" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
+                            <div data-ng-show="action.Type == 'Checkbox'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
                                 <input type="checkbox" id="{{action.Id}}" />
                                 <div class="displayInlineBlock">{{action.Legend}}</div>
                             </div>
 
                             <!-- This is what is being rendered if it's an input element (Text). -->
-                            <div data-ng-if="action.Type == 'Input'" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
+                            <div data-ng-if="action.Type == 'Input'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
                                 <input type="text" id="{{action.Id}}" placeholder="{{action.Legend}}" data-ng-style="{width:'{{action.Width}}'}"/>
                             </div>
                         </div>
@@ -116,13 +116,13 @@
                                     </div>
 
                                     <!-- This is what is being rendered if it's an input element (Checkbox). -->
-                                    <div data-ng-show="action.Type == 'Checkbox'" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
+                                    <div data-ng-show="action.Type == 'Checkbox'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
                                         <input type="checkbox" id="{{action.Id}}" />
                                         <div class="displayInlineBlock">{{action.Legend}}</div>
                                     </div>
 
                                     <!-- This is what is being rendered if it's an input element (Text). -->
-                                    <div data-ng-if="action.Type == 'Input'" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
+                                    <div data-ng-if="action.Type == 'Input'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
                                         <input type="text" id="{{action.Id}}" placeholder="{{action.Legend}}" data-ng-style="{width:'{{action.Width}}'}"/>
                                     </div>
                                 </div>

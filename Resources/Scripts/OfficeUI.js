@@ -527,9 +527,6 @@ OfficeUIModule.factory('officeUIRibbonConfigurationFactory', ['$http', 'OfficeUI
      particular object. */
     var officeUIRibbonConfigurationFactoryInstance = {};
 
-    // Defines the variables which are needed for this service.
-    var changeActiveTabOnHover = null;
-
     /**
      * @type            Function
      * @name            getOfficeUIRibbonConfiguration
@@ -681,6 +678,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var COOKIE_NAME_RIBBON_ACTIVE_TAB = 'OfficeUI_Ribbon_ActiveTab';
     var COOKIE_NAME_OFFICEUI_CURRENT_STYLE = 'OfficeUI_CurrentStyle';
     var COOKIE_NAME_OFFICEUI_CURRENT_THEME = 'OfficeUI_CurrentTheme';
+    var COOKIE_NAME_RIBBON_STATE = 'OfficeUI_RibbonState';
     var COOKIE_VALIDATY = 365;
 
     // Variables: Various variables that are required for the OfficeUIController to execute.
@@ -1045,8 +1043,17 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * If the ribbon is visible, then rhe ribbon does become showed.
      */
     $scope.toggleRibbonState = function() {
-        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
-        if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
+        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) {
+            ribbonState = ribbonStates.Hidden;
+
+            if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_STATE, ribbonStates.Hidden, COOKIE_VALIDATY); }
+        }
+        if (ribbonState == ribbonStates.Visible)
+        {
+            ribbonState = ribbonStates.Showed;
+
+            if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_STATE, ribbonStates.Showed, COOKIE_VALIDATY); }
+        }
     }
 
     /**
