@@ -29,6 +29,10 @@
 @import 'OfficeUI.Elements.less';
 @import 'Styles/OfficeUI.Styles.less';
 
+/* ---- Classes that can be used on elements. Mainly used in the AngularJS syntax. --- */
+.displayBlock { display: block; }
+.displayInlineBlock { display: inline-block; }
+
 /* ---- Elements which covering the entire application. */
 html, body { height: 100%; }
 body { font-size: 1em; }
@@ -80,8 +84,25 @@ body { font-size: 1em; }
 
   /* -- Styling of the contents of the tabs. -- */
   #OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
-  /* -- Styling of the collapse icon. -- */
-  #OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
+
+      /* -- Styling of the collapse icon. -- */
+      #OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
+
+      /* -- Groups. --*/
+      #OfficeUI .ribbon .group { display: inline-block; height: 90px; margin-left: 4px; margin-top: 3px; position: relative; vertical-align: top; }
+      #OfficeUI .ribbon .group .legend { bottom: 2px; color: #666; font-size: 0.9em; margin-left: -1px; overflow: hidden; position: absolute; text-align: center; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
+      #OfficeUI .pipe { border-right: 1px solid #d4d4d4; display: inline-block; height: 84px; margin-left: 1px; margin-top: 4px; vertical-align: top; }
+
+      /* -- Areas. -- */
+      #OfficeUI .ribbon .group .area { display: inline-block; vertical-align: top; }
+      #OfficeUI .ribbon .group .area .actions-holder { position: relative; }
+
+      /* -- Actions. -- */
+      .group .area > div { vertical-align: top; }
+      .group .area > div .icon { display: inline-block; height: 66px; margin-right: 0; padding-top: 3px; vertical-align: top; }
+      .group .area > div .icon img { padding: 0 5px 0 5px; }
+      .group .area > div .big-icon { text-align: center; }
+      .group .area > div .big-icon .label { line-height: 15px; padding: 0 3px 0 2px; text-align: center; top: -2px; }
 
 /* ---- Animations ---- */
 

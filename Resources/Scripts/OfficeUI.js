@@ -20,7 +20,7 @@
  * It's on the module 'OfficeUI', that all the hooks needs to be connector.
  * By the hooks, we do mean the controllers, filters, directives, ...
  */
-var OfficeUIModule = angular.module('OfficeUI', []);
+var OfficeUIModule = angular.module('OfficeUI', ['ngSanitize']);
 
 /* ---- End: AngularJS Modules. ---- */
 
@@ -686,7 +686,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     // Variables: Various variables that are required for the OfficeUIController to execute.
     var activeTab = null;
     var stylesheetData = null;
-    var ribbonConfigurationData = null;
+    var ribbonConfigurationData = [];
     var activeContextualGroups = [];
     var ribbonState = null;
 
@@ -1295,6 +1295,14 @@ OfficeUIModule.directive('dynamicEventHandling', function() {
     }
 });
 
+/**
+ * @type            Directive
+ * @usage           Attribute
+ * @name            stopPropogation
+ *
+ * @description
+ * Defines the 'stopPropagation' directive. This directive allows us to stop propagating an event.
+ */
 OfficeUIModule.directive('stopPropagation', function () {
     return {
         restrict: 'A',
@@ -1307,3 +1315,23 @@ OfficeUIModule.directive('stopPropagation', function () {
 });
 
 /* ---- End: AngularJS Directives. ---- */
+
+/* ---- AngularJS Filters. ---- */
+
+/**
+ * @type            Filter
+ * @name            actionLegend
+ *
+ * @description
+ * Provides the 'actionLegend' filter. This filter will append some text to another element is a condition is matched.
+ */
+OfficeUIModule.filter('actionLegend', function() {
+    return function(action) {
+        if (action.MenuItems) {
+            return action.Legend + ' <i class="fa fa-caret-down"></i>';
+        }
+        return action.Legend;
+    }
+});
+
+/* ---- End: AngularJS Filters. ---- */
