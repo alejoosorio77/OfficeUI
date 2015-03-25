@@ -699,8 +699,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     Initialize();
 
     /**
-     * @type        Function
-     * @name        Initialize
+     * @type            Function
+     * @name            Initialize
      *
      * @description
      * Initializes the OfficeUI application by loading all the required files and adjusting the properties as needed.
@@ -719,7 +719,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
             else { $scope.Theme = stylesheetFactory.changeTheme(previousTheme); }
         });
 
-        // Load the 'applicationDefintionFactory' in which the OfficeUI application data is stored.
+        // Load the 'applicationDefinitionFactory' in which the OfficeUI application data is stored.
         applicationDefinitionFactory.getOfficeUIApplicationDefinition().then(function(data) {
             $scope.Title = data.Title;
             $scope.Icons = data.Icons;
@@ -751,15 +751,18 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     }
 
     /**
-     * @type       Function
-     * @name       changeStyle
+     * @type            Function
+     * @name            changeStyle
      *
-     * @param      styleName (string):         The name of the style to load. This should be a name which has been
-     *                                          defined in the 'availableStyles' array.
+     * @param           styleName (string):         The name of the style to load. This should be a name which has been
+     *                                              defined in the 'availableStyles' array.
      *
-     * @notes
-     * The styles which can be loaded are defined in the variable 'availableStyles'.
-     * When you pass a style which either match multiple entries or no entries an error is thrown.
+     * @description
+     * Change the style of the application.
+     * When the style of the application should be preserved, then this value is stored inside a cookie and then
+     * changed. By doing this, when you refresh the page, it's this style that will be loaded.
+     * When the style of the application does not need to be preserved, the style is just changed without saving the
+     * chosen value.
      */
     $scope.changeStyle = function(styleName) {
         if (stylesheetData.PreserveStyle) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_STYLE, styleName, COOKIE_VALIDATY); }
@@ -768,15 +771,18 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     }
 
     /**
-     * @type       Function
-     * @name       changeTheme
+     * @type            Function
+     * @name            changeTheme
      *
-     * @param      themeName (string):          The name of the theme to load. This should be a name which has been
-     *                                          defined in the 'availableThemes' array.
+     * @param           themeName (string):         The name of the theme to load. This should be a name which has been
+     *                                              defined in the 'availableThemes' array.
      *
-     * @notes
-     * The themes which can be loaded are defined in the variable 'availableThemes'.
-     * When you pass a style which either match multiple entries or no entries an error is thrown.
+     * @description
+     * Change the theme of the application.
+     * When the theme of the application should be preserved, then this value is stored inside a cookie and then
+     * changed. By doing this, when you refresh the page, it's this theme that will be loaded.
+     * When the theme of the application does not need to be preserved, the theme is just changed without saving the
+     * chosen value.
      */
     $scope.changeTheme = function(themeName) {
         if (stylesheetData.PreserveTheme) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME, themeName, COOKIE_VALIDATY); }
@@ -785,41 +791,46 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     }
 
     /**
-     * @type        Function
-     * @name        refresh
+     * @type            Function
+     * @name            refresh
      *
-     * @notes
-     * Refresh the current scope so that changes are visible on the website.
+     * @description
+     * Refresh the current scope.
+     * This is required when you're executing actions that needs to have an explicit reset.
      */
     $scope.refresh = function() {
         $scope.$apply();
     }
 
     /**
-     * @type        Function
-     * @name        isTabActive
+     * @type            Function
+     * @name            isTabActive
      *
-     * @param       tabId
-     *              The id of the element that identifies the tab to check.
-     *
-     * @returns     {boolean} True is the given tab is active, false otherwise.
-     *
-     * @notes
+     * @description
      * Check if a given tab is active, based on it's id.
+     *
+     * @param           tabId (string):     The if of the element that identified the element for being active.
+     *
+     * @returns         {boolean} True is the given tab is active, false otherwise.
      */
     $scope.isTabActive = function(tabId) {
         return activeTab == tabId;
     }
 
     /**
-     * @type        Function
-     * @name        setActiveTab
+     * @type            Function
+     * @name            setActiveTab
      *
-     * @param       tabId
-     *              The id of the tab which you want to activate.
-     *
-     * @notes
+     * @description
      * Set a tab as the currently active tab based on it's id.
+     *
+     * @param           tabId
+     *                  The id of the tab which you want to activate.
+     *
+     * @remarks
+     * When the state of the ribbon should be preserved, the value of the active tab is being stored in a cookie.
+     * This makes sure that when you load the page, the active tab will become the active tab stored in the cookie.
+     * When the state of the ribbon should not be preserved, the active tab is just changed.
      */
     $scope.setActiveTab = function(tabId) {
         // Set the ribbon state as being showed when it was hidden.
@@ -827,32 +838,33 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
         activeTab = tabId;
 
-        if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, COOKIE_VALIDATY); }
+        if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, activeTab, COOKIE_VALIDATY); }
     }
 
     /**
-     * @type        Function
-     * @name        isAnyContextualGroupActive
+     * @type            Function
+     * @name            isAnyContextualGroupActive
      *
-     * @returns     {boolean}
-     *
-     * @notes
+     * @description
      * Check if any contextual group is being active or not.
+     *
+     * @returns         {boolean} True when any contextual group is being active, false otherwise.
      */
     $scope.isAnyContextualGroupActive = function() {
         return activeContextualGroups.length > 0;
     }
 
     /**
-     * @type        Function
-     * @name        isContextualGroupActive
+     * @type            Function
+     * @name            isContextualGroupActive
      *
-     * @param       contextualGroupId       The id of the contextual group which you want to check for being active.
+     * @description
+     * Checks if contextual group is being active (based on it's id).
      *
-     * @returns     {boolean}   True if any contextual group is being active, false otherwise.
+     * @param           contextualGroupId (string):     The id of the contextual group which you want to check for
+     *                                                  being active.
      *
-     * @notes
-     * Checks if any contextual group is being marked as active.
+     * @returns         {boolean}   True if the contextual group is being active, false otherwise.
      */
     $scope.isContextualGroupActive = function(contextualGroupId) {
         var matches = jQuery.grep(activeContextualGroups, function(item) {
@@ -863,26 +875,30 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     }
 
     /**
-     * @type        Function
-     * @name        activateContextualGroup
+     * @type            Function
+     * @name            activateContextualGroup
      *
-     * @param       contextualGroupId       The id of the contextual group to activate.
-     *
-     * @notes
+     * @description
      * Activate a contextual group by it's id.
+     *
+     * @param           contextualGroupId (string):     The id of the contextual group to activate.
      */
     $scope.activateContextualGroup = function(contextualGroupId) {
         activeContextualGroups.push(contextualGroupId);
     }
 
     /**
-     * @type        Function
-     * @name        deactivateContextualGroup
-     *
-     * @param       contextualGroupId       The id of the contextual group to deactivate.
+     * @type            Function
+     * @name            deactivateContextualGroup
      *
      * @notes
      * Deactivate a contextual group by it's id.
+     *
+     * @param           contextualGroupId (string)       The id of the contextual group to deactivate.
+     *
+     * @remarks
+     * When you deactivate a contextual group and the currently active tab is a tab element defined in the contextual
+     * group, then the active tab should be set to the first non-application tab in the entire ribbon.
      */
     $scope.deactivateContextualGroup = function(contextualGroupId) {
         activeContextualGroups = jQuery.grep(activeContextualGroups, function(value) {
@@ -901,18 +917,17 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 
         // Select the first available tab is required.
         if (match.length > 0) { $scope.setActiveTab($('.tab:not(.application)', '.ribbon').attr('id')); }
-
-        if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB,  activeTab, COOKIE_VALIDATY); }
     }
 
     /**
-     * @type        Function
-     * @name        ribbonScroll
+     * @type            Function
+     * @name            ribbonScroll
      *
-     * @param       scrollEvent     The scroll event, which is passed from the DOMMouseScroll or mousewheel event.
-     *
-     * @notes
+     * @description
      * Sets the next as active when you're scrolling on the page.
+     *
+     * @param           scrollEvent (event):    The scroll event, which is passed from the DOMMouseScroll or mousewheel
+     *                                          event.
      */
     $scope.ribbonScroll = function(scrollEvent) {
         var activeTab = $('.ribbon .active');
@@ -934,91 +949,100 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
         }
 
         if (tabToActivate != null) { $scope.setActiveTab(tabToActivate.attr('id')); }
-        if (ribbonConfigurationData.PreserveRibbonState && tabToActivate != null) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB, tabToActivate.attr('id'), COOKIE_VALIDATY); }
     }
 
     /**
-     * @type        Function
-     * @name        setActiveTabOnHover
+     * @type            Function
+     * @name            setActiveTabOnHover
      *
-     * @param       tabId       The id of the tab to activate.
-     *
-     * @notes
+     * @description
      * Set a tab as being active when hovering onto it.
      * This function will check if it's allowed to change the active tab on hover. If that's the case, the active tab
      * is being changed.
+     *
+     * @param           tabId (string):     The id of the tab to activate.
      */
     $scope.setActiveTabOnHover = function(tabId) {
         if (ribbonConfigurationData.ChangeActiveTabOnHover) { $scope.setActiveTab(tabId); }
     }
 
     /**
-     * @type        Function
-     * @name        setActiveTabColor
+     * @type            Function
+     * @name            setActiveTabColor
      *
-     * @param       tabId       The id of the tab.
-     * @param       tabColor    The color of the tab.
-     * @returns     {*}         The color of the tab.
-     *
-     * @notes
+     * @description
      * This method will change the color of the active tab, but only when the tab is active.
      * Otherwise, no color is returned and the default color is used.
+     *
+     * @param           tabId (string):     The id of the tab.
+     * @param           tabColor (string):  The color of the tab.
+
+     * @returns         {*}                 The color of the tab.
      */
     $scope.setActiveTabColor = function(tabId, tabColor) {
         if (activeTab == tabId) { return tabColor; }
     }
 
     /**
-     * @type        Function
-     * @name        isRibbonShowed
+     * @type            Function
+     * @name            isRibbonShowed
      *
-     * @returns     {boolean}
+     * @description.
+     * Check's if the ribbon is showed.
      *
-     * @note
-     * Check's the state of the ribbon. Return true if it's showed, false otherwise.
+     * @returns         {boolean}   True if it's showed, false otherwise.
      */
     $scope.isRibbonShowed = function() {
         return ribbonState == ribbonStates.Showed;
     }
 
+    /**
+     * @type            Function
+     * @name            isRibbonInitialized
+     *
+     * @description.
+     * Check's if the ribbon is initialized.
+     *
+     * @returns         {boolean}   True if it's initialized, false otherwise.
+     */
     $scope.isRibbonInitialized = function() {
         return ribbonState == ribbonStates.Showed_Initialized;
     }
 
     /**
-     * @type        Function
-     * @name        isRibbonVisible
+     * @type            Function
+     * @name            isRibbonVisible
      *
-     * @returns     {boolean}
+     * @description.
+     * Check's if the ribbon is visible.
      *
-     * @note
-     * Check's the state of the ribbon. Return true if it's visible, false otherwise.
+     * @returns         {boolean}   True if it's visible, false otherwise.
      */
     $scope.isRibbonVisible = function() {
         return ribbonState == ribbonStates.Visible;
     }
 
     /**
-     * @type        Function
-     * @name        isRibbonHidden
+     * @type            Function
+     * @name            isRibbonHidden
      *
-     * @returns     {boolean}
+     * @description.
+     * Check's if the ribbon is hidden.
      *
-     * @note
-     * Check's the state of the ribbon. Return true if it's hidden, false otherwise.
+     * @returns         {boolean}   True if it's hidden, false otherwise.
      */
     $scope.isRibbonHidden = function() {
         return ribbonState == ribbonStates.Hidden;
     }
 
     /**
-     * @type        Function
-     * @name        toggleRibbonState
+     * @type            Function
+     * @name            toggleRibbonState
      *
-     * @note
-     * The function will toggle the ribbon state.
-     * This means that if the ribbon is visible, it will become showed.
-     * If the ribbon is showed, it will become hidden.
+     * @description.
+     * Toggle the state of the ribbon to the next logical state.
+     * If the state of the ribbon is 'Showed' or 'Showed_Initialized', then the ribbon will become hidden.
+     * If the ribbon is visible, then rhe ribbon does become showed.
      */
     $scope.toggleRibbonState = function() {
         if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
@@ -1035,7 +1059,6 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * This is done to mimic the same look-and-feel of a native Microsoft Office Application.
      */
     $(window).on('click', function(e) {
-        console.log(ribbonState);
         if ($scope.isRibbonVisible()) {
             ribbonState = ribbonStates.Hidden;
         }
