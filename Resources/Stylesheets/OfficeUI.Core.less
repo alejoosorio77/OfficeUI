@@ -10,9 +10,6 @@
  *                that we can use various styles and other elements.
  *
  * Remarks:       Some features have been included in order to help debugging stylesheets.
- *                Note: Make sure that you remove or disable the debugging features. Strictly spoken
- *                it's not needed to remove them, but it's not nice to have debugging classes in a
- *                production css file.
  *                The following 'debugging' features have been included:
  *                  - Css class (debug):  When you do apply this class on an element, the element
  *                                        itself will receive a dotted red border around it.
@@ -20,8 +17,9 @@
  *                Some parts of the application does highly lean on the z-index property in order to
  *                show elements at the correct level. Therefore, all the elements which rely on a
  *                z-index property are showed below (highest z-index first, lowest latest).
- *                  - Application Icons (300).
+ *                  - Application Icons (300) .
  *                  - Application Title (200).
+ *                  - Ribbon Tabs (150).
  *                  - Header (100).
 ======================================================================================================= */
 
@@ -34,7 +32,6 @@
 html, body { height: 100%; }
 body { font-size: 1em; }
 
-/* ToDo: The entire section below should be either commented or removed when releasing the project. */
 /* ---- Elements to help debugging. ---- */
 #OfficeUI .debug { border: 1px red dashed; } /* When this class is added onto a given element, the element is being
                                                 marked with a red dashed border around it. This is helpful for
@@ -47,7 +44,7 @@ body { font-size: 1em; }
 #OfficeUI .invisible-border { border-color: transparent; }
 #OfficeUI .no-select { -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; -webkit-user-select: none; cursor: default; user-select: none; }
 
-/* ---- Application styling. --- */
+/* ---- Application styling. ---- */
 #OfficeUI header { height: 142px; z-index: 100; }
 #OfficeUI header .application-title { height: 22px; padding: 8px 2px 0 0; position: relative; text-align: center; z-index: 200; }
 #OfficeUI header .application-icons { margin-left: 5px; position: absolute; z-index: 300; }
@@ -58,6 +55,30 @@ body { font-size: 1em; }
 #OfficeUI footer .navigation ul li { display: inline-block; font-size: 23px; font-weight: lighter; line-height: 45px; margin-right: 15px; }
 #OfficeUI footer .notification-area { bottom: 0; color: white; font-weight: 600; height: 21px; line-height: 21px; padding: 0 10px 0 10px; position: fixed; text-transform: uppercase; width: 100%; }
 
+/* ---- Ribbon styling. ---- */
+#OfficeUI .ribbon { position: absolute; top: 0; width: 100%; }
+#OfficeUI .ribbon .tabs { border-bottom: 1px solid @defaultGrayRibbon; height: 50px; position: relative; z-index: 150; }
+#OfficeUI .ribbon .tabs li { display: inline-block; }
+#OfficeUI .ribbon .tabs .label { text-align: center; text-transform: uppercase; }
+#OfficeUI .ribbon .tab-group { position: relative; top: 25px; }
+#OfficeUI .ribbon .tab-group .label { height: 25px; line-height: 25px; padding: 0 13px 0 12px; }
+#OfficeUI .ribbon .contextual-group-label { font-size: 0.9em; height: 17px; margin-top: 4px; padding: 0 4px; }
+
+  /* -- Contextual tabs & tab groups. -- */
+  #OfficeUI .ribbon .tabs .accent { height: 4px; }
+  #OfficeUI .ribbon .tabs .contextual-tab-group { height: 50px; margin-right: 6px; }
+  #OfficeUI .ribbon .tabs .contextual-tab-group ul { display: table; position: relative; width: 100%; }
+  #OfficeUI .ribbon .tabs .contextual-tab-group ul li { display: table-cell; height: 23px; line-height: 23px; }
+  #OfficeUI .ribbon .tabs .contextual-tab-group ul li span { padding-right: 13px; padding-left: 12px; }
+
+  /* -- Styling of the tabs itself. -- */
+  #OfficeUI .ribbon .tab { height: 25px; }
+  #OfficeUI .ribbon .tab.application { background-image: none; border: 1px solid transparent; color: #fff; margin-right: 4px; min-width: 52px; padding: 0 3px 0 2px; }
+  #OfficeUI .ribbon .tab.active { background: #fff; border: 1px solid @defaultGrayRibbon; border-bottom-color: #fff; }
+  #OfficeUI .ribbon .tab:not(.active) { border: 1px solid transparent; border-bottom-color: @defaultGrayRibbon; }
+///* ---- OfficeUI ribbon styling. ---- */
+//#OfficeUI .ribbon .tabs .tab:not(.application).no-border { border-bottom: 1px solid @defaultGrayRibbon !important; }
+//#OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
 ///* ---- Elements which are used for the whole application. ---- */
 //html, body { height: 100%; }
 //
