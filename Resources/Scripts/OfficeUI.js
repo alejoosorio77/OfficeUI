@@ -1071,11 +1071,11 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            toggleClassOnClick
+ * @name            officeuiToggleClassOnClick
  *
  * @description
- * Defines the 'toggleClassOnClick' directive. This directive allows us to toggle a specific class when you click on
- * a certain element.
+ * Defines the 'officeuiToggleClassOnClick' directive. This directive allows us to toggle a specific class when you click
+ * on a certain element.
  * Whenever you click on the element, the class provided as an attribute will be added to the element.
  *
  * @example
@@ -1090,7 +1090,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
  * Therefore, the following code van be used:
  *
  * <div class="icons no-select">
- *     <img class="application-icon" src="#" data-toggle-class-on-click="active" />
+ *     <img class="application-icon" src="#" data-officeui-toggle-class-on-click="active" />
  * </div>
  *
  * @remarks
@@ -1098,11 +1098,11 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
  * and then you move away your mouse, the class 'active-ie-fix' doesn't get removed. It's only get removed if you
  * click on the element again. Now the class is also removed when your mouse leave the element.
  */
-OfficeUIModule.directive('toggleClassOnClick', function() {
+OfficeUIModule.directive('officeuiToggleClassOnClick', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes) {
-            var toggleClass = attributes['toggleClassOnClick'];
+            var toggleClass = attributes['officeuiToggleClassOnClick'];
 
             // Bind the mousedown and mouseup event handlers.
             element.bind('mousedown mouseup', function() {
@@ -1120,11 +1120,11 @@ OfficeUIModule.directive('toggleClassOnClick', function() {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            toggleStyleAttributeOnHover
+ * @name            officeuiToggleStyleAttributeOnHover
  *
  * @description
- * Defines the 'toggleStyleAttributeOnHover' directive. This directive allows us to add or remove a specific style on an
- * element when we hover on it.
+ * Defines the 'officeuiToggleStyleAttributeOnHover' directive. This directive allows us to add or remove a specific
+ * style on an element when we hover on it.
  *
  * @example
  * Imagine that we do have the following Html:
@@ -1136,7 +1136,7 @@ OfficeUIModule.directive('toggleClassOnClick', function() {
  * Now, let's say that when we hover on the element, we want to have a red background-color.
  * Therefore, the code above can be adapted like the following:
  *
- * <li class="tab contextual-tab label" data-toggle-style-attribute-on-hover='{"background-color": "red"}'>
+ * <li class="tab contextual-tab label" data-officeui-toggle-style-attribute-on-hover='{"background-color": "red"}'>
  *     <span>{{tab.Label}}</span>
  * </li>
  *
@@ -1147,11 +1147,11 @@ OfficeUIModule.directive('toggleClassOnClick', function() {
  * If it isn't a valid Json string, an error will be throwed.
  * The added class will only be removed when the element doesn't have a class named 'active'.
  */
-OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
+OfficeUIModule.directive('officeuiToggleStyleAttributeOnHover', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes){
-            var toggleStyleAttribute = attributes['toggleStyleAttributeOnHover'];
+            var toggleStyleAttribute = attributes['officeuiToggleStyleAttributeOnHover'];
             var toggleStyleAttributes = JSON.parse(toggleStyleAttribute)
 
             // Bind the mouse leave event handler.
@@ -1176,10 +1176,11 @@ OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            onHover
+ * @name            officeuiOnHover
  *
  * @description
- * Defines the 'onHover' directive. This directive allows us to execute an AngularJS when we hover on the element.
+ * Defines the 'officeuiOnHover' directive. This directive allows us to execute an AngularJS when we hover on the
+ * element.
  *
  * @example
  * Imagine that we have the following Html:
@@ -1191,15 +1192,15 @@ OfficeUIModule.directive('toggleStyleAttributeOnHover', function() {
  * Now, let's say that we have a function in AngularJS named 'myFunction()'.
  * If you want to execute this function, you can modify the HTML to match the following:
  *
- * <li class="tab contextual-tab label" data-on-hover="myFunction()">
+ * <li class="tab contextual-tab label" data-officeui-on-hover="myFunction()">
  *     <span>{{tab.Label}}</span>
  * </li>
  */
-OfficeUIModule.directive('onHover', function() {
+OfficeUIModule.directive('officeuiOnHover', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes){
-            var hoverAttribute = attributes['onHover'];
+            var hoverAttribute = attributes['officeuiOnHover'];
 
             // Bind the mouse enter event handler.
             element.bind('mouseenter', function() {
@@ -1212,11 +1213,11 @@ OfficeUIModule.directive('onHover', function() {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            onScroll
+ * @name            officeuiOnScroll
  *
  * @description
- * Defines the 'onScroll' directive. This directive allows us to execute an AngularJS function when we're scrolling on
- * the element.
+ * Defines the 'officeuiOnScroll' directive. This directive allows us to execute an AngularJS function when we're
+ * scrolling on the element.
  *
  * @example
  * Imagine that we have the following Html:
@@ -1228,7 +1229,7 @@ OfficeUIModule.directive('onHover', function() {
  * Now, let's say that we have a function named 'ribbonScroll' that we want to execute when we scroll on that element,
  * then the Html can be adapted to match the following:
  *
- * <ul class="tabs_content" data-on-scroll="ribbonScroll">
+ * <ul class="tabs_content" data-officeui-on-scroll="ribbonScroll">
  *     <li></li>
  * </ul>
  *
@@ -1237,11 +1238,11 @@ OfficeUIModule.directive('onHover', function() {
  * In this particular case, it's used to make sure that the page does not scroll when we scroll on the element which
  * has implemented this directive.
  */
-OfficeUIModule.directive('onScroll', function() {
+OfficeUIModule.directive('officeuiOnScroll', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes){
-            var scrollAttribute = attributes['onScroll'];
+            var scrollAttribute = attributes['officeuiOnScroll'];
 
             // Bind the mousewheel event handler.
             element.on('DOMMouseScroll mousewheel', function (e) {
@@ -1259,11 +1260,11 @@ OfficeUIModule.directive('onScroll', function() {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            dynamicEventHandling
+ * @name            officeuiDynamicEventHandling
  *
  * @description
- * Defines the 'dynamicEventHandling' directive. This directive allows us to bind events to this element using the
- * OfficeUI.Core library.
+ * Defines the 'officeuiDynamicEventHandling' directive. This directive allows us to bind events to this element using
+ * the OfficeUI.Core library.
  *
  * @remarks
  * When you want to bind an event handler to a given event, it should be done by using the code:
@@ -1272,13 +1273,13 @@ OfficeUIModule.directive('onScroll', function() {
  *
  * See the method 'Bind' in 'OfficeUICore' library for more information on how it should be used.
  */
-OfficeUIModule.directive('dynamicEventHandling', function() {
+OfficeUIModule.directive('officeuiDynamicEventHandling', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes) {
             var idAttribute = attributes['id'];
 
-            if (typeof idAttribute === 'undefined' || idAttribute == '') { OfficeUICore.Exceptions.officeUIDynamicEventHandlingException('The directive \'dynamicEventHandling\' could not be placed on an element without an id attribute.'); }
+            if (typeof idAttribute === 'undefined' || idAttribute == '') { OfficeUICore.Exceptions.officeUIDynamicEventHandlingException('The directive \'officeuiDynamicEventHandling\' could not be placed on an element without an id attribute.'); }
             else {
                 var registeredEvent = OfficeUICore.SearchEvent('#' + idAttribute);
 
@@ -1295,16 +1296,16 @@ OfficeUIModule.directive('dynamicEventHandling', function() {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            stopPropogation
+ * @name            officeuiStopPropagation
  *
  * @description
- * Defines the 'stopPropagation' directive. This directive allows us to stop propagating an event.
+ * Defines the 'officeuiStopPropagation' directive. This directive allows us to stop propagating an event.
  */
-OfficeUIModule.directive('stopPropagation', function () {
+OfficeUIModule.directive('officeuiStopPropagation', function () {
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
-            element.bind(attr.stopPropagation, function (e) {
+            element.bind(attr.officeuiStopPropagation, function (e) {
                 e.stopPropagation();
             });
         }
@@ -1314,12 +1315,12 @@ OfficeUIModule.directive('stopPropagation', function () {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            ngcTooltip
+ * @name            officeuiTooltip
  *
  * @description
- * Defines the 'ngcTooltip' directive. This directive allows us to show a tooltip for a specific element.
+ * Defines the 'officeuiTooltip' directive. This directive allows us to show a tooltip for a specific element.
  */
-OfficeUIModule.directive('ngcTooltip', function () {
+OfficeUIModule.directive('officeuiTooltip', function () {
     return {
         restrict: 'A',
         link: function (scope, element, attributes) {

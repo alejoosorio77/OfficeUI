@@ -1,7 +1,28 @@
 <header>
+    <!-- OfficeUI: Explanation on how the attributes on various elements are being placed.
+         Every element does respect the following order of the attributes, but all the elements
+         are placed in an alphabetical order (per section).
+
+         - Standard attributes that are not related to AngularJS in any way.
+         - Standard attributes which are related to AngularJS. You can identify them by the '{{}}' syntax.
+         - Standard AngularJS attributes. You can identify them by the 'data-ng-' prefix.
+         - Custom OfficeUI AngularJS attributes. You can identify them by the 'data-officeui' prefix.
+      -->
+
     <!-- Section: Icons on the top left of the page. -->
     <div class="application-icons no-select">
-        <img class="icon" id="{{icon.Id}}" src="#" alt="{{icon.Alt}}" data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-toggle-class-on-click="active" data-dynamic-event-handling="" />
+        <img class="icon"
+             src="#"
+
+             alt="{{icon.Alt}}"
+             id="{{icon.Id}}"
+
+             data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}"
+
+             data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}"
+
+             data-officeui-toggle-class-on-click="active"
+             data-officeui-dynamic-event-handling />
     </div>
 
     <!-- Section: Title of the application. -->
@@ -11,66 +32,164 @@
 
     <!-- Section: Ribbon of the application. -->
     <div class="ribbon no-select">
-        <ul class="tabs" data-on-scroll="ribbonScroll" data-stop-propagation="click">
-            <li class="tab-group" data-ng-repeat="tab in Tabs" data-ng-click="!$first && setActiveTab(tab.Id)" data-on-hover="!$first && setActiveTabOnHover(tab.Id)">
+        <ul class="tabs"
+
+            data-officeui-on-scroll="ribbonScroll"
+            data-officeui-stop-propagation="click">
+
+            <li class="tab-group"
+
+                data-ng-click="!$first && setActiveTab(tab.Id)"
+                data-on-hover="!$first && setActiveTabOnHover(tab.Id)"
+                data-ng-repeat="tab in Tabs">
+
                 <ul>
-                    <li class="tab label" id="{{tab.Id}}" data-ng-class="{'application': $first, 'active': isTabActive(tab.Id) && !isRibbonHidden(), 'no-border': isRibbonHidden()}">
+                    <li class="tab label"
+                        id="{{tab.Id}}"
+
+                        data-ng-class="{'application': $first, 'active': isTabActive(tab.Id) && !isRibbonHidden(), 'no-border': isRibbonHidden()}">
+
                         <span>{{tab.Label}}</span>
                     </li>
                 </ul>
             </li>
 
-            <li class="contextual-tab-group" id="{{contextualGroup.Id}}" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-if="isContextualGroupActive(contextualGroup.Id)" data-ng-style="{'background-color': contextualGroup.GroupColor}">
-                <div data-ng-style="{'background-color': contextualGroup.AccentColor}" class="accent">&nbsp;</div>
-                <div class="label contextual-group-label" data-ng-style="{'color': contextualGroup.GroupTextColor}">
+            <li class="contextual-tab-group"
+                id="{{contextualGroup.Id}}"
+
+                data-ng-if="isContextualGroupActive(contextualGroup.Id)"
+                data-ng-repeat="contextualGroup in ContextualGroups"
+                data-ng-style="{'background-color': contextualGroup.GroupColor}">
+
+                <div class="accent"
+                     data-ng-style="{'background-color': contextualGroup.AccentColor}" >&nbsp;</div>
+
+                <div class="label contextual-group-label"
+
+                     data-ng-style="{'color': contextualGroup.GroupTextColor}">
                     <span>{{contextualGroup.Label}}</span>
                 </div>
                 <ul>
-                    <li class="tab contextual-tab label" id="{{tab.Id}}" data-ng-repeat="tab in contextualGroup.Tabs" data-ng-class="{active: isTabActive(tab.Id)}" data-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}" data-ng-click="setActiveTab(tab.Id)" data-on-hover="setActiveTabOnHover(tab.Id)">
+                    <li class="tab contextual-tab label"
+                        id="{{tab.Id}}"
+
+                        data-ng-class="{active: isTabActive(tab.Id)}"
+                        data-ng-click="setActiveTab(tab.Id)"
+                        data-ng-repeat="tab in contextualGroup.Tabs"
+                        data-ng-style="{color: setActiveTabColor(tab.Id, contextualGroup.GroupTextColor)}"
+
+                        data-officeui-on-hover="setActiveTabOnHover(tab.Id)"
+                        data-officeui-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}'>
                         <span>{{tab.Label}}</span>
                     </li>
                 </ul>
             </li>
         </ul>
 
-        <ul class="tabs_content" data-on-scroll="ribbonScroll" data-ng-class="{'tabs-content-hidden': isRibbonHidden(), 'tabs-content-visible': isRibbonVisible()}" data-stop-propagation="click">
-            <li data-ng-repeat="tab in Tabs" data-ng-show="isTabActive(tab.Id)">
+        <ul class="tabs_content"
+
+            data-ng-class="{'tabs-content-hidden': isRibbonHidden(), 'tabs-content-visible': isRibbonVisible()}"
+            data-officeui-on-scroll="ribbonScroll"
+            data-officeui-stop-propagation="click">
+
+            <li data-ng-repeat="tab in Tabs"
+                data-ng-show="isTabActive(tab.Id)">
+
                 <!-- The contents of the ribbon are starting here. -->
-                <div class="group" data-ng-repeat-start="group in tab.Groups">
-                    <div class="area" data-ng-repeat="area in group.Areas">
-                        <div data-ng-repeat="action in area.Actions" class="actions-holder" data-ng-class="{'displayBlock': action.Type == 'sIcon', 'displayInlineBlock': action.Type == 'bIcon'}">
+                <div class="group"
+
+                     data-ng-repeat-start="group in tab.Groups">
+
+                    <div class="area"
+
+                         data-ng-repeat="area in group.Areas">
+
+                        <div class="actions-holder"
+
+                             data-ng-class="{'displayBlock': action.Type == 'sIcon', 'displayInlineBlock': action.Type == 'bIcon'}"
+                             data-ng-repeat="action in area.Actions">
 
                             <!-- This is what is being rendered if it's a big icon. -->
-                            <div class="big-icon-holder" data-ng-if="action.Type == 'bIcon'" data-ngc-menu data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
-                                <a data-ng-href="{{action.Uri}}" data-ng-click="defaultActionClick(action);">
-                                    <div id="{{action.Id}}" class="icon big-icon" data-dynamic-event-handling="action.Id" data-toggle-class-on-click="active" data-ng-class="{'no-hover': isMenuOpened(), 'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}">
+                            <div class="big-icon-holder"
+
+                                 data-ng-class="{'disabled': action.Disabled == 'True'}"
+                                 data-ng-if="action.Type == 'bIcon'"
+
+                                 data-officeui-tooltip="{'action': action.Id}">
+
+                                <a data-ng-click="defaultActionClick(action);"
+                                   data-ng-href="{{action.Uri}}">
+
+                                    <div class="icon big-icon"
+                                         id="{{action.Id}}"
+
+                                         data-ng-class="{'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}"
+
+                                         data-officeui-dynamic-event-handling="action.Id"
+                                         data-officeui-toggle-class-on-click="active" >
                                         <img data-ng-src="{{action.Resource}}" />
 
-                                        <div class="label" data-ng-bind-html="action |actionLegend"></div>
+                                        <div class="label"
+
+                                             data-ng-bind-html="action |actionLegend"></div>
                                     </div>
                                 </a>
                             </div>
 
                             <!-- This is what is being rendered if it's a small icon. -->
-                            <div class="small-icon-holder" data-ng-if="action.Type == 'sIcon'" data-ngc-menu data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
-                                <a data-ng-href="{{action.Uri}}" data-ng-click="defaultActionClick(action);">
-                                    <div id="{{action.Id}}" class="icon small-icon" data-dynamic-event-handling="action.Id" data-toggle-class-on-click="active" data-ng-class="{'no-hover': isMenuOpened(), 'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}">
+                            <div class="small-icon-holder"
+
+                                 data-ng-if="action.Type == 'sIcon'"
+
+                                 data-ng-class="{'disabled': action.Disabled == 'True'}"
+
+                                 data-officeui-tooltip="{'action': action.Id}">
+
+                                <a data-ng-click="defaultActionClick(action);"
+                                   data-ng-href="{{action.Uri}}" >
+
+                                    <div class="icon small-icon" id="{{action.Id}}"
+
+                                         data-ng-class="{'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}"
+
+                                         data-officeui-dynamic-event-handling="action.Id"
+                                         data-officeui-toggle-class-on-click="active">
                                         <img data-ng-src="{{action.Resource}}" />
 
-                                        <div class="label" data-ng-bind-html="action |actionLegend"></div>
+                                        <div class="label"
+
+                                             data-ng-bind-html="action |actionLegend"></div>
                                     </div>
                                 </a>
                             </div>
 
                             <!-- This is what is being rendered if it's an input element (Checkbox). -->
-                            <div data-ng-show="action.Type == 'Checkbox'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
+                            <div id="{{action.Id}}"
+
+                                 data-ng-class="{'disabled': action.Disabled == 'True'}"
+                                 data-ng-show="action.Type == 'Checkbox'"
+
+                                 data-officeui-dynamic-event-handling="action.Id"
+                                 data-officeui-tooltip="{'action': action.Id}">
+
                                 <input type="checkbox" id="{{action.Id}}" />
                                 <div class="displayInlineBlock">{{action.Legend}}</div>
                             </div>
 
                             <!-- This is what is being rendered if it's an input element (Text). -->
-                            <div data-ng-if="action.Type == 'Input'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
-                                <input type="text" id="{{action.Id}}" placeholder="{{action.Legend}}" data-ng-style="{width:'{{action.Width}}'}"/>
+                            <div id="{{action.Id}}"
+
+                                 ng-class="{'disabled': action.Disabled == 'True'}"
+                                 data-ng-if="action.Type == 'Input'"
+
+                                 data-officeui-dynamic-event-handling="action.Id"
+                                 data-officeui-tooltip="{'action': action.Id}" >
+
+                                <input id="{{action.Id}}"
+                                       placeholder="{{action.Legend}}"
+                                       type="text"
+
+                                       data-ng-style="{width:'{{action.Width}}'}"/>
                             </div>
 
                             <!-- Provides the tooltip to render. -->
@@ -83,52 +202,124 @@
                 </div>
 
                 <!-- Defines the vertical 'pipe' sign. -->
-                <div class="pipe" data-ng-repeat-end></div>
+                <div class="pipe"
 
-                <div class="icon collapse" data-ng-click="toggleRibbonState()">
-                    <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed() || isRibbonInitialized()" alt="Toggle Ribbon State" />
-                    <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
+                     data-ng-repeat-end></div>
+
+                <div class="icon collapse"
+
+                     data-ng-click="toggleRibbonState()">
+                    <img alt="Toggle Ribbon State"
+                         class="pin-icon"
+                         src="/Resources/Images/Ribbon/Functionalities/Collapse.png"
+
+                         data-ng-if="isRibbonShowed() || isRibbonInitialized()" />
+                    <img alt="Toggle Ribbon State"
+                         class="pin-icon"
+                         src="/Resources/Images/Ribbon/Functionalities/Pin.png"
+
+                         data-ng-if="isRibbonVisible()"  />
                 </div>
             </li>
-            <li data-ng-repeat="contextualGroup in ContextualGroups" data-ng-show="isContextualGroupActive(contextualGroup.Id)">
+            <li data-ng-repeat="contextualGroup in ContextualGroups"
+                data-ng-show="isContextualGroupActive(contextualGroup.Id)">
                 <ul>
-                    <li data-ng-repeat="tab in contextualGroup.Tabs" data-ng-show="isTabActive(tab.Id)">
+                    <li data-ng-repeat="tab in contextualGroup.Tabs"
+                        data-ng-show="isTabActive(tab.Id)">
+
                         <!-- The contents of the ribbon are starting here. -->
-                        <div class="group" data-ng-repeat-start="group in tab.Groups">
-                            <div class="area" data-ng-repeat="area in group.Areas">
-                                <div data-ng-repeat="action in area.Actions" class="actions-holder" data-ng-class="{'displayBlock': action.Type == 'sIcon', 'displayInlineBlock': action.Type == 'bIcon'}">
+                        <div class="group"
+
+                             data-ng-repeat-start="group in tab.Groups">
+                            <div class="area"
+
+                                 data-ng-repeat="area in group.Areas">
+                                <div class="actions-holder"
+
+                                     data-ng-class="{'displayBlock': action.Type == 'sIcon', 'displayInlineBlock': action.Type == 'bIcon'}"
+                                     data-ng-repeat="action in area.Actions">
 
                                     <!-- This is what is being rendered if it's a big icon. -->
-                                    <div class="big-icon-holder" data-ng-if="action.Type == 'bIcon'" data-ngc-menu data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
-                                        <a data-ng-href="{{action.Uri}}" data-ng-click="defaultActionClick(action);">
-                                            <div id="{{action.Id}}" class="icon big-icon" data-dynamic-event-handling="action.Id" data-toggle-class-on-click="active" data-ng-class="{'no-hover': isMenuOpened(), 'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}">
+                                    <div class="big-icon-holder"
+
+                                         data-ng-class="{'disabled': action.Disabled == 'True'}"
+                                         data-ng-if="action.Type == 'bIcon'"
+
+                                         data-officeui-tooltip="{'action': action.Id}">
+
+                                        <a data-ng-click="defaultActionClick(action);"
+                                           data-ng-href="{{action.Uri}}">
+
+                                            <div class="icon big-icon"
+                                                 id="{{action.Id}}"
+
+                                                 data-ng-class="{'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}"
+
+                                                 data-officeui-dynamic-event-handling="action.Id"
+                                                 data-officeui-toggle-class-on-click="active" >
                                                 <img data-ng-src="{{action.Resource}}" />
 
-                                                <div class="label" data-ng-bind-html="action |actionLegend"></div>
+                                                <div class="label"
+
+                                                     data-ng-bind-html="action |actionLegend"></div>
                                             </div>
                                         </a>
                                     </div>
 
                                     <!-- This is what is being rendered if it's a small icon. -->
-                                    <div class="small-icon-holder" data-ng-if="action.Type == 'sIcon'" data-ngc-menu data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
-                                        <a data-ng-href="{{action.Uri}}" data-ng-click="defaultActionClick(action);">
-                                            <div id="{{action.Id}}" class="icon small-icon" data-dynamic-event-handling="action.Id" data-toggle-class-on-click="active" data-ng-class="{'no-hover': isMenuOpened(), 'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}">
+                                    <div class="small-icon-holder"
+
+                                         data-ng-if="action.Type == 'sIcon'"
+
+                                         data-ng-class="{'disabled': action.Disabled == 'True'}"
+
+                                         data-officeui-tooltip="{'action': action.Id}">
+
+                                        <a data-ng-click="defaultActionClick(action);"
+                                           data-ng-href="{{action.Uri}}" >
+
+                                            <div class="icon small-icon" id="{{action.Id}}"
+
+                                                 data-ng-class="{'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}"
+
+                                                 data-officeui-dynamic-event-handling="action.Id"
+                                                 data-officeui-toggle-class-on-click="active">
                                                 <img data-ng-src="{{action.Resource}}" />
 
-                                                <div class="label" data-ng-bind-html="action |actionLegend"></div>
+                                                <div class="label"
+
+                                                     data-ng-bind-html="action |actionLegend"></div>
                                             </div>
                                         </a>
                                     </div>
 
                                     <!-- This is what is being rendered if it's an input element (Checkbox). -->
-                                    <div data-ng-show="action.Type == 'Checkbox'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" data-ng-class="{'disabled': action.Disabled == 'True'}">
+                                    <div id="{{action.Id}}"
+
+                                         data-ng-class="{'disabled': action.Disabled == 'True'}"
+                                         data-ng-show="action.Type == 'Checkbox'"
+
+                                         data-officeui-dynamic-event-handling="action.Id"
+                                         data-officeui-tooltip="{'action': action.Id}">
+
                                         <input type="checkbox" id="{{action.Id}}" />
                                         <div class="displayInlineBlock">{{action.Legend}}</div>
                                     </div>
 
                                     <!-- This is what is being rendered if it's an input element (Text). -->
-                                    <div data-ng-if="action.Type == 'Input'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
-                                        <input type="text" id="{{action.Id}}" placeholder="{{action.Legend}}" data-ng-style="{width:'{{action.Width}}'}"/>
+                                    <div id="{{action.Id}}"
+
+                                         ng-class="{'disabled': action.Disabled == 'True'}"
+                                         data-ng-if="action.Type == 'Input'"
+
+                                         data-officeui-dynamic-event-handling="action.Id"
+                                         data-officeui-tooltip="{'action': action.Id}" >
+
+                                        <input id="{{action.Id}}"
+                                               placeholder="{{action.Legend}}"
+                                               type="text"
+
+                                               data-ng-style="{width:'{{action.Width}}'}"/>
                                     </div>
 
                                     <!-- Provides the tooltip to render. -->
@@ -141,11 +332,23 @@
                         </div>
 
                         <!-- Defines the vertical 'pipe' sign. -->
-                        <div class="pipe" data-ng-repeat-end></div>
+                        <div class="pipe"
 
-                        <div class="icon collapse">
-                            <img src="/Resources/Images/Ribbon/Functionalities/Collapse.png" class="pin-icon" data-ng-if="isRibbonShowed() || isRibbonInitialized()" alt="Toggle Ribbon State" />
-                            <img src="/Resources/Images/Ribbon/Functionalities/Pin.png" class="pin-icon" data-ng-if="isRibbonVisible()" alt="Toggle Ribbon State" />
+                             data-ng-repeat-end></div>
+
+                        <div class="icon collapse"
+
+                             data-ng-click="toggleRibbonState()">
+                            <img alt="Toggle Ribbon State"
+                                 class="pin-icon"
+                                 src="/Resources/Images/Ribbon/Functionalities/Collapse.png"
+
+                                 data-ng-if="isRibbonShowed() || isRibbonInitialized()" />
+                            <img alt="Toggle Ribbon State"
+                                 class="pin-icon"
+                                 src="/Resources/Images/Ribbon/Functionalities/Pin.png"
+
+                                 data-ng-if="isRibbonVisible()"  />
                         </div>
                     </li>
                 </ul>
