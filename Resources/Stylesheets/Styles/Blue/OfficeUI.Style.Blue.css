@@ -97,8 +97,8 @@
  *    </a>
  * ================================================================================================================= */
 /* -- Dropdown element -- */
-#OfficeUI .dropdown.active .legend,
-#OfficeUI .dropdown.focus .legend {
+#OfficeUI .dropdown.active .dropdown-legend,
+#OfficeUI .dropdown.focus .dropdown-legend {
   border-color: #a3bde3;
 }
 #OfficeUI .dropdown.focus i,
