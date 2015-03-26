@@ -148,6 +148,10 @@
 #OfficeUI footer .notification-area {
   background-color: #a4373a;
 }
+#OfficeUI footer a:hover,
+#OfficeUI footer a:active {
+  color: #c75659;
+}
 /* ---- Variables. ---- */
 /* ---- OfficeUI ribbon styling. ---- */
 #OfficeUI .ribbon .tabs .tab.application {

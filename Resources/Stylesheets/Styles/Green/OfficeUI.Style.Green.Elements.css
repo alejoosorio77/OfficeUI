@@ -50,6 +50,10 @@
 #OfficeUI footer .notification-area {
   background-color: #217346;
 }
+#OfficeUI footer a:hover,
+#OfficeUI footer a:active {
+  color: #439467;
+}
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Green.Ribbon.less
  * Author:        Kevin De Coninck

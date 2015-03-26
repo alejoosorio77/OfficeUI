@@ -138,6 +138,10 @@
 #OfficeUI footer .notification-area {
   background-color: #6a3889;
 }
+#OfficeUI footer a:hover,
+#OfficeUI footer a:active {
+  color: #8653a5;
+}
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Purple.Ribbon.less
  * Author:        Kevin De Coninck

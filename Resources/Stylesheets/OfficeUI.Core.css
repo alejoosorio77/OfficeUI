@@ -372,6 +372,10 @@ body {
 #OfficeUI header .application-icons .icon:not(.application-icon) {
   margin-right: 6px;
 }
+#OfficeUI footer a {
+  color: #444;
+  text-decoration: none;
+}
 #OfficeUI footer .navigation {
   background-color: #e4e4e4;
   bottom: 21px;

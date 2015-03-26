@@ -162,3 +162,7 @@
 #OfficeUI footer .notification-area {
   background-color: #0072c6;
 }
+#OfficeUI footer a:hover,
+#OfficeUI footer a:active {
+  color: #2a8dd4;
+}
