@@ -1254,6 +1254,41 @@ OfficeUIModule.directive('officeuiControlDropdown', function () {
     };
 });
 
+/**
+ * @type            Directive
+ * @usage           Attribute
+ * @name            officeuiControlDropdownItem
+ *
+ * @description
+ * Defines the 'officeuiControlDropdownItem' directive. This directive allows us to transform an element into an
+ * OfficeUIDropdown item element.
+ */
+OfficeUIModule.directive('officeuiControlDropdownItem', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            $(element).click(function() {
+                var selectedLiText = $(this).html();
+                $('.dropdown-legend', $(this).parent().parent()).html(selectedLiText);
+
+                $.fn.selectedItem = selectedLiText; // Set a property to we know the item which has been selected.
+
+                // Check if there's an attribute called data-on-change.
+                // If that's attribute correct, check the value in it, try to transform it into a JavaScript function
+                // and execute it.
+                var attribute = $(this).parent().parent().attr('data-on-change');
+                if (typeof attribute !== 'undefined' && attribute != '') { eval(attribute); }
+
+                // Close the dropdown element.
+                $(this).parent().parent().Close();
+
+                // IE-Fix: Remove the class 'focus' from the dropdown element.
+                $(this).removeClass('focus');
+            });
+        }
+    };
+});
+
 /* ---- End: AngularJS Directives. ---- */
 
 /* ---- AngularJS Filters. ---- */

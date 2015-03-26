@@ -201,7 +201,7 @@
                                 <div id="{{action.Id}}"
                                      class="dropdown"
 
-                                     data-on-change="$('{{action.Id}}').scope().changeTheme($(this).selectedItem); $('{{action.Id}}').scope().refresh();"
+                                     data-on-change="onDropdownChange('{{action.Id}}', $(this));"
 
                                      data-ng-style="{width:'{{action.Width}}'}"
 
@@ -209,7 +209,8 @@
 
                                     <div class="dropdown-legend">{{action.DefaultSelection}}</div>
                                     <ul class="elements">
-                                        <li data-ng-repeat="item in action.Items">{{item.Label}}</li>
+                                        <li data-ng-repeat="item in action.Items"
+                                            data-officeui-control-dropdown-item>{{item.Label}}</li>
                                     </ul>
                                 </div>
                             </div>
