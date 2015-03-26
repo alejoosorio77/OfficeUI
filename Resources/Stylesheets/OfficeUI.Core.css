@@ -290,6 +290,7 @@ input[type="text"]:focus {
   display: none;
   position: absolute;
   width: 100%;
+  z-index: 100;
 }
 #OfficeUI .dropdown .elements li {
   padding: 3px 0 3px 3px;
