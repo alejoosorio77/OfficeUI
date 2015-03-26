@@ -51,29 +51,11 @@
                     </div>
 
                     <div class="site-contents" style="height: calc(100% - 20px);">
-                        <div style="padding-left: 10px; padding-top: 20px; float: left; width: 250px; background-color: green; height: 100%; background: linear-gradient(#fff, #f0f0f0); border-right: 1px solid #d4d4d4;">
+                        <div id="menu" class="no-select">
 
                         </div>
-                        <div style="float: left; height: 100%; padding: 20px;">
-                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupDrawingTools')">
-                                <span>Activate Contextual Group 'Drawing Tools'</span>
-                            </a>
-                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupTableTools')">
-                                <span>Activate Contextual Group 'Table Tools'</span>
-                            </a>
-                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="activateContextualGroup('contextualGroupSmartTools')">
-                                <span>Activate Contextual Group 'Smart Tools'</span>
-                            </a>
-                            <br/><br/>
-                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupDrawingTools')">
-                                <span>Deactivate Contextual Group 'Drawing Tools'</span>
-                            </a>
-                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupTableTools')">
-                                <span>Deactivate Contextual Group 'Table Tools'</span>
-                            </a>
-                            <a href="#" class="button" style="margin-right: 25px;" data-ng-click="deactivateContextualGroup('contextualGroupSmartTools')">
-                                <span>Deactivate Contextual Group 'Smart Tools'</span>
-                            </a>
+                        <div id="site-contents" style="float: left; height: 100%; padding: 20px; overflow-y: scroll; width: calc(100% - 250px);">
+
                         </div>
                     </div>
                 </div>
@@ -81,7 +63,7 @@
             <footer>
                 <div class="navigation no-select" style="z-index: 100;">
                     <ul>
-                        <li><a href="#">Installation Guide</a></li>
+                        <li><a id="menuInstallationGuide" href="/Docs/Installation-Guide/index.html" data-menu="/Docs/Installation-Guide/menu.html">Installation Guide</a></li>
                         <li><a href="#">API Reference</a></li>
                         <li><a href="#">Developers Guide</a></li>
                     </ul>
@@ -106,6 +88,25 @@
                     scope.refresh();
                 }
             }
+
+            // Make sure that jQuery is loaded.
+            $(function() {
+                $('#menuInstallationGuide').addClass('active');
+
+                $('#menu').load($('#menuInstallationGuide').attr('data-menu'));
+                $('#site-contents').load($('#menuInstallationGuide').attr('href'));
+
+                // When you click a link the footer, make sure that the requested page is loaded through ajax calls.
+                $('footer a').click(function() {
+                    $('footer a').removeClass('active');
+                    $(this).addClass('active');
+
+                    $('#menu').load($(this).attr('data-menu'));
+                    $('#site-contents').load($(this).attr('href'));
+
+                    return false;
+                })
+            });
         </script>
     </body>
 </html>

@@ -730,7 +730,7 @@ body {
     top: 0;
   }
   to {
-    top: -92px;
+    top: -93px;
   }
 }
 @keyframes hideRibbon {
@@ -738,12 +738,12 @@ body {
     top: 0;
   }
   to {
-    top: -92px;
+    top: -93px;
   }
 }
 @-webkit-keyframes showRibbon {
   from {
-    top: -92px;
+    top: -93px;
   }
   to {
     top: 0;
@@ -751,7 +751,7 @@ body {
 }
 @keyframes showRibbon {
   from {
-    top: -92px;
+    top: -93px;
   }
   to {
     top: 0;

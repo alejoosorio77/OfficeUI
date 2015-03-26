@@ -7,3 +7,54 @@
  * Notes:         The OfficeUI.Site.less file is the main file for styling the website (not the
  *                OfficeUI Components).
 ======================================================================================================= */
+/* ---- Menu ---- */
+#menu {
+  background-color: green;
+  background: linear-gradient(#ffffff, #f0f0f0);
+  border-right: 1px solid #d4d4d4;
+  float: left;
+  height: 100%;
+  padding: 10px 10px 0 10px;
+  width: 250px;
+}
+#menu ul li {
+  line-height: 20px;
+  margin-bottom: 2px;
+}
+#menu ul li .legend {
+  padding-left: 10px;
+}
+#menu ul li.active {
+  background-color: #e1e1e1;
+}
+#menu ul li ul li .legend {
+  padding-left: 20px;
+}
+/* ---- Contents ---- */
+#site-contents {
+  color: #454545;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.166em;
+  line-height: 18px;
+  margin-top: 10px;
+}
+#site-contents a {
+  color: #1e75bb;
+  text-decoration: none;
+}
+#site-contents a:hover {
+  color: #00bcf2;
+}
+#site-contents h1 {
+  font-size: 3em;
+  margin-bottom: 40px;
+}
+#site-contents p {
+  margin-bottom: 20px;
+}
+#site-contents ul {
+  list-style: inside;
+}
+#site-contents ul li {
+  margin-bottom: 10px;
+}

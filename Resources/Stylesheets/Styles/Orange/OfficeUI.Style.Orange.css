@@ -139,8 +139,12 @@
   background-color: #d24726;
 }
 #OfficeUI footer a:hover,
-#OfficeUI footer a:active {
+#OfficeUI footer a:active,
+#OfficeUI footer a.active {
   color: #f0623e;
+}
+#OfficeUI #menu ul li:not(.active):not(.no-hover):hover {
+  background-color: #fce4dc;
 }
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Orange.Ribbon.less
