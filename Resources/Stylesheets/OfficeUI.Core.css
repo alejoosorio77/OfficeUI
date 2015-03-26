@@ -273,7 +273,7 @@ input[type="text"]:focus {
   top: 0;
   width: 13px;
 }
-#OfficeUI .dropdown .legend {
+#OfficeUI .dropdown .dropdown-legend {
   border: 1px solid #ababab;
   height: 100%;
   line-height: 1.5;
@@ -285,6 +285,7 @@ input[type="text"]:focus {
   color: #000;
 }
 #OfficeUI .dropdown .elements {
+  background-color: white;
   border: 1px solid #ababab;
   display: none;
   position: absolute;

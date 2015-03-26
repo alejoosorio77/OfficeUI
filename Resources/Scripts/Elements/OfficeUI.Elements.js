@@ -179,7 +179,7 @@ $(function() {
         //          clearing it manually through a JavaScript call.
         $('.elements li', this).click(function() {
             var selectedLiText = $(this).html();
-            $('.legend', $(this).parent().parent()).html(selectedLiText);
+            $('.dropdown-legend', $(this).parent().parent()).html(selectedLiText);
 
             $.fn.selectedItem = selectedLiText; // Set a property to we know the item which has been selected.
 

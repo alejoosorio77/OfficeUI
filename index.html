@@ -74,8 +74,8 @@
                                 <span>Deactivate Contextual Group 'Smart Tools'</span>
                             </a>
                             <br/><br/>
-                            <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeTheme').scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">
-                                <div class="legend">LightBlue</div>
+                            <div class="dropdown" id="dropdownChangeStyle" style="width: 100px;" data-on-change="$('#dropdownChangeStyle').scope().changeStyle($(this).selectedItem); $('#dropdownChangeStyle').scope().refresh();">
+                                <div class="dropdown-legend">LightBlue</div>
 
                                 <ul class="elements">
                                     <li>Blue</li>
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="dropdown" id="dropdownChangeTheme" style="width: 150px;" data-on-change="$('#dropdownChangeTheme').scope().changeTheme($(this).selectedItem); $('#dropdownChangeTheme').scope().refresh();">
-                                <div class="legend">Geometry</div>
+                                <div class="dropdown-legend">Geometry</div>
 
                                 <ul class="elements">
                                     <li>No Background</li>
@@ -126,27 +126,5 @@
                 </div>
             </footer>
         </div>
-
-        <!-- Scripts which should be executed at startup. -->
-        <script type="text/javascript">
-            //$(function() {
-            //    var contentElement = $('#OfficeUI .content-wrapper');
-            //    var siteContentElement = $('#OfficeUI .site-contents');
-
-            //    $(window).on('load resize', function(e) {
-
-            //        var windowHeight = $('body').height();
-            //        var headerHeight = $('header').height();
-            //        var breadcrumbHeight = $('.breadcrumb').height();
-            //        var footerNavigationHeight = $('.footer-navigation').height();
-            //        var footerHeight = $('.footer').height();
-
-            //        console.log(windowHeight - (headerHeight + footerNavigationHeight + footerHeight));
-
-            //        contentElement.height(windowHeight - (headerHeight + footerNavigationHeight + footerHeight));
-            //        siteContentElement.height(windowHeight - (headerHeight + footerNavigationHeight + breadcrumbHeight + footerNavigationHeight));
-            //    });
-            //});
-        </script>
     </body>
 </html>

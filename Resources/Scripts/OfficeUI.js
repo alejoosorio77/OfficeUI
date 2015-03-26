@@ -681,7 +681,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var stylesheetData = null;
     var ribbonConfigurationData = [];
     var activeContextualGroups = [];
-    var ribbonState = null;
+    var ribbonState = ribbonStates.Showed_Initialized;
 
     // Gets the values from the cookies which are used to initialize the ribbon.
     var previousActiveTab = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_ACTIVE_TAB);
@@ -1340,6 +1340,24 @@ OfficeUIModule.directive('ngcTooltip', function () {
                     });
                 }
             });
+        }
+    };
+});
+
+/**
+ * @type            Directive
+ * @usage           Attribute
+ * @name            customControlDropdown
+ *
+ * @description
+ * Defines the 'customControlDropdown' directive. This directive allows us to transform an element into an
+ * OfficeUIDropdown element.
+ */
+OfficeUIModule.directive('customControlDropdown', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            $(element).OfficeUIDropdown();
         }
     };
 });
