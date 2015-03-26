@@ -72,6 +72,11 @@
                             <div data-ng-if="action.Type == 'Input'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
                                 <input type="text" id="{{action.Id}}" placeholder="{{action.Legend}}" data-ng-style="{width:'{{action.Width}}'}"/>
                             </div>
+
+                            <!-- Provides the tooltip to render. -->
+                            <div class="tooltip" data-ng-if="action.Tooltip">
+                                <div data-ng-bind-html="action.Tooltip"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="legend">{{group.Legend}}</div>
@@ -124,6 +129,11 @@
                                     <!-- This is what is being rendered if it's an input element (Text). -->
                                     <div data-ng-if="action.Type == 'Input'" id="{{action.Id}}" data-dynamic-event-handling="action.Id" data-ngc-tooltip="{'action': action.Id}" ng-class="{'disabled': action.Disabled == 'True'}">
                                         <input type="text" id="{{action.Id}}" placeholder="{{action.Legend}}" data-ng-style="{width:'{{action.Width}}'}"/>
+                                    </div>
+
+                                    <!-- Provides the tooltip to render. -->
+                                    <div class="tooltip" data-ng-if="action.Tooltip">
+                                        <div data-ng-bind-html="action.Tooltip"></div>
                                     </div>
                                 </div>
                             </div>

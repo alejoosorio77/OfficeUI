@@ -290,45 +290,45 @@ OfficeUIModule.factory('OfficeUIRibbonConfigurationService', function($http) {
  *
  *      $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation = '/path/to/data/file.json'
  */
-OfficeUIModule.factory('OfficeUIApplicationDefinitionService', function($http) {
-    // Defines the object that this service needs to return.
-    return {
+        OfficeUIModule.factory('OfficeUIApplicationDefinitionService', function($http) {
+            // Defines the object that this service needs to return.
+            return {
 
-        /**
-         * @type            Function
-         * @name            getOfficeUIApplicationDefinition
-         *
-         * @returns         {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
-         *
-         * @remarks
-         * This method can throw exceptions when an error occurred during the loading of this file.
-         * The explanation below provides some information about which exception can occur when:
-         *
-         * OfficeUIConfigurationException:      This exception is throwed when the value of the field
-         *                                      '$.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation' is
-         *                                      not provided. This does mean that the configuration cannot be loaded.
-         *
-         * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
-         *                                      or when there's an error in the configuration file.
-         */
-        getOfficeUIApplicationDefinition: function() {
-            // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') {
-                OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI application definition file is not defined.');
+                /**
+                 * @type            Function
+                 * @name            getOfficeUIApplicationDefinition
+                 *
+                 * @returns         {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
+                 *
+                 * @remarks
+                 * This method can throw exceptions when an error occurred during the loading of this file.
+                 * The explanation below provides some information about which exception can occur when:
+                 *
+                 * OfficeUIConfigurationException:      This exception is throwed when the value of the field
+                 *                                      '$.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation' is
+                 *                                      not provided. This does mean that the configuration cannot be loaded.
+                 *
+                 * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
+                 *                                      or when there's an error in the configuration file.
+                 */
+                getOfficeUIApplicationDefinition: function() {
+                    // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
+                    if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') {
+                        OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI application definition file is not defined.');
+                    }
+
+                    // Returns the 'httpPromise' which is required for further processing.
+                    return $http.get($.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation)
+                        .then(function (response) {
+                            return {
+                                Title: response.data.Title,
+                                Icons: response.data.Icons
+                            };
+                        }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); }
+                    );
+                }
             }
-
-            // Returns the 'httpPromise' which is required for further processing.
-            return $http.get($.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation)
-                .then(function (response) {
-                    return {
-                        Title: response.data.Title,
-                        Icons: response.data.Icons
-                    };
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); }
-            );
-        }
-    }
-});
+        });
 
 /**
  * @type            Service
@@ -564,10 +564,6 @@ OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplic
      particular object. */
     var applicationDefinitionFactoryInstance = {};
 
-    // Defines the variables which are needed for this service.
-    var title = [];
-    var icons = '';
-
     /**
      * @type        Function
      * @name        getOfficeUIApplicationDefinition
@@ -678,7 +674,6 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var COOKIE_NAME_RIBBON_ACTIVE_TAB = 'OfficeUI_Ribbon_ActiveTab';
     var COOKIE_NAME_OFFICEUI_CURRENT_STYLE = 'OfficeUI_CurrentStyle';
     var COOKIE_NAME_OFFICEUI_CURRENT_THEME = 'OfficeUI_CurrentTheme';
-    var COOKIE_NAME_RIBBON_STATE = 'OfficeUI_RibbonState';
     var COOKIE_VALIDATY = 365;
 
     // Variables: Various variables that are required for the OfficeUIController to execute.
@@ -693,7 +688,6 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
     var previousStyle = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_STYLE);
     var previousTheme = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_OFFICEUI_CURRENT_THEME);
 
-    // Initializes the controller so that the application is configured to work.
     Initialize();
 
     /**
@@ -705,20 +699,28 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      */
     function Initialize() {
         // Load the 'stylesheetFactory' which is used to manage the various styles.
-        stylesheetFactory.getOfficeUIConfiguration().then(function(data) {
+        stylesheetFactory.getOfficeUIConfiguration().then(function (data) {
             stylesheetData = data;
 
             // Set the style to the previously found style in the cookie or the default style if it's not found.
-            if (previousStyle == '') { $scope.Style = stylesheetFactory.changeStyle(stylesheetData.DefaultStyle); }
-            else { $scope.Style = stylesheetFactory.changeStyle(previousStyle); }
+            if (previousStyle == '') {
+                $scope.Style = stylesheetFactory.changeStyle(stylesheetData.DefaultStyle);
+            }
+            else {
+                $scope.Style = stylesheetFactory.changeStyle(previousStyle);
+            }
 
             // Set the theme to the previously found theme in the cookie or the default theme if it's not found.
-            if (previousTheme == '') { $scope.Theme = stylesheetFactory.changeTheme(stylesheetData.DefaultTheme); }
-            else { $scope.Theme = stylesheetFactory.changeTheme(previousTheme); }
+            if (previousTheme == '') {
+                $scope.Theme = stylesheetFactory.changeTheme(stylesheetData.DefaultTheme);
+            }
+            else {
+                $scope.Theme = stylesheetFactory.changeTheme(previousTheme);
+            }
         });
 
         // Load the 'applicationDefinitionFactory' in which the OfficeUI application data is stored.
-        applicationDefinitionFactory.getOfficeUIApplicationDefinition().then(function(data) {
+        applicationDefinitionFactory.getOfficeUIApplicationDefinition().then(function (data) {
             $scope.Title = data.Title;
             $scope.Icons = data.Icons;
         });
@@ -743,9 +745,6 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
                 else { activeTab = $scope.Tabs[1].Id; }
             } else { activeTab = $scope.Tabs[1].Id; }
         });
-
-        // Sets the current state of the ribbon.
-        ribbonState = ribbonStates.Showed_Initialized;
     }
 
     /**
@@ -1043,17 +1042,8 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
      * If the ribbon is visible, then rhe ribbon does become showed.
      */
     $scope.toggleRibbonState = function() {
-        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) {
-            ribbonState = ribbonStates.Hidden;
-
-            if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_STATE, ribbonStates.Hidden, COOKIE_VALIDATY); }
-        }
-        if (ribbonState == ribbonStates.Visible)
-        {
-            ribbonState = ribbonStates.Showed;
-
-            if (ribbonConfigurationData.PreserveRibbonState) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_STATE, ribbonStates.Showed, COOKIE_VALIDATY); }
-        }
+        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
+        if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
     }
 
     /**
@@ -1316,6 +1306,39 @@ OfficeUIModule.directive('stopPropagation', function () {
         link: function (scope, element, attr) {
             element.bind(attr.stopPropagation, function (e) {
                 e.stopPropagation();
+            });
+        }
+    };
+});
+
+/**
+ * @type            Directive
+ * @usage           Attribute
+ * @name            ngcTooltip
+ *
+ * @description
+ * Defines the 'ngcTooltip' directive. This directive allows us to show a tooltip for a specific element.
+ */
+OfficeUIModule.directive('ngcTooltip', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attributes) {
+            element.bind("mouseenter", function (e) {
+                if (!element.hasClass('disabled')) {
+                    var tooltipElement = $('.tooltip', element.parent());
+
+                   var tooltipTimeout = setTimeout(function () {
+                        $(tooltipElement).show();
+                    }, 1000);
+
+                    element.bind("mouseleave", function (e) {
+                        clearTimeout(tooltipTimeout);
+
+                        $.fn.OfficeUI.waitHandleHideTooltip = setTimeout(function () {
+                            $(tooltipElement).hide();
+                        }, 500);
+                    });
+                }
             });
         }
     };
