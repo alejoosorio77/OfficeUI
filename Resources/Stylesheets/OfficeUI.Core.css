@@ -421,9 +421,12 @@ body {
   position: relative;
   top: 25px;
 }
+#OfficeUI .ribbon .tab-group:not(:first-child) {
+  margin-right: 2px;
+}
 #OfficeUI .ribbon .tab-group .label {
   height: 25px;
-  line-height: 24px;
+  line-height: 23px;
   padding: 0 13px 0 12px;
 }
 #OfficeUI .ribbon .contextual-group-label {
@@ -464,7 +467,7 @@ body {
   border: 1px solid transparent;
   color: #fff;
   margin-right: 4px;
-  min-width: 52px;
+  min-width: 59px;
   padding: 0 3px 0 2px;
 }
 #OfficeUI .ribbon .tab.active {
@@ -480,7 +483,7 @@ body {
 #OfficeUI .ribbon .tabs_content {
   background-color: #fff;
   border-bottom: 1px solid #d4d4d4;
-  height: 92px;
+  height: 93px;
   position: relative;
   z-index: 30;
 }
@@ -537,7 +540,7 @@ body {
 }
 #OfficeUI .ribbon .actions-holder .icon {
   display: inline-block;
-  height: 68px;
+  height: 69px;
   margin-right: 0;
   padding-top: 3px;
   vertical-align: top;
@@ -556,10 +559,11 @@ body {
   text-align: center;
 }
 #OfficeUI .ribbon .actions-holder .big-icon .label {
-  line-height: 15px;
-  padding: 0 3px 0 2px;
+  line-height: 16px;
+  padding-top: 1px;
+  position: relative;
   text-align: center;
-  top: -2px;
+  top: 0px;
 }
 #OfficeUI .ribbon .actions-holder .small-icon-holder {
   height: 23px;

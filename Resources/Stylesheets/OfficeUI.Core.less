@@ -66,7 +66,8 @@ body { font-size: 1em; }
 #OfficeUI .ribbon .tabs li { display: inline-block; }
 #OfficeUI .ribbon .tabs .label { text-align: center; text-transform: uppercase; }
 #OfficeUI .ribbon .tab-group { position: relative; top: 25px; }
-#OfficeUI .ribbon .tab-group .label { height: 25px; line-height: 24px; padding: 0 13px 0 12px; }
+#OfficeUI .ribbon .tab-group:not(:first-child) { margin-right: 2px; }
+#OfficeUI .ribbon .tab-group .label { height: 25px; line-height: 23px; padding: 0 13px 0 12px; }
 #OfficeUI .ribbon .contextual-group-label { font-size: 0.9em; height: 17px; margin-top: 4px; padding: 0 4px; }
 
   /* -- Contextual tabs & tab groups. -- */
@@ -78,12 +79,12 @@ body { font-size: 1em; }
 
   /* -- Styling of the tabs itself. -- */
   #OfficeUI .ribbon .tab { height: 25px; }
-  #OfficeUI .ribbon .tab.application { background-image: none; border: 1px solid transparent; color: #fff; margin-right: 4px; min-width: 52px; padding: 0 3px 0 2px; }
+  #OfficeUI .ribbon .tab.application { background-image: none; border: 1px solid transparent; color: #fff; margin-right: 4px; min-width: 59px; padding: 0 3px 0 2px; }
   #OfficeUI .ribbon .tab.active { background: #fff; border: 1px solid @defaultGrayRibbon; border-bottom-color: #fff; }
   #OfficeUI .ribbon .tab:not(.active) { border: 1px solid transparent; border-bottom-color: @defaultGrayRibbon; }
 
   /* -- Styling of the contents of the tabs. -- */
-  #OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 92px; position: relative; z-index: 30; }
+  #OfficeUI .ribbon .tabs_content { background-color: #fff; border-bottom: 1px solid @defaultGrayRibbon; height: 93px; position: relative; z-index: 30; }
 
       /* -- Styling of the collapse icon. -- */
       #OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
@@ -99,12 +100,12 @@ body { font-size: 1em; }
 
       /* -- Actions. -- */
       #OfficeUI .ribbon .actions-holder { vertical-align: top; }
-      #OfficeUI .ribbon .actions-holder .icon { display: inline-block; height: 68px; margin-right: 0; padding-top: 3px; vertical-align: top; }
+      #OfficeUI .ribbon .actions-holder .icon { display: inline-block; height: 69px; margin-right: 0; padding-top: 3px; vertical-align: top; }
       #OfficeUI .ribbon .actions-holder .icon img { padding: 0 5px 0 5px; }
       #OfficeUI .ribbon .actions-holder .big-icon-holder { height: 68px;}
       #OfficeUI .ribbon .actions-holder .big-icon-holder a { display: block; height: 100%; }
       #OfficeUI .ribbon .actions-holder .big-icon { text-align: center; }
-      #OfficeUI .ribbon .actions-holder .big-icon .label { line-height: 15px; padding: 0 3px 0 2px; text-align: center; top: -2px; }
+      #OfficeUI .ribbon .actions-holder .big-icon .label { line-height: 16px; padding-top: 1px; position: relative; text-align: center; top: 0px; }
       #OfficeUI .ribbon .actions-holder .small-icon-holder { height: 23px; }
       #OfficeUI .ribbon .actions-holder .small-icon { height: 100%; margin-right: 0; padding: 3px 7px 0 0; text-align: left; }
       #OfficeUI .ribbon .actions-holder .small-icon .label { display: inline-block; padding-top: 3px; text-align: left; vertical-align: top; }
