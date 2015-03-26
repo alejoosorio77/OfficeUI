@@ -282,7 +282,7 @@
                   "Id": "icoMeeting",
                   "Resource": "/Resources/Images/Ribbon/Tabs/Home/Meetings.png",
                   "Legend": "Meeting",
-                  "Tooltip": "<strong>Reply with Meeting(Ctrl+Alt+R)</strong><p>Create a meeting request from this item.</p>",
+                  "Tooltip": "<strong>Reply with Meeting (Ctrl+Alt+R)</strong><p>Create a meeting request from this email.</p>",
                   "Type": "sIcon"
                 },
                 {

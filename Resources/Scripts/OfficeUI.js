@@ -512,115 +512,6 @@ OfficeUIModule.factory('stylesheetFactory', ['$http', 'OfficeUIConfigurationServ
     return stylesheetFactoryServiceIntsance;
 }]);
 
-/**
- * @type            Service
- * @name            officeUIRibbonConfigurationFactory
- *
- * @description
- * Provides various ways to work with an OfficeUI Ribbon using the AngularJS way.
- *
- * @dependencies    $http, OfficeUIRibbonConfigurationService.
- */
-OfficeUIModule.factory('officeUIRibbonConfigurationFactory', ['$http', 'OfficeUIRibbonConfigurationService', function($http, OfficeUIRibbonConfigurationService) {
-    /* Define the service instance. This one is returned from the factory and it's through this instance that the
-     required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
-     particular object. */
-    var officeUIRibbonConfigurationFactoryInstance = {};
-
-    /**
-     * @type            Function
-     * @name            getOfficeUIRibbonConfiguration
-     *
-     * @description
-     * Retrieved the OfficeUIRibbonConfiguration file and parse the data so it can be used further in the application.
-     *
-     * @returns         {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous
-     *                                      calls to complete.
-     */
-    officeUIRibbonConfigurationFactoryInstance.getOfficeUIRibbonConfiguration = function() {
-        var promise = OfficeUIRibbonConfigurationService.getOfficeUIRibbonConfiguration();
-
-        promise.then(function(response){});
-
-        return promise;
-    }
-
-    // Return the instance of the service.
-    return officeUIRibbonConfigurationFactoryInstance;
-}]);
-
-/**
- * @type            Service
- * @name            applicationDefinitionFactory
- *
- * @description
- * Provides various ways to work with an OfficeUI application using the AngularJS way.
- *
- * @dependencies    $http, OfficeUIApplicationDefinitionService.
- */
-OfficeUIModule.factory('applicationDefinitionFactory', ['$http', 'OfficeUIApplicationDefinitionService', function($http, OfficeUIApplicationDefinitionService) {
-    /* Define the service instance. This one is returned from the factory and it's through this instance that the
-     required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
-     particular object. */
-    var applicationDefinitionFactoryInstance = {};
-
-    /**
-     * @type        Function
-     * @name        getOfficeUIApplicationDefinition
-     *
-     * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
-     *                                  complete.
-     */
-    applicationDefinitionFactoryInstance.getOfficeUIApplicationDefinition = function() {
-        var promise = OfficeUIApplicationDefinitionService.getOfficeUIApplicationDefinition();
-
-        promise.then(function(response){});
-
-        return promise;
-    }
-
-    // Returns the instance of the service.
-    return applicationDefinitionFactoryInstance;
-}]);
-
-/**
- * @type            Service
- * @name            ribbonDefinitionFactory
- *
- * @description
- * Provides various ways to work with an OfficeUI Ribbon using the AngularJS way.
- *
- * @dependencies    $http, OfficeUIRibbonDefinitionService.
- */
-OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefinitionService', function($http, OfficeUIRibbonDefinitionService) {
-    /* Define the service instance. This one is returned from the factory and it's through this instance that the
-     required methods will be called. Thus all methods that this service needs to expose needs to be defined on this
-     particular object. */
-    var ribbonDefinitionFactoryInstance = {};
-
-    // Defines the variables which are needed for this service.
-    var tabs = [];
-    var contextualGroups = '';
-
-    /**
-     * @type        Function
-     * @name        getOfficeUIApplicationDefinition
-     *
-     * @returns     {HttpPromise}:      A Http Promise which the application does use to wait for asynchronous calls to
-     *                                  complete.
-     */
-    ribbonDefinitionFactoryInstance.getOfficeUIRibbonDefinition = function() {
-        var promise = OfficeUIRibbonDefinitionService.getOfficeUIRibbonDefinition();
-
-        promise.then(function(response){});
-
-        return promise;
-    }
-
-    // Returns the instance of the service.
-    return ribbonDefinitionFactoryInstance;
-}]);
-
 /* ---- End: AngularJS Services. ---- */
 
 /* ---- AngularJS Controllers. ---- */
@@ -634,12 +525,12 @@ OfficeUIModule.factory('ribbonDefinitionFactory', ['$http', 'OfficeUIRibbonDefin
  * controlled.
  *
  * @dependencies    stylesheetFactory                   The factory which is used to manage stylesheets on the website.
- *                  applicationDefinitionFactory        Provides the definition for the OfficeUI application.
- *                  ribbonDefinitionFactory             Provides the definition for the OfficeUI ribbon.
- *                  officeUIRibbonConfigurationFactory  Provides the configuration for the OfficeUI ribbon.
+ *                  OfficeUIApplicationDefinitionService        Provides the definition for the OfficeUI application.
+ *                  OfficeUIRibbonDefinitionService     Provides the definition for the OfficeUI ribbon.
+ *                  OfficeUIRibbonConfigurationService  Provides the configuration for the OfficeUI ribbon.
  */
-OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, applicationDefinitionFactory,
-                                                         ribbonDefinitionFactory, officeUIRibbonConfigurationFactory,
+OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, OfficeUIApplicationDefinitionService,
+                                                         OfficeUIRibbonDefinitionService, OfficeUIRibbonConfigurationService,
                                                          $scope) {
     /**
      * @description
@@ -719,19 +610,19 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, appl
             }
         });
 
-        // Load the 'applicationDefinitionFactory' in which the OfficeUI application data is stored.
-        applicationDefinitionFactory.getOfficeUIApplicationDefinition().then(function (data) {
+        // Load the 'OfficeUIApplicationDefinitionService' in which the OfficeUI application data is stored.
+        OfficeUIApplicationDefinitionService.getOfficeUIApplicationDefinition().then(function (data) {
             $scope.Title = data.Title;
             $scope.Icons = data.Icons;
         });
 
-        // Load the 'officeUIRibbonConfigurationFactory' in which the OfficeUI ribbon data is stored.
-        officeUIRibbonConfigurationFactory.getOfficeUIRibbonConfiguration().then(function(data) {
+        // Load the 'OfficeUIRibbonConfigurationService' in which the OfficeUI ribbon data is stored.
+        OfficeUIRibbonConfigurationService.getOfficeUIRibbonConfiguration().then(function(data) {
             ribbonConfigurationData = data;
         });
 
-        // Load the 'ribbonDefinitionFactory' in which the configuration for the ribbon is found.
-        ribbonDefinitionFactory.getOfficeUIRibbonDefinition().then(function(data) {
+        // Load the 'OfficeUIRibbonDefinitionService' in which the configuration for the ribbon is found.
+        OfficeUIRibbonDefinitionService.getOfficeUIRibbonDefinition().then(function(data) {
             $scope.Tabs = data.Tabs;
             $scope.ContextualGroups = data.ContextualGroups;
 
