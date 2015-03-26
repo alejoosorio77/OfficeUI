@@ -1373,6 +1373,107 @@
           ]
         }
       ]
+    },
+    {
+      "Id": "tabMiscellaneous",
+      "Label": "Miscellaneous",
+      "Groups": [
+        {
+          "Legend": "Appearance",
+          "Areas": [
+            {
+              "Actions": [
+                {
+                  "Id": "drpChangeApplicationStyle",
+                  "Legend": "Change Style:",
+                  "Tooltip": "<strong>Change Style</strong><p>Change the style of the application</p>",
+                  "Type": "Dropdown",
+                  "DefaultSelection": "Blue",
+                  "Width": "150px",
+                  "Items": [
+                    {
+                      "Label": "Blue"
+                    },
+                    {
+                      "Label": "Green"
+                    },
+                    {
+                      "Label": "LightBlue"
+                    },
+                    {
+                      "Label": "Orange"
+                    },
+                    {
+                      "Label": "Purple"
+                    },
+                    {
+                      "Label": "Red"
+                    },
+                    {
+                      "Label": "Turquoise"
+                    }
+                  ]
+                },
+                {
+                  "Id": "drpChangeApplicationTheme",
+                  "Legend": "Change Theme:",
+                  "Tooltip": "<strong>Change Theme</strong><p>Change the theme of the application</p>",
+                  "Type": "Dropdown",
+                  "DefaultSelection": "No Background",
+                  "Width": "150px",
+                  "Items": [
+                    {
+                      "Label": "No Background"
+                    },
+                    {
+                      "Label": "Calligraphy"
+                    },
+                    {
+                      "Label": "Circles And Stripes"
+                    },
+                    {
+                      "Label": "Circuit"
+                    },
+                    {
+                      "Label": "Clouds"
+                    },
+                    {
+                      "Label": "Doodle Circles"
+                    },
+                    {
+                      "Label": "Doodle Diamonds"
+                    },
+                    {
+                      "Label": "Geometry"
+                    },
+                    {
+                      "Label": "Lunchbox"
+                    },
+                    {
+                      "Label": "School Supplies"
+                    },
+                    {
+                      "Label": "Spring"
+                    },
+                    {
+                      "Label": "Stars"
+                    },
+                    {
+                      "Label": "Straws"
+                    },
+                    {
+                      "Label": "Tree Rings"
+                    },
+                    {
+                      "Label": "Underwater"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "ContextualGroups": [

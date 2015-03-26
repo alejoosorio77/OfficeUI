@@ -579,6 +579,9 @@ body {
 #OfficeUI .ribbon .actions-holder .small-icon img {
   padding: 0 0 0 3px;
 }
+#OfficeUI .ribbon .actions-holder .dropdown-holder {
+  margin-bottom: 2px;
+}
 /* -- Tooltips. -- */
 #OfficeUI .ribbon .tooltip {
   background-color: white;

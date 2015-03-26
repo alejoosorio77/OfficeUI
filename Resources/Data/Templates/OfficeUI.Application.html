@@ -192,6 +192,28 @@
                                        data-ng-style="{width:'{{action.Width}}'}"/>
                             </div>
 
+                            <!-- This is what is being rendered if it's a dropdown element. -->
+                            <div class="dropdown-holder"
+                                 data-ng-if="action.Type == 'Dropdown'"
+
+                                 data-officeui-tooltip="{'action': action.Id}">
+                                <span>{{action.Legend}}</span>
+                                <div id="{{action.Id}}"
+                                     class="dropdown"
+
+                                     data-on-change="$('{{action.Id}}').scope().changeTheme($(this).selectedItem); $('{{action.Id}}').scope().refresh();"
+
+                                     data-ng-style="{width:'{{action.Width}}'}"
+
+                                     data-officeui-control-dropdown>
+
+                                    <div class="dropdown-legend">{{action.DefaultSelection}}</div>
+                                    <ul class="elements">
+                                        <li data-ng-repeat="item in action.Items">{{item.Label}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
                             <!-- Provides the tooltip to render. -->
                             <div class="tooltip" data-ng-if="action.Tooltip">
                                 <div data-ng-bind-html="action.Tooltip"></div>

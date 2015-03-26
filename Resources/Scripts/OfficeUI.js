@@ -1239,13 +1239,13 @@ OfficeUIModule.directive('officeuiTooltip', function () {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            customControlDropdown
+ * @name            officeuiControlDropdown
  *
  * @description
- * Defines the 'customControlDropdown' directive. This directive allows us to transform an element into an
+ * Defines the 'officeuiControlDropdown' directive. This directive allows us to transform an element into an
  * OfficeUIDropdown element.
  */
-OfficeUIModule.directive('customControlDropdown', function () {
+OfficeUIModule.directive('officeuiControlDropdown', function () {
     return {
         restrict: 'A',
         link: function (scope, element, attributes) {
