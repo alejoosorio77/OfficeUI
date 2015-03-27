@@ -955,10 +955,6 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, Offi
     });
 });
 
-/* ---- End: AngularJS Controllers. ---- */
-
-/* ---- AngularJS Directives. ---- */
-
 /**
  * @type            Directive
  * @usage           Attribute

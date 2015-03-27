@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="site-contents" style="height: calc(100% - 20px);">
-                        <div id="menu" class="no-select">
+                        <div class="menu-wrapper" class="no-select">
 
                         </div>
                         <div id="site-contents" style="float: left; height: 100%; padding: 20px; overflow-y: scroll; width: calc(100% - 250px);">
@@ -63,7 +63,7 @@
             <footer>
                 <div class="navigation no-select" style="z-index: 100;">
                     <ul>
-                        <li><a id="menuInstallationGuide" href="/Docs/Installation-Guide/index.html" data-menu="/Docs/Installation-Guide/menu.html">Installation Guide</a></li>
+                        <li><a id="menuOfficeUIReference" href="/Docs/OfficeUI-Reference/index.html" data-menu="/Docs/OfficeUI-Reference/menu.html">OfficeUI Reference</a></li>
                         <li><a href="#">API Reference</a></li>
                         <li><a href="#">Developers Guide</a></li>
                     </ul>
@@ -89,23 +89,37 @@
                 }
             }
 
-            // Make sure that jQuery is loaded.
+            /**
+             * @type            Function
+             * @name            N.A.
+             *
+             * @description
+             * When this function is executed, quite a few things does happen:
+             * 1.   Set's the 'menuOfficeUIReference' id as the active one.
+             * 2.   Load the menu and the contents for this menu.
+             * 3.   Make sure that when you click an entry in the footer, that this does become active and the others
+             *      become inactive.
+             */
             $(function() {
-                $('#menuInstallationGuide').addClass('active');
+                $('#menuOfficeUIReference').addClass('active');
 
-                $('#menu').load($('#menuInstallationGuide').attr('data-menu'));
-                $('#site-contents').load($('#menuInstallationGuide').attr('href'));
+                $('.menu-wrapper').load($('#menuOfficeUIReference').attr('data-menu'), function() {
+                    $('.menu-wrapper .menu').OfficeUIMenu();
+                });
+                $('#site-contents').load($('#menuOfficeUIReference').attr('href'));
 
                 // When you click a link the footer, make sure that the requested page is loaded through ajax calls.
                 $('footer a').click(function() {
                     $('footer a').removeClass('active');
                     $(this).addClass('active');
 
-                    $('#menu').load($(this).attr('data-menu'));
+                    $('#menu-wrapper').load($(this).attr('data-menu'));
                     $('#site-contents').load($(this).attr('href'));
 
                     return false;
                 })
+
+
             });
         </script>
     </body>

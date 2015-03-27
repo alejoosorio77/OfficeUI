@@ -602,7 +602,7 @@ body {
   display: none;
   position: fixed;
   padding: 5px 11px;
-  top: 142px;
+  top: 143px;
   width: 220px;
 }
 #OfficeUI .ribbon .tooltip strong {
@@ -613,6 +613,41 @@ body {
   line-height: 15px;
   margin: 0;
   padding: 5px 0;
+}
+/* ---- Menu ---- */
+#OfficeUI .menu-wrapper {
+  background-color: green;
+  background: linear-gradient(#ffffff, #f0f0f0);
+  border-right: 1px solid #d4d4d4;
+  float: left;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 10px 10px 0 10px;
+  width: 250px;
+}
+#OfficeUI .menu i {
+  left: -5px;
+  position: relative;
+  width: 10px;
+}
+#OfficeUI .menu li {
+  line-height: 20px;
+  margin-bottom: 2px;
+}
+#OfficeUI .menu li .legend {
+  padding-left: 10px;
+}
+#OfficeUI .menu li.active {
+  background-color: #e1e1e1;
+}
+#OfficeUI .menu li ul li .legend {
+  padding-left: 20px;
+}
+#OfficeUI .menu li ul li ul li .legend {
+  padding-left: 40px;
+}
+#OfficeUI .menu .collapsed + li:not(.animateShowChildren) {
+  display: none;
 }
 /* ---- Animations ---- */
 /* -- Less classes to include in other animations. -- */
@@ -668,45 +703,43 @@ body {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: fadeInContextualGroup;
-  -webkit-animation-duration: 0.2s;
   animation-name: fadeInContextualGroup;
-  animation-duration: 0.2s;
 }
 #OfficeUI .tabs-content-hidden {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: hideRibbon;
-  -webkit-animation-duration: 0.25s;
   animation-name: hideRibbon;
-  animation-duration: 0.25s;
 }
 #OfficeUI .tabs-content-visible {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: showRibbon;
-  -webkit-animation-duration: 0.25s;
   animation-name: showRibbon;
-  animation-duration: 0.25s;
 }
 #OfficeUI .ribbon-hidden {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: moveContentsUp;
-  -webkit-animation-duration: 0.25s;
   animation-name: moveContentsUp;
-  animation-duration: 0.25s;
 }
 #OfficeUI .ribbon-showed {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
   -webkit-animation-fill-mode: forwards;
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-name: moveContentsDown;
-  -webkit-animation-duration: 0.25s;
   animation-name: moveContentsDown;
-  animation-duration: 0.25s;
 }
 /* -- Animations itself. Each animation is written double due to a special syntax needed for Google, Safari and Opera. -- */
 @-webkit-keyframes fadeInContextualGroup {
@@ -787,5 +820,55 @@ body {
   }
   to {
     top: 142px;
+  }
+}
+#OfficeUI .animateShowChildren {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: showMenuChildren;
+  animation-name: showMenuChildren;
+}
+#OfficeUI .animateHideChildren {
+  -webkit-animation-duration: 0.25s;
+  animation-duration: 0.25s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: hideMenuChildren;
+  animation-name: hideMenuChildren;
+}
+@-webkit-keyframes showMenuChildren {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes showMenuChildren {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes hideMenuChildren {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes hideMenuChildren {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

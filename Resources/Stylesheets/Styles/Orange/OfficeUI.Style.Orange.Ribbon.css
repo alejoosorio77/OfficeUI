@@ -153,8 +153,11 @@
 #OfficeUI footer a.active {
   color: #f0623e;
 }
-#OfficeUI #menu ul li:not(.active):not(.no-hover):hover {
+#OfficeUI .menu ul li:not(.active):not(.no-hover):hover {
   background-color: #fce4dc;
+}
+#OfficeUI .menu i:hover {
+  color: #d24726;
 }
 /* ---- Variables. ---- */
 /* ---- OfficeUI ribbon styling. ---- */

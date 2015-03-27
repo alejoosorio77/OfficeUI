@@ -55,8 +55,11 @@
 #OfficeUI footer a.active {
   color: #c75659;
 }
-#OfficeUI #menu ul li:not(.active):not(.no-hover):hover {
+#OfficeUI .menu ul li:not(.active):not(.no-hover):hover {
   background-color: #fadcdd;
+}
+#OfficeUI .menu i:hover {
+  color: #a4373a;
 }
 /* ====================================================================================================
  * Filename:      OfficeUI.Style.Red.Ribbon.less

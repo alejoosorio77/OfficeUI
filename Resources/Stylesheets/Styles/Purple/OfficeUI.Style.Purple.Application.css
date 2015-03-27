@@ -167,6 +167,9 @@
 #OfficeUI footer a.active {
   color: #8653a5;
 }
-#OfficeUI #menu ul li:not(.active):not(.no-hover):hover {
+#OfficeUI .menu ul li:not(.active):not(.no-hover):hover {
   background-color: #eadcf2;
+}
+#OfficeUI .menu i:hover {
+  color: #6a3889;
 }

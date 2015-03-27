@@ -60,6 +60,52 @@ $(function() {
 
     /**
      * @type            Plugin
+     * @name            OfficeUIMenu
+     *
+     * @description
+     * This plugin makes it possible to transform a specific element into an OfficeUI menu elementt. This is done by
+     * adding elements and other information.
+     */
+    $.fn.OfficeUIMenu = function() {
+        var next = function(selector) {
+            var $element = $(selector);
+
+            return $element
+                .children(":eq(0)")
+                .add($element.next())
+                .add($element.parents().filter(function() {
+                    return $(this).next().length > 0;
+                }).next()).first();
+        }
+
+        var previous = function(selector) {
+            var $element = $(selector);
+
+            return $element
+                .prev().find("*:last")
+                .add($element.parent())
+                .add($element.prev())
+                .last();
+        }
+
+        var element = $('li.has-children', this);
+        var legend = $('.legend', element);
+        $(legend).prepend('<i class="fa fa-caret-right"></i>')
+        $(element).addClass('collapsed');
+
+        // Make sure that when you click the i element, that the icon does change from collapse to hidden.
+        $('i', this).click(function(e) {
+            var element = $(this).parent().parent().next();
+            console.log(element);
+            if ($(this).hasClass('fa-caret-down')) { $(this).removeClass('fa-caret-down').addClass('fa-caret-right'); element.removeClass('animateShowChildren'); element.addClass('animateHideChildren'); }
+            else if ($(this).hasClass('fa-caret-right')) { $(this).removeClass('fa-caret-right').addClass('fa-caret-down'); element.removeClass('animateHideChildren'); element.addClass('animateShowChildren'); }
+        });
+
+        return this; // Return this object to ensure that methods can be chained.
+    };
+
+    /**
+     * @type            Plugin
      * @name            OfficeUIDropdown
      *
      * @description
@@ -208,6 +254,16 @@ $(function() {
      * 'OfficeUI' into an OfficeUI DropDown.
      */
     $('#OfficeUI .dropdown').OfficeUIDropdown();
+
+    /**
+     * @type        DOM Manipulation.
+     * @name        N.A.
+     *
+     * @description
+     * This call will transform every element with a class 'menu' which is placed inside a container with id
+     * 'OfficeUI' into an OfficeUI Menu.
+     */
+    $('#OfficeUI .dropdown').OfficeUIMenu();
 
     /**
      * @type        DOM Manipulation
