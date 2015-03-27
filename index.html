@@ -63,9 +63,9 @@
             <footer>
                 <div class="navigation no-select" style="z-index: 100;">
                     <ul>
-                        <li><a id="menuOfficeUIReference" href="/Docs/OfficeUI-Reference/index.html" data-menu="/Docs/OfficeUI-Reference/menu.html">OfficeUI Reference</a></li>
-                        <li><a href="#">API Reference</a></li>
-                        <li><a href="#">Developers Guide</a></li>
+                        <li><a id="menuOfficeUIReference" href="/Docs/OfficeUI-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-Reference/menu.html">OfficeUI Reference</a></li>
+                        <li><a id="menuOfficeAPIReference" href="/Docs/OfficeUI-API-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-API-Reference/menu.html">API Reference</a></li>
+                        <li><a id="menuOfficeDevelopersGuide" href="/Docs/OfficeUI-Developers-Guide/Pages/index.html" data-menu="/Docs/OfficeUI-Developers-Guide/menu.html">Developers Guide</a></li>
                     </ul>
                 </div>
                 <div class="notification-area no-select">
@@ -104,7 +104,9 @@
                 $('#menuOfficeUIReference').addClass('active');
 
                 $('.menu-wrapper').load($('#menuOfficeUIReference').attr('data-menu'), function() {
-                    $('.menu-wrapper .menu').OfficeUIMenu();
+                    $('.menu-wrapper .menu').OfficeUIMenu({
+                        contentArea: '#site-contents'
+                    });
                 });
                 $('#site-contents').load($('#menuOfficeUIReference').attr('href'));
 
@@ -112,8 +114,11 @@
                 $('footer a').click(function() {
                     $('footer a').removeClass('active');
                     $(this).addClass('active');
-
-                    $('#menu-wrapper').load($(this).attr('data-menu'));
+                    $('.menu-wrapper').load($(this).attr('data-menu'), function(){
+                        $('.menu-wrapper .menu').OfficeUIMenu({
+                            contentArea: '#site-contents'
+                        });
+                    });
                     $('#site-contents').load($(this).attr('href'));
 
                     return false;

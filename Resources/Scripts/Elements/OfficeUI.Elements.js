@@ -66,27 +66,25 @@ $(function() {
      * This plugin makes it possible to transform a specific element into an OfficeUI menu elementt. This is done by
      * adding elements and other information.
      */
-    $.fn.OfficeUIMenu = function() {
-        var next = function(selector) {
-            var $element = $(selector);
+    $.fn.OfficeUIMenu = function(options) {
 
-            return $element
-                .children(":eq(0)")
-                .add($element.next())
-                .add($element.parents().filter(function() {
-                    return $(this).next().length > 0;
-                }).next()).first();
-        }
+        var settings = $.extend({
+            contentArea: null
+        }, options );
 
-        var previous = function(selector) {
-            var $element = $(selector);
+        $('li').click(function(e) {
+            console.log($(this));
+            var contentArea = $(settings.contentArea);
+            if (typeof $(this).attr('data-follow-link') !== 'undefined' && $(this).attr('data-follow-link') !== '') {
+                console.log($(this).attr('data-follow-link'));
+                $(contentArea).load($(this).attr('data-follow-link'));
 
-            return $element
-                .prev().find("*:last")
-                .add($element.parent())
-                .add($element.prev())
-                .last();
-        }
+                $('li.active', $(this).closest('.menu')).removeClass('active');
+                $(this).addClass('active');
+            }
+
+            e.preventDefault();
+        });
 
         var element = $('li.has-children', this);
         var legend = $('.legend', element);
@@ -99,6 +97,8 @@ $(function() {
             console.log(element);
             if ($(this).hasClass('fa-caret-down')) { $(this).removeClass('fa-caret-down').addClass('fa-caret-right'); element.removeClass('animateShowChildren'); element.addClass('animateHideChildren'); }
             else if ($(this).hasClass('fa-caret-right')) { $(this).removeClass('fa-caret-right').addClass('fa-caret-down'); element.removeClass('animateHideChildren'); element.addClass('animateShowChildren'); }
+
+            e.preventDefault();
         });
 
         return this; // Return this object to ensure that methods can be chained.
@@ -254,16 +254,6 @@ $(function() {
      * 'OfficeUI' into an OfficeUI DropDown.
      */
     $('#OfficeUI .dropdown').OfficeUIDropdown();
-
-    /**
-     * @type        DOM Manipulation.
-     * @name        N.A.
-     *
-     * @description
-     * This call will transform every element with a class 'menu' which is placed inside a container with id
-     * 'OfficeUI' into an OfficeUI Menu.
-     */
-    $('#OfficeUI .dropdown').OfficeUIMenu();
 
     /**
      * @type        DOM Manipulation
