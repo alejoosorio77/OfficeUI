@@ -154,7 +154,7 @@
   color: #f0623e;
 }
 #OfficeUI .menu ul li:not(.active):not(.no-hover):hover {
-  background-color: #fce4dc;
+  background-color: #fcece9;
 }
 #OfficeUI .menu i:hover {
   color: #d24726;
