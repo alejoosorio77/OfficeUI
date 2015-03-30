@@ -320,6 +320,10 @@ body {
 body {
   font-size: 1em;
 }
+/* ---- Classes which can be set by standard AngularJS directives. */
+[ng-cloak] {
+  display: none !important;
+}
 /* ---- Elements to help debugging. ---- */
 #OfficeUI .debug {
   border: 1px red dashed;

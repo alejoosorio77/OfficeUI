@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="OfficeUI" data-ng-controller="OfficeUIController as OfficeUIController">
+<html data-ng-app="OfficeUI">
     <head>
         <title>OfficeUI (Version 1.0.0)</title>
 
@@ -33,9 +33,9 @@
         <link rel="stylesheet" href="#" data-ng-href="{{Style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
         <link rel="stylesheet" href="#" data-ng-href="{{Theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
     </head>
-    <body>
+    <body data-ng-controller="OfficeUIController as OfficeUIController">
         <!-- Defines the OfficeUI container. All OfficeUI components should be placed in here. -->
-        <div id="OfficeUI">
+        <div id="OfficeUI" ng-cloak>
 
             <!-- Defines the OfficeUI application container. -->
             <div>

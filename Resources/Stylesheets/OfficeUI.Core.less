@@ -37,6 +37,12 @@
 html, body { height: 100%; }
 body { font-size: 1em; }
 
+/* ---- Classes which can be set by standard AngularJS directives. */
+[ng-cloak]
+{
+  display: none !important;
+}
+
 /* ---- Elements to help debugging. ---- */
 #OfficeUI .debug { border: 1px red dashed; } /* When this class is added onto a given element, the element is being
                                                 marked with a red dashed border around it. This is helpful for

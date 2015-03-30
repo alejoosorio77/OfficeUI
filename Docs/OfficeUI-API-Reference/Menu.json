@@ -10,11 +10,11 @@
           "Children": [
             {
               "Name": "From Source Package",
-              "Data": "/Docs/OfficeUI-Reference/Pages/Installation/from-source-package.html",
+              "Data": "/Docs/OfficeUI-Reference/Pages/Installation/from-source-package.html"
             },
             {
               "Name": "From Release Package",
-              "Data": "/Docs/OfficeUI-Reference/Pages/Installation/from-release-package.html",
+              "Data": "/Docs/OfficeUI-Reference/Pages/Installation/from-release-package.html"
             }
           ]
         }

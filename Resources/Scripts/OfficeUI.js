@@ -590,6 +590,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, Offi
      */
     function Initialize() {
         // Load the 'stylesheetFactory' which is used to manage the various styles.
+        setTimeout(function() {
         stylesheetFactory.getOfficeUIConfiguration().then(function (data) {
             stylesheetData = data;
 
@@ -609,6 +610,7 @@ OfficeUIModule.controller('OfficeUIController', function(stylesheetFactory, Offi
                 $scope.Theme = stylesheetFactory.changeTheme(previousTheme);
             }
         });
+        }, 10000);
 
         // Load the 'OfficeUIApplicationDefinitionService' in which the OfficeUI application data is stored.
         OfficeUIApplicationDefinitionService.getOfficeUIApplicationDefinition().then(function (data) {
