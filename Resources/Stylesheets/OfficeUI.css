@@ -97,11 +97,11 @@ body {
 
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
 .spinner-circle {
-  -moz-transform: scale(0.15);
-  -ms-transform: scale(0.15);
-  -o-transform: scale(0.15);
-  -webkit-transform: scale(0.15);
-  transform: scale(0.15);
+  -moz-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
   width: 70px;
   height: 70px;
   margin-left: auto;
@@ -118,11 +118,11 @@ body {
     -o-animation-name: fade-circle;
     -webkit-animation-name: fade-circle;
     animation-name: fade-circle;
-    -moz-border-radius: 23px;
-    -ms-border-radius: 23px;
-    -o-border-radius: 23px;
-    -webkit-border-radius: 23px;
-    border-radius: 23px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
     -moz-animation-iteration-count: infinite;
     -ms-animation-iteration-count: infinite;
     -o-animation-iteration-count: infinite;
@@ -133,8 +133,8 @@ body {
     -o-animation-direction: normal;
     -webkit-animation-direction: normal;
     animation-direction: normal;
-    width: 47px;
-    height: 47px;
+    width: 10px;
+    height: 10px;
     background-color: #0072c6;
     position: absolute; }
   .spinner-circle .animate-step-01 {
@@ -144,63 +144,63 @@ body {
     -webkit-animation-delay: 0.45s;
     animation-delay: 0.45s;
     top: 0;
-    left: 105px; }
+    left: 30px; }
   .spinner-circle .animate-step-02 {
     -moz-animation-delay: 0.6s;
     -ms-animation-delay: 0.6s;
     -o-animation-delay: 0.6s;
     -webkit-animation-delay: 0.6s;
     animation-delay: 0.6s;
-    top: 30px;
-    left: 180px; }
+    top: 10px;
+    left: 50px; }
   .spinner-circle .animate-step-03 {
     -moz-animation-delay: 0.75s;
     -ms-animation-delay: 0.75s;
     -o-animation-delay: 0.75s;
     -webkit-animation-delay: 0.75s;
     animation-delay: 0.75s;
-    top: 105px;
-    left: 210px; }
+    top: 30px;
+    left: 60px; }
   .spinner-circle .animate-step-04 {
     -moz-animation-delay: 0.9s;
     -ms-animation-delay: 0.9s;
     -o-animation-delay: 0.9s;
     -webkit-animation-delay: 0.9s;
     animation-delay: 0.9s;
-    top: 180px;
-    left: 180px; }
+    top: 50px;
+    left: 50px; }
   .spinner-circle .animate-step-05 {
     -moz-animation-delay: 1.05s;
     -ms-animation-delay: 1.05s;
     -o-animation-delay: 1.05s;
     -webkit-animation-delay: 1.05s;
     animation-delay: 1.05s;
-    top: 220px;
-    left: 105px; }
+    top: 60px;
+    left: 30px; }
   .spinner-circle .animate-step-06 {
     -moz-animation-delay: 1.2s;
     -ms-animation-delay: 1.2s;
     -o-animation-delay: 1.2s;
     -webkit-animation-delay: 1.2s;
     animation-delay: 1.2s;
-    top: 180px;
-    left: 30px; }
+    top: 50px;
+    left: 10px; }
   .spinner-circle .animate-step-07 {
     -moz-animation-delay: 1.35s;
     -ms-animation-delay: 1.35s;
     -o-animation-delay: 1.35s;
     -webkit-animation-delay: 1.35s;
     animation-delay: 1.35s;
-    top: 105px;
-    left: 0; }
+    top: 30px;
+    left: 0px; }
   .spinner-circle .animate-step-08 {
     -moz-animation-delay: 1.5s;
     -ms-animation-delay: 1.5s;
     -o-animation-delay: 1.5s;
     -webkit-animation-delay: 1.5s;
     animation-delay: 1.5s;
-    top: 30px;
-    left: 30px; }
+    top: 10px;
+    left: 10px; }
 @-moz-keyframes fade-circle {
   0% {
     background-color: #0071c5; }
