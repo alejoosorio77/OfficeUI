@@ -27,105 +27,137 @@
         <link rel="stylesheet" href="/Resources/External/Bower/fontawesome/css/font-awesome.min.css">
 
         <!-- Include all the required stylesheets. -->
-        <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Core.min.css" />
+        <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.css" />
         <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Site.min.css" />
 
         <link rel="stylesheet" href="#" data-ng-href="{{Style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
         <link rel="stylesheet" href="#" data-ng-href="{{Theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
     </head>
     <body data-ng-controller="OfficeUIController as OfficeUIController">
-        <!-- Defines the OfficeUI container. All OfficeUI components should be placed in here. -->
-        <div id="OfficeUI" ng-cloak>
+        <!-- Defines the OfficeUI holder. -->
+        <div id="OfficeUI">
+            <!-- Defines the loading area. -->
+            <div class="area-loading center-screen" style="text-align: center;">
+                <h1>Office User Interface for Web</h1>
 
-            <!-- Defines the OfficeUI application container. -->
-            <div>
-
-                <!-- Defines that the OfficeUI Application should be rendered here. -->
-                <div officeui-application=""></div>
-
-                <div class="content-wrapper" style="position: absolute; top: 142px; bottom: 66px; width: 100%;" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}">
-                    <div class="breadcrumb no-select" style="height: 20px; position: relative; border-bottom: 1px solid #d4d4d4; line-height: 20px; padding-left: 10px;">
-                        <span style="padding-right: 5px;">Content Management</span>
-                        <i class="fa fa-caret-right" style="padding-right: 5px;"></i>
-                        <span>Personalization</span>
+                <!-- Defines the loading spinner which is implemented. -->
+                <div class="spinner-circle">
+                    <div class="animation-image animate-step-01">
                     </div>
-
-                    <div class="site-contents" style="height: calc(100% - 20px);">
-                        <div class="menu-wrapper" class="no-select">
-
-                        </div>
-                        <div id="site-contents" style="float: left; height: 100%; padding: 20px; overflow-y: scroll; width: calc(100% - 250px);">
-
-                        </div>
+                    <div class="animation-image animate-step-02">
+                    </div>
+                    <div class="animation-image animate-step-03">
+                    </div>
+                    <div class="animation-image animate-step-04">
+                    </div>
+                    <div class="animation-image animate-step-05">
+                    </div>
+                    <div class="animation-image animate-step-06">
+                    </div>
+                    <div class="animation-image animate-step-07">
+                    </div>
+                    <div class="animation-image animate-step-08">
                     </div>
                 </div>
             </div>
-            <footer>
-                <div class="navigation no-select" style="z-index: 100;">
-                    <ul>
-                        <li><a id="menuOfficeUIReference" href="/Docs/OfficeUI-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-Reference/menu.html">OfficeUI Reference</a></li>
-                        <li><a id="menuOfficeAPIReference" href="/Docs/OfficeUI-API-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-API-Reference/menu.html">API Reference</a></li>
-                        <li><a id="menuOfficeDevelopersGuide" href="/Docs/OfficeUI-Developers-Guide/Pages/index.html" data-menu="/Docs/OfficeUI-Developers-Guide/menu.html">Developers Guide</a></li>
-                    </ul>
-                </div>
-                <div class="notification-area no-select">
-                    Items: 1,242
-                </div>
-            </footer>
+
+            <!-- Defines the main application area. -->
+            <div class="area-application">
+
+            </div>
         </div>
+        <!--&lt;!&ndash; Defines the OfficeUI container. All OfficeUI components should be placed in here. &ndash;&gt;-->
+        <!--<div id="OfficeUI" ng-cloak>-->
 
-        <!-- Provides scripts which are required for the application to work. -->
-        <script type="text/javascript">
-            function onDropdownChange(id, element) {
-                var scope = element.scope();
+            <!--&lt;!&ndash; Defines the OfficeUI application container. &ndash;&gt;-->
+            <!--<div>-->
 
-                if (id == 'drpChangeApplicationStyle') {
-                    scope.changeStyle(element.selectedItem);
-                    scope.refresh();
-                }
-                else if (id == 'drpChangeApplicationTheme') {
-                    scope.changeTheme(element.selectedItem);
-                    scope.refresh();
-                }
-            }
+                <!--&lt;!&ndash; Defines that the OfficeUI Application should be rendered here. &ndash;&gt;-->
+                <!--<div officeui-application=""></div>-->
 
-            /**
-             * @type            Function
-             * @name            N.A.
-             *
-             * @description
-             * When this function is executed, quite a few things does happen:
-             * 1.   Set's the 'menuOfficeUIReference' id as the active one.
-             * 2.   Load the menu and the contents for this menu.
-             * 3.   Make sure that when you click an entry in the footer, that this does become active and the others
-             *      become inactive.
-             */
-            $(function() {
-                $('#menuOfficeUIReference').addClass('active');
+                <!--<div class="content-wrapper" style="position: absolute; top: 142px; bottom: 66px; width: 100%;" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}">-->
+                    <!--<div class="breadcrumb no-select" style="height: 20px; position: relative; border-bottom: 1px solid #d4d4d4; line-height: 20px; padding-left: 10px;">-->
+                        <!--<span style="padding-right: 5px;">Content Management</span>-->
+                        <!--<i class="fa fa-caret-right" style="padding-right: 5px;"></i>-->
+                        <!--<span>Personalization</span>-->
+                    <!--</div>-->
 
-                $('.menu-wrapper').load($('#menuOfficeUIReference').attr('data-menu'), function() {
-                    $('.menu-wrapper .menu').OfficeUIMenu({
-                        contentArea: '#site-contents'
-                    });
-                });
-                $('#site-contents').load($('#menuOfficeUIReference').attr('href'));
+                    <!--<div class="site-contents" style="height: calc(100% - 20px);">-->
+                        <!--<div class="menu-wrapper" class="no-select">-->
 
-                // When you click a link the footer, make sure that the requested page is loaded through ajax calls.
-                $('footer a').click(function() {
-                    $('footer a').removeClass('active');
-                    $(this).addClass('active');
-                    $('.menu-wrapper').load($(this).attr('data-menu'), function(){
-                        $('.menu-wrapper .menu').OfficeUIMenu({
-                            contentArea: '#site-contents'
-                        });
-                    });
-                    $('#site-contents').load($(this).attr('href'));
+                        <!--</div>-->
+                        <!--<div id="site-contents" style="float: left; height: 100%; padding: 20px; overflow-y: scroll; width: calc(100% - 250px);">-->
 
-                    return false;
-                })
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<footer>-->
+                <!--<div class="navigation no-select" style="z-index: 100;">-->
+                    <!--<ul>-->
+                        <!--<li><a id="menuOfficeUIReference" href="/Docs/OfficeUI-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-Reference/menu.html">OfficeUI Reference</a></li>-->
+                        <!--<li><a id="menuOfficeAPIReference" href="/Docs/OfficeUI-API-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-API-Reference/menu.html">API Reference</a></li>-->
+                        <!--<li><a id="menuOfficeDevelopersGuide" href="/Docs/OfficeUI-Developers-Guide/Pages/index.html" data-menu="/Docs/OfficeUI-Developers-Guide/menu.html">Developers Guide</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="notification-area no-select">-->
+                    <!--Items: 1,242-->
+                <!--</div>-->
+            <!--</footer>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; Provides scripts which are required for the application to work. &ndash;&gt;-->
+        <!--<script type="text/javascript">-->
+            <!--function onDropdownChange(id, element) {-->
+                <!--var scope = element.scope();-->
+
+                <!--if (id == 'drpChangeApplicationStyle') {-->
+                    <!--scope.changeStyle(element.selectedItem);-->
+                    <!--scope.refresh();-->
+                <!--}-->
+                <!--else if (id == 'drpChangeApplicationTheme') {-->
+                    <!--scope.changeTheme(element.selectedItem);-->
+                    <!--scope.refresh();-->
+                <!--}-->
+            <!--}-->
+
+            <!--/**-->
+             <!--* @type            Function-->
+             <!--* @name            N.A.-->
+             <!--*-->
+             <!--* @description-->
+             <!--* When this function is executed, quite a few things does happen:-->
+             <!--* 1.   Set's the 'menuOfficeUIReference' id as the active one.-->
+             <!--* 2.   Load the menu and the contents for this menu.-->
+             <!--* 3.   Make sure that when you click an entry in the footer, that this does become active and the others-->
+             <!--*      become inactive.-->
+             <!--*/-->
+            <!--$(function() {-->
+                <!--$('#menuOfficeUIReference').addClass('active');-->
+
+                <!--$('.menu-wrapper').load($('#menuOfficeUIReference').attr('data-menu'), function() {-->
+                    <!--$('.menu-wrapper .menu').OfficeUIMenu({-->
+                        <!--contentArea: '#site-contents'-->
+                    <!--});-->
+                <!--});-->
+                <!--$('#site-contents').load($('#menuOfficeUIReference').attr('href'));-->
+
+                <!--// When you click a link the footer, make sure that the requested page is loaded through ajax calls.-->
+                <!--$('footer a').click(function() {-->
+                    <!--$('footer a').removeClass('active');-->
+                    <!--$(this).addClass('active');-->
+                    <!--$('.menu-wrapper').load($(this).attr('data-menu'), function(){-->
+                        <!--$('.menu-wrapper .menu').OfficeUIMenu({-->
+                            <!--contentArea: '#site-contents'-->
+                        <!--});-->
+                    <!--});-->
+                    <!--$('#site-contents').load($(this).attr('href'));-->
+
+                    <!--return false;-->
+                <!--})-->
 
 
-            });
-        </script>
+            <!--});-->
+        <!--</script>-->
     </body>
 </html>
