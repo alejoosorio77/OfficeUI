@@ -27,23 +27,26 @@
 /* ---- Import Statements. ---- */
 @import 'OfficeUI.Reset.css';
 
+/* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely. ---- */
+@font-face { font-family: "Segoe UI"; font-weight: 200; src: local("Segoe UI Light"); }
+@font-face { font-family: "Segoe UI"; font-weight: 300; src: local("Segoe UI Semilight"); }
+@font-face { font-family: "Segoe UI"; font-weight: 400; src: local("Segoe UI"); }
+@font-face { font-family: "Segoe UI"; font-weight: 600; src: local("Segoe UI Semibold"); }
+@font-face { font-family: "Segoe UI"; font-weight: 700; src: local("Segoe UI Bold"); }
+@font-face { font-family: "Segoe UI"; font-style: italic; font-weight: 400; src: local("Segoe UI Italic"); }
+@font-face { font-family: "Segoe UI"; font-style: italic; font-weight: 700; src: local("Segoe UI Bold Italic"); }
+
 /* ---- Useful mixins. ---- */
 @mixin square-box($dimensions) { width: $dimensions; height: $dimensions; }
 @mixin border-radius($radius) { -moz-border-radius: $radius; -ms-border-radius: $radius; -o-border-radius: $radius; -webkit-border-radius: $radius; border-radius: $radius; }
 @mixin animation-transform-scale($scale) { -moz-transform: scale($scale); -ms-transform: scale($scale); -o-transform: scale($scale); -webkit-transform: scale($scale); transform: scale($scale); }
-@mixin animation-duration($time) { -moz-animation-duration: scale($time); -ms-animation-duration: scale($time); -o-animation-duration: scale($time); -webkit-animation-duration: scale($time); animation-duration: scale($time); }
+@mixin animation-duration($time) { -moz-animation-duration: $time; -ms-animation-duration: $time; -o-animation-duration: $time; -webkit-animation-duration: $time; animation-duration: $time; }
 @mixin animation-delay($time) { -moz-animation-delay: $time; -ms-animation-delay: $time; -o-animation-delay: $time; -webkit-animation-delay: $time; animation-delay: $time; }
 @mixin animation-name ($name) { -moz-animation-name: $name; -ms-animation-name: $name; -o-animation-name: $name; -webkit-animation-name: $name; animation-name: $name; }
 @mixin animation-iteration-infinite { -moz-animation-iteration-count: infinite; -ms-animation-iteration-count: infinite; -o-animation-iteration-count: infinite; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; }
 @mixin animation-direction-normal { -moz-animation-direction: normal; -ms-animation-direction: normal; -o-animation-direction: normal; -webkit-animation-direction: normal; animation-direction: normal; }
 @mixin top-left-position($top, $left) { top: $top; left: $left; }
-@mixin keyframes($name) {
-  @-moz-keyframes #{$name} { @content; }
-  @-ms-keyframes #{$name} { @content; }
-  @-o-keyframes #{$name} { @content; }
-  @-webkit-keyframes #{$name} { @content; }
-  @keyframes #{$name} { @content; }
-}
+@mixin keyframes($name) { @-moz-keyframes #{$name} { @content; } @-ms-keyframes #{$name} { @content; } @-o-keyframes #{$name} { @content; } @-webkit-keyframes #{$name} { @content; } @keyframes #{$name} { @content; }}
 
 /* ---- Elements which covering the entire application, but which are needed to the OfficeUI to work. */
 html, body { height: 100%; }
@@ -53,16 +56,17 @@ body { font-size: 1em; }
 #OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; font-size: 1em; }
 
 /* ---- General classes which are used to position elements. ----*/
-#OfficeUI .center-screen { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+#OfficeUI .center-screen { left: 50%; position: fixed; top: 50%; transform: translate(-50%, -50%); }
 
 /* ---- Defines the 'loading' and displaying' area. ---- */
-#OfficeUI .area-loading { color: #0072c6 }
-#OfficeUI .area-loading h1 { font-size: 3.0628em; }
+#OfficeUI .area-loading { color: #0072c6; left: 50%; position: fixed; top: 30%; transform: translate(-50%, -30%); }
+#OfficeUI .area-loading h1 { font-size: 3.0628em; font-weight: 200; }
+#OfficeUI .area-loading h1 .registered { display: inline-block; font-size: 0.25em; margin-top: 10px; vertical-align: top; }
 
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
 .spinner-circle
 {
-  @include animation-transform-scale(0.6); @include square-box(256px); margin-left: auto; margin-right: auto; position: relative;
+  @include animation-transform-scale(0.15); @include square-box(70px); margin-left: auto; margin-right: auto; position: relative;
 
   .animation-image { @include animation-duration(1.2s); @include animation-name(fade-circle); @include border-radius(23px); @include animation-iteration-infinite; @include animation-direction-normal; @include square-box(47px); background-color: #0072c6; position: absolute; }
   .animate-step-01 { @include animation-delay(0.45s); @include top-left-position(0, 105px); }
@@ -74,51 +78,11 @@ body { font-size: 1em; }
   .animate-step-07 { @include animation-delay(1.35s); @include top-left-position(105px, 0); }
   .animate-step-08 { @include animation-delay(1.50s); @include top-left-position(30px, 30px); }
 
-}
-
-@-moz-keyframes fade-circle{
-  0%{
-    background-color:#0071c5}
-
-  100%{
-    background-color:#FFFFFF}
-
-}
-
-@-webkit-keyframes fade-circle{
-  0%{
-    background-color:#0071c5}
-
-  100%{
-    background-color:#FFFFFF}
-
-}
-
-@-ms-keyframes fade-circle{
-  0%{
-    background-color:#0071c5}
-
-  100%{
-    background-color:#FFFFFF}
-
-}
-
-@-o-keyframes fade-circle{
-  0%{
-    background-color:#0071c5}
-
-  100%{
-    background-color:#FFFFFF}
-
-}
-
-@keyframes fade-circle{
-  0%{
-    background-color:#0071c5}
-
-  100%{
-    background-color:#FFFFFF}
-
+  // Provides the animation itself.
+  @include keyframes(fade-circle) {
+    0% { background-color: #0071c5; }
+    100% { background-color: #fff; }
+  }
 }
 
 

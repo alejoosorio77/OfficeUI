@@ -25,6 +25,37 @@
 ======================================================================================================= */
 /* ---- Import Statements. ---- */
 @import url(OfficeUI.Reset.css);
+/* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely. ---- */
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 200;
+  src: local("Segoe UI Light"); }
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 300;
+  src: local("Segoe UI Semilight"); }
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 400;
+  src: local("Segoe UI"); }
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 600;
+  src: local("Segoe UI Semibold"); }
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 700;
+  src: local("Segoe UI Bold"); }
+@font-face {
+  font-family: "Segoe UI";
+  font-style: italic;
+  font-weight: 400;
+  src: local("Segoe UI Italic"); }
+@font-face {
+  font-family: "Segoe UI";
+  font-style: italic;
+  font-weight: 700;
+  src: local("Segoe UI Bold Italic"); }
 /* ---- Useful mixins. ---- */
 /* ---- Elements which covering the entire application, but which are needed to the OfficeUI to work. */
 html, body {
@@ -41,36 +72,47 @@ body {
 
 /* ---- General classes which are used to position elements. ----*/
 #OfficeUI .center-screen {
-  position: fixed;
   left: 50%;
+  position: fixed;
   top: 50%;
   transform: translate(-50%, -50%); }
 
 /* ---- Defines the 'loading' and displaying' area. ---- */
 #OfficeUI .area-loading {
-  color: #0072c6; }
+  color: #0072c6;
+  left: 50%;
+  position: fixed;
+  top: 30%;
+  transform: translate(-50%, -30%); }
 
 #OfficeUI .area-loading h1 {
-  font-size: 3.0628em; }
+  font-size: 3.0628em;
+  font-weight: 200; }
+
+#OfficeUI .area-loading h1 .registered {
+  display: inline-block;
+  font-size: 0.25em;
+  margin-top: 10px;
+  vertical-align: top; }
 
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
 .spinner-circle {
-  -moz-transform: scale(0.6);
-  -ms-transform: scale(0.6);
-  -o-transform: scale(0.6);
-  -webkit-transform: scale(0.6);
-  transform: scale(0.6);
-  width: 256px;
-  height: 256px;
+  -moz-transform: scale(0.15);
+  -ms-transform: scale(0.15);
+  -o-transform: scale(0.15);
+  -webkit-transform: scale(0.15);
+  transform: scale(0.15);
+  width: 70px;
+  height: 70px;
   margin-left: auto;
   margin-right: auto;
   position: relative; }
   .spinner-circle .animation-image {
-    -moz-animation-duration: scale(1.2s);
-    -ms-animation-duration: scale(1.2s);
-    -o-animation-duration: scale(1.2s);
-    -webkit-animation-duration: scale(1.2s);
-    animation-duration: scale(1.2s);
+    -moz-animation-duration: 1.2s;
+    -ms-animation-duration: 1.2s;
+    -o-animation-duration: 1.2s;
+    -webkit-animation-duration: 1.2s;
+    animation-duration: 1.2s;
     -moz-animation-name: fade-circle;
     -ms-animation-name: fade-circle;
     -o-animation-name: fade-circle;
@@ -159,31 +201,30 @@ body {
     animation-delay: 1.5s;
     top: 30px;
     left: 30px; }
-
 @-moz-keyframes fade-circle {
   0% {
     background-color: #0071c5; }
   100% {
-    background-color: #FFFFFF; } }
-@-webkit-keyframes fade-circle {
-  0% {
-    background-color: #0071c5; }
-  100% {
-    background-color: #FFFFFF; } }
+    background-color: #fff; } }
 @-ms-keyframes fade-circle {
   0% {
     background-color: #0071c5; }
   100% {
-    background-color: #FFFFFF; } }
+    background-color: #fff; } }
 @-o-keyframes fade-circle {
   0% {
     background-color: #0071c5; }
   100% {
-    background-color: #FFFFFF; } }
+    background-color: #fff; } }
+@-webkit-keyframes fade-circle {
+  0% {
+    background-color: #0071c5; }
+  100% {
+    background-color: #fff; } }
 @keyframes fade-circle {
   0% {
     background-color: #0071c5; }
   100% {
-    background-color: #FFFFFF; } }
+    background-color: #fff; } }
 
 /*# sourceMappingURL=OfficeUI.css.map */
