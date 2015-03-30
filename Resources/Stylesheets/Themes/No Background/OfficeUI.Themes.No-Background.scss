@@ -1,0 +1,10 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Themes.No-Background.scss
+ * Author:        Kevin De Coninck
+ * Date Created:  19/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Themes.No-Background.scss file is a file is used to style an OfficeUI
+ *                application to match a given theme. In this case, the 'No Background' theme.
+======================================================================================================= */
+#OfficeUI .application, #OfficeUI .backstage, #OfficeUI .ribbon .tabs { background: white; }

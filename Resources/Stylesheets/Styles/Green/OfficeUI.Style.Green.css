@@ -1,175 +1,91 @@
 /* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.less
+ * Filename:      OfficeUI.Style.Green.scss
  * Author:        Kevin De Coninck
- * Date Created:  10/03/2015
+ * Date Created:  30/03/2015
  * Media:         Screen
  * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.less file is a file which on itself doesn't do anything.
- *                This files does act as a file in which various variables and other items have are
- *                stored. This does mean that this file does need to be referenced from other files.
-======================================================================================================= */
-/* ----- Import Statements. ---- */
-/* ====================================================================================================
- * Filename:      OfficeUI.Styles.less
- * Author:        Kevin De Coninck
- * Date Created:  10/03/2015
- * Media:         Screen
- * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Styles.less file is a file which contains a couple of variables that
- *                are the same for all the styles.
-======================================================================================================= */
-/* ---- Variables. ---- */
-/* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.Elements.less
- * Author:        Kevin De Coninck
- * Date Created:  10/03/2015
- * Media:         Screen
- * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.Elements.less file is a file is used to style various
- *                elements. The classes in this file does only implements style-based style rules
- *                such as border colors, background colors, ...
+ * Notes:         The OfficeUI.Style.Green.scss file is a file which on itself doesn't do anything.
+ *                This files does act as a file in which various import statements are saved.
 ======================================================================================================= */
 /* ----- Import statements ----- */
-/* ----- General elements ---- */
-/*
- * Notes:
- * In a web application, there are various normal elements such as input elements and dropdown elements.
- * Those elements are being styles in the section below.
-*/
-#OfficeUI input:hover,
-#OfficeUI input:focus {
-  border-color: #86bfa0;
-}
-#OfficeUI .dropdown .legend:hover {
-  border-color: #86bfa0;
-}
-/* ----- Buttons ----- */
-/* Notes:
- * The OfficeUI Suite contains various types of buttons such as a normal button, an image button, ...
- * The section below gives an explanation about every type of button and also given an example on how to render them.
- *
- * Some classes have added 'active-ie-fix' on the end. This is because some functionalities are not available in all browsers.
- * Therefore that since class is being added because otherwise the element might not render correctly in Internet
- * Explorer.
- *
- * The class is 'active-ie-fix' is used to solve the following problems:
- * -  When you have an anchor <a href="#"> with another element in it, the anchor does not become :active when you
- *    click on the element itself. In other words, the active class is not bubbling up.
- *
- * ==================================================== Example ====================================================
- * Normal button:
- *
- *    Provides a normal button that just contains some plain text.
- *
- *    <a href="#" class="button">
- *        <span>Yes</span>
- *    </a>
- * ================================================================================================================= */
-/* -- Normal button -- */
-#OfficeUI a.button {
-  border-color: #ababab;
-}
-#OfficeUI a.button.default-button {
-  background-color: #d3f0e0;
-  border-color: #86bfa0;
-}
-#OfficeUI a.button:hover {
-  background-color: #d3f0e0;
-  border-color: #86bfa0;
-}
-#OfficeUI a.button:active,
-#OfficeUI a.button.active-ie-fix {
-  background-color: #86bfa0;
-  border-color: #439467;
-}
-/* ----- DropDown Elements ----- */
-/* Notes:
- * The OfficeUI Suite contains various types of DropDowns such as a simple text dropdown and a large item menu
- * dropdown.
- * The section below gives an explanation about every type of dropdown and also given an example on how to render them.
- * ==================================================== Example ====================================================
- * Simple DropDown Element
- *
- *    Provides a simple dropdown.
- *
- *    <span class="dropdown">
- *      <input type="text" />
- *    </a>
- * ================================================================================================================= */
-/* -- Dropdown element -- */
-#OfficeUI .dropdown.active .dropdown-legend,
-#OfficeUI .dropdown.focus .dropdown-legend {
-  border-color: #86bfa0;
-}
-#OfficeUI .dropdown.focus i,
-#OfficeUI .dropdown.active i {
-  border-top-color: #86bfa0;
-  border-right-color: #86bfa0;
-  border-bottom-color: #86bfa0;
-}
-#OfficeUI .dropdown.active i,
-#OfficeUI .dropdown.focus i {
-  background-color: #d3f0e0;
-  border-left-color: #86bfa0;
-}
-#OfficeUI .dropdown.opened i {
-  background-color: #86bfa0;
-}
-#OfficeUI .dropdown .elements li:hover {
-  background-color: #d3f0e0;
-}
 /* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.Application.less
+ * Filename:      OfficeUI.Green.Application.scss
  * Author:        Kevin De Coninck
- * Date Created:  19/03/2015
+ * Date Created:  30/03/2015
  * Media:         Screen
  * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.Application.less file is a file which is used to style
+ * Notes:         The OfficeUI.Green.Application.scss file is a file which is used to style
  *                various OfficeUI elements.
 ======================================================================================================= */
 /* ----- Import statements ----- */
-/* ---- OfficeUI application styling. ---- */
-#OfficeUI .icon:not(.application-icon):not(.disabled):hover {
-  background-color: #d3f0e0;
-}
-#OfficeUI .icon:not(.application-icon).active {
-  background-color: #86bfa0 !important;
-}
-#OfficeUI footer .notification-area {
-  background-color: #217346;
-}
-#OfficeUI footer a:hover,
-#OfficeUI footer a:active,
-#OfficeUI footer a.active {
-  color: #439467;
-}
-#OfficeUI .menu ul li:not(.active):not(.no-hover):hover {
-  background-color: #ebfaf1;
-}
-#OfficeUI .menu i:hover {
-  color: #217346;
-}
 /* ====================================================================================================
- * Filename:      OfficeUI.Style.Green.Ribbon.less
+ * Filename:      OfficeUI.Green.References.scss
  * Author:        Kevin De Coninck
- * Date Created:  19/03/2015
+ * Date Created:  30/03/2015
  * Media:         Screen
  * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Style.Green.Ribbon.less file is a file which is used to an OfficeUI
- *                ribbon element.
+ * Notes:         The OfficeUI.Green.References.scss file is a file which on itself doesn't do anything.
+ *                This file contains the references to all the other files.
 ======================================================================================================= */
 /* ----- Import statements ----- */
-/* ---- OfficeUI ribbon styling. ---- */
-#OfficeUI .ribbon .tabs .tab.application {
-  background-color: #217346;
-  border-color: #217346;
-}
-#OfficeUI .ribbon .tabs .application:hover {
-  background-color: #439467 !important;
-  border-color: #439467 !important;
-}
-#OfficeUI .ribbon .tabs .tab.active,
-#OfficeUI .ribbon .tabs .tab:not(.contextual-tab):not(.application):hover {
-  color: #439467;
-}
+/* ====================================================================================================
+ * Filename:      OfficeUI.Mixins.scss
+ * Author:        Kevin De Coninck
+ * Date Created:  30/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Mixins.scss file is a file contains various mixins that can be used with
+ *                the scss syntax.
+======================================================================================================= */
+/* ---- Useful mixins. ---- */
+/* ====================================================================================================
+ * Filename:      OfficeUI.Green.Variables.scss
+ * Author:        Kevin De Coninck
+ * Date Created:  30/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Green.Variables.scss file which holds variables for styling various
+ *                elements.
+======================================================================================================= */
 /* ---- Variables. ---- */
+/* ---- OfficeUI application styling. ---- */
+#OfficeUI .loading-area {
+  color: #217346; }
+
+#OfficeUI .spinner-circle .animation-image {
+  background-color: #217245; }
+
+#OfficeUI .icon:not(.application-icon):not(.disabled):hover {
+  background-color: #d3f0e0; }
+
+#OfficeUI .icon:not(.application-icon).active {
+  background-color: #86bfa0 !important; }
+
+/* ---- OfficeUI Styling Animations. ---- */
+@-moz-keyframes fade-circle {
+  0% {
+    background-color: #217245; }
+  100% {
+    background-color: #fff; } }
+@-ms-keyframes fade-circle {
+  0% {
+    background-color: #217245; }
+  100% {
+    background-color: #fff; } }
+@-o-keyframes fade-circle {
+  0% {
+    background-color: #217245; }
+  100% {
+    background-color: #fff; } }
+@-webkit-keyframes fade-circle {
+  0% {
+    background-color: #217245; }
+  100% {
+    background-color: #fff; } }
+@keyframes fade-circle {
+  0% {
+    background-color: #217245; }
+  100% {
+    background-color: #fff; } }
+
+/*# sourceMappingURL=OfficeUI.Style.Green.css.map */

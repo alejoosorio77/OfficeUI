@@ -26,6 +26,7 @@
 
 /* ---- Import Statements. ---- */
 @import 'OfficeUI.Reset.css';
+@import 'OfficeUI.Mixins';
 
 /* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely. ---- */
 @font-face { font-family: "Segoe UI"; font-weight: 200; src: local("Segoe UI Light"); }
@@ -36,39 +37,39 @@
 @font-face { font-family: "Segoe UI"; font-style: italic; font-weight: 400; src: local("Segoe UI Italic"); }
 @font-face { font-family: "Segoe UI"; font-style: italic; font-weight: 700; src: local("Segoe UI Bold Italic"); }
 
-/* ---- Useful mixins. ---- */
-@mixin square-box($dimensions) { width: $dimensions; height: $dimensions; }
-@mixin border-radius($radius) { -moz-border-radius: $radius; -ms-border-radius: $radius; -o-border-radius: $radius; -webkit-border-radius: $radius; border-radius: $radius; }
-@mixin animation-transform-scale($scale) { -moz-transform: scale($scale); -ms-transform: scale($scale); -o-transform: scale($scale); -webkit-transform: scale($scale); transform: scale($scale); }
-@mixin animation-duration($time) { -moz-animation-duration: $time; -ms-animation-duration: $time; -o-animation-duration: $time; -webkit-animation-duration: $time; animation-duration: $time; }
-@mixin animation-delay($time) { -moz-animation-delay: $time; -ms-animation-delay: $time; -o-animation-delay: $time; -webkit-animation-delay: $time; animation-delay: $time; }
-@mixin animation-name ($name) { -moz-animation-name: $name; -ms-animation-name: $name; -o-animation-name: $name; -webkit-animation-name: $name; animation-name: $name; }
-@mixin animation-iteration-infinite { -moz-animation-iteration-count: infinite; -ms-animation-iteration-count: infinite; -o-animation-iteration-count: infinite; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; }
-@mixin animation-direction-normal { -moz-animation-direction: normal; -ms-animation-direction: normal; -o-animation-direction: normal; -webkit-animation-direction: normal; animation-direction: normal; }
-@mixin top-left-position($top, $left) { top: $top; left: $left; }
-@mixin keyframes($name) { @-moz-keyframes #{$name} { @content; } @-ms-keyframes #{$name} { @content; } @-o-keyframes #{$name} { @content; } @-webkit-keyframes #{$name} { @content; } @keyframes #{$name} { @content; }}
-
 /* ---- Elements which covering the entire application, but which are needed to the OfficeUI to work. */
 html, body { height: 100%; }
 body { font-size: 1em; }
 
 /* ---- General OfficeUI classes. ---- */
 #OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; font-size: 1em; }
+#OfficeUI .no-select { -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; -webkit-user-select: none; cursor: default; user-select: none; }
+#OfficeUI .disabled { opacity: 0.5; pointer-events: none; }
 
 /* ---- General classes which are used to position elements. ----*/
-#OfficeUI .center-screen { left: 50%; position: fixed; top: 50%; transform: translate(-50%, -50%); }
+#OfficeUI .center-screen { left: 50%; position: fixed; top: 30%; transform: translate(-50%, -50%); }
 
 /* ---- Defines the 'loading' and displaying' area. ---- */
-#OfficeUI .area-loading { color: #0072c6; left: 50%; position: fixed; top: 30%; transform: translate(-50%, -30%); }
-#OfficeUI .area-loading h1 { font-size: 3.0628em; font-weight: 200; }
-#OfficeUI .area-loading h1 .registered { display: inline-block; font-size: 0.25em; margin-top: 10px; vertical-align: top; }
+#OfficeUI .loading-area { left: 50%; position: fixed; top: 30%; text-align: center; transform: translate(-50%, -30%); }
+#OfficeUI .loading-area h1 { font-size: 3.0628em; font-weight: 200; line-height: 1em; }
+#OfficeUI .loading-area h1 .registered { display: inline-block; font-size: 0.25em; line-height: 1em; margin-top: 10px; vertical-align: top; }
+#OfficeUI .loading-area .status-message { font-size: 0.75em; }
+#OfficeUI .loading-wrapper { margin: 20px 0 20px 0; }
+
+/* ---- Styling for the OfficeUI application. ---- */
+#OfficeUI .application { font-size: 0.75em; }
+#OfficeUI .application header { height: 142px; z-index: 100; }
+#OfficeUI .application header .application-title { height: 22px; padding: 8px 2px 0 0; position: relative; text-align: center; z-index: 200; }
+#OfficeUI .application header .application-icons { margin-left: 5px; position: absolute; z-index: 300; }
+#OfficeUI .application header .application-icons .icon { margin: 0 5px 0 2px; }
+#OfficeUI .application header .application-icons .icon:not(.application-icon) { margin-right: 6px; }
 
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
-.spinner-circle
+#OfficeUI .spinner-circle
 {
   @include animation-transform-scale(0.5); @include square-box(70px); margin-left: auto; margin-right: auto; position: relative;
 
-  .animation-image { @include animation-duration(1.2s); @include animation-name(fade-circle); @include border-radius(5px); @include animation-iteration-infinite; @include animation-direction-normal; @include square-box(10px); background-color: #0072c6; position: absolute; }
+  .animation-image { @include animation-duration(1.2s); @include animation-name(fade-circle); @include border-radius(5px); @include animation-iteration-infinite; @include animation-direction-normal; @include square-box(10px); background-color: #fff; position: absolute; }
   .animate-step-01 { @include animation-delay(0.45s); @include top-left-position(0, 30px); }
   .animate-step-02 { @include animation-delay(0.60s); @include top-left-position(10px, 50px); }
   .animate-step-03 { @include animation-delay(0.75s); @include top-left-position(30px, 60px); }
@@ -80,7 +81,7 @@ body { font-size: 1em; }
 
   // Provides the animation itself.
   @include keyframes(fade-circle) {
-    0% { background-color: #0071c5; }
+    0% { background-color: #fff; }
     100% { background-color: #fff; }
   }
 }

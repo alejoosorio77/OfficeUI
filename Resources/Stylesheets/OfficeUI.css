@@ -25,6 +25,16 @@
 ======================================================================================================= */
 /* ---- Import Statements. ---- */
 @import url(OfficeUI.Reset.css);
+/* ====================================================================================================
+ * Filename:      OfficeUI.Mixins.scss
+ * Author:        Kevin De Coninck
+ * Date Created:  30/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Mixins.scss file is a file contains various mixins that can be used with
+ *                the scss syntax.
+======================================================================================================= */
+/* ---- Useful mixins. ---- */
 /* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely. ---- */
 @font-face {
   font-family: "Segoe UI";
@@ -56,7 +66,6 @@
   font-style: italic;
   font-weight: 700;
   src: local("Segoe UI Bold Italic"); }
-/* ---- Useful mixins. ---- */
 /* ---- Elements which covering the entire application, but which are needed to the OfficeUI to work. */
 html, body {
   height: 100%; }
@@ -70,33 +79,79 @@ body {
   font-family: 'Segoe UI', arial, sans-serif;
   font-size: 1em; }
 
+#OfficeUI .no-select {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  cursor: default;
+  user-select: none; }
+
+#OfficeUI .disabled {
+  opacity: 0.5;
+  pointer-events: none; }
+
 /* ---- General classes which are used to position elements. ----*/
 #OfficeUI .center-screen {
   left: 50%;
   position: fixed;
-  top: 50%;
+  top: 30%;
   transform: translate(-50%, -50%); }
 
 /* ---- Defines the 'loading' and displaying' area. ---- */
-#OfficeUI .area-loading {
-  color: #0072c6;
+#OfficeUI .loading-area {
   left: 50%;
   position: fixed;
   top: 30%;
+  text-align: center;
   transform: translate(-50%, -30%); }
 
-#OfficeUI .area-loading h1 {
+#OfficeUI .loading-area h1 {
   font-size: 3.0628em;
-  font-weight: 200; }
+  font-weight: 200;
+  line-height: 1em; }
 
-#OfficeUI .area-loading h1 .registered {
+#OfficeUI .loading-area h1 .registered {
   display: inline-block;
   font-size: 0.25em;
+  line-height: 1em;
   margin-top: 10px;
   vertical-align: top; }
 
+#OfficeUI .loading-area .status-message {
+  font-size: 0.75em; }
+
+#OfficeUI .loading-wrapper {
+  margin: 20px 0 20px 0; }
+
+/* ---- Styling for the OfficeUI application. ---- */
+#OfficeUI .application {
+  font-size: 0.75em; }
+
+#OfficeUI .application header {
+  height: 142px;
+  z-index: 100; }
+
+#OfficeUI .application header .application-title {
+  height: 22px;
+  padding: 8px 2px 0 0;
+  position: relative;
+  text-align: center;
+  z-index: 200; }
+
+#OfficeUI .application header .application-icons {
+  margin-left: 5px;
+  position: absolute;
+  z-index: 300; }
+
+#OfficeUI .application header .application-icons .icon {
+  margin: 0 5px 0 2px; }
+
+#OfficeUI .application header .application-icons .icon:not(.application-icon) {
+  margin-right: 6px; }
+
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
-.spinner-circle {
+#OfficeUI .spinner-circle {
   -moz-transform: scale(0.5);
   -ms-transform: scale(0.5);
   -o-transform: scale(0.5);
@@ -107,7 +162,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   position: relative; }
-  .spinner-circle .animation-image {
+  #OfficeUI .spinner-circle .animation-image {
     -moz-animation-duration: 1.2s;
     -ms-animation-duration: 1.2s;
     -o-animation-duration: 1.2s;
@@ -135,9 +190,9 @@ body {
     animation-direction: normal;
     width: 10px;
     height: 10px;
-    background-color: #0072c6;
+    background-color: #fff;
     position: absolute; }
-  .spinner-circle .animate-step-01 {
+  #OfficeUI .spinner-circle .animate-step-01 {
     -moz-animation-delay: 0.45s;
     -ms-animation-delay: 0.45s;
     -o-animation-delay: 0.45s;
@@ -145,7 +200,7 @@ body {
     animation-delay: 0.45s;
     top: 0;
     left: 30px; }
-  .spinner-circle .animate-step-02 {
+  #OfficeUI .spinner-circle .animate-step-02 {
     -moz-animation-delay: 0.6s;
     -ms-animation-delay: 0.6s;
     -o-animation-delay: 0.6s;
@@ -153,7 +208,7 @@ body {
     animation-delay: 0.6s;
     top: 10px;
     left: 50px; }
-  .spinner-circle .animate-step-03 {
+  #OfficeUI .spinner-circle .animate-step-03 {
     -moz-animation-delay: 0.75s;
     -ms-animation-delay: 0.75s;
     -o-animation-delay: 0.75s;
@@ -161,7 +216,7 @@ body {
     animation-delay: 0.75s;
     top: 30px;
     left: 60px; }
-  .spinner-circle .animate-step-04 {
+  #OfficeUI .spinner-circle .animate-step-04 {
     -moz-animation-delay: 0.9s;
     -ms-animation-delay: 0.9s;
     -o-animation-delay: 0.9s;
@@ -169,7 +224,7 @@ body {
     animation-delay: 0.9s;
     top: 50px;
     left: 50px; }
-  .spinner-circle .animate-step-05 {
+  #OfficeUI .spinner-circle .animate-step-05 {
     -moz-animation-delay: 1.05s;
     -ms-animation-delay: 1.05s;
     -o-animation-delay: 1.05s;
@@ -177,7 +232,7 @@ body {
     animation-delay: 1.05s;
     top: 60px;
     left: 30px; }
-  .spinner-circle .animate-step-06 {
+  #OfficeUI .spinner-circle .animate-step-06 {
     -moz-animation-delay: 1.2s;
     -ms-animation-delay: 1.2s;
     -o-animation-delay: 1.2s;
@@ -185,7 +240,7 @@ body {
     animation-delay: 1.2s;
     top: 50px;
     left: 10px; }
-  .spinner-circle .animate-step-07 {
+  #OfficeUI .spinner-circle .animate-step-07 {
     -moz-animation-delay: 1.35s;
     -ms-animation-delay: 1.35s;
     -o-animation-delay: 1.35s;
@@ -193,7 +248,7 @@ body {
     animation-delay: 1.35s;
     top: 30px;
     left: 0px; }
-  .spinner-circle .animate-step-08 {
+  #OfficeUI .spinner-circle .animate-step-08 {
     -moz-animation-delay: 1.5s;
     -ms-animation-delay: 1.5s;
     -o-animation-delay: 1.5s;
@@ -203,27 +258,27 @@ body {
     left: 10px; }
 @-moz-keyframes fade-circle {
   0% {
-    background-color: #0071c5; }
+    background-color: #fff; }
   100% {
     background-color: #fff; } }
 @-ms-keyframes fade-circle {
   0% {
-    background-color: #0071c5; }
+    background-color: #fff; }
   100% {
     background-color: #fff; } }
 @-o-keyframes fade-circle {
   0% {
-    background-color: #0071c5; }
+    background-color: #fff; }
   100% {
     background-color: #fff; } }
 @-webkit-keyframes fade-circle {
   0% {
-    background-color: #0071c5; }
+    background-color: #fff; }
   100% {
     background-color: #fff; } }
 @keyframes fade-circle {
   0% {
-    background-color: #0071c5; }
+    background-color: #fff; }
   100% {
     background-color: #fff; } }
 

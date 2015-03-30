@@ -1,5 +1,5 @@
 /* ====================================================================================================
- * Filename:      OfficeUI.Themes.Calligraphy.less
+ * Filename:      OfficeUI.Themes.Calligraphy.scss
  * Author:        Kevin De Coninck
  * Date Created:  18/03/2015
  * Media:         Screen
@@ -7,8 +7,7 @@
  * Notes:         The OfficeUI.Themes.Calligraphy.less file is a file is used to style an OfficeUI
  *                application to match a given theme. In this case, the 'Calligraphy' theme.
 ======================================================================================================= */
-#OfficeUI .application,
-#OfficeUI .backstage,
-#OfficeUI .ribbon .tabs {
-  background: url("/Resources/Images/Themes/Calligraphy/Background.png") no-repeat scroll right top white;
-}
+#OfficeUI .application, #OfficeUI .backstage, #OfficeUI .ribbon .tabs {
+  background: url("/Resources/Images/Themes/Calligraphy/Background.png") no-repeat scroll right top white; }
+
+/*# sourceMappingURL=OfficeUI.Themes.Calligraphy.css.map */

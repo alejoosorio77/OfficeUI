@@ -1,0 +1,11 @@
+<div class="application">
+    <header>
+        <div class="application-icons no-select">
+            <img class="icon" src="#" alt="{{icon.Alt}}" id="{{icon.Id}}" data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-officeui-toggle-class-on-click="active" />
+        </div>
+
+        <div class="application-title">
+            <span>{{Title}}</span>
+        </div>
+    </header>
+</div>

@@ -1,14 +1,13 @@
 /* ====================================================================================================
- * Filename:      OfficeUI.Themes.Doodle-Diamonds.less
+ * Filename:      OfficeUI.Themes.Doodle-Diamonds.scss
  * Author:        Kevin De Coninck
  * Date Created:  18/03/2015
  * Media:         Screen
  * ----------------------------------------------------------------------------------------------------
- * Notes:         The OfficeUI.Themes.Doodle-Diamonds.less file is a file is used to style an OfficeUI
+ * Notes:         The OfficeUI.Themes.Doodle-Diamonds.scss file is a file is used to style an OfficeUI
  *                application to match a given theme. In this case, the 'Doodle Diamonds' theme.
 ======================================================================================================= */
-#OfficeUI .application,
-#OfficeUI .backstage,
-#OfficeUI .ribbon .tabs {
-  background: url("/Resources/Images/Themes/Doodle Diamonds/Background.png") no-repeat scroll right top white;
-}
+#OfficeUI .application, #OfficeUI .backstage, #OfficeUI .ribbon .tabs {
+  background: url("/Resources/Images/Themes/Doodle Diamonds/Background.png") no-repeat scroll right top white; }
+
+/*# sourceMappingURL=OfficeUI.Themes.Doodle-Diamonds.css.map */

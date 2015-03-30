@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="OfficeUI">
+<html data-ng-app="OfficeUIApplication" data-ng-controller="OfficeUIController">
     <head>
         <title>OfficeUI (Version 1.0.0)</title>
 
@@ -30,43 +30,39 @@
         <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.css" />
         <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.Site.min.css" />
 
-        <link rel="stylesheet" href="#" data-ng-href="{{Style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
-        <link rel="stylesheet" href="#" data-ng-href="{{Theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
+        <!--<link rel="stylesheet" href="#" data-ng-href="{{Style}}" /> <!-- Dynamic stylesheet: Style of the OfficeUI application 'Red', 'Blue', 'LightBlue', 'Green', ... -> See OfficeUI.config.json -->
+        <!--<link rel="stylesheet" href="#" data-ng-href="{{Theme}}" /> <!-- Dynamic stylesheet: Theme of the OfficeUI application 'Calligraphy', 'Circles And Stripes', 'Circuit', 'Clouds', ... -->
+        <link rel="stylesheet" href="#" data-ng-href="{{Style}}" />
+        <link rel="stylesheet" href="#" data-ng-href="{{Theme}}" />
     </head>
-    <body data-ng-controller="OfficeUIController as OfficeUIController">
+    <body>
         <!-- Defines the OfficeUI holder. -->
         <div id="OfficeUI">
             <!-- Defines the loading area. -->
-            <div class="area-loading center-screen" style="text-align: center;">
+            <div class="loading-area center-screen no-select" data-ng-if="loadingScreenLoaded && !isInitialized">
                 <h1>Office<span class="registered">®</span> Web Controls for Web Applications</h1>
 
                 <!-- Defines the loading spinner which is implemented. -->
-                <div class="spinner-circle">
-                    <div class="animation-image animate-step-01">
-                    </div>
-                    <div class="animation-image animate-step-02">
-                    </div>
-                    <div class="animation-image animate-step-03">
-                    </div>
-                    <div class="animation-image animate-step-04">
-                    </div>
-                    <div class="animation-image animate-step-05">
-                    </div>
-                    <div class="animation-image animate-step-06">
-                    </div>
-                    <div class="animation-image animate-step-07">
-                    </div>
-                    <div class="animation-image animate-step-08">
+                <div class="loading-wrapper">
+                    <div class="spinner-circle">
+                        <div class="animation-image animate-step-01"></div>
+                        <div class="animation-image animate-step-02"></div>
+                        <div class="animation-image animate-step-03"></div>
+                        <div class="animation-image animate-step-04"></div>
+                        <div class="animation-image animate-step-05"></div>
+                        <div class="animation-image animate-step-06"></div>
+                        <div class="animation-image animate-step-07"></div>
+                        <div class="animation-image animate-step-08"></div>
                     </div>
                 </div>
 
                 <!-- Defines the loading text. -->
-                <div>Almost there...</div>
+                <div class="status-message">Opening the application...</div>
             </div>
 
             <!-- Defines the main application area. -->
-            <div class="area-application">
-
+            <div class="area-application" data-ng-if="isInitialized">
+                <div officeui-application=""></div>
             </div>
         </div>
         <!--&lt;!&ndash; Defines the OfficeUI container. All OfficeUI components should be placed in here. &ndash;&gt;-->

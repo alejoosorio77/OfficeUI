@@ -1,0 +1,59 @@
+/* ====================================================================================================
+ * Filename:      OfficeUI.Mixins.scss
+ * Author:        Kevin De Coninck
+ * Date Created:  30/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Mixins.scss file is a file contains various mixins that can be used with
+ *                the scss syntax.
+======================================================================================================= */
+
+/* ---- Useful mixins. ---- */
+@mixin square-box($dimensions) { width: $dimensions; height: $dimensions; }
+@mixin border-radius($radius) { -moz-border-radius: $radius; -ms-border-radius: $radius; -o-border-radius: $radius; -webkit-border-radius: $radius; border-radius: $radius; }
+@mixin animation-transform-scale($scale) { -moz-transform: scale($scale); -ms-transform: scale($scale); -o-transform: scale($scale); -webkit-transform: scale($scale); transform: scale($scale); }
+@mixin animation-duration($time) { -moz-animation-duration: $time; -ms-animation-duration: $time; -o-animation-duration: $time; -webkit-animation-duration: $time; animation-duration: $time; }
+@mixin animation-delay($time) { -moz-animation-delay: $time; -ms-animation-delay: $time; -o-animation-delay: $time; -webkit-animation-delay: $time; animation-delay: $time; }
+@mixin animation-name ($name) { -moz-animation-name: $name; -ms-animation-name: $name; -o-animation-name: $name; -webkit-animation-name: $name; animation-name: $name; }
+@mixin animation-iteration-infinite { -moz-animation-iteration-count: infinite; -ms-animation-iteration-count: infinite; -o-animation-iteration-count: infinite; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; }
+@mixin animation-direction-normal { -moz-animation-direction: normal; -ms-animation-direction: normal; -o-animation-direction: normal; -webkit-animation-direction: normal; animation-direction: normal; }
+@mixin top-left-position($top, $left) { top: $top; left: $left; }
+@mixin keyframes($name) { @-moz-keyframes #{$name} { @content; } @-ms-keyframes #{$name} { @content; } @-o-keyframes #{$name} { @content; } @-webkit-keyframes #{$name} { @content; } @keyframes #{$name} { @content; }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
