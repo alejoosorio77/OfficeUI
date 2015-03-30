@@ -28,6 +28,7 @@
     { "name": "Underwater", "stylesheet": "/Resources/Stylesheets/Themes/Underwater/OfficeUI.Themes.Underwater.min.css" }
   ],
   "DefaultTheme": "Geometry",
+  "Configuration": "/Resources/Data/Application.json",
   "Controls": [
     { "Name": "Ribbon", "ConfigurationFile": "/Configuration/Application/OfficeUI.Ribbon.config.json" }
   ]

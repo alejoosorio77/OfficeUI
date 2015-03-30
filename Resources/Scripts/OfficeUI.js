@@ -93,82 +93,10 @@ OfficeUI.factory('OfficeUIConfigurationService', function($http) {
                         DefaultStyle: response.data.DefaultStyle,
                         Themes: response.data.Themes,
                         DefaultTheme: response.data.DefaultTheme,
-                        PreserveStyle: response.data.PreserveStyle,
-                        PreserveTheme: response.data.PreserveTheme
+                        Configuration: response.data.Configuration,
+                        Controls: response.data.Controls
                     };
                 }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); }
-            );
-        }
-    }
-});
-
-/**
- * @type            Service
- * @name            OfficeUIApplicationDefinitionService
- *
- * @description
- * Provides a service which will read the necessary data file for an OfficeUI application to function properly.
- *
- * @remarks
- * By default, the location of the configuration file to read is stored in a JavaScript library which can be accessed
- * with the following code:
- *
- * $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation
- *
- * The default location for the file which this service will try to read is the following:
- *
- * '/Resources/Data/Application.json'
- *
- * To change the location of this file, you have 2 options:
- *
- * 1.   Change the default path in the JavaScript file (OfficeUI.Configuration.js) or the minified version of it
- *      if you're using the minified release.
- *      This JavaScript file location is: '/Resources/Scripts/OfficeUI.Configuration.js'.
- *      Caution: Modifying 'core' files can make an application unusable when updating to a new version.
- *               This because the modified file might get overridden.
- *
- * 2.   Another option would be to change the location of the file on page load.
- *      Doing this makes sure that you don't need to mess with the 'core' files, meaning that the project can be
- *      updated at all times.
- *      In order to change the location of the configuration file on page load, you can execute the following code:
- *
- *      $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation = '/path/to/data/file.json'
- */
-OfficeUI.factory('OfficeUIApplicationDefinitionService', function($http) {
-    // Defines the object that this service needs to return.
-    return {
-
-        /**
-         * @type            Function
-         * @name            getOfficeUIApplicationDefinition
-         *
-         * @returns         {HttpPromise}:      A promise which is loading the OfficeUI application definition file.
-         *
-         * @remarks
-         * This method can throw exceptions when an error occurred during the loading of this file.
-         * The explanation below provides some information about which exception can occur when:
-         *
-         * OfficeUIConfigurationException:      This exception is throwed when the value of the field
-         *                                      '$.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation' is
-         *                                      not provided. This does mean that the configuration cannot be loaded.
-         *
-         * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
-         *                                      or when there's an error in the configuration file.
-         */
-        getOfficeUIApplicationDefinition: function() {
-            // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
-            if (typeof $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation == '') {
-                OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI application definition file is not defined.');
-            }
-
-            // Returns the 'httpPromise' which is required for further processing.
-            return $http.get($.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation)
-                .then(function (response) {
-                    return {
-                        Title: response.data.Title,
-                        Icons: response.data.Icons
-                    };
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + $.fn.OfficeUI.Settings.OfficeUIApplicationDefinitionFileLocation + '\' could not be loaded.'); }
             );
         }
     }
@@ -280,10 +208,8 @@ OfficeUI.directive('officeuiToggleClassOnClick', function() {
  * controlled.
  *
  * @dependencies    OfficeUIConfigurationService:           Provides the configuration for an OfficeUI application.
- *                  OfficeUIApplicationDefinitionService    Provides the data file for an OfficeUI application.
  */
-OfficeUI.controller('OfficeUIController', function(OfficeUIConfigurationService, OfficeUIApplicationDefinitionService,
-                                                   $scope) {
+OfficeUI.controller('OfficeUIController', function(OfficeUIConfigurationService, $scope, $http) {
     $scope.isInitialized = false;           // Indicates that the entire OfficeUI application has been loaded.
     $scope.loadingScreenLoaded = false;     // Indicates that the data for the loading screen has been loaded.
 
@@ -293,18 +219,22 @@ OfficeUI.controller('OfficeUIController', function(OfficeUIConfigurationService,
     function Initialize() {
         OfficeUIConfigurationService.getOfficeUIConfiguration().then(function(data) {
             var foundStyles = JSPath.apply('.{.name == "' + data.DefaultStyle + '"}', data.Styles);
-            $scope.Style = foundStyles[0].stylesheet;
-
             var foundThemes = JSPath.apply('.{.name == "' + data.DefaultTheme + '"}', data.Themes);
+
+            $scope.Style = foundStyles[0].stylesheet;
             $scope.Theme = foundThemes[0].stylesheet;
 
+            // Set a value that indicates that the loading screen has been loaded. So, at this point, the loading screen
+            // can be rendered.
             $scope.loadingScreenLoaded = true;
-        });
 
-        // Load the 'OfficeUIApplicationDefinitionService' in which the OfficeUI application data is stored.
-        OfficeUIApplicationDefinitionService.getOfficeUIApplicationDefinition().then(function(data) {
-            $scope.Title = data.Title;
-            $scope.Icons = data.Icons;
+            // Returns the 'httpPromise' which is required for further processing.
+            $http.get(data.Configuration)
+                .then(function (response) {
+                        $scope.Title = response.data.Title;
+                        $scope.Icons = response.data.Icons;
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + data.Configuration + '\' could not be loaded.'); }
+            );
         });
 
         setTimeout(function() {
