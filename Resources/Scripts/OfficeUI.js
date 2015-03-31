@@ -103,6 +103,35 @@ OfficeUI.factory('OfficeUIConfigurationService', function($http) {
 });
 
 /**
+ * @type                Service
+ * @name                PreloaderService
+ *
+ * @description
+ * Provides a way to preload data. By using this, we can make sure that for example, icons are being loaded and displayed
+ * before we show the element that does contain those images.
+ */
+OfficeUI.factory('PreloaderService', ['$q', function($q) {
+    function Preloader( imageLocations ) {}
+
+    /**
+     * @type                Function
+     * @name                PreloadImages
+     *
+     * @description
+     * Preload all the images which are passed as an array into this object.
+     *
+     * @param               imageLocations:     An array containing all the paths that needs to be resolved.
+     *
+     * @returns {*}
+     * A promise containing the images which are being loaded.
+     */
+    Preloader.PreloadImages = function(imageLocations) {
+        var preloader = new Preloader( imageLocations );
+        return( preloader.load() );
+    }
+}]);
+
+/**
  * @type            Service
  * @name            CssInjectorService
  *

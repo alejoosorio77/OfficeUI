@@ -108,7 +108,8 @@ body {
   position: fixed;
   top: 30%;
   text-align: center;
-  transform: translate(-50%, -30%); }
+  transform: translate(-50%, -30%);
+  width: 100%; }
 
 #OfficeUI .loading-area h1 {
   font-size: 3.0628em;
