@@ -31,6 +31,6 @@
   "Configuration": "/Resources/Data/Application.json",
   "Controls":
   [
-    { "Name": "Ribbon", "Service": "OfficeUIRibbonControlService", "ConfigurationFile": "/Configuration/Application/OfficeUI.Ribbon.config.json" }
+    { "Name": "Ribbon", "Service": "OfficeUIRibbonControlService", "ConfigurationFile": "/Resources/Data/Ribbon.json" }
   ]
 }

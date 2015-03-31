@@ -250,13 +250,33 @@ OfficeUI.factory('PreloaderService', ['$q', function($q) {
 
 /* ---- OfficeUI Services (controls). ---- */
 
-OfficeUI.factory('OfficeUIRibbonControlService', [function() {
-    var OfficeUIRibbonControlServiceObject = { };
+OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', 'PreloaderService', function($rootScope, $http, PreloaderService) {
+    var OfficeUIRibbonControlServiceObject = { }; // Defines the object that needs to be returned by the service.
 
-    OfficeUIRibbonControlServiceObject.Show = function(messageText) {
-        console.log(messageText);
+    /**
+     * @type                Function
+     * @name                Initialize
+     *
+     * @description
+     * Initializes the service.
+     *
+     * @param               configurationFile:      The file that contains the configuration of the service.
+     */
+    OfficeUIRibbonControlServiceObject.Initialize = function(configurationFile) {
+        $http.get(configurationFile)
+            .then(function (response) {
+                $rootScope.Tabs = response.data.Tabs;
+                $rootScope.ContextualGroups = response.data.ContextualGroups;
+
+                var images = JSPath.apply('.Groups.Areas.Actions.Resource', $rootScope.Tabs);
+                images.concat(JSPath.apply('.Tabs.Groups.Areas.Actions.Resource', $rootScope.ContextualGroups));
+
+                // Loads all the images.
+                PreloaderService.Load(images);
+            });
     }
 
+    // Return the service object itself.
     return OfficeUIRibbonControlServiceObject;
 }]);
 
@@ -313,6 +333,7 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
             // in an object.
             $(services).each(function(index, service) {
                 registeredServices[service.Name] = [ $injector.get(service.Service), service.ConfigurationFile ];
+                InitializeService(registeredServices[service.Name][0], service.ConfigurationFile); // Initialize the service.
             });
 
             // Using our custom 'CssInjectorService' service, add a stylesheet for the theme and style.
@@ -342,6 +363,32 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
         });
     }
 
+    /**
+     * @type                Function
+     * @name                InitializeService
+     *
+     * @description
+     * Executes the initialization logic of the service.
+     *
+     * @param               serviceInstance:    The instance of the service for which to execute the logic.
+     * @param               configurationFile:  The file that defines the configuration of the service.
+     */
+    function InitializeService(serviceInstance, configurationFile) {
+        serviceInstance.Initialize(configurationFile);
+    }
+
+    /**
+     * @type                Function
+     * @name                InitializeServiceCall
+     *
+     * @description
+     * This controller could have registered multiple services. This method is used to execute a method on one of those
+     * services.
+     *
+     * @param               service:        The name of the service for which to execute a function.
+     * @param               method:         The method on the service to call.
+     * @param               parameters:     The parameters to pass to the method call.
+     */
     $scope.InitializeServiceCall = function(service, method, parameters) {
         var serviceInstance = registeredServices[service][0];
         serviceInstance[method](parameters);
