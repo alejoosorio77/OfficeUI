@@ -271,7 +271,6 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', 'Preloa
                 var images = JSPath.apply('.Groups.Areas.Actions.Resource', $rootScope.Tabs);
                 images.concat(JSPath.apply('.Tabs.Groups.Areas.Actions.Resource', $rootScope.ContextualGroups));
 
-                // Loads all the images.
                 PreloaderService.Load(images);
             });
     }
@@ -333,7 +332,6 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
             // in an object.
             $(services).each(function(index, service) {
                 registeredServices[service.Name] = [ $injector.get(service.Service), service.ConfigurationFile ];
-                InitializeService(registeredServices[service.Name][0], service.ConfigurationFile); // Initialize the service.
             });
 
             // Using our custom 'CssInjectorService' service, add a stylesheet for the theme and style.
@@ -354,6 +352,14 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
 
                     // Loads all the images which needs to be loaded for the application.
                     PreloaderService.Load(iconReferences).then(function() {
+                        // Loads all the services.
+                        $(services).each(function(index, service) {
+                            InitializeService(registeredServices[service.Name][0], service.ConfigurationFile)
+                            //InitializeService(registeredServices[service.Name][0], service.ConfigurationFile).then(function() {
+                            //    alert('Service has been loaded.');
+                            //})
+                        });
+
                         // Sets a value that indicates that the application has been loaded.
                         $scope.isInitialized = true;
                     });
