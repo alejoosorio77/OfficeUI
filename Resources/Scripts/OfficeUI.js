@@ -248,19 +248,19 @@ OfficeUI.factory('PreloaderService', ['$q', function($q) {
 
 /* ---- End: AngularJS Services. ---- */
 
-/* ---- OfficeUI Services. ---- */
-
-/* ---- End: OfficeUI Services. ---- */
+/* ---- OfficeUI Services (controls). ---- */
 
 OfficeUI.factory('OfficeUIRibbonControlService', [function() {
     var OfficeUIRibbonControlServiceObject = { };
 
-    OfficeUIRibbonControlServiceObject.Show = function() {
-        console.log('Registering the OfficeUIRibbonControlService object.');
+    OfficeUIRibbonControlServiceObject.Show = function(messageText) {
+        console.log(messageText);
     }
 
     return OfficeUIRibbonControlServiceObject;
 }]);
+
+/* ---- End: OfficeUI Services (controls). ---- */
 
 /* ---- AngularJS Controllers. ---- */
 
@@ -340,6 +340,11 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
                 }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + data.Configuration + '\' could not be loaded.'); }
             );
         });
+    }
+
+    $scope.InitializeServiceCall = function(service, method, parameters) {
+        var serviceInstance = registeredServices[service][0];
+        serviceInstance[method](parameters);
     }
 });
 
