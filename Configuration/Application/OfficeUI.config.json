@@ -29,7 +29,8 @@
   ],
   "DefaultTheme": "Geometry",
   "Configuration": "/Resources/Data/Application.json",
-  "Controls": [
-    { "Name": "Ribbon", "ConfigurationFile": "/Configuration/Application/OfficeUI.Ribbon.config.json" }
+  "Controls":
+  [
+    { "Name": "Ribbon", "Service": "OfficeUIRibbonControlService", "ConfigurationFile": "/Configuration/Application/OfficeUI.Ribbon.config.json" }
   ]
 }

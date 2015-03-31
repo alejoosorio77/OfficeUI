@@ -171,27 +171,6 @@ OfficeUI.factory('CssInjectorService', ['$q', function($q) {
 
     /**
      * @type                Function
-     * @name                loadAndWait
-     * @description
-     * Load a given stylesheet file and wait until it's loaded.
-     * To check if it's done loading, we execute this method in a loop until we retrieve some data.
-     *
-     * @param               url:        The url of the stylesheet which is being loaded.
-     * @param               deferred:   An object which is required to resolve the file.
-     */
-    var loadAndWait = function(url, deferred) {
-        for (var i in document.styleSheets) {
-            var href = document.styleSheets[i].href || "";
-            if (href.split("/").slice(-1).join() === url) {
-                deferred.resolve();
-                return;
-            }
-        }
-        setTimeout(function() {loadAndWait(url, deferred);}, 50);
-    }
-
-    /**
-     * @type                Function
      * @name                Inject
      *
      * @description
@@ -203,7 +182,7 @@ OfficeUI.factory('CssInjectorService', ['$q', function($q) {
      * @returns {*}
      * A 'promise' which means that we can wait until the data has been loaded.
      */
-    cssInjectorServiceObject.Inject = function(id, url){
+    cssInjectorServiceObject.Inject = function(id, url) {
         var deferred = $q.defer();
         var link;
 
@@ -217,8 +196,6 @@ OfficeUI.factory('CssInjectorService', ['$q', function($q) {
                 angular.element('head').append(link);
             }
 
-            loadAndWait(url, deferred);
-
             return deferred.promise;
         }
     };
@@ -227,7 +204,146 @@ OfficeUI.factory('CssInjectorService', ['$q', function($q) {
     return cssInjectorServiceObject;
 }]);
 
+/**
+ * @type                Service
+ * @name                PreloaderService
+ *
+ * @description
+ * The 'PreloaderService' enables you to load data in the back-end. By doing this, we can make sure to change a scope
+ * value only, and only when the data has been loaded.
+ */
+OfficeUI.factory('PreloaderService', ['$q', function($q) {
+    var preloaderServiceObject = { }; // Defines the object that needs to be returned by the service.
+
+    /**
+     * @type                Function
+     * @name                Load
+     *
+     * @description
+     * Provides a way to load a resource in the backend.
+     *
+     * @param               referencePaths:     An array containing all the resources that should be loaded in the
+     *                                          background.
+     *
+     * @returns {*}
+     * An HttpPromise which can be used to wait until this call has been completed.
+     */
+    preloaderServiceObject.Load = function(referencePaths){
+        var deferred = $q.defer();
+
+        $(referencePaths).each(function(index, referencePath) {
+            var preloadedElement = document.createElement('img');
+            {
+                preloadedElement.onload = deferred.resolve;
+                preloadedElement.src = referencePath;
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    // Return the service object itself.
+    return preloaderServiceObject;
+}]);
+
 /* ---- End: AngularJS Services. ---- */
+
+/* ---- OfficeUI Services. ---- */
+
+/* ---- End: OfficeUI Services. ---- */
+
+OfficeUI.factory('OfficeUIRibbonControlService', [function() {
+    var OfficeUIRibbonControlServiceObject = { };
+
+    OfficeUIRibbonControlServiceObject.Show = function() {
+        console.log('Registering the OfficeUIRibbonControlService object.');
+    }
+
+    return OfficeUIRibbonControlServiceObject;
+}]);
+
+/* ---- AngularJS Controllers. ---- */
+
+/**
+ * @type                Controller
+ * @name                OfficeUIController
+ *
+ * @description
+ * Defines the 'OfficeUIController' controller. By this controller, everything for an OfficeUI application is
+ * controlled.
+ *
+ * @dependencies        CssInjectorService:                     Provides a way to load stylesheets dynamically and
+ *                                                              wait for them to be retrieved.
+*                       PreloaderService:                       The service which is required for preloading data.
+ *                      OfficeUIConfigurationService:           Provides the configuration for an OfficeUI application.
+ */
+OfficeUI.controller('OfficeUIController', function(CssInjectorService, PreloaderService, OfficeUIConfigurationService,
+                                                   $scope, $http, $injector) {
+    /* -- Section: Variables. -- */
+    var registeredServices = { };           // Provides an array of all the registered services (OfficeUI controls).
+    $scope.isInitialized = false;           // Indicates that the entire OfficeUI application has been loaded.
+    $scope.loadingScreenLoaded = false;     // Indicates that the data for the loading screen has been loaded.
+
+    // Initialize all the required components for the website.
+    Initialize();
+
+    /**
+     * @type                Function
+     * @name                Initialize
+     *
+     * @description
+     * Initialize the AngularJS controller by loading the required files, parsing them, loading them into the DOM, ...
+     * The following initialization is being done:
+     * -    Retrieve the OfficeUI Configuration and according to this file, apply the correct stylesheets for both the
+     *      theming and the styling of the application.
+     * -    Retrieve the configuration file of the application, and use this configuration file to populate the string,
+     *      images and other elements which needs to be placed on the page.
+     */
+    function Initialize() {
+        OfficeUIConfigurationService.getOfficeUIConfiguration().then(function(data) {
+            // Retrieve the styles and themes as defined in the Json file.
+            var foundStyles = JSPath.apply('.{.name == "' + data.DefaultStyle + '"}', data.Styles);
+            var foundThemes = JSPath.apply('.{.name == "' + data.DefaultTheme + '"}', data.Themes);
+
+            // Inject the services, based on the implemented controls.
+            var services = JSPath.apply('.', data.Controls);
+
+            // Register all the services as instructed by the icons.
+            // Each service has 3 properties (Name, Service and Configuration file). All those properties are stored
+            // in an object.
+            $(services).each(function(index, service) {
+                registeredServices[service.Name] = [ $injector.get(service.Service), service.ConfigurationFile ];
+            });
+
+            // Using our custom 'CssInjectorService' service, add a stylesheet for the theme and style.
+            CssInjectorService.Inject('OfficeUIStyle', foundStyles[0].stylesheet);
+            CssInjectorService.Inject('OfficeUITheme', foundThemes[0].stylesheet).then(function() {
+                // Set a variable that indicates that the loading screen can be showed.
+                $scope.loadingScreenLoaded = true;
+            });
+
+            // Loads the configuration of the application.
+            // The configuration file of the application is defined in the OfficeUI configuration file.
+            $http.get(data.Configuration)
+                .then(function (response) {
+                    $scope.Title = response.data.Title;
+                    $scope.Icons = response.data.Icons;
+
+                    var iconReferences = JSPath.apply('.Icon', $scope.Icons);
+
+                    // Loads all the images which needs to be loaded for the application.
+                    PreloaderService.Load(iconReferences).then(function() {
+                        // Sets a value that indicates that the application has been loaded.
+                        $scope.isInitialized = true;
+                    });
+
+                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + data.Configuration + '\' could not be loaded.'); }
+            );
+        });
+    }
+});
+
+/* ---- End: AngularJS Controllers. ---- */
 
 /* ----  AngularJS Directives. ---- */
 
@@ -281,67 +397,3 @@ OfficeUI.directive('officeuiToggleClassOnClick', function() {
 });
 
 /* ----  End: AngularJS Directives. ---- */
-
-/* ---- AngularJS Controllers. ---- */
-
-/**
- * @type            Controller
- * @name            OfficeUIController
- *
- * @description
- * Defines the 'OfficeUIController' controller. By this controller, everything for an OfficeUI application is
- * controlled.
- *
- * @dependencies        CssInjectorService:                     Provides a way to load stylesheets dynamically and
- *                                                              wait for them to be retrieved.
- *                      OfficeUIConfigurationService:           Provides the configuration for an OfficeUI application.
- */
-OfficeUI.controller('OfficeUIController', function(CssInjectorService, OfficeUIConfigurationService, $scope, $http) {
-
-    /* -- Section: Variables. -- */
-    $scope.isInitialized = false;           // Indicates that the entire OfficeUI application has been loaded.
-    $scope.loadingScreenLoaded = false;     // Indicates that the data for the loading screen has been loaded.
-
-    // Initialize all the required components for the website.
-    Initialize();
-
-    /**
-     * @type                Function
-     * @name                Initialize
-     *
-     * @description
-     * Initialize the AngularJS controller by loading the required files, parsing them, loading them into the DOM, ...
-     * The following initialization is being done:
-     * -    Retrieve the OfficeUI Configuration and according to this file, apply the correct stylesheets for both the
-     *      theming and the styling of the application.
-     * -    Retrieve the configuration file of the application, and use this configuration file to populate the string,
-     *      images and other elements which needs to be placed on the page.
-     */
-    function Initialize() {
-        OfficeUIConfigurationService.getOfficeUIConfiguration().then(function(data) {
-            // Retrieve the styles and themes as defined in the Json file.
-            var foundStyles = JSPath.apply('.{.name == "' + data.DefaultStyle + '"}', data.Styles);
-            var foundThemes = JSPath.apply('.{.name == "' + data.DefaultTheme + '"}', data.Themes);
-
-            // Using our custom 'CssInjectorService' service, add a stylesheet for the theme and style.
-            CssInjectorService.Inject('OfficeUIStyle', foundStyles[0].stylesheet);
-            CssInjectorService.Inject('OfficeUITheme', foundThemes[0].stylesheet).then(function() {
-                // Set a variable that indicates that the loading screen can be showed.
-                $scope.loadingScreenLoaded = true;
-            });
-
-            // Returns the 'httpPromise' which is required for further processing.
-            $http.get(data.Configuration)
-                .then(function (response) {
-                    $scope.Title = response.data.Title;
-                    $scope.Icons = response.data.Icons;
-
-                    // Sets a value that indicates that the application has been loaded.
-                    $scope.isInitialized = true;
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + data.Configuration + '\' could not be loaded.'); }
-            );
-        });
-    }
-});
-
-/* ---- End: AngularJS Controllers. ---- */
