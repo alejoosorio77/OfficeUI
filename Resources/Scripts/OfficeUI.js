@@ -304,13 +304,14 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, OfficeUIC
             // Returns the 'httpPromise' which is required for further processing.
             $http.get(data.Configuration)
                 .then(function (response) {
-                        $scope.Title = response.data.Title;
-                        $scope.Icons = response.data.Icons;
+                    $scope.Title = response.data.Title;
+                    $scope.Icons = response.data.Icons;
+
+                    // Sets a value that indicates that the application has been loaded.
+                    $scope.isInitialized = true;
                 }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + data.Configuration + '\' could not be loaded.'); }
             );
         });
-
-        $scope.isInitialized = true;
     }
 });
 

@@ -1,21 +1,21 @@
 {
-  "Title": "Office Web Controls For Web Applications - Version 2015",
-  "Icons": [
-    {
-      "Id": "icoApplication",
-      "Icon": "/Resources/Images/Application/Application.png",
-      "Alt": "Outlook"
+    "Title": "Office Web Controls For Web Applications - Version 2015",
+    "Icons": [
+        {
+            "Id": "icoApplication",
+            "Icon": "/Resources/Images/Application/Application.png",
+            "Alt": "Outlook"
     },
-    {
-      "Id": "icoSendReceive",
-      "Icon": "/Resources/Images/Application/Send-Receive.png",
-      "Alt": "Send / Receive"
+        {
+            "Id": "icoSendReceive",
+            "Icon": "/Resources/Images/Application/Send-Receive.png",
+            "Alt": "Send / Receive"
     },
-    {
-      "Id": "icoUndo",
-      "Icon": "/Resources/Images/Application/Undo.png",
-      "Alt": "Undo",
-      "Disabled": "True"
+        {
+            "Id": "icoUndo",
+            "Icon": "/Resources/Images/Application/Undo.png",
+            "Alt": "Undo",
+            "Disabled": "True"
     }
   ]
 }
