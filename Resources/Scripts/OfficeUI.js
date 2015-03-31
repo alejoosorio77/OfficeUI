@@ -102,49 +102,105 @@ OfficeUI.factory('OfficeUIConfigurationService', function($http) {
     }
 });
 
+/**
+ * @type            Service
+ * @name            CssInjectorService
+ *
+ * @description
+ * Provides a service which enabled the end user to dynamically attach css files to the header of your HTML document.
+ * This service does return a promise, so that does mean that we can wait until the Stylesheets are loaded and
+ * injected into the HTML.
+ */
+OfficeUI.factory('CssInjectorService', ['$q', function($q) {
+    var cssInjectorServiceObject = { }; // Defines the object that needs to be returned by the service.
+
+    /**
+     * @type                Function
+     * @name                createLink
+     *
+     * @description
+     * Returns a 'HtmlElement' which is a 'link' with various default properties.
+     * The default properties are:
+     * - rel:       stylesheet
+     * - type:      text/css
+     *
+     * @param               id:         The id of the element to return.
+     * @param               url:        The url that this link points to.
+     *
+     * @returns             {HTMLElement}
+     * An 'HtmlElement', representing the generated link.
+     */
+    var createLink = function(id, url) {
+        var link = document.createElement('link');
+        link.id = id;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = url;
+
+        return link;
+    }
+
+    /**
+     * @type                Function
+     * @name                loadAndWait
+     * @description
+     * Load a given stylesheet file and wait until it's loaded.
+     * To check if it's done loading, we execute this method in a loop until we retrieve some data.
+     *
+     * @param               url:        The url of the stylesheet which is being loaded.
+     * @param               deferred:   An object which is required to resolve the file.
+     */
+    var loadAndWait = function(url, deferred) {
+        for (var i in document.styleSheets) {
+            var href = document.styleSheets[i].href || "";
+            if (href.split("/").slice(-1).join() === url) {
+                deferred.resolve();
+                return;
+            }
+        }
+        setTimeout(function() {loadAndWait(url, deferred);}, 50);
+    }
+
+    /**
+     * @type                Function
+     * @name                Inject
+     *
+     * @description
+     * Inject a given stylesheet into the page and wait for until.
+     *
+     * @param               id:         The id of the element in which to save the stylesheet.
+     * @param               url:        The url of the stylesheet to load.
+     *
+     * @returns {*}
+     * A 'promise' which means that we can wait until the data has been loaded.
+     */
+    cssInjectorServiceObject.Inject = function(id, url){
+        var deferred = $q.defer();
+        var link;
+
+        // Check if a stylesheet element which this id does not exist.
+        if(!angular.element('link#' + id).length) {
+
+            // Create the element.
+            link = createLink(id, url);
+            {
+                link.onload = deferred.resolve;
+                angular.element('head').append(link);
+            }
+
+            loadAndWait(url, deferred);
+
+            return deferred.promise;
+        }
+    };
+
+    // return the service object itself.
+    return cssInjectorServiceObject;
+}]);
+
 /* ---- End: AngularJS Services. ---- */
 
 /* ----  AngularJS Directives. ---- */
-
-/**
- * @type            Directive
- * @name            officeuiApplication
- *
- * @description
- * Defines the OfficeUIApplication directive. This directive allows us, by placing an HTML tag to render the entire
- * OfficeUI application, which does include the ribbon and all the other controls.
- *
- * @remarks
- * The template file itself is saved in the following location: '/Resources/Data/Templates/OfficeUI.html'.
- * This location is hardcoded and cannot be changed.
- *
- * @example
- * Imagine the following HTML code which is placed on a page.
- *
- * <body>
- *    <div id="OfficeUI">
- *        <!-- We want to render the OfficeUI Suite here. -->
- *    </div>
- * </body>
- *
- * Now, we want to render the OfficeUI controls on the place of the comment.
- * There are 2 options, or we can either replace the entire section with the OfficeUI controls, but that makes that the
- * HTML does become very cluttered and it's not easy to maintain.
- * Therefore, you can also replace the section with this directive as showed in the example below:
- *
- * <body>
- *    <div id="OfficeUI">
- *        <div officeui-application=""></div>
- *    </div>
- * </body>
- */
-OfficeUI.directive('officeuiApplication', function() {
-    return {
-        restrict: 'AE',
-        replace: true,
-        templateUrl: '/Resources/Data/Templates/OfficeUI.html'
-    }
-});
 
 /**
  * @type            Directive
@@ -207,26 +263,43 @@ OfficeUI.directive('officeuiToggleClassOnClick', function() {
  * Defines the 'OfficeUIController' controller. By this controller, everything for an OfficeUI application is
  * controlled.
  *
- * @dependencies    OfficeUIConfigurationService:           Provides the configuration for an OfficeUI application.
+ * @dependencies        CssInjectorService:                     Provides a way to load stylesheets dynamically and
+ *                                                              wait for them to be retrieved.
+ *                      OfficeUIConfigurationService:           Provides the configuration for an OfficeUI application.
  */
-OfficeUI.controller('OfficeUIController', function(OfficeUIConfigurationService, $scope, $http) {
+OfficeUI.controller('OfficeUIController', function(CssInjectorService, OfficeUIConfigurationService, $scope, $http) {
+
+    /* -- Section: Variables. -- */
     $scope.isInitialized = false;           // Indicates that the entire OfficeUI application has been loaded.
     $scope.loadingScreenLoaded = false;     // Indicates that the data for the loading screen has been loaded.
 
     // Initialize all the required components for the website.
     Initialize();
 
+    /**
+     * @type                Function
+     * @name                Initialize
+     *
+     * @description
+     * Initialize the AngularJS controller by loading the required files, parsing them, loading them into the DOM, ...
+     * The following initialization is being done:
+     * -    Retrieve the OfficeUI Configuration and according to this file, apply the correct stylesheets for both the
+     *      theming and the styling of the application.
+     * -    Retrieve the configuration file of the application, and use this configuration file to populate the string,
+     *      images and other elements which needs to be placed on the page.
+     */
     function Initialize() {
         OfficeUIConfigurationService.getOfficeUIConfiguration().then(function(data) {
+            // Retrieve the styles and themes as defined in the Json file.
             var foundStyles = JSPath.apply('.{.name == "' + data.DefaultStyle + '"}', data.Styles);
             var foundThemes = JSPath.apply('.{.name == "' + data.DefaultTheme + '"}', data.Themes);
 
-            $scope.Style = foundStyles[0].stylesheet;
-            $scope.Theme = foundThemes[0].stylesheet;
-
-            // Set a value that indicates that the loading screen has been loaded. So, at this point, the loading screen
-            // can be rendered.
-            $scope.loadingScreenLoaded = true;
+            // Using our custom 'CssInjectorService' service, add a stylesheet for the theme and style.
+            CssInjectorService.Inject('OfficeUIStyle', foundStyles[0].stylesheet);
+            CssInjectorService.Inject('OfficeUITheme', foundThemes[0].stylesheet).then(function() {
+                // Set a variable that indicates that the loading screen can be showed.
+                $scope.loadingScreenLoaded = true;
+            });
 
             // Returns the 'httpPromise' which is required for further processing.
             $http.get(data.Configuration)
@@ -237,10 +310,7 @@ OfficeUI.controller('OfficeUIController', function(OfficeUIConfigurationService,
             );
         });
 
-        setTimeout(function() {
-            $scope.isInitialized = true;
-            $scope.$apply();
-        }, 2000);
+        $scope.isInitialized = true;
     }
 });
 

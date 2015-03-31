@@ -73,6 +73,10 @@ html, body {
 body {
   font-size: 1em; }
 
+/* ----- Classes which are set through AngularJS. */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important; }
+
 /* ---- General OfficeUI classes. ---- */
 #OfficeUI {
   color: #444;
