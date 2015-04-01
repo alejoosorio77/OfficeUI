@@ -222,22 +222,20 @@ OfficeUI.factory('PreloaderService', ['$q', function($q) {
      * @description
      * Provides a way to load a resource in the backend.
      *
-     * @param               referencePaths:     An array containing all the resources that should be loaded in the
+     * @param               referencePath:      An array containing the resource that should be loaded in the
      *                                          background.
      *
      * @returns {*}
      * An HttpPromise which can be used to wait until this call has been completed.
      */
-    preloaderServiceObject.Load = function(referencePaths){
+    preloaderServiceObject.Load = function(referencePath){
         var deferred = $q.defer();
 
-        $(referencePaths).each(function(index, referencePath) {
-            var preloadedElement = document.createElement('img');
-            {
-                preloadedElement.onload = deferred.resolve;
-                preloadedElement.src = referencePath;
-            }
-        });
+        var preloadedElement = document.createElement('img');
+        {
+            preloadedElement.onload = deferred.resolve;
+            preloadedElement.src = referencePath;
+        }
 
         return deferred.promise;
     }
@@ -250,7 +248,7 @@ OfficeUI.factory('PreloaderService', ['$q', function($q) {
 
 /* ---- OfficeUI Services (controls). ---- */
 
-OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', 'PreloaderService', function($rootScope, $http, PreloaderService) {
+OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', 'PreloaderService', function($rootScope, $http, $q, PreloaderService) {
     var OfficeUIRibbonControlServiceObject = { }; // Defines the object that needs to be returned by the service.
 
     /**
@@ -263,6 +261,8 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', 'Preloa
      * @param               configurationFile:      The file that contains the configuration of the service.
      */
     OfficeUIRibbonControlServiceObject.Initialize = function(configurationFile) {
+        var deferred = $q.defer();
+
         $http.get(configurationFile)
             .then(function (response) {
                 $rootScope.Tabs = response.data.Tabs;
@@ -271,8 +271,18 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', 'Preloa
                 var images = JSPath.apply('.Groups.Areas.Actions.Resource', $rootScope.Tabs);
                 images.concat(JSPath.apply('.Tabs.Groups.Areas.Actions.Resource', $rootScope.ContextualGroups));
 
-                PreloaderService.Load(images);
+                var imagesPromise = [];
+
+                $(images).each(function(index, item) {
+                    imagesPromise.push(PreloaderService.Load(item));
+                });
+
+                $q.all(imagesPromise).then(function() {
+                    deferred.resolve();
+                });
             });
+
+        return deferred.promise;
     }
 
     // Return the service object itself.
@@ -297,7 +307,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', 'Preloa
  *                      OfficeUIConfigurationService:           Provides the configuration for an OfficeUI application.
  */
 OfficeUI.controller('OfficeUIController', function(CssInjectorService, PreloaderService, OfficeUIConfigurationService,
-                                                   $scope, $http, $injector) {
+                                                   $scope, $http, $injector, $q) {
     /* -- Section: Variables. -- */
     var registeredServices = { };           // Provides an array of all the registered services (OfficeUI controls).
     $scope.isInitialized = false;           // Indicates that the entire OfficeUI application has been loaded.
@@ -335,8 +345,11 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
             });
 
             // Using our custom 'CssInjectorService' service, add a stylesheet for the theme and style.
-            CssInjectorService.Inject('OfficeUIStyle', foundStyles[0].stylesheet);
-            CssInjectorService.Inject('OfficeUITheme', foundThemes[0].stylesheet).then(function() {
+            var cssLoaderPromises = [];
+            cssLoaderPromises.push(CssInjectorService.Inject('OfficeUIStyle', foundStyles[0].stylesheet));
+            cssLoaderPromises.push(CssInjectorService.Inject('OfficeUITheme', foundThemes[0].stylesheet));
+
+            $q.all(cssLoaderPromises).then(function() {
                 // Set a variable that indicates that the loading screen can be showed.
                 $scope.loadingScreenLoaded = true;
             });
@@ -349,21 +362,22 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
                     $scope.Icons = response.data.Icons;
 
                     var iconReferences = JSPath.apply('.Icon', $scope.Icons);
+                    var iconReferencesPromises = [];
+                    var serviceLoaderPromises = [];
 
-                    // Loads all the images which needs to be loaded for the application.
-                    PreloaderService.Load(iconReferences).then(function() {
-                        // Loads all the services.
-                        $(services).each(function(index, service) {
-                            InitializeService(registeredServices[service.Name][0], service.ConfigurationFile)
-                            //InitializeService(registeredServices[service.Name][0], service.ConfigurationFile).then(function() {
-                            //    alert('Service has been loaded.');
-                            //})
-                        });
-
-                        // Sets a value that indicates that the application has been loaded.
-                        $scope.isInitialized = true;
+                    $(iconReferences).each(function(index, item) {
+                        iconReferencesPromises.push(PreloaderService.Load(item));
                     });
 
+                    $q.all(iconReferencesPromises).then(function() {
+                        $(services).each(function(index, service) {
+                            serviceLoaderPromises.push(InitializeService(registeredServices[service.Name][0], service.ConfigurationFile));
+                        });
+
+                        $q.all(serviceLoaderPromises).then(function() {
+                            $scope.isInitialized = true;
+                        })
+                    });
                 }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + data.Configuration + '\' could not be loaded.'); }
             );
         });
@@ -380,7 +394,13 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      * @param               configurationFile:  The file that defines the configuration of the service.
      */
     function InitializeService(serviceInstance, configurationFile) {
-        serviceInstance.Initialize(configurationFile);
+        var deferred = $q.defer();
+
+        serviceInstance.Initialize(configurationFile).then(function() {
+            deferred.resolve();
+        });
+
+        return deferred.promise;
     }
 
     /**

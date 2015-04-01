@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html data-ng-app="OfficeUIApplication" data-ng-controller="OfficeUIController">
     <head>
-        <title>OfficeUI (Version 1.0.0)</title>
+        <title>OfficeUI Web Controls for Web Applications</title>
 
         <!-- Enable universal character encoding. -->
         <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
@@ -57,7 +57,7 @@
 
             <!-- Defines the main application area. -->
             <div class="area-application" data-ng-if="isInitialized">
-                <div data-ng-include="'/Resources/Data/Templates/OfficeUI.html'"></div>
+                <div data-ng-include="'/Resources/Data/Templates/OfficeUI.html'" ng-cloak></div>
             </div>
         </div>
         <!--&lt;!&ndash; Defines the OfficeUI container. All OfficeUI components should be placed in here. &ndash;&gt;-->
