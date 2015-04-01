@@ -28,6 +28,9 @@
 @import 'OfficeUI.Reset.css';
 @import 'OfficeUI.Mixins';
 
+/* ---- Variables. ---- */
+$color-default-gray: #d4d4d4;
+
 /* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely. ---- */
 @font-face { font-family: "Segoe UI"; font-weight: 200; src: local("Segoe UI Light"); }
 @font-face { font-family: "Segoe UI"; font-weight: 300; src: local("Segoe UI Semilight"); }
@@ -75,6 +78,16 @@ body { font-size: 1em; }
 #OfficeUI .application header .application-icons { margin-left: 5px; position: absolute; z-index: 300; }
 #OfficeUI .application header .application-icons .icon { margin: 0 5px 0 2px; }
 #OfficeUI .application header .application-icons .icon:not(.application-icon) { margin-right: 6px; }
+
+#OfficeUI .ribbon { position: absolute; top: 0; width: 100%; }
+#OfficeUI .ribbon .tabs { border-bottom: 1px solid $color-default-gray; height: 50px; position: relative; z-index: 150; }
+#OfficeUI .ribbon .tabs li { display: inline-block; }
+#OfficeUI .ribbon .tabs .tab-group { position: relative; top: 25px; }
+#OfficeUI .ribbon .tabs .tab-label { padding: 0 13px 0 12px; text-align: center; text-transform: uppercase; }
+#OfficeUI .ribbon .tab { height: 25px; line-height: 25px; }
+#OfficeUI .ribbon .tab-application { background-image: none; border: 1px solid transparent; color: #fff; margin-right: 4px; min-width: 59px; padding: 0 3px 0 2px; }
+#OfficeUI .ribbon .tab.active { background: #fff; border: 1px solid $color-default-gray; border-bottom-color: #fff; }
+#OfficeUI .ribbon .tab:not(.active) { border: 1px solid transparent; border-bottom-color: $color-default-gray; }
 
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
 #OfficeUI .spinner-circle

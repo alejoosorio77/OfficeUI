@@ -16,7 +16,7 @@
             <ul class="tabs">
                 <li class="tab-group" data-ng-repeat="tab in Tabs">
                     <ul>
-                        <li class="tab label" id="{{tab.Id}}">
+                        <li class="tab tab-label" id="{{tab.Id}}" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}">
                             <span>{{tab.Label}}</span>
                         </li>
                     </ul>

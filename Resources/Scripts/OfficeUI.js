@@ -263,6 +263,9 @@ OfficeUI.factory('PreloaderService', ['$q', function($q) {
 OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', 'PreloaderService', function($rootScope, $http, $q, PreloaderService) {
     var OfficeUIRibbonControlServiceObject = { }; // Defines the object that needs to be returned by the service.
 
+    // Defines all the variables which are needed for this control.
+    var activeTab;
+
     /**
      * @type                Function
      * @name                SetLoadingImage
@@ -292,6 +295,9 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
                 $rootScope.Tabs = response.data.Tabs;
                 $rootScope.ContextualGroups = response.data.ContextualGroups;
 
+                // Sets the currently active tab.
+                activeTab = $rootScope.Tabs[1].Id;
+
                 var images = JSPath.apply('.Groups.Areas.Actions.Resource', $rootScope.Tabs);
                 images.concat(JSPath.apply('.Tabs.Groups.Areas.Actions.Resource', $rootScope.ContextualGroups));
 
@@ -307,6 +313,23 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
             });
 
         return deferred.promise;
+    }
+
+    /**
+     * @type                Function
+     * @name                isTabActive
+     *
+     * @description
+     * Checks if a given tab is active, based on it's id.
+     *
+     * @param               tabId:      The id of the tab element to check for being active.
+     */
+    OfficeUIRibbonControlServiceObject.isTabActive = function(tabId) {
+        return activeTab == tabId;
+    }
+
+    OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) {
+        activeTab = tabId;
     }
 
     // Return the service object itself.
@@ -528,7 +551,7 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      */
     $scope.InitializeServiceCall = function(service, method, parameters) {
         var serviceInstance = registeredServices[service][0];
-        serviceInstance[method](parameters);
+        return serviceInstance[method](parameters);
     }
 });
 

@@ -17,6 +17,11 @@
 #OfficeUI .icon:not(.application-icon):not(.disabled):hover { background-color: $icon-hover-color; }
 #OfficeUI .icon:not(.application-icon).active { background-color: $icon-active-color !important; }
 
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tab-application { background-color: $primary-color; border-color: $primary-color !important; }
+#OfficeUI .ribbon .tab-application:hover { background-color: $link-active-color !important; border-color: $link-active-color !important; }
+#OfficeUI .ribbon .tab.active, #OfficeUI .ribbon .tab:not(.contextual-tab):not(.tab-application):hover { color: $link-active-color; }
+
 /* ---- OfficeUI Styling Animations. ---- */
 @include keyframes(fade-circle) {
   0% { background-color: $spinner-color; }

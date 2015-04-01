@@ -61,6 +61,18 @@
 #OfficeUI .icon:not(.application-icon).active {
   background-color: #92c0e0 !important; }
 
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tab-application {
+  background-color: #0072c6;
+  border-color: #0072c6 !important; }
+
+#OfficeUI .ribbon .tab-application:hover {
+  background-color: #2a8dd4 !important;
+  border-color: #2a8dd4 !important; }
+
+#OfficeUI .ribbon .tab.active, #OfficeUI .ribbon .tab:not(.contextual-tab):not(.tab-application):hover {
+  color: #2a8dd4; }
+
 /* ---- OfficeUI Styling Animations. ---- */
 @-moz-keyframes fade-circle {
   0% {
