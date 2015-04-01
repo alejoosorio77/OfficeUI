@@ -273,7 +273,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      * @param               scope:      The scope object on which the loading message is defined.
      */
     OfficeUIRibbonControlServiceObject.SetLoadingMessage = function(scope) {
-        scope.LoadingMessage = 'OfficeUI Ribbon Control Initialization...';
+        scope.LoadingMessage = 'OfficeUI Ribbon Control Initialization';
     }
     /**
      * @type                Function
@@ -367,7 +367,7 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      * loading screen.
      */
     function Initialize() {
-        $scope.LoadingMessage = 'Loading the application...';
+        $scope.LoadingMessage = 'Loading the application';
         OfficeUIConfigurationService.getOfficeUIConfiguration().then(function(data) {
             // Retrieve the styles and themes as defined in the Json file.
             var foundStyles = JSPath.apply('.{.name == "' + data.DefaultStyle + '"}', data.Styles);

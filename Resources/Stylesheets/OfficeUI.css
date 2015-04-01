@@ -111,6 +111,9 @@ body {
   transform: translate(-50%, -30%);
   width: 100%; }
 
+#OfficeUI .loading-wrapper {
+  margin: 20px 0 20px 0; }
+
 #OfficeUI .loading-area h1 {
   font-size: 3.0628em;
   font-weight: 200;
@@ -126,9 +129,69 @@ body {
 #OfficeUI .loading-area .status-message {
   font-size: 0.75em; }
 
-#OfficeUI .loading-wrapper {
-  margin: 20px 0 20px 0; }
+#OfficeUI .loading-area .status-message span {
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -moz-animation-name: animating-loading-text;
+  -ms-animation-name: animating-loading-text;
+  -o-animation-name: animating-loading-text;
+  -webkit-animation-name: animating-loading-text;
+  animation-name: animating-loading-text;
+  -moz-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite; }
 
+#OfficeUI .loading-area .status-message span:nth-child(1) {
+  -moz-animation-delay: 100ms;
+  -ms-animation-delay: 100ms;
+  -o-animation-delay: 100ms;
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms; }
+
+#OfficeUI .loading-area .status-message span:nth-child(2) {
+  -moz-animation-delay: 300ms;
+  -ms-animation-delay: 300ms;
+  -o-animation-delay: 300ms;
+  -webkit-animation-delay: 300ms;
+  animation-delay: 300ms; }
+
+#OfficeUI .loading-area .status-message span:nth-child(3) {
+  -moz-animation-delay: 500ms;
+  -ms-animation-delay: 500ms;
+  -o-animation-delay: 500ms;
+  -webkit-animation-delay: 500ms;
+  animation-delay: 500ms; }
+
+@-moz-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@-ms-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@-o-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@-webkit-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
 /* ---- Styling for the OfficeUI application. ---- */
 #OfficeUI .application {
   font-size: 0.75em; }

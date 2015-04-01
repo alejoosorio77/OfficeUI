@@ -52,7 +52,15 @@
                 </div>
 
                 <!-- Defines the loading text. -->
-                <div class="status-message">{{LoadingMessage}}</div>
+                <div class="status-message">{{LoadingMessage}}
+                    <!-- The three '.' signs which are being placed here are required to animate the login screen.
+                         Otherwise, when on a slow connection, it might be that loading takes quite a time and the user
+                         might think that the application has frozen. By animating a bit, it's more clear that the
+                         application is still doing something. -->
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </div>
             </div>
 
             <!-- Defines the main application area. -->

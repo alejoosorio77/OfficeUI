@@ -11,7 +11,7 @@
 /* ---- Useful mixins. ---- */
 @mixin square-box($dimensions) { width: $dimensions; height: $dimensions; }
 @mixin border-radius($radius) { -moz-border-radius: $radius; -ms-border-radius: $radius; -o-border-radius: $radius; -webkit-border-radius: $radius; border-radius: $radius; }
-@mixin animation-transform-scale($scale) { -moz-transform: scale($scale); -ms-transform: scale($scale); -o-transform: scale($scale); -webkit-transform: scale($scale); transform: scale($scale); }
+@mixin transform-scale($scale) { -moz-transform: scale($scale); -ms-transform: scale($scale); -o-transform: scale($scale); -webkit-transform: scale($scale); transform: scale($scale); }
 @mixin animation-duration($time) { -moz-animation-duration: $time; -ms-animation-duration: $time; -o-animation-duration: $time; -webkit-animation-duration: $time; animation-duration: $time; }
 @mixin animation-delay($time) { -moz-animation-delay: $time; -ms-animation-delay: $time; -o-animation-delay: $time; -webkit-animation-delay: $time; animation-delay: $time; }
 @mixin animation-name ($name) { -moz-animation-name: $name; -ms-animation-name: $name; -o-animation-name: $name; -webkit-animation-name: $name; animation-name: $name; }

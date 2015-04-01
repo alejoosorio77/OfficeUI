@@ -54,10 +54,19 @@ body { font-size: 1em; }
 
 /* ---- Defines the 'loading' and displaying' area. ---- */
 #OfficeUI .loading-area { left: 50%; position: fixed; top: 30%; text-align: center; transform: translate(-50%, -30%); width: 100%; }
+#OfficeUI .loading-wrapper { margin: 20px 0 20px 0; }
 #OfficeUI .loading-area h1 { font-size: 3.0628em; font-weight: 200; line-height: 1em; }
 #OfficeUI .loading-area h1 .registered { display: inline-block; font-size: 0.25em; line-height: 1em; margin-top: 10px; vertical-align: top; }
 #OfficeUI .loading-area .status-message { font-size: 0.75em; }
-#OfficeUI .loading-wrapper { margin: 20px 0 20px 0; }
+#OfficeUI .loading-area .status-message span { @include animation-duration(1s); @include animation-name(animating-loading-text); @include animation-iteration-infinite; }
+#OfficeUI .loading-area .status-message span:nth-child(1) { @include animation-delay(100ms); }
+#OfficeUI .loading-area .status-message span:nth-child(2) { @include animation-delay(300ms); }
+#OfficeUI .loading-area .status-message span:nth-child(3) { @include animation-delay(500ms); }
+
+@include keyframes(animating-loading-text) {
+  0% { opacity: 0; }
+  100% { opacity: 100; }
+}
 
 /* ---- Styling for the OfficeUI application. ---- */
 #OfficeUI .application { font-size: 0.75em; }
@@ -70,7 +79,7 @@ body { font-size: 1em; }
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
 #OfficeUI .spinner-circle
 {
-  @include animation-transform-scale(0.5); @include square-box(70px); margin-left: auto; margin-right: auto; position: relative;
+  @include transform-scale(0.5); @include square-box(70px); margin-left: auto; margin-right: auto; position: relative;
 
   .animation-image { @include animation-duration(1.2s); @include animation-name(fade-circle); @include border-radius(5px); @include animation-iteration-infinite; @include animation-direction-normal; @include square-box(10px); background-color: #fff; position: absolute; }
   .animate-step-01 { @include animation-delay(0.45s); @include top-left-position(0, 30px); }
