@@ -328,8 +328,33 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
         return activeTab == tabId;
     }
 
+    /**
+     * @type                Function
+     * @name                setActiveTab
+     *
+     * @description         Set a tab as the active tab.
+     *
+     * @param               tabId:      The id of the tab to set as active.
+     */
     OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) {
         activeTab = tabId;
+    }
+
+    /**
+     * @type            Function
+     * @name            setActiveTabColor
+     *
+     * @description
+     * This method will change the color of the active tab, but only when the tab is active.
+     * Otherwise, no color is returned and the default color is used.
+     *
+     * @param           tabId (string):     The id of the tab.
+     * @param           tabColor (string):  The color of the tab.
+
+     * @returns         {*}                 The color of the tab.
+     */
+    OfficeUIRibbonControlServiceObject.setActiveTabColor = function(tabId, tabColor) {
+        if (activeTab == tabId) { return tabColor; }
     }
 
     // Return the service object itself.

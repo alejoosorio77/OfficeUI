@@ -271,7 +271,7 @@ body {
   position: relative;
   top: 25px; }
 
-#OfficeUI .ribbon .tabs .tab-label {
+#OfficeUI .ribbon .tabs .tab-label, #OfficeUI .ribbon .tabs .group-label {
   padding: 0 13px 0 12px;
   text-align: center;
   text-transform: uppercase; }
@@ -302,7 +302,8 @@ body {
 
 #OfficeUI .ribbon .tabs .contextual-tab-group {
   height: 50px;
-  margin-right: 6px; }
+  margin-right: 6px;
+  vertical-align: top; }
 
 #OfficeUI .ribbon .tabs .contextual-tab-group ul {
   display: table;
@@ -318,6 +319,11 @@ body {
   padding-left: 12px;
   position: relative;
   top: 1px; }
+
+#OfficeUI .ribbon .tabs .contextual-tab-group .group-label {
+  font-size: 0.9em;
+  height: 17px;
+  margin-top: 4px; }
 
 #OfficeUI .ribbon .tabs-content {
   border-bottom: 1px solid #d4d4d4;
