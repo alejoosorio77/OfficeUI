@@ -48,6 +48,15 @@
  *                elements.
 ======================================================================================================= */
 /* ---- Variables. ---- */
+/* ---- General styling. ---- */
+#OfficeUI a {
+  color: #d24726;
+  text-decoration: none; }
+
+#OfficeUI a:hover {
+  color: #f0623e;
+  text-decoration: none; }
+
 /* ---- OfficeUI application styling. ---- */
 #OfficeUI .loading-area {
   color: #d24726; }
@@ -60,6 +69,22 @@
 
 #OfficeUI .icon:not(.application-icon).active {
   background-color: #f5ba9d !important; }
+
+/* ---- OfficeUI ribbon styling. ---- */
+#OfficeUI .ribbon .tab-application {
+  background-color: #d24726;
+  border-color: #d24726 !important; }
+
+#OfficeUI .ribbon .tab-application:hover {
+  background-color: #f0623e !important;
+  border-color: #f0623e !important; }
+
+#OfficeUI .ribbon .tab.active, #OfficeUI .ribbon .tab:not(.contextual-tab):not(.tab-application):hover {
+  color: #f0623e; }
+
+/* ---- OfficeUI menu styling. ---- */
+#OfficeUI .menu li:not(.active):not(.no-hover):hover {
+  background-color: #fcece9; }
 
 /* ---- OfficeUI Styling Animations. ---- */
 @-moz-keyframes fade-circle {

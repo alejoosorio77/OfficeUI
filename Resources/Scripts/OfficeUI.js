@@ -276,7 +276,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      * @param               scope:      The scope object on which the loading message is defined.
      */
     OfficeUIRibbonControlServiceObject.SetLoadingMessage = function(scope) {
-        scope.LoadingMessage = 'OfficeUI Ribbon Control Initialization';
+        scope.LoadingMessage = 'Office Web Controls Ribbon Control Initialization';
     }
     /**
      * @type                Function

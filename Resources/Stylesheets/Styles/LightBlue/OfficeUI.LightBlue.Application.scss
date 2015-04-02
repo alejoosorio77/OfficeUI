@@ -10,6 +10,10 @@
 /* ----- Import statements ----- */
 @import 'OfficeUI.LightBlue.References';
 
+/* ---- General styling. ---- */
+#OfficeUI a { color: $primary-color; text-decoration: none; }
+#OfficeUI a:hover { color: $link-active-color; text-decoration: none; }
+
 /* ---- OfficeUI application styling. ---- */
 #OfficeUI .loading-area { color: $primary-color; }
 #OfficeUI .spinner-circle .animation-image { background-color: $spinner-color; }
@@ -21,6 +25,9 @@
 #OfficeUI .ribbon .tab-application { background-color: $primary-color; border-color: $primary-color !important; }
 #OfficeUI .ribbon .tab-application:hover { background-color: $link-active-color !important; border-color: $link-active-color !important; }
 #OfficeUI .ribbon .tab.active, #OfficeUI .ribbon .tab:not(.contextual-tab):not(.tab-application):hover { color: $link-active-color; }
+
+/* ---- OfficeUI menu styling. ---- */
+#OfficeUI .menu li:not(.active):not(.no-hover):hover { background-color: $menu-navigation-color; }
 
 /* ---- OfficeUI Styling Animations. ---- */
 @include keyframes(fade-circle) {
