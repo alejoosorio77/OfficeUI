@@ -30,7 +30,7 @@
                     </div>
 
                     <ul>
-                        <li class="tab tab-label" id="{{tab.Id}}" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}" data-ng-repeat="tab in contextualGroup.Tabs">
+                        <li class="tab tab-label" cu-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' id="{{tab.Id}}" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}" data-ng-repeat="tab in contextualGroup.Tabs">
                             <span>{{tab.Label}}</span>
                         </li>
                     </ul>
