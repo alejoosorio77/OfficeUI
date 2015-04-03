@@ -353,7 +353,10 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
 
      * @returns         {*}                 The color of the tab.
      */
-    OfficeUIRibbonControlServiceObject.setActiveTabColor = function(tabId, tabColor) {
+    OfficeUIRibbonControlServiceObject.setActiveTabColor = function(tabSettings) {
+        var tabId = tabSettings[0];
+        var tabColor = tabSettings[1];
+
         if (activeTab == tabId) { return tabColor; }
     }
 
@@ -576,7 +579,7 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      */
     $scope.InitializeServiceCall = function(service, method, parameters) {
         var serviceInstance = registeredServices[service][0];
-        return serviceInstance[method](parameters);
+        return serviceInstance[method](parameters, parameters);
     }
 });
 
