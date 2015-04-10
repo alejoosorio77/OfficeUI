@@ -4,19 +4,28 @@
  * @version        1.0.0
  * @date           30/03/2015
  *
- * @depends             AngularJS/Services/OfficeUI.AngularJS.Services.CssInjectorService.js
- * @depends             AngularJS/Services/OfficeUI.AngularJS.Services.OfficeUIConfigurationService.js
- * @depends             AngularJS/Services/OfficeUI.AngularJS.Services.PreloaderService.js
- * @depends             AngularJS/Services/OfficeUI.AngularJS.Services.OfficeUIRibbonControlService.js
+ * @depends             AngularJS/Services/CssInjectorService.js
+ * @depends             AngularJS/Services/ImagePreloaderService.js
+ * @depends             AngularJS/Services/OfficeUIConfigurationService.js
  *
- * @depends             AngularJS/Controllers/OfficeUI.AngularJS.Controllers.OfficeUIController.js
+ * @depends             AngularJS/Controllers/OfficeUIController.js
  *
- * @depends             AngularJS/Directives/OfficeUI.AngularJS.Directives.OfficeUIToggleClassOnClick.js
- * @depends             AngularJS/Directives/OfficeUI.AngularJS.Directives.OfficeUIToggleStyleOnHover.js
+ * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
+ * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
+ *
+ * @depends             AngularJS/Services/Controls/Ribbon.js
  *
  * @notes
- * Defines the core components behind the OfficeUI application.
- * In this file all the required AngularJS code will be placed (Modules, Controller, Directives, ...)
+ * Defines the main starting point for the 'OfficeUIApplication' module.
+ *
+ * @remarks
+ * In the comments above, you do some entries with the name 'depends'. Those entries should not be removed, nor
+ * adjusted. There's a tool included which is stored in 'Tools/Build/JavaScriptCombiner/JavaScriptCombiner.exe'.
+ * This tool will read this particular file, and search for all the 'depends' in the comments. The contents of this file
+ * and all it's dependencies is outputted in a single file, which makes sure that there's only 1 request to the server
+ * to request all those files, while keeping a high readability by using different files for development.
+ * When you do change any of the dependent files, you should also touch this file to make sure that the combined version
+ * is the latest version.
  */
 
 /**
@@ -29,6 +38,17 @@
  * By 'hooks', we do mean the Controllers, Directives, Filters, Services, ...
  */
 var OfficeUI = angular.module('OfficeUIApplication', ['ngSanitize']);
+/**
+ * @filename       CssInjectorService.js
+ * @Author         Kevin De Coninck
+ * @version        1.0.0
+ * @date           30/03/2015
+ *
+ * @notes
+ * Defines the service 'CssInjectorService'.
+ * This service allows us to load stylesheets asynchronously.
+ */
+
 /**
  * @type            Service
  * @name            CssInjectorService
@@ -95,11 +115,62 @@ OfficeUI.factory('CssInjectorService', ['$q', function($q) {
             }
 
             return deferred.promise;
-        }
+        } else { OfficeUICore.Exceptions.OfficeUICssInjectorServiceException('[CssInjectorService.Inject]: There is already a link with id \'' + id + '\'. A new element could not be created.'); }
+
     };
 
     // return the service object itself.
     return cssInjectorServiceObject;
+}]);
+/**
+ * @filename       ImagePreloaderService.js
+ * @Author         Kevin De Coninck
+ * @version        1.0.0
+ * @date           30/03/2015
+ *
+ * @notes
+ * Defines the service 'ImagePreloaderService'.
+ * This service allows us to load data asynchronously.
+ */
+
+/**
+ * @type                Service
+ * @name                ImagePreloaderService
+ *
+ * @description
+ * The 'PreloaderService' enables you to load data in the back-end. By doing this, we can make sure to change a scope
+ * value only, and only when the data has been loaded.
+ */
+OfficeUI.factory('ImagePreloaderService', ['$q', function($q) {
+    var imagePreloaderServiceObject = { }; // Defines the object that needs to be returned by the service.
+
+    /**
+     * @type                Function
+     * @name                Load
+     *
+     * @description
+     * Provides a way to load a resource in the backend.
+     *
+     * @param               referencePath:      An array containing the resource that should be loaded in the
+     *                                          background.
+     *
+     * @returns {*}
+     * An HttpPromise which can be used to wait until this call has been completed.
+     */
+    imagePreloaderServiceObject.Load = function(referencePath){
+        var deferred = $q.defer();
+
+        var preloadedElement = document.createElement('img');
+        {
+            preloadedElement.onload = deferred.resolve;
+            preloadedElement.src = referencePath;
+        }
+
+        return deferred.promise;
+    }
+
+    // Return the service object itself.
+    return imagePreloaderServiceObject;
 }]);
 /**
  * @type            Service
@@ -140,197 +211,62 @@ OfficeUI.factory('OfficeUIConfigurationService', function($http) {
 
         /**
          * @type            Function
-         * @name            getOfficeUIConfiguration
+         * @name            GetOfficeUIConfiguration
          *
          * @returns         {HttpPromise}:      A promise which is loading the OfficeUI configuration file.
-         *
-         * @remarks
-         * This method can throw exceptions when an error occurred during the loading of this file.
-         * The explanation below provides some information about which exception can occur when:
-         *
-         * OfficeUIConfigurationException:      This exception is throwed when the value of the field
-         *                                      '$.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation' is not
-         *                                      provided. This does mean that the configuration file cannot be loaded.
-         *
-         * OfficeUILoadingException:            This exception is throwed when the configuration file cannot be loaded,
-         *                                      or when there's an error in the configuration file.
          */
-        getOfficeUIConfiguration: function() {
+        GetOfficeUIConfiguration: function() {
             // Check if the location of the file can be found somewhere. If it cannot be found, throw an error.
             if (typeof $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation === 'undefined' || $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation == '') {
-                OfficeUICore.Exceptions.officeUIConfigurationException('The OfficeUI Configuration file is not defined.');
+                OfficeUICore.Exceptions.OfficeUIConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The OfficeUI Configuration file is not defined.');
             }
 
             // Returns the 'httpPromise' which is required for further processing.
             return $http.get($.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation)
                 .then(function (response) {
+                    // Perform some checks to see if all the required data is stored in the Json file.
+                    if (typeof response.data.Styles === 'undefined' || response.data.Styles == '') { OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The configuration element [Styles] is missing or could not be found in the file \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\''); }
+                    if (typeof response.data.DefaultStyle === 'undefined' || response.data.Styles == '') { OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The configuration element [DefaultStyle] is missing or could not be found in the file \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\''); }
+                    if (typeof response.data.Themes === 'undefined' || response.data.Styles == '') { OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The configuration element [Themes] is missing or could not be found in the file \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\''); }
+                    if (typeof response.data.DefaultTheme === 'undefined' || response.data.Styles == '') { OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The configuration element [DefaultTheme] is missing or could not be found in the file \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\''); }
+                    if (typeof response.data.Configuration === 'undefined' || response.data.Styles == '') { OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The configuration element [Configuration] is missing or could not be found in the file \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\''); }
+                    if (typeof response.data.Controls === 'undefined' || response.data.Styles == '') { OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The configuration element [Controls] is missing or could not be found in the file \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\''); }
+                    if (typeof response.data.LoadingMessage === 'undefined' || response.data.Styles == '') { OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The configuration element [LoadingMessage] is missing or could not be found in the file \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\''); }
+
+                    // Retrieve the styles and themes as defined in the Json file.
+                    var foundStyles = JSPath.apply('.{.name == "' + response.data.DefaultStyle + '"}', response.data.Styles);
+                    var foundThemes = JSPath.apply('.{.name == "' + response.data.DefaultTheme + '"}', response.data.Themes);
+
+                    // Check if the data is valid, if not, throw an error.
+                    if (foundStyles.length == 0) { OfficeUICore.Exceptions.OfficeUIConfigurationException('[OfficeUIController.Initialize] - The requested default style: \'' + response.data.DefaultStyle + '\' which is referenced from \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' cannot be found.'); }
+                    if (foundThemes.length == 0) { OfficeUICore.Exceptions.OfficeUIConfigurationException('[OfficeUIController.Initialize] - The requested default theme: \'' + response.data.DefaultTheme + '\' which is referenced from \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' cannot be found.'); }
+                    if (foundStyles.length > 1) { OfficeUICore.Exceptions.OfficeUIConfigurationException('[OfficeUIController.Initialize] - The requested default style: \'' + response.data.DefaultStyle + '\' which is referenced from \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' matches multiple defined styles.'); }
+                    if (foundThemes.length > 1) { OfficeUICore.Exceptions.OfficeUIConfigurationException('[OfficeUIController.Initialize] - The requested default theme: \'' + response.data.DefaultTheme + '\' which is referenced from \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' matches multiple defined themes.'); }
+
                     return {
                         Styles: response.data.Styles,
-                        DefaultStyle: response.data.DefaultStyle,
                         Themes: response.data.Themes,
-                        DefaultTheme: response.data.DefaultTheme,
                         Configuration: response.data.Configuration,
-                        Controls: response.data.Controls
+                        Controls: response.data.Controls,
+                        LoadingMessage: response.data.LoadingMessage,
+                        DefaultStyle: foundStyles[0].stylesheet,
+                        DefaultTheme: foundThemes[0].stylesheet
                     };
-                }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); }
+                }, function(error) { OfficeUICore.Exceptions.OfficeUILoadingException('[OfficeUIConfigurationService.GetOfficeUIConfiguration] - The OfficeUI Configuration file: \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); }
             );
         }
     }
 });
 /**
- * @type                Service
- * @name                PreloaderService
+ * @filename       OfficeUIController.js
+ * @Author         Kevin De Coninck
+ * @version        1.0.0
+ * @date           30/03/2015
  *
- * @description
- * The 'PreloaderService' enables you to load data in the back-end. By doing this, we can make sure to change a scope
- * value only, and only when the data has been loaded.
+ * @notes
+ * Defines the controller 'OfficeUIController'.
  */
-OfficeUI.factory('PreloaderService', ['$q', function($q) {
-    var preloaderServiceObject = { }; // Defines the object that needs to be returned by the service.
 
-    /**
-     * @type                Function
-     * @name                Load
-     *
-     * @description
-     * Provides a way to load a resource in the backend.
-     *
-     * @param               referencePath:      An array containing the resource that should be loaded in the
-     *                                          background.
-     *
-     * @returns {*}
-     * An HttpPromise which can be used to wait until this call has been completed.
-     */
-    preloaderServiceObject.Load = function(referencePath){
-        var deferred = $q.defer();
-
-        var preloadedElement = document.createElement('img');
-        {
-            preloadedElement.onload = deferred.resolve;
-            preloadedElement.src = referencePath;
-        }
-
-        return deferred.promise;
-    }
-
-    // Return the service object itself.
-    return preloaderServiceObject;
-}]);
-/**
- * @type                Service
- * @name                OfficeUIRibbonControlService
- *
- * @description
- * Provides the service which is needed to manage the OfficeUI ribbon control.
- *
- * @dependencies        rootScope:          Used to inject properties into the root scope.
- *                      http:               Used to execute request to external providers.
- *                      q:                  Used to work with promises.
- *                      PreloaderService:   Used to preload images.
- */
-OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', 'PreloaderService', function($rootScope, $http, $q, PreloaderService) {
-    var OfficeUIRibbonControlServiceObject = { }; // Defines the object that needs to be returned by the service.
-
-    // Defines all the variables which are needed for this control.
-    var activeTab;
-
-    /**
-     * @type                Function
-     * @name                SetLoadingImage
-     *
-     * @description
-     * Sets the text that should be displayed on the loading screen when this service is being loaded.
-     *
-     * @param               scope:      The scope object on which the loading message is defined.
-     */
-    OfficeUIRibbonControlServiceObject.SetLoadingMessage = function(scope) {
-        scope.LoadingMessage = 'Office Web Controls Ribbon Control Initialization';
-    }
-    /**
-     * @type                Function
-     * @name                Initialize
-     *
-     * @description
-     * Initializes the service.
-     *
-     * @param               configurationFile:      The file that contains the configuration of the service.
-     */
-    OfficeUIRibbonControlServiceObject.Initialize = function(configurationFile) {
-        var deferred = $q.defer();
-
-        $http.get(configurationFile)
-            .then(function (response) {
-                $rootScope.Tabs = response.data.Tabs;
-                $rootScope.ContextualGroups = response.data.ContextualGroups;
-
-                // Sets the currently active tab.
-                activeTab = $rootScope.Tabs[1].Id;
-
-                var images = JSPath.apply('.Groups.Areas.Actions.Resource', $rootScope.Tabs);
-                images.concat(JSPath.apply('.Tabs.Groups.Areas.Actions.Resource', $rootScope.ContextualGroups));
-
-                var imagesPromise = [];
-
-                $(images).each(function(index, item) {
-                    imagesPromise.push(PreloaderService.Load(item));
-                });
-
-                $q.all(imagesPromise).then(function() {
-                    deferred.resolve();
-                });
-            });
-
-        return deferred.promise;
-    }
-
-    /**
-     * @type                Function
-     * @name                isTabActive
-     *
-     * @description
-     * Checks if a given tab is active, based on it's id.
-     *
-     * @param               tabId:      The id of the tab element to check for being active.
-     */
-    OfficeUIRibbonControlServiceObject.isTabActive = function(tabId) {
-        return activeTab == tabId;
-    }
-
-    /**
-     * @type                Function
-     * @name                setActiveTab
-     *
-     * @description         Set a tab as the active tab.
-     *
-     * @param               tabId:      The id of the tab to set as active.
-     */
-    OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) {
-        activeTab = tabId;
-    }
-
-    /**
-     * @type            Function
-     * @name            setActiveTabColor
-     *
-     * @description
-     * This method will change the color of the active tab, but only when the tab is active.
-     * Otherwise, no color is returned and the default color is used.
-     *
-     * @param           tabId (string):     The id of the tab.
-     * @param           tabColor (string):  The color of the tab.
-
-     * @returns         {*}                 The color of the tab.
-     */
-    OfficeUIRibbonControlServiceObject.setActiveTabColor = function(tabSettings) {
-        var tabId = tabSettings[0];
-        var tabColor = tabSettings[1];
-
-        if (activeTab == tabId) { return tabColor; }
-    }
-
-    // Return the service object itself.
-    return OfficeUIRibbonControlServiceObject;
-}]);
 /**
  * @type                Controller
  * @name                OfficeUIController
@@ -339,19 +275,35 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
  * Defines the 'OfficeUIController' controller. By this controller, everything for an OfficeUI application is
  * controlled.
  *
+ * @remarks
+ * There's a mechanism behind the loading of an OfficeUI application which is explained below.
+ * As soon as this controller is placed on a website, the method 'Initialize' is called. This method does load the
+ * configuration file in which the configuration for the application is stored.
+ * With this minimal configuration, the stylesheets are loaded, and once the requested stylesheets are loaded a loading
+ * screen is showed to the user. The screen will stay blank until all the data for the loading screen is loaded.
+ * While the loading screen is loaded, the application does load all the other necessary files (Json, Images,
+ * Stylesheets, Templates, ...). As soon as all those files are loaded the main application screen is showed.
+ * This mechanism is implemented to make sure that there's no flickering while the application is being loaded.
+ *
  * @dependencies        CssInjectorService:                     Provides a way to load stylesheets dynamically and
  *                                                              wait for them to be retrieved.
- *                       PreloaderService:                       The service which is required for preloading data.
+ *                      ImagePreloaderService:                  The service which is required for preloading images.
  *                      OfficeUIConfigurationService:           Provides the configuration for an OfficeUI application.
  */
-OfficeUI.controller('OfficeUIController', function(CssInjectorService, PreloaderService, OfficeUIConfigurationService,
+OfficeUI.controller('OfficeUIController', function(CssInjectorService, ImagePreloaderService, OfficeUIConfigurationService,
                                                    $scope, $http, $injector, $q) {
     /* -- Section: Variables. -- */
     var registeredServices = { };           // Provides an array of all the registered services (OfficeUI controls).
-    $scope.isInitialized = false;           // Indicates that the entire OfficeUI application has been loaded.
-    $scope.loadingScreenLoaded = false;     // Indicates that the data for the loading screen has been loaded.
+                                            // A service is a control in an OfficeUI application and we can have a
+                                            // variaty of controls such as (Ribbon, Menu, Buttons, Modals, ...)
+    $scope.isInitialized = false;           // Provides a boolean that indicates that the application is fully
+                                            // initialized.
+    $scope.loadingScreenLoaded = false;     // Provides a boolean that indicates that the loading screen is fully
+                                            // Initialized.
 
     // Initialize all the required components for the website.
+    // This method will, like mentioned before always load the loading screen and the application, and then, based on
+    // data stored in the configuration file, load other required data.
     Initialize();
 
     /**
@@ -381,17 +333,15 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      * loading screen.
      */
     function Initialize() {
-        $scope.LoadingMessage = 'Loading the application';
-        OfficeUIConfigurationService.getOfficeUIConfiguration().then(function(data) {
-            // Retrieve the styles and themes as defined in the Json file.
-            var foundStyles = JSPath.apply('.{.name == "' + data.DefaultStyle + '"}', data.Styles);
-            var foundThemes = JSPath.apply('.{.name == "' + data.DefaultTheme + '"}', data.Themes);
+        OfficeUIConfigurationService.GetOfficeUIConfiguration().then(function(data) {
+            // Defines the message of the loading message.
+            $scope.LoadingMessage = data.LoadingMessage;
 
             // Preload the css files.
             // This is placed as one of the first call, because as soon as the files have been preloaded, the
             // loading screen will be showed to the user, which means that the application has all the time it needs
             // to do additional loading.
-            PreloadCssFiles([foundStyles[0].stylesheet, foundThemes[0].stylesheet]).then(
+            PreloadCssFiles([data.DefaultStyle, data.DefaultTheme]).then(
                 function() { $scope.loadingScreenLoaded = true; }
             );
 
@@ -410,12 +360,14 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      * @param               stylesheetsCollection:      The collection of stylesheets that should be loaded.
      */
     function PreloadCssFiles(stylesheetsCollection) {
-        var cssLoaderPromises = [];
+        var cssLoaderPromises = []; // Defines the object which will hold all the promises.
 
+        // Load each file which is in the 'stylesheetsCollection' and append it to the head.
         $(stylesheetsCollection).each(function(index, stylesheet) {
             cssLoaderPromises.push(CssInjectorService.Inject('OfficeUIStyle' + index, stylesheet));
         });
 
+        // Return all the promises, so this call can be awaited.
         return $q.all(cssLoaderPromises);
     }
 
@@ -428,6 +380,8 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      *
      * @param               configurationFile:      The configuration file of the application itself.
      * @param               services:               A collection of services that should be registered.
+     *                                              In an OfficeUI application, a service is nothing more than an
+     *                                              OfficeUI control such as 'Ribbon', 'Button', 'Modal', ...
      */
     function LoadApplication(configurationFile, services) {
         // Inject all the required services into the AngularJS application.
@@ -441,12 +395,12 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
                 $scope.Title = response.data.Title;
                 $scope.Icons = response.data.Icons;
 
+                // Preload the image files which are required for the application.
                 PreloadImageFiles(JSPath.apply('.Icon', $scope.Icons)).then(function() {
                     LoadApplicationServices(services);
                 });
 
-
-            }, function(error) { OfficeUICore.Exceptions.officeUILoadingException('The OfficeUI application definition file: \'' + data.Configuration + '\' could not be loaded.'); }
+            }, function(error) { OfficeUICore.Exceptions.OfficeUILoadingException('[OfficeUIController.LoadApplication] - The OfficeUI Application Definition file: \'' + configurationFile + '\' which is referenced from \'' + $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation + '\' could not be loaded.'); }
         );
     }
 
@@ -460,12 +414,14 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      * @param               imageFilesCollection:       A collection of images that should be loaded.
      */
     function PreloadImageFiles(imageFilesCollection) {
-        var iconReferencesPromises = [];
+        var iconReferencesPromises = []; // Defines the object which will hold all the promises.
 
+        // Load each file which is in the 'imageFilesCollection'.
         $(imageFilesCollection).each(function(index, item) {
-            iconReferencesPromises.push(PreloaderService.Load(item));
+            iconReferencesPromises.push(ImagePreloaderService.Load(item));
         });
 
+        // Return all the promises, so this call can be awaited.
         return $q.all(iconReferencesPromises);
     }
 
@@ -495,12 +451,25 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      */
 
     function PreloadServices(servicesCollection) {
-        var serviceLoaderPromises = [];
+        var serviceLoaderPromises = []; // Defines the object which will hold all the promises.
+        var serviceNames = []; // Defines an array that contains all the names of the services.
 
+        // Load each srevice which is in the 'servicesCollection'.
         $(servicesCollection).each(function(index, service) {
-            serviceLoaderPromises.push(InitializeService(registeredServices[service.Name][0], service.ConfigurationFile));
+            // Checks if another service with the same does already exists.
+            var foundServices = $.grep(serviceNames, function(element) {
+               return element.Name == service.Name;
+            });
+
+            serviceNames.push(service);
+
+            // Throw an exception if another service with the same name is already registered.
+            if (foundServices.length > 0) { OfficeUICore.Exceptions.OfficeUIServiceException('[OfficeUIController.PreloadServices] - A service with name \'' + service.Name + '\' is already registered.'); }
+
+            serviceLoaderPromises.push(InitializeService(service.Name, registeredServices[service.Name][0], service.ConfigurationFile));
         });
 
+        // Return all the promises, so this call can be awaited.
         return $q.all(serviceLoaderPromises);
     }
 
@@ -511,20 +480,26 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      * @description
      * Executes the initialization logic of the service.
      *
+     * @param               serviceName:            The name of the service for which to execute the logic.
      * @param               serviceInstance:        The instance of the service for which to execute the logic.
      * @param               configurationFile:      The file that defines the configuration of the service.
      */
-    function InitializeService(serviceInstance, configurationFile) {
+    function InitializeService(serviceName, serviceInstance, configurationFile) {
+        var deferred = $q.defer();
+
+        // Check if the service is valid. If it isn't, throw an error message.
+        if (!$.isFunction(serviceInstance.SetLoadingMessage)) { OfficeUICore.Exceptions.OfficeUIServiceException('[OfficeUIController.InitializeService] - The service \'' + serviceName + '\' does not implement the \'SetLoadingMessage(scope) { }\' function.'); }
+        if (!$.isFunction(serviceInstance.Initialize)) { OfficeUICore.Exceptions.OfficeUIServiceException('[OfficeUIController.InitializeService] - The service \'' + serviceName + '\' does not implement the \'Initialize(configurationFile) { }\' function.'); }
+
         // Change the loading message so the view can be updated.
         serviceInstance.SetLoadingMessage($scope);
-
-        var deferred = $q.defer();
 
         // Executes the initialization logic of the service itself.
         serviceInstance.Initialize(configurationFile).then(function() {
             deferred.resolve();
         });
 
+        // Return the initialized service.
         return deferred.promise;
     }
 
@@ -541,6 +516,9 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, Preloader
      * @param               parameters:     The parameters to pass to the method call.
      */
     $scope.InitializeServiceCall = function(service, method, parameters) {
+        // Check if the call is valid. If not, throw an error.
+        if (typeof registeredServices[service] === 'undefined' || registeredServices[service] == '') { OfficeUICore.Exceptions.OfficeUIServiceException('[OfficeUIController.InitializeServiceCall] - The service \'' + service + '\' could not be found.'); }
+
         var serviceInstance = registeredServices[service][0];
         return serviceInstance[method](parameters, parameters);
     }
@@ -648,3 +626,118 @@ OfficeUI.directive('cuToggleStyleAttributeOnHover', function() {
         }
     }
 });
+/**
+ * @type                Service
+ * @name                OfficeUIRibbonControlService
+ *
+ * @description
+ * Provides the service which is needed to manage the OfficeUI ribbon control.
+ *
+ * @dependencies        rootScope:              Used to inject properties into the root scope.
+ *                      http:                   Used to execute request to external providers.
+ *                      q:                      Used to work with promises.
+ *                      ImagePreloaderService:  Used to preload images.
+ */
+OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', 'ImagePreloaderService', function($rootScope, $http, $q, ImagePreloaderService) {
+    var OfficeUIRibbonControlServiceObject = { }; // Defines the object that needs to be returned by the service.
+
+    // Defines all the variables which are needed for this control.
+    var activeTab;
+
+    /**
+     * @type                Function
+     * @name                SetLoadingImage
+     *
+     * @description
+     * Sets the text that should be displayed on the loading screen when this service is being loaded.
+     *
+     * @param               scope:      The scope object on which the loading message is defined.
+     */
+    OfficeUIRibbonControlServiceObject.SetLoadingMessage = function(scope) {
+        scope.LoadingMessage = 'Office Web Controls Ribbon Control Initialization';
+    }
+    /**
+     * @type                Function
+     * @name                Initialize
+     *
+     * @description
+     * Initializes the service.
+     *
+     * @param               configurationFile:      The file that contains the configuration of the service.
+     */
+    OfficeUIRibbonControlServiceObject.Initialize = function(configurationFile) {
+        var deferred = $q.defer();
+
+        $http.get(configurationFile)
+            .then(function (response) {
+                $rootScope.Tabs = response.data.Tabs;
+                $rootScope.ContextualGroups = response.data.ContextualGroups;
+
+                // Sets the currently active tab.
+                activeTab = $rootScope.Tabs[1].Id;
+
+                var images = JSPath.apply('.Groups.Areas.Actions.Resource', $rootScope.Tabs);
+                images.concat(JSPath.apply('.Tabs.Groups.Areas.Actions.Resource', $rootScope.ContextualGroups));
+
+                var imagesPromise = [];
+
+                $(images).each(function(index, item) {
+                    imagesPromise.push(ImagePreloaderService.Load(item));
+                });
+
+                $q.all(imagesPromise).then(function() {
+                    deferred.resolve();
+                });
+            });
+
+        return deferred.promise;
+    }
+
+    /**
+     * @type                Function
+     * @name                isTabActive
+     *
+     * @description
+     * Checks if a given tab is active, based on it's id.
+     *
+     * @param               tabId:      The id of the tab element to check for being active.
+     */
+    OfficeUIRibbonControlServiceObject.isTabActive = function(tabId) {
+        return activeTab == tabId;
+    }
+
+    /**
+     * @type                Function
+     * @name                setActiveTab
+     *
+     * @description         Set a tab as the active tab.
+     *
+     * @param               tabId:      The id of the tab to set as active.
+     */
+    OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) {
+        activeTab = tabId;
+    }
+
+    /**
+     * @type            Function
+     * @name            setActiveTabColor
+     *
+     * @description
+     * This method will change the color of the active tab, but only when the tab is active.
+     * Otherwise, no color is returned and the default color is used.
+     *
+     * @param           tabId (string):     The id of the tab.
+     * @param           tabColor (string):  The color of the tab.
+
+     * @returns         {*}                 The color of the tab.
+     */
+    OfficeUIRibbonControlServiceObject.setActiveTabColor = function(tabSettings) {
+        var tabId = tabSettings[0];
+        var tabColor = tabSettings[1];
+
+        if (activeTab == tabId) { return tabColor; }
+    }
+
+    // Return the service object itself.
+    return OfficeUIRibbonControlServiceObject;
+}]);

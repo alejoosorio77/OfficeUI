@@ -9,20 +9,6 @@
         <!-- Reference the favicon to use. -->
         <link rel="shortcut icon" type="image/x-icon" href="/Resources/Images/favicon.ico" />
 
-        <!-- Include all the external script files. -->
-        <script src="/Resources/External/Bower/jquery/dist/jquery.js"></script>
-        <script src="/Resources/External/Bower/jquery-ui/jquery-ui.js"></script>
-        <script src="/Resources/External/Bower/angular/angular.js"></script>
-        <script src="/Resources/External/Bower/angular-sanitize/angular-sanitize.js"></script>
-        <script src="/Components/External/NodeJS/node_modules/jspath/jspath.min.js"></script>
-        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-
-        <!-- Include all the internal script files. -->
-        <script src="/Resources/Scripts/Elements/OfficeUI.Elements.js"></script>
-        <script src="/Resources/Scripts/OfficeUI.Combined.js"></script>
-        <script src="/Resources/Scripts/OfficeUI.Configuration.js"></script>
-        <script src="/Resources/Scripts/OfficeUI.Core.js"></script>
-
         <!-- Include all the external stylesheets. -->
         <link rel="stylesheet" href="/Resources/External/Bower/fontawesome/css/font-awesome.min.css">
 
@@ -66,179 +52,18 @@
             <!-- Defines the main application area. -->
             <div class="area-application" data-ng-if="isInitialized">
                 <div data-ng-include="'/Resources/Data/Templates/OfficeUI.html'" ng-cloak></div>
-
-                <div class="site-container">
-                    <div class="menu-wrapper">
-                        <ul class="menu">
-                            <li>
-                                <span class="legend">Office Web Controls Reference</span>
-                            </li>
-                            <li class="no-hover">
-                                <ul>
-                                    <li>
-                                        <span class="legend">
-                                            <!--<i class="fa fa-caret-down"></i>-->
-                                            Installation
-                                        </span>
-                                    </li>
-                                    <li class="no-hover">
-                                        <ul>
-                                            <li>
-                                                <span class="legend">
-                                                    From Source
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <span class="legend">
-                                                    From Release Package
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="article">
-                        <h1>Office Web Controls Reference</h1>
-                        <p></p>
-                        <p>These sections explains the elements that make up the Office Web Controls Suite.</p>
-                        <p>
-                            An Office Web Controls applications can interact with HTML, CSS and the Document Object Model (DOM), which represents HTML and browser objects.
-                        </p>
-                        <ul>
-                            <li>
-                                <p>For more information about interacting with HTML elements, see <a href="#">Interacting with HTML elements.</a></p>
-                            </li>
-                            <li>
-                                <p>For more information about CSS, see <a href="#">Interacting with Cascading Style Sheets.</a></p>
-                            </li>
-                            <li>
-                                <p>For more information about the DOM, see <a href="#">Interacting with the Document Object Model (DOM).</a></p>
-                            </li>
-                        </ul>
-                        <div class="alert">
-                            <table>
-                                <tbody>
-                                    <tr align="left">
-                                        <th><strong>Important</strong></th>
-                                    </tr>
-                                <tr>
-                                    <td>
-                                        <p>
-                                            The Office Web Controls Suite is an application which is built on top of AngularJS which means that a good knowledge of JavaScript is needed when you want
-                                            to modify the source code of project.
-                                        </p>
-                                        <p>
-                                            Also, when you want to install the Office Web Controls Suite you have 2 options, and that's <a href="#">installing from source</a> or
-                                            <a href="#"> installing from a release package.</a>
-                                        </p>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <footer>
-                        The footer goes here.
-                    </footer>
-                </div>
             </div>
-
-
         </div>
-        <!--&lt;!&ndash; Defines the OfficeUI container. All OfficeUI components should be placed in here. &ndash;&gt;-->
-        <!--<div id="OfficeUI" ng-cloak>-->
 
-            <!--&lt;!&ndash; Defines the OfficeUI application container. &ndash;&gt;-->
-            <!--<div>-->
-
-                <!--&lt;!&ndash; Defines that the OfficeUI Application should be rendered here. &ndash;&gt;-->
-                <!--<div officeui-application=""></div>-->
-
-                <!--<div class="content-wrapper" style="position: absolute; top: 142px; bottom: 66px; width: 100%;" data-ng-class="{'ribbon-hidden': isRibbonHidden() || isRibbonVisible(), 'ribbon-showed': isRibbonShowed()}">-->
-                    <!--<div class="breadcrumb no-select" style="height: 20px; position: relative; border-bottom: 1px solid #d4d4d4; line-height: 20px; padding-left: 10px;">-->
-                        <!--<span style="padding-right: 5px;">Content Management</span>-->
-                        <!--<i class="fa fa-caret-right" style="padding-right: 5px;"></i>-->
-                        <!--<span>Personalization</span>-->
-                    <!--</div>-->
-
-                    <!--<div class="site-contents" style="height: calc(100% - 20px);">-->
-                        <!--<div class="menu-wrapper" class="no-select">-->
-
-                        <!--</div>-->
-                        <!--<div id="site-contents" style="float: left; height: 100%; padding: 20px; overflow-y: scroll; width: calc(100% - 250px);">-->
-
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<footer>-->
-                <!--<div class="navigation no-select" style="z-index: 100;">-->
-                    <!--<ul>-->
-                        <!--<li><a id="menuOfficeUIReference" href="/Docs/OfficeUI-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-Reference/menu.html">OfficeUI Reference</a></li>-->
-                        <!--<li><a id="menuOfficeAPIReference" href="/Docs/OfficeUI-API-Reference/Pages/index.html" data-menu="/Docs/OfficeUI-API-Reference/menu.html">API Reference</a></li>-->
-                        <!--<li><a id="menuOfficeDevelopersGuide" href="/Docs/OfficeUI-Developers-Guide/Pages/index.html" data-menu="/Docs/OfficeUI-Developers-Guide/menu.html">Developers Guide</a></li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--<div class="notification-area no-select">-->
-                    <!--Items: 1,242-->
-                <!--</div>-->
-            <!--</footer>-->
-        <!--</div>-->
-
-        <!--&lt;!&ndash; Provides scripts which are required for the application to work. &ndash;&gt;-->
-        <!--<script type="text/javascript">-->
-            <!--function onDropdownChange(id, element) {-->
-                <!--var scope = element.scope();-->
-
-                <!--if (id == 'drpChangeApplicationStyle') {-->
-                    <!--scope.changeStyle(element.selectedItem);-->
-                    <!--scope.refresh();-->
-                <!--}-->
-                <!--else if (id == 'drpChangeApplicationTheme') {-->
-                    <!--scope.changeTheme(element.selectedItem);-->
-                    <!--scope.refresh();-->
-                <!--}-->
-            <!--}-->
-
-            <!--/**-->
-             <!--* @type            Function-->
-             <!--* @name            N.A.-->
-             <!--*-->
-             <!--* @description-->
-             <!--* When this function is executed, quite a few things does happen:-->
-             <!--* 1.   Set's the 'menuOfficeUIReference' id as the active one.-->
-             <!--* 2.   Load the menu and the contents for this menu.-->
-             <!--* 3.   Make sure that when you click an entry in the footer, that this does become active and the others-->
-             <!--*      become inactive.-->
-             <!--*/-->
-            <!--$(function() {-->
-                <!--$('#menuOfficeUIReference').addClass('active');-->
-
-                <!--$('.menu-wrapper').load($('#menuOfficeUIReference').attr('data-menu'), function() {-->
-                    <!--$('.menu-wrapper .menu').OfficeUIMenu({-->
-                        <!--contentArea: '#site-contents'-->
-                    <!--});-->
-                <!--});-->
-                <!--$('#site-contents').load($('#menuOfficeUIReference').attr('href'));-->
-
-                <!--// When you click a link the footer, make sure that the requested page is loaded through ajax calls.-->
-                <!--$('footer a').click(function() {-->
-                    <!--$('footer a').removeClass('active');-->
-                    <!--$(this).addClass('active');-->
-                    <!--$('.menu-wrapper').load($(this).attr('data-menu'), function(){-->
-                        <!--$('.menu-wrapper .menu').OfficeUIMenu({-->
-                            <!--contentArea: '#site-contents'-->
-                        <!--});-->
-                    <!--});-->
-                    <!--$('#site-contents').load($(this).attr('href'));-->
-
-                    <!--return false;-->
-                <!--})-->
-
-
-            <!--});-->
-        <!--</script>-->
+        <!-- Best practice: Include all the script files on the bottom of the page. -->
+        <script src="/Resources/External/Bower/jquery/dist/jquery.js"></script>
+        <script src="/Resources/External/Bower/angular/angular.js"></script>
+        <script src="/Resources/External/Bower/angular-sanitize/angular-sanitize.js"></script>
+        <script src="/Components/External/NodeJS/node_modules/jspath/jspath.min.js"></script>
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+        <script src="/Resources/Scripts/Elements/OfficeUI.Elements.js"></script>
+        <script src="/Resources/Scripts/OfficeUI.Combined.js"></script>
+        <script src="/Resources/Scripts/OfficeUI.Configuration.js"></script>
+        <script src="/Resources/Scripts/OfficeUI.Core.js"></script>
     </body>
 </html>

@@ -28,9 +28,11 @@
     { "name": "Underwater", "stylesheet": "/Resources/Stylesheets/Themes/Underwater/OfficeUI.Themes.Underwater.min.css" }
   ],
   "DefaultTheme": "Geometry",
+
   "Configuration": "/Resources/Data/Application.json",
   "Controls":
   [
     { "Name": "Ribbon", "Service": "OfficeUIRibbonControlService", "ConfigurationFile": "/Resources/Data/Ribbon.json" }
-  ]
+  ],
+  "LoadingMessage": "Loading the application"
 }

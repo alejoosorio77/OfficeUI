@@ -235,42 +235,68 @@
 
             /**
              * @type            Function
-             * @name            officeUIException
+             * @name            ThrowException
              *
-             * @param           message         The message to pass to this exception.
+             * @param           exceptionType       The type of the exception to throw. This is just a string that
+             *                                      defines the type of the exception.
+             * @param           message             The message to pass to this exception.
              *
              * @description
-             * Writes a new exception of type 'OfficeUIException'.
+             * Writes a message to the console window, which is formatted in the following way:
+             * [{exceptionType}]: {message}
              *
              * @example
-             * When you want to write an exception of type 'OfficeUIException', with the following message:
-             * 'An error has occurred'.
-             * The following code can be used:
+             * When you do want to throw an 'OfficeUIException', with the following message:
+             * 'An error has occurred'. You can use the following code:
              *
-             * OfficeUICore.Exceptions.officeUIException('An error has occurred.');
+             * OfficeUICore.Exceptions.ThrowException('OfficeUIException', 'An error has occured.');
              */
-            officeUIException: function(message) {
-                OfficeUICore.Exceptions.throwException('OfficeUIException', message);
+            ThrowException: function(exceptionType, message) {
+                return console.error('[' + exceptionType + ']: ' + message);
             },
 
             /**
              * @type            Function
-             * @name            officeUIStylesheetException
+             * @name            OfficeUIInvalidConfigurationException
              *
              * @param           message         The message to pass to this exception.
              *
              * @description
-             * Writes a new exception of type 'OfficeUIStylesheetException'.
+             * Writes a new exception of type 'OfficeUIInvalidConfigurationException'.
+             *
+             * @remarks
+             * This type of exception should be throwed, when there's anything wrong with a configuration file.
              *
              * @example
-             * When you want to write an exception of type 'OfficeUIStylesheetException', with the following message:
-             * 'An error has occurred'.
-             * The following code can be used:
+             * When you want to write an exception of type 'OfficeUIInvalidConfigurationException' with the following
+             * message: 'An error has occurred', the following code can be used:
              *
-             * OfficeUICore.Exceptions.officeUIStylesheetException('An error has occurred.');
+             * OfficeUICore.Exceptions.OfficeUIInvalidConfigurationException('An error has occurred.');
              */
-            officeUIStylesheetException: function(message) {
-                OfficeUICore.Exceptions.throwException('OfficeUIStylesheetException', message);
+            OfficeUIInvalidConfigurationException: function(message) {
+                OfficeUICore.Exceptions.ThrowException('OfficeUIInvalidConfigurationException', message);
+            },
+
+            /**
+             * @type            Function
+             * @name            OfficeUIConfigurationException
+             *
+             * @param           message         The message to pass to this exception.
+             *
+             * @description
+             * Writes a new exception of type 'OfficeUIConfigurationException'.
+             *
+             * @remarks
+             * This type of exception should be throwed, when a configuration file could not be accessed.
+             *
+             * @example
+             * When you want to write an exception of type 'OfficeUIConfigurationException' with the following
+             * message: 'An error has occurred', the following code can be used:
+             *
+             * OfficeUICore.Exceptions.OfficeUIConfigurationException('An error has occurred.');
+             */
+            OfficeUIConfigurationException: function(message) {
+                OfficeUICore.Exceptions.ThrowException('OfficeUIConfigurationException', message);
             },
 
             /**
@@ -287,73 +313,50 @@
              * 'An error has occurred'.
              * The following code can be used:
              *
-             * OfficeUICore.Exceptions.officeUILoadingException('An error has occurred.');
+             * OfficeUICore.Exceptions.OfficeUILoadingException('An error has occurred.');
              */
-            officeUILoadingException: function(message) {
-                OfficeUICore.Exceptions.throwException('OfficeUILoadingException', message);
+            OfficeUILoadingException: function(message) {
+                OfficeUICore.Exceptions.ThrowException('OfficeUILoadingException', message);
             },
 
             /**
              * @type            Function
-             * @name            officeUIConfigurationException
+             * @name            OfficeUICssInjectorServiceException
              *
              * @param           message         The message to pass to this exception.
              *
              * @description
-             * Writes a new exception of type 'OfficeUIConfigurationException'.
+             * Writes a new exception of type 'OfficeUICssInjectorServiceException'.
              *
              * @example
-             * When you want to write an exception of type 'OfficeUIConfigurationException', with the following message:
+             * When you want to write an exception of type 'OfficeUICssInjectorServiceException', with the following message:
              * 'An error has occurred'.
              * The following code can be used:
              *
-             * OfficeUICore.Exceptions.officeUIConfigurationException('An error has occurred.');
+             * OfficeUICore.Exceptions.OfficeUICssInjectorServiceException('An error has occurred.');
              */
-            officeUIConfigurationException: function(message) {
-                OfficeUICore.Exceptions.throwException('OfficeUIConfigurationException', message);
+            OfficeUICssInjectorServiceException: function(message) {
+                OfficeUICore.Exceptions.ThrowException('OfficeUICssInjectorServiceException', message);
             },
 
             /**
              * @type            Function
-             * @name            officeUIDynamicEventHandlingException
+             * @name            OfficeUIServiceException
              *
              * @param           message         The message to pass to this exception.
              *
              * @description
-             * Writes a new exception of type 'OfficeUIDynamicEventHandlingException'.
+             * Writes a new exception of type 'OfficeUIServiceException'.
              *
              * @example
-             * When you want to write an exception of type 'OfficeUIDynamicEventHandlingException', with the following
-             * message: 'An error has occurred'.
+             * When you want to write an exception of type 'OfficeUIServiceException', with the following message:
+             * 'An error has occurred'.
              * The following code can be used:
              *
-             * OfficeUICore.Exceptions.officeUIDynamicEventHandlingException('An error has occurred.');
+             * OfficeUICore.Exceptions.OfficeUIServiceException('An error has occurred.');
              */
-            officeUIDynamicEventHandlingException: function(message) {
-                OfficeUICore.Exceptions.throwException('OfficeUIDynamicEventHandlingException', message);
-            },
-
-            /**
-             * @type            Function
-             * @name            throwException
-             *
-             * @param           exceptionType       The type of the exception to throw. This is just a string that
-             *                                      defines the type of the exception.
-             * @param           message             The message to pass to this exception.
-             * @returns         {*}
-             *
-             * @description
-             * Writes a message to the console window, which is formatted in the following way:
-             * [{exceptionType}]: {message}
-             *
-             * @example
-             * When you do want to throw an exception, an 'OfficeUIException', with the following message:
-             * 'An error has occurred'. You can use the following code:
-             *
-             * OfficeUICore.Exceptions.throwException('OfficeUIException', 'An error has occured.');
-             */
-            throwException: function(exceptionType, message) {
-                return console.error('[' + exceptionType + ']: ' + message);
+            OfficeUIServiceException: function(message) {
+                OfficeUICore.Exceptions.ThrowException('OfficeUIServiceException', message);
             }
         }
     };

@@ -5,12 +5,12 @@
  * @description
  * Provides the service which is needed to manage the OfficeUI ribbon control.
  *
- * @dependencies        rootScope:          Used to inject properties into the root scope.
- *                      http:               Used to execute request to external providers.
- *                      q:                  Used to work with promises.
- *                      PreloaderService:   Used to preload images.
+ * @dependencies        rootScope:              Used to inject properties into the root scope.
+ *                      http:                   Used to execute request to external providers.
+ *                      q:                      Used to work with promises.
+ *                      ImagePreloaderService:  Used to preload images.
  */
-OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', 'PreloaderService', function($rootScope, $http, $q, PreloaderService) {
+OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', 'ImagePreloaderService', function($rootScope, $http, $q, ImagePreloaderService) {
     var OfficeUIRibbonControlServiceObject = { }; // Defines the object that needs to be returned by the service.
 
     // Defines all the variables which are needed for this control.
@@ -54,7 +54,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
                 var imagesPromise = [];
 
                 $(images).each(function(index, item) {
-                    imagesPromise.push(PreloaderService.Load(item));
+                    imagesPromise.push(ImagePreloaderService.Load(item));
                 });
 
                 $q.all(imagesPromise).then(function() {

@@ -1,13 +1,24 @@
 /**
+ * @filename       ImagePreloaderService.js
+ * @Author         Kevin De Coninck
+ * @version        1.0.0
+ * @date           30/03/2015
+ *
+ * @notes
+ * Defines the service 'ImagePreloaderService'.
+ * This service allows us to load data asynchronously.
+ */
+
+/**
  * @type                Service
- * @name                PreloaderService
+ * @name                ImagePreloaderService
  *
  * @description
  * The 'PreloaderService' enables you to load data in the back-end. By doing this, we can make sure to change a scope
  * value only, and only when the data has been loaded.
  */
-OfficeUI.factory('PreloaderService', ['$q', function($q) {
-    var preloaderServiceObject = { }; // Defines the object that needs to be returned by the service.
+OfficeUI.factory('ImagePreloaderService', ['$q', function($q) {
+    var imagePreloaderServiceObject = { }; // Defines the object that needs to be returned by the service.
 
     /**
      * @type                Function
@@ -22,7 +33,7 @@ OfficeUI.factory('PreloaderService', ['$q', function($q) {
      * @returns {*}
      * An HttpPromise which can be used to wait until this call has been completed.
      */
-    preloaderServiceObject.Load = function(referencePath){
+    imagePreloaderServiceObject.Load = function(referencePath){
         var deferred = $q.defer();
 
         var preloadedElement = document.createElement('img');
@@ -35,5 +46,5 @@ OfficeUI.factory('PreloaderService', ['$q', function($q) {
     }
 
     // Return the service object itself.
-    return preloaderServiceObject;
+    return imagePreloaderServiceObject;
 }]);

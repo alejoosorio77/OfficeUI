@@ -1,4 +1,15 @@
 /**
+ * @filename       CssInjectorService.js
+ * @Author         Kevin De Coninck
+ * @version        1.0.0
+ * @date           30/03/2015
+ *
+ * @notes
+ * Defines the service 'CssInjectorService'.
+ * This service allows us to load stylesheets asynchronously.
+ */
+
+/**
  * @type            Service
  * @name            CssInjectorService
  *
@@ -64,7 +75,8 @@ OfficeUI.factory('CssInjectorService', ['$q', function($q) {
             }
 
             return deferred.promise;
-        }
+        } else { OfficeUICore.Exceptions.OfficeUICssInjectorServiceException('[CssInjectorService.Inject]: There is already a link with id \'' + id + '\'. A new element could not be created.'); }
+
     };
 
     // return the service object itself.
