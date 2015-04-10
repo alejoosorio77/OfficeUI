@@ -85,10 +85,6 @@
 #OfficeUI .ribbon .tab.active, #OfficeUI .ribbon .tab:not(.contextual-tab):not(.tab-application):hover {
   color: #2a8dd4; }
 
-/* ---- OfficeUI menu styling. ---- */
-#OfficeUI .menu li:not(.active):not(.no-hover):hover {
-  background-color: #e5f5ff; }
-
 /* ---- OfficeUI Styling Animations. ---- */
 @-moz-keyframes fade-circle {
   0% {

@@ -27,9 +27,6 @@
 #OfficeUI .ribbon .tab-application:hover { background-color: $link-active-color !important; border-color: $link-active-color !important; }
 #OfficeUI .ribbon .tab.active, #OfficeUI .ribbon .tab:not(.contextual-tab):not(.tab-application):hover { color: $link-active-color; }
 
-/* ---- OfficeUI menu styling. ---- */
-#OfficeUI .menu li:not(.active):not(.no-hover):hover { background-color: $menu-navigation-color; }
-
 /* ---- OfficeUI Styling Animations. ---- */
 @include keyframes(fade-circle) {
   0% { background-color: $spinner-color; }

@@ -8,9 +8,8 @@
  *                elements.
 ======================================================================================================= */
 /* ---- Variables. ---- */
-$primary-color: #0072c6;
-$spinner-color: #0071c5;
-$icon-hover-color: #cde6f7;
-$icon-active-color: #92c0e0;
-$link-active-color: #2a8dd4;
-$menu-navigation-color: #e5f5ff;
+$primary-color: #0072c6;            // This color is used for anchors, the loading area and the application tab.
+$spinner-color: #0071c5;            // This color is used for the spinner on the loading page.
+$icon-hover-color: #cde6f7;         // This color is used as the background color when hovering on an icon.
+$icon-active-color: #92c0e0;        // This color is used as the background color for an active icon, as well as the border color for an input element (hover or active).
+$link-active-color: #2a8dd4;        // This color is used when you hover on a link, when you hover on the application tab and the text color when hovering on a tab element.
