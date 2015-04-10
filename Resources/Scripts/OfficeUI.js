@@ -13,6 +13,8 @@
  * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
  * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
  *
+ * @depends             AngularJS/Filters/ActionLegend.js
+ *
  * @depends             AngularJS/Services/Controls/Ribbon.js
  *
  * @notes

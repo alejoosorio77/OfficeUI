@@ -67,7 +67,7 @@
                 <li data-ng-repeat="tab in Tabs"
                     data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
 
-                    Contents of the tab: {{tab.Id}}
+                    <div data-ng-include="'/Resources/Data/Templates/OfficeUIRibbonContents.html'" ng-cloak></div>
                 </li>
 
                 <!-- Defines the contents of the contextual tabs. -->
@@ -78,7 +78,7 @@
                         <li data-ng-repeat="tab in contextualGroup.Tabs"
                             data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
 
-                            Contents of the tab: {{tab.Id}}
+                            <div data-ng-include="'/Resources/Data/Templates/OfficeUIRibbonContents.html'" ng-cloak></div>
                         </li>
                     </ul>
                 </li>

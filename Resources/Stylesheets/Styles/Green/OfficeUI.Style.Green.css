@@ -57,6 +57,9 @@
   color: #439467;
   text-decoration: none; }
 
+#OfficeUI input:hover, #OfficeUI input:focus {
+  border-color: #86bfa0; }
+
 /* ---- OfficeUI application styling. ---- */
 #OfficeUI .loading-area {
   color: #217346; }

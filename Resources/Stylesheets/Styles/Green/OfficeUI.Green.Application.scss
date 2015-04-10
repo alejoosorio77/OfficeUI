@@ -13,6 +13,7 @@
 /* ---- General styling. ---- */
 #OfficeUI a { color: $primary-color; text-decoration: none; }
 #OfficeUI a:hover { color: $link-active-color; text-decoration: none; }
+#OfficeUI input:hover, #OfficeUI input:focus { border-color: $icon-active-color; }
 
 /* ---- OfficeUI application styling. ---- */
 #OfficeUI .loading-area { color: $primary-color; }

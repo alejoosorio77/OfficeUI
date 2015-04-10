@@ -74,6 +74,16 @@ html, body {
 body {
   font-size: 1em; }
 
+#OfficeUI input {
+  border-color: #d4d4d4; }
+
+#OfficeUI input[type="text"] {
+  border: 1px solid #d4d4d4;
+  font-family: 'Segoe UI', arial, sans-serif;
+  font-size: 1em;
+  height: 22px;
+  padding-left: 3px; }
+
 /* ----- Classes which are set through AngularJS. */
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
@@ -96,6 +106,12 @@ body {
 #OfficeUI .disabled {
   opacity: 0.5;
   pointer-events: none; }
+
+#OfficeUI .displayBlock {
+  display: block; }
+
+#OfficeUI .displayInlineBlock {
+  display: inline-block; }
 
 /* ---- General classes which are used to position elements. ----*/
 #OfficeUI .center-screen {
@@ -225,6 +241,9 @@ body {
   top: 0;
   width: 100%; }
 
+#OfficeUI .ribbon a, #OfficeUI .ribbon a:hover, #OfficeUI .ribbon a:active {
+  color: #444; }
+
 #OfficeUI .ribbon .tabs {
   border-bottom: 1px solid #d4d4d4;
   height: 50px;
@@ -295,6 +314,99 @@ body {
 #OfficeUI .ribbon .tabs-content {
   border-bottom: 1px solid #d4d4d4;
   height: 93px; }
+
+/* -- Groups. --*/
+#OfficeUI .ribbon .group {
+  display: inline-block;
+  height: 85px;
+  margin-left: 4px;
+  margin-top: 3px;
+  min-width: 30px;
+  position: relative;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .group .legend {
+  height: 12px;
+  bottom: 0;
+  color: #666;
+  font-size: 0.9em;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%; }
+
+#OfficeUI .ribbon .pipe {
+  border-right: 1px solid #d4d4d4;
+  display: inline-block;
+  height: 84px;
+  margin-left: 1px;
+  margin-top: 4px;
+  vertical-align: top; }
+
+/* -- Areas -- */
+#OfficeUI .ribbon .group .area {
+  display: inline-block;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .group .area .actions-holder {
+  position: relative; }
+
+/* -- Actions. -- */
+#OfficeUI .ribbon .actions-holder {
+  vertical-align: top; }
+
+#OfficeUI .ribbon .actions-holder .icon {
+  display: inline-block;
+  height: 69px;
+  margin-right: 0;
+  padding-top: 3px;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .actions-holder .icon img {
+  padding: 0 5px 0 5px; }
+
+#OfficeUI .ribbon .actions-holder .big-icon-holder {
+  height: 68px; }
+
+#OfficeUI .ribbon .actions-holder .big-icon-holder a {
+  display: block;
+  height: 100%; }
+
+#OfficeUI .ribbon .actions-holder .big-icon {
+  text-align: center; }
+
+#OfficeUI .ribbon .actions-holder .big-icon .label {
+  line-height: 16px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 1px;
+  position: relative;
+  text-align: center;
+  top: 0px; }
+
+#OfficeUI .ribbon .actions-holder .small-icon-holder {
+  display: block;
+  height: 23px; }
+
+#OfficeUI .ribbon .actions-holder .small-icon {
+  height: 100%;
+  margin-right: 0;
+  padding: 3px 7px 0 0;
+  text-align: left; }
+
+#OfficeUI .ribbon .actions-holder .small-icon .label {
+  display: inline-block;
+  padding-top: 3px;
+  text-align: left;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .actions-holder .small-icon img {
+  padding: 0 0 0 3px; }
+
+#OfficeUI .ribbon .actions-holder .dropdown-holder {
+  margin-bottom: 2px; }
 
 /* ---- Styling for the website beneath the OfficeUI ribbon control. ---- */
 #OfficeUI .site-container {
