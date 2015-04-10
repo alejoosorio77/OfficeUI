@@ -3,10 +3,16 @@
         <!-- The wrapper in which the application contents are being showed. -->
         <div>
             <div class="application-icons no-select">
-                <img class="icon" src="#" alt="{{icon.Alt}}" id="{{icon.Id}}" data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-officeui-toggle-class-on-click="active" />
+                <img class="icon" src="#" alt="{{icon.Alt}}" id="{{icon.Id}}"
+                     data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}"
+                     data-ng-repeat="icon in Icons"
+                     data-ng-src="{{icon.Icon}}"
+                     data-officeui-toggle-class-on-click="active" />
             </div>
 
-            <div class="application-title" data-ng-show="!InitializeServiceCall('Ribbon', 'areContextualGroupsActive', contextualGroup.Id)">
+            <div class="application-title"
+                 data-ng-show="!InitializeServiceCall('Ribbon', 'areContextualGroupsActive', contextualGroup.Id)">
+
                 <span>{{Title}}</span>
             </div>
         </div>
@@ -16,21 +22,38 @@
             <ul class="tabs">
                 <li class="tab-group" data-ng-repeat="tab in Tabs">
                     <ul>
-                        <li class="tab tab-label" id="{{tab.Id}}" data-ng-click="!$first && InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}">
+                        <li class="tab tab-label" id="{{tab.Id}}"
+                            data-ng-click="!$first && InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)"
+                            data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}">
+
                             <span>{{tab.Label}}</span>
                         </li>
                     </ul>
                 </li>
 
-                <li class="contextual-tab-group" id="{{contextualGroup.Id}}" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-style="{'background-color': contextualGroup.GroupColor}" data-ng-show="InitializeServiceCall('Ribbon', 'isContextualGroupActive', contextualGroup.Id)">
-                    <div class="accent" data-ng-style="{'background-color': contextualGroup.AccentColor}" >&nbsp;</div>
+                <li class="contextual-tab-group" id="{{contextualGroup.Id}}"
+                    data-ng-repeat="contextualGroup in ContextualGroups"
+                    data-ng-style="{'background-color': contextualGroup.GroupColor}"
+                    data-ng-show="InitializeServiceCall('Ribbon', 'isContextualGroupActive', contextualGroup.Id)">
 
-                        <div class="group-label" data-ng-style="{'color': contextualGroup.GroupTextColor}">
+                    <div class="accent"
+                         data-ng-style="{'background-color': contextualGroup.AccentColor}" >&nbsp;</div>
+
+                        <div class="group-label"
+                             data-ng-style="{'color': contextualGroup.GroupTextColor}">
+
                         <span>{{contextualGroup.Label}}</span>
                     </div>
 
                     <ul>
-                        <li class="tab tab-label" cu-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' id="{{tab.Id}}" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}" data-ng-repeat="tab in contextualGroup.Tabs">
+                        <li class="tab tab-label"
+                            id="{{tab.Id}}"
+                            cu-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}'
+                            data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)"
+                            data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}"
+                            data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}"
+                            data-ng-repeat="tab in contextualGroup.Tabs">
+
                             <span>{{tab.Label}}</span>
                         </li>
                     </ul>
@@ -41,14 +64,20 @@
             <ul class="tabs-content">
 
                 <!-- Defines the contents of the normal tabs. -->
-                <li data-ng-repeat="tab in Tabs" data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
+                <li data-ng-repeat="tab in Tabs"
+                    data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
+
                     Contents of the tab: {{tab.Id}}
                 </li>
 
                 <!-- Defines the contents of the contextual tabs. -->
-                <li data-ng-repeat="contextualGroup in ContextualGroups" data-ng-show="InitializeServiceCall('Ribbon', 'isContextualGroupActive', contextualGroup.Id)">
+                <li data-ng-repeat="contextualGroup in ContextualGroups"
+                    data-ng-show="InitializeServiceCall('Ribbon', 'isContextualGroupActive', contextualGroup.Id)">
+
                     <ul>
-                        <li data-ng-repeat="tab in contextualGroup.Tabs" data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
+                        <li data-ng-repeat="tab in contextualGroup.Tabs"
+                            data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
+
                             Contents of the tab: {{tab.Id}}
                         </li>
                     </ul>
