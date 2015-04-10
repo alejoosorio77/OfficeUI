@@ -15,9 +15,6 @@
     // When you want to change the location of the file, it can be done like the following:
     // $.fn.OfficeUI.Settings.OfficeUIConfigurationFileLocation = '/Configuration/Application/OfficeUI.config.json';
     $.fn.OfficeUI.Settings = {
-        OfficeUIConfigurationFileLocation: '/Configuration/Application/OfficeUI.config.json',
-        OfficeUIRibbonConfigurationFile: '/Configuration/Application/OfficeUI.Ribbon.config.json',
-        OfficeUIApplicationDefinitionFileLocation: '/Resources/Data/Application.json',
-        OfficeUIRibbonDefinitionFileLocation: '/Resources/Data/Ribbon.json'
+        OfficeUIConfigurationFileLocation: '/Configuration/Application/OfficeUI.config.json'
     };
 }(jQuery));

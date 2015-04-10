@@ -71,18 +71,6 @@ body { font-size: 1em; }
   100% { opacity: 100; }
 }
 
-/* ---- Styling for the menu. ---- */
-#OfficeUI .menu { cursor: default; line-height: 1.7em; }
-#OfficeUI .menu li .legend { margin-bottom: 2px; padding-left: 5px; }
-#OfficeUI .menu li li .legend { padding-left: 10px; }
-#OfficeUI .menu li li li .legend { padding-left: 15px; }
-#OfficeUI .menu li li li li .legend { padding-left: 20px; }
-#OfficeUI .menu li li li li li .legend { padding-left: 25px; }
-#OfficeUI .menu li li li li li li .legend { padding-left: 30px; }
-#OfficeUI .menu li li li li li li li .legend { padding-left: 35px; }
-#OfficeUI .menu li li li li li li li li .legend { padding-left: 40px; }
-#OfficeUI .menu .active { background-color: #e1e1e1; }
-
 /* ---- Styling for the OfficeUI application. ---- */
 #OfficeUI .application { font-size: 0.75em; }
 #OfficeUI .application header { height: 142px; z-index: 100; }
@@ -111,20 +99,10 @@ body { font-size: 1em; }
 #OfficeUI .ribbon .tabs-content { border-bottom: 1px solid $color-default-gray; height: 93px; }
 
 /* ---- Styling for the website beneath the OfficeUI ribbon control. ---- */
-#OfficeUI .site-container { bottom: 45px; position: absolute; top: 143px; width: 100%; }
-#OfficeUI .site-container .menu-wrapper { background: linear-gradient(#fff, #f0f0f0) repeat scroll 0 0 rgba(0, 0, 0, 0); border-right: 1px solid $color-default-gray; float: left; font-size: 0.75em; height: 100%; overflow-y: scroll; padding: 10px; width: 250px; }
-#OfficeUI .site-container footer { background-color: #e4e4e4; bottom: 0; height: 45px; padding-left: 15px; position: fixed; width: 100%; }
-#OfficeUI .site-container .article { color: #454545; float: left; font-size: 0.875em; height: 100%; overflow-y: scroll; padding: 20px 20px 20px 40px; width: calc(100% - 250px); }
-#OfficeUI .site-container .article strong { font-weight: 900; }
-#OfficeUI .site-container .article h1 { font-size: 3em; padding: 0 0 20px; }
-#OfficeUI .site-container .article p { line-height: 1.429em; padding-bottom: 15px; }
-#OfficeUI .site-container .article ul { list-style: initial; list-style-position: outside; margin: 5px 0 20px; padding-left: 1.1em; }
-#OfficeUI .site-container .article .alert { background-color: #ededf0; margin-bottom: 26px; padding: 10px 12px; }
-#OfficeUI .site-container .article .alert p { margin: 0; }
-#OfficeUI .site-container .article .alert table { border-bottom: none; border-collapse: separate; border-right: none; border-spacing: 0; margin-bottom: 20px; margin-top: 20px; width: 100%; }
-#OfficeUI .site-container .article .alert table p:last-child { padding-bottom: 0; }
-#OfficeUI .site-container .article .alert table th { color: #636363; }
-#OfficeUI .site-container .article .alert table td, #OfficeUI .site-container .article .alert table th { border-bottom: 1px solid #d2d2d2; padding: 10px 8px; }
+#OfficeUI .site-container { font-size: 0.75em; padding: 10px; padding-left: 50px; position: absolute; top: 143px; width: 100%; }
+#OfficeUI .site-container p { margin-bottom: 20px; }
+#OfficeUI .site-container h1 { font-size: 2.25em; line-height: normal; padding-bottom: 10px; }
+#OfficeUI .site-container .link { display: inline-block; margin-right: 40px; }
 
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
 #OfficeUI .spinner-circle

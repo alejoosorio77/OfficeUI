@@ -6,7 +6,7 @@
                 <img class="icon" src="#" alt="{{icon.Alt}}" id="{{icon.Id}}" data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-ng-src="{{icon.Icon}}" data-officeui-toggle-class-on-click="active" />
             </div>
 
-            <div class="application-title">
+            <div class="application-title" data-ng-show="!InitializeServiceCall('Ribbon', 'areContextualGroupsActive', contextualGroup.Id)">
                 <span>{{Title}}</span>
             </div>
         </div>
@@ -22,7 +22,7 @@
                     </ul>
                 </li>
 
-                <li class="contextual-tab-group" id="{{contextualGroup.Id"}} data-ng-repeat="contextualGroup in ContextualGroups" data-ng-style="{'background-color': contextualGroup.GroupColor}">
+                <li class="contextual-tab-group" id="{{contextualGroup.Id}}" data-ng-repeat="contextualGroup in ContextualGroups" data-ng-style="{'background-color': contextualGroup.GroupColor}" data-ng-show="InitializeServiceCall('Ribbon', 'isContextualGroupActive', contextualGroup.Id)">
                     <div class="accent" data-ng-style="{'background-color': contextualGroup.AccentColor}" >&nbsp;</div>
 
                         <div class="group-label" data-ng-style="{'color': contextualGroup.GroupTextColor}">

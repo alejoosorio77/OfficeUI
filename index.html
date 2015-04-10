@@ -52,6 +52,30 @@
             <!-- Defines the main application area. -->
             <div class="area-application" data-ng-if="isInitialized">
                 <div data-ng-include="'/Resources/Data/Templates/OfficeUI.html'" ng-cloak></div>
+
+                <div class="site-container">
+                    <p>
+                        <h1>Activating Tabs</h1>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabHome')">Activate tab 'Home'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabSendReceive')">Activate tab 'Send / Receive'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabFolder')">Activate tab 'Folder'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabView')">Activate tab 'View'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabMiscellaneous')">Activate tab 'Miscellaneous'</a></div>
+                        <br/>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabDrawingTools_Format')">Activate contextual tab 'Format (Drawing Tools)'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabTableTools_Design')">Activate contextual tab 'Design (Table Tools)'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabTableTools_Layout')">Activate contextual tab 'Layout (Table Tools)'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabSmartTools_Design')">Activate contextual tab 'Design (Smart Tools)'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabSmartTools_Format')">Activate contextual tab 'Format (Smart Tools)'</a></div>
+                    </p>
+
+                    <p>
+                        <h1>Activating Contextual Groups</h1>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupDrawingTools')">Activate tab 'Drawing Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupDrawingTools')">Deactivate tab 'Drawing Tools'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupTableTools')">Activate tab 'Table Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupTableTools')">Deactivate tab 'Table Tools'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupSmartTools')">Activate tab 'Smart Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupSmartTools')">Deactivate tab 'Smart Tools'</a></div>
+                    </p>
+                </div>
             </div>
         </div>
 

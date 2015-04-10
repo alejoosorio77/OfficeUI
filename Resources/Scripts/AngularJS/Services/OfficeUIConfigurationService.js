@@ -1,4 +1,15 @@
 /**
+ * @filename       OfficeUIConfigurationService.js
+ * @Author         Kevin De Coninck
+ * @version        1.0.0
+ * @date           30/03/2015
+ *
+ * @notes
+ * Defines the controller 'OfficeUIConfigurationService'. This service is required for loading the initial configuration
+ * of an OfficeUI application.
+ */
+
+/**
  * @type            Service
  * @name            OfficeUIConfigurationService
  *
