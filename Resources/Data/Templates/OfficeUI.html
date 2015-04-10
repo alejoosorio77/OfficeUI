@@ -36,8 +36,23 @@
                     </ul>
                 </li>
             </ul>
+
+            <!-- Defines the content of the ribbon element. -->
             <ul class="tabs-content">
 
+                <!-- Defines the contents of the normal tabs. -->
+                <li data-ng-repeat="tab in Tabs" data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
+                    Contents of the tab: {{tab.Id}}
+                </li>
+
+                <!-- Defines the contents of the contextual tabs. -->
+                <li data-ng-repeat="contextualGroup in ContextualGroups" data-ng-show="InitializeServiceCall('Ribbon', 'isContextualGroupActive', contextualGroup.Id)">
+                    <ul>
+                        <li data-ng-repeat="tab in contextualGroup.Tabs" data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
+                            Contents of the tab: {{tab.Id}}
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </header>

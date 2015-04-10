@@ -315,7 +315,8 @@ body {
 
 #OfficeUI .site-container .link {
   display: inline-block;
-  margin-right: 40px; }
+  margin-right: 40px;
+  height: 20px; }
 
 /* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
 #OfficeUI .spinner-circle {
