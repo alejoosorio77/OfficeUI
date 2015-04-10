@@ -1,6 +1,9 @@
 ## JetBrains WebStorm specific folders.
 .idea/
 
+## Map files
+*.map
+
 ## NPM and Bower directories.
 ## To install NPM packages, run 'npm install' from within '/Components/External/NodeJS'.
 ## To install Bower packages, run 'bower install' from within '/Components/External/Bower'.
