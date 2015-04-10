@@ -120,6 +120,15 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
         // Get all the tabs, except the first one.
         // We use the JSON.parse method here to create a new deep-copy of the array, not related to the first one.
         var tabs = JSON.parse(JSON.stringify($rootScope.Tabs)).splice(1, $rootScope.Tabs.length - 1);
+        var isNormalTab = false;
+
+        // Check if the requested tab is a valid tab or contextual tab element.
+        var tabMatches = $.grep(tabs, function(tab) { return tab.Id == tabId; });
+
+        // Sets a boolean that indicates that the tab to activate is a normal tab.
+        // This is needed because only a normal tab will be saved in a cookie, this is because by default, contextual
+        // groups and tabs are hidden on launch.
+        if (tabMatches.length > 0) { isNormalTab = true; }
 
         // Get all the tabs in which we can search for the tab to activate.
         // The following tabs can be activated.
@@ -132,14 +141,14 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
         });
 
         // Check if the requested tab is a valid tab or contextual tab element.
-        var tabMatches = $.grep(tabs, function(tab) { return tab.Id == tabId; });
+        tabMatches = $.grep(tabs, function(tab) { return tab.Id == tabId; });
 
         // If the tab cannot be actived for any reason, throw an error message.
         if (tabMatches.length == 0) { OfficeUICore.Exceptions.ThrowException('OfficeUIRibbonControlServiceException', '[OfficeUIRibbonControlService.setActiveTab] - The tab \'' + tabId + '\' cannot be activated. Either the tab does not exists, or the tab belongs to a contextual group which isn\'t active.'); }
         else
         {
             // If the latest selected tab of the ribbon should be preserved, store the value in a cookie.
-            if (preserveSelectedRibbonTab) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_LATEST_SELECTED_TAB, tabId, 365); }
+            if (preserveSelectedRibbonTab && isNormalTab) { OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_LATEST_SELECTED_TAB, tabId, 365); }
 
             // Change the active tab.
             activeTab = tabId;
