@@ -1,10 +1,10 @@
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            officeuiScroll
+ * @name            officeuiRibbonScroll
  *
  * @description
- * Defines the 'officeuiScroll' directive. This directive allows us to execute an AngularJS function when we're
+ * Defines the 'officeuiRibbonScroll' directive. This directive allows us to execute an AngularJS function when we're
  * scrolling on the element.
  *
  *
@@ -13,11 +13,11 @@
  * In this particular case, it's used to make sure that the page does not scroll when we scroll on the element which
  * has implemented this directive.
  */
-OfficeUI.directive('officeuiScroll', function() {
+OfficeUI.directive('officeuiRibbonScroll', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes){
-            var scrollAttribute = attributes['officeuiScroll'];
+            var scrollAttribute = attributes['officeuiRibbonScroll'];
 
             // Bind the mousewheel event handler.
             element.on('DOMMouseScroll mousewheel', function (e) {

@@ -10,7 +10,7 @@
  *
  * @depends             AngularJS/Controllers/OfficeUIController.js
  *
- * @depends             AngularJS/Directives/OfficeUIScroll.js
+ * @depends             AngularJS/Directives/OfficeUIRibbonScroll.js
  * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
  * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
  *
