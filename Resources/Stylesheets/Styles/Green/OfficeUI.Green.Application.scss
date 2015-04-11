@@ -10,7 +10,7 @@
 /* ----- Import statements ----- */
 @import 'OfficeUI.Green.References';
 
-/* ---- General styling. ---- */
+/* ---- General elements styling (anchors, input element, ...). ---- */
 #OfficeUI a { color: $primary-color; text-decoration: none; }
 #OfficeUI a:hover { color: $link-active-color; text-decoration: none; }
 #OfficeUI input:hover, #OfficeUI input:focus { border-color: $icon-active-color; }
