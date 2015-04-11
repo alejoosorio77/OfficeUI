@@ -19,7 +19,7 @@
 
         <!-- Defines the ribbon element. -->
         <div class="ribbon no-select">
-            <ul class="tabs">
+            <ul class="tabs" data-officeui-scroll>
                 <li class="tab-group" data-ng-repeat="tab in Tabs">
                     <ul>
                         <li class="tab tab-label" id="{{tab.Id}}"
@@ -61,7 +61,7 @@
             </ul>
 
             <!-- Defines the content of the ribbon element. -->
-            <ul class="tabs-content">
+            <ul class="tabs-content" data-officeui-scroll>
 
                 <!-- Defines the contents of the normal tabs. -->
                 <li data-ng-repeat="tab in Tabs"

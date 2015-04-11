@@ -213,7 +213,7 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, ImagePrel
         var foundElement = JSPath.apply('.{.Id == "' + iconId + '"}', $scope.Icons);
 
         // If the element cannot be found, throw an exception.
-        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIController.DisableApplicationIcon] - An application icon with id \'' + iconId + '\' cannot be found.'); }
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIController.EnableApplicationIcon] - An application icon with id \'' + iconId + '\' cannot be found.'); }
 
         // Disable the provided element.
         foundElement[0].Disabled = "False";

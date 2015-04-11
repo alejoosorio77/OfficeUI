@@ -10,6 +10,7 @@
  *
  * @depends             AngularJS/Controllers/OfficeUIController.js
  *
+ * @depends             AngularJS/Directives/OfficeUIScroll.js
  * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
  * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
  *
@@ -485,7 +486,7 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, ImagePrel
         var foundElement = JSPath.apply('.{.Id == "' + iconId + '"}', $scope.Icons);
 
         // If the element cannot be found, throw an exception.
-        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIController.DisableApplicationIcon] - An application icon with id \'' + iconId + '\' cannot be found.'); }
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIController.EnableApplicationIcon] - An application icon with id \'' + iconId + '\' cannot be found.'); }
 
         // Disable the provided element.
         foundElement[0].Disabled = "False";
@@ -572,6 +573,39 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, ImagePrel
 
         var serviceInstance = registeredServices[service][0];
         return serviceInstance[method](parameters, parameters);
+    }
+});
+/**
+ * @type            Directive
+ * @usage           Attribute
+ * @name            officeuiScroll
+ *
+ * @description
+ * Defines the 'officeuiScroll' directive. This directive allows us to execute an AngularJS function when we're
+ * scrolling on the element.
+ *
+ *
+ * @remarks
+ * This directive is implementing 'e.preventDefault()'. This does mean that default events are not executed anymore.
+ * In this particular case, it's used to make sure that the page does not scroll when we scroll on the element which
+ * has implemented this directive.
+ */
+OfficeUI.directive('officeuiScroll', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes){
+            var scrollAttribute = attributes['officeuiScroll'];
+
+            // Bind the mousewheel event handler.
+            element.on('DOMMouseScroll mousewheel', function (e) {
+                scope.$apply(function(self) {
+                    scope.InitializeServiceCall('Ribbon', 'ribbonScroll', e.originalEvent);
+                });
+
+                // Prevent default actions from happening.
+                e.preventDefault();
+            });
+        }
     }
 });
 /**
@@ -836,7 +870,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
         tabMatches = $.grep(tabs, function(tab) { return tab.Id == tabId; });
 
         // If the tab cannot be actived for any reason, throw an error message.
-        if (tabMatches.length == 0) { OfficeUICore.Exceptions.ThrowException('OfficeUIRibbonControlServiceException', '[OfficeUIRibbonControlService.setActiveTab] - The tab \'' + tabId + '\' cannot be activated. Either the tab does not exists, or the tab belongs to a contextual group which isn\'t active.'); }
+        if (tabMatches.length == 0) { OfficeUICore.Exceptions.ThrowException('OfficeUIRibbonControlServiceException', '[OfficeUIRibbonControlService.setActiveTab] - The tab \'' + tabId + '\' cannot be activated. Either the tab does not exists, is an application tab, or the tab belongs to a contextual group which isn\'t active.'); }
         else
         {
             // If the latest selected tab of the ribbon should be preserved, store the value in a cookie.
@@ -939,6 +973,76 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      * @returns             {boolean}   True if there are active contextual groups, false otherwise.
      */
     OfficeUIRibbonControlServiceObject.areContextualGroupsActive = function() { return activeContextualGroups.length > 0; }
+
+    /**
+     * @type                Function
+     * @name                DisableIcon
+     *
+     * @description
+     * Disables a given application icon based on it's id.
+     *
+     * @param               iconId          The id of the icon to disable.
+     */
+    OfficeUIRibbonControlServiceObject.DisableIcon = function(iconId) {
+        var foundElement = JSPath.apply('.Groups.Areas.Actions{.Id == "' + iconId + '"}', $rootScope.Tabs);
+
+        // If the element cannot be found, throw an exception.
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIRibbonControlService.DisableIcon] - An icon with id \'' + iconId + '\' cannot be found.'); }
+
+        // Disable the provided element.
+        foundElement[0].Disabled = "True";
+    }
+
+    /**
+     * @type                EnableIcon
+     * @name                EnableApplicationIcon
+     *
+     * @description
+     * Enables a given application icon based on it's id.
+     *
+     * @param               iconId          The id of the icon to enable.
+     */
+    OfficeUIRibbonControlServiceObject.EnableIcon = function(iconId) {
+        var foundElement = JSPath.apply('.Groups.Areas.Actions{.Id == "' + iconId + '"}', $rootScope.Tabs);
+
+        // If the element cannot be found, throw an exception.
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIRibbonControlService.EnableIcon] - An icon with id \'' + iconId + '\' cannot be found.'); }
+
+        // Disable the provided element.
+        foundElement[0].Disabled = "False";
+    }
+
+    /**
+     * @type            Function
+     * @name            ribbonScroll
+     *
+     * @description
+     * Sets the next as active when you're scrolling on the page.
+     *
+     * @param           scrollEvent (event):    The scroll event, which is passed from the DOMMouseScroll or mousewheel
+     *                                          event.
+     */
+    OfficeUIRibbonControlServiceObject.ribbonScroll = function(scrollEvent) {
+        var activeTab = $('.ribbon .active');
+        var tabToActivate = null;
+
+        // Scrolling forward, meaning that the next active tab should be activated.
+        if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
+            if (activeTab.hasClass('contextual-tab') && activeTab.next().length > 0) { tabToActivate = activeTab.next(); }
+            else {
+                var closestTab = $(activeTab).parent().parent();
+                if ($(closestTab).next().length > 0) { tabToActivate = $('.tab', closestTab.next()); }
+            }
+        } else { // Scrolling backward, meaning that the previous active tab should be activated.
+            if (activeTab.hasClass('contextual-tab') && activeTab.prev().length > 0) { tabToActivate = activeTab.prev(); }
+            else {
+                var closestTab = $(activeTab).parent().parent();
+                if ($(closestTab).prev().length > 0 && !$('.tab', closestTab.prev()).hasClass('application')) { tabToActivate = $('.tab', closestTab.prev()).last(); }
+            }
+        }
+
+        if (tabToActivate != null) { OfficeUIRibbonControlServiceObject.setActiveTab(tabToActivate.attr('id')); }
+    }
 
     // Return the service object itself.
     return OfficeUIRibbonControlServiceObject;

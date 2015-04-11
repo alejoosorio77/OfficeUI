@@ -20,8 +20,6 @@
         <script src="/Resources/External/Bower/angular/angular.js"></script>
         <script src="/Resources/External/Bower/angular-sanitize/angular-sanitize.js"></script>
         <script src="/Components/External/NodeJS/node_modules/jspath/jspath.min.js"></script>
-        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-        <script src="/Resources/Scripts/Elements/OfficeUI.Elements.js"></script>
         <script src="/Resources/Scripts/OfficeUI.Combined.js"></script>
         <script src="/Resources/Scripts/OfficeUI.Configuration.js"></script>
         <script src="/Resources/Scripts/OfficeUI.Core.js"></script>
@@ -81,15 +79,21 @@
 
                     <p>
                         <h1>Activating Contextual Groups</h1>
-                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupDrawingTools')">Activate tab 'Drawing Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupDrawingTools')">Deactivate tab 'Drawing Tools'</a></div>
-                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupTableTools')">Activate tab 'Table Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupTableTools')">Deactivate tab 'Table Tools'</a></div>
-                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupSmartTools')">Activate tab 'Smart Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupSmartTools')">Deactivate tab 'Smart Tools'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupDrawingTools')">Activate contextual group 'Drawing Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupDrawingTools')">Deactivate contextual group 'Drawing Tools'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupTableTools')">Activate contextual group 'Table Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupTableTools')">Deactivate contextual group 'Table Tools'</a></div>
+                        <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'activateContextualGroup', 'contextualGroupSmartTools')">Activate contextual group 'Smart Tools'</a> / <a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'deactivateContextualGroup', 'contextualGroupSmartTools')">Deactivate contextual group 'Smart Tools'</a></div>
                     </p>
 
                     <p>
                         <h1>Application Icons Functions</h1>
                         <div class="link"><a href="#" data-ng-click="DisableApplicationIcon('icoSendReceive')">Disable icon 'Send Receive'</a></div>
                         <div class="link"><a href="#" data-ng-click="EnableApplicationIcon('icoSendReceive')">Enable icon 'Send Receive'</a></div>
+                    </p>
+
+                    <p>
+                    <h1>Ribbon Icons Functions</h1>
+                    <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'DisableIcon', 'icoNewEmail')">Disable icon 'New Email'</a></div>
+                    <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'EnableIcon', 'icoNewEmail')">Enable icon 'New Email'</a></div>
                     </p>
                 </div>
             </div>

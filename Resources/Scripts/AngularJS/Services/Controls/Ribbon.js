@@ -144,7 +144,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
         tabMatches = $.grep(tabs, function(tab) { return tab.Id == tabId; });
 
         // If the tab cannot be actived for any reason, throw an error message.
-        if (tabMatches.length == 0) { OfficeUICore.Exceptions.ThrowException('OfficeUIRibbonControlServiceException', '[OfficeUIRibbonControlService.setActiveTab] - The tab \'' + tabId + '\' cannot be activated. Either the tab does not exists, or the tab belongs to a contextual group which isn\'t active.'); }
+        if (tabMatches.length == 0) { OfficeUICore.Exceptions.ThrowException('OfficeUIRibbonControlServiceException', '[OfficeUIRibbonControlService.setActiveTab] - The tab \'' + tabId + '\' cannot be activated. Either the tab does not exists, is an application tab, or the tab belongs to a contextual group which isn\'t active.'); }
         else
         {
             // If the latest selected tab of the ribbon should be preserved, store the value in a cookie.
@@ -247,6 +247,76 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      * @returns             {boolean}   True if there are active contextual groups, false otherwise.
      */
     OfficeUIRibbonControlServiceObject.areContextualGroupsActive = function() { return activeContextualGroups.length > 0; }
+
+    /**
+     * @type                Function
+     * @name                DisableIcon
+     *
+     * @description
+     * Disables a given application icon based on it's id.
+     *
+     * @param               iconId          The id of the icon to disable.
+     */
+    OfficeUIRibbonControlServiceObject.DisableIcon = function(iconId) {
+        var foundElement = JSPath.apply('.Groups.Areas.Actions{.Id == "' + iconId + '"}', $rootScope.Tabs);
+
+        // If the element cannot be found, throw an exception.
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIRibbonControlService.DisableIcon] - An icon with id \'' + iconId + '\' cannot be found.'); }
+
+        // Disable the provided element.
+        foundElement[0].Disabled = "True";
+    }
+
+    /**
+     * @type                EnableIcon
+     * @name                EnableApplicationIcon
+     *
+     * @description
+     * Enables a given application icon based on it's id.
+     *
+     * @param               iconId          The id of the icon to enable.
+     */
+    OfficeUIRibbonControlServiceObject.EnableIcon = function(iconId) {
+        var foundElement = JSPath.apply('.Groups.Areas.Actions{.Id == "' + iconId + '"}', $rootScope.Tabs);
+
+        // If the element cannot be found, throw an exception.
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIRibbonControlService.EnableIcon] - An icon with id \'' + iconId + '\' cannot be found.'); }
+
+        // Disable the provided element.
+        foundElement[0].Disabled = "False";
+    }
+
+    /**
+     * @type            Function
+     * @name            ribbonScroll
+     *
+     * @description
+     * Sets the next as active when you're scrolling on the page.
+     *
+     * @param           scrollEvent (event):    The scroll event, which is passed from the DOMMouseScroll or mousewheel
+     *                                          event.
+     */
+    OfficeUIRibbonControlServiceObject.ribbonScroll = function(scrollEvent) {
+        var activeTab = $('.ribbon .active');
+        var tabToActivate = null;
+
+        // Scrolling forward, meaning that the next active tab should be activated.
+        if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
+            if (activeTab.hasClass('contextual-tab') && activeTab.next().length > 0) { tabToActivate = activeTab.next(); }
+            else {
+                var closestTab = $(activeTab).parent().parent();
+                if ($(closestTab).next().length > 0) { tabToActivate = $('.tab', closestTab.next()); }
+            }
+        } else { // Scrolling backward, meaning that the previous active tab should be activated.
+            if (activeTab.hasClass('contextual-tab') && activeTab.prev().length > 0) { tabToActivate = activeTab.prev(); }
+            else {
+                var closestTab = $(activeTab).parent().parent();
+                if ($(closestTab).prev().length > 0 && !$('.tab', closestTab.prev()).hasClass('application')) { tabToActivate = $('.tab', closestTab.prev()).last(); }
+            }
+        }
+
+        if (tabToActivate != null) { OfficeUIRibbonControlServiceObject.setActiveTab(tabToActivate.attr('id')); }
+    }
 
     // Return the service object itself.
     return OfficeUIRibbonControlServiceObject;
