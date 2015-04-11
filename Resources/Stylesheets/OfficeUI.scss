@@ -31,7 +31,7 @@
 /* ---- Variables. ---- */
 $color-default-gray: #d4d4d4;
 
-/* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely. ---- */
+/* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely (light, Semilight, UI, Semibold, Bold, Italic & Bold Italic). ---- */
 @font-face { font-family: "Segoe UI"; font-weight: 200; src: local("Segoe UI Light"); }
 @font-face { font-family: "Segoe UI"; font-weight: 300; src: local("Segoe UI Semilight"); }
 @font-face { font-family: "Segoe UI"; font-weight: 400; src: local("Segoe UI"); }

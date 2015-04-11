@@ -84,7 +84,7 @@ input[type="text"]:focus {
 ======================================================================================================= */
 /* ---- Useful mixins. ---- */
 /* ---- Variables. ---- */
-/* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely. ---- */
+/* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely (light, Semilight, UI, Semibold, Bold, Italic & Bold Italic). ---- */
 @font-face {
   font-family: "Segoe UI";
   font-weight: 200;
