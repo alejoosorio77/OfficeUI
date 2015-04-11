@@ -341,6 +341,26 @@
 
             /**
              * @type            Function
+             * @name            OfficeUIElementNotFoundException
+             *
+             * @param           message         The message to pass to this exception.
+             *
+             * @description
+             * Writes a new exception of type 'OfficeUIElementNotFoundException'.
+             *
+             * @example
+             * When you want to write an exception of type 'OfficeUIElementNotFoundException', with the following message:
+             * 'An error has occurred'.
+             * The following code can be used:
+             *
+             * OfficeUICore.Exceptions.OfficeUIElementNotFoundException('An error has occurred.');
+             */
+            OfficeUIElementNotFoundException: function(message) {
+                OfficeUICore.Exceptions.ThrowException('OfficeUIElementNotFoundException', message);
+            },
+
+            /**
+             * @type            Function
              * @name            OfficeUIServiceException
              *
              * @param           message         The message to pass to this exception.

@@ -455,6 +455,44 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, ImagePrel
 
     /**
      * @type                Function
+     * @name                DisableApplicationIcon
+     *
+     * @description
+     * Disables a given application icon based on it's id.
+     *
+     * @param               iconId          The id of the icon to disable.
+     */
+    $scope.DisableApplicationIcon = function(iconId) {
+        var foundElement = JSPath.apply('.{.Id == "' + iconId + '"}', $scope.Icons);
+
+        // If the element cannot be found, throw an exception.
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIController.DisableApplicationIcon] - An application icon with id \'' + iconId + '\' cannot be found.'); }
+
+        // Disable the provided element.
+        foundElement[0].Disabled = "True";
+    }
+
+    /**
+     * @type                Function
+     * @name                EnableApplicationIcon
+     *
+     * @description
+     * Enables a given application icon based on it's id.
+     *
+     * @param               iconId          The id of the icon to enable.
+     */
+    $scope.EnableApplicationIcon = function(iconId) {
+        var foundElement = JSPath.apply('.{.Id == "' + iconId + '"}', $scope.Icons);
+
+        // If the element cannot be found, throw an exception.
+        if (foundElement.length == 0) { OfficeUICore.Exceptions.OfficeUIElementNotFoundException('[OfficeUIController.DisableApplicationIcon] - An application icon with id \'' + iconId + '\' cannot be found.'); }
+
+        // Disable the provided element.
+        foundElement[0].Disabled = "False";
+    }
+
+    /**
+     * @type                Function
      * @name                PreloadServices
      *
      * @description
