@@ -4,16 +4,12 @@
         <title>OfficeUI Web Controls for Web Applications</title>
 
         <!-- Enable universal character encoding. -->
-        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <meta content="text/html;charset=UTF-8" http-equiv="Content-type">
 
-        <!-- Reference the favicon to use. -->
-        <link rel="shortcut icon" type="image/x-icon" href="/Resources/Images/favicon.ico" />
-
-        <!-- Include all the external stylesheets. -->
-        <link rel="stylesheet" href="/Resources/External/Bower/fontawesome/css/font-awesome.min.css">
-
-        <!-- Include all the required stylesheets. -->
-        <link rel="stylesheet" href="/Resources/Stylesheets/OfficeUI.css" />
+        <!-- Reference the stylesheets and the favicon. -->
+        <link href="/Resources/Images/favicon.ico"  rel="shortcut icon" type="image/x-icon"/>
+        <link href="/Resources/External/Bower/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/Resources/Stylesheets/OfficeUI.css" rel="stylesheet"  />
 
         <!-- Required scripts for the OfficeUI application. -->
         <script src="/Resources/External/Bower/jquery/dist/jquery.js"></script>
@@ -58,7 +54,7 @@
             </div>
 
             <!-- Defines the main application area. -->
-            <div class="area-application" data-ng-if="isInitialized">
+            <div data-ng-if="isInitialized">
                 <div data-ng-include="'/Resources/Data/Templates/OfficeUI.html'" ng-cloak></div>
 
                 <div class="site-container" data-ng-class="{'ribbon-hidden': InitializeServiceCall('Ribbon', 'isRibbonHidden') || InitializeServiceCall('Ribbon', 'isRibbonVisible'), 'ribbon-showed': InitializeServiceCall('Ribbon', 'isRibbonShowed')}">
