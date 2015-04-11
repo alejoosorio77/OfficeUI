@@ -7,6 +7,7 @@
             <!-- This is what is being rendered if it's a big icon. -->
             <div class="big-icon-holder"
                  data-ng-class="{'disabled': action.Disabled == 'True'}"
+                 data-officeui-tooltip="{'action': action.Id}"
                  data-ng-if="action.Type == 'bIcon'">
 
                 <a data-ng-href="{{action.Uri}}">
@@ -27,6 +28,7 @@
             <!-- This is what is being rendered if it's a small icon. -->
             <div class="small-icon-holder"
                  data-ng-if="action.Type == 'sIcon'"
+                 data-officeui-tooltip="{'action': action.Id}"
                  data-ng-class="{'disabled': action.Disabled == 'True'}">
 
                 <a data-ng-href="{{action.Uri}}" >
@@ -46,6 +48,7 @@
             <!-- This is what is being rendered if it's an input element (Checkbox). -->
             <div id="{{action.Id}}"
                  data-ng-class="{'disabled': action.Disabled == 'True'}"
+                 data-officeui-tooltip="{'action': action.Id}"
                  data-ng-show="action.Type == 'Checkbox'">
 
                 <input type="checkbox" id="{{action.Id}}" />
@@ -56,10 +59,16 @@
             <!-- This is what is being rendered if it's an input element (Text). -->
             <div id="{{action.Id}}"
                  ng-class="{'disabled': action.Disabled == 'True'}"
+                 data-officeui-tooltip="{'action': action.Id}"
                  data-ng-if="action.Type == 'Input'">
 
                 <input id="{{action.Id}}" placeholder="{{action.Legend}}" type="text"
                        data-ng-style="{width:'{{action.Width}}'}"/>
+            </div>
+
+            <!-- Provides the tooltip to render. -->
+            <div class="tooltip" data-ng-if="action.Tooltip">
+                <div data-ng-bind-html="action.Tooltip"></div>
             </div>
 
         </div>

@@ -14,6 +14,7 @@
  * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
  * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
  * @depends             AngularJS/Directives/StopPropagation.js
+ * @depends             AngularJS/Directives/OfficeUITooltip.js
  *
  * @depends             AngularJS/Filters/ActionLegend.js
  *
