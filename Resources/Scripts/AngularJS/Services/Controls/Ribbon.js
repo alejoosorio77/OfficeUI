@@ -16,10 +16,14 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
     // Defines the constants which are needed for this controller.
     const COOKIE_NAME_LATEST_SELECTED_TAB = 'OfficeUIRibbon_SelectedTab';
 
+    // Defines the various states that a ribbon can have.
+    var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3, Showed_Initialized: 99 }
+
     // Defines all the variables which are needed for this control.
     var preserveSelectedRibbonTab;
     var activeTab;
     var activeContextualGroups = [];
+    var ribbonState = ribbonStates.Showed_Initialized;
 
     /**
      * @type                Function
@@ -117,6 +121,9 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      * @param               tabId:      The id of the tab to set as active.
      */
     OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) {
+        // Set the ribbon state as being showed when it was hidden.
+        if (ribbonState == ribbonStates.Hidden) { ribbonState = ribbonStates.Visible; }
+
         // Get all the tabs, except the first one.
         // We use the JSON.parse method here to create a new deep-copy of the array, not related to the first one.
         var tabs = JSON.parse(JSON.stringify($rootScope.Tabs)).splice(1, $rootScope.Tabs.length - 1);
@@ -319,6 +326,87 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
             if (currentActiveTabIndex > 1) { OfficeUIRibbonControlServiceObject.setActiveTab(availableTabs[currentActiveTabIndex - 1]); }
         }
     }
+
+    /**
+     * @type            Function
+     * @name            isRibbonShowed
+     *
+     * @description.
+     * Check's if the ribbon is showed.
+     *
+     * @returns         {boolean}   True if it's showed, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonShowed = function() {
+        return ribbonState == ribbonStates.Showed;
+    }
+
+    /**
+     * @type            Function
+     * @name            isRibbonInitialized
+     *
+     * @description.
+     * Check's if the ribbon is initialized.
+     *
+     * @returns         {boolean}   True if it's initialized, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonInitialized = function() {
+        return ribbonState == ribbonStates.Showed_Initialized;
+    }
+
+    /**
+     * @type            Function
+     * @name            isRibbonVisible
+     *
+     * @description.
+     * Check's if the ribbon is visible.
+     *
+     * @returns         {boolean}   True if it's visible, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonVisible = function() {
+        return ribbonState == ribbonStates.Visible;
+    }
+
+    /**
+     * @type            Function
+     * @name            isRibbonHidden
+     *
+     * @description.
+     * Check's if the ribbon is hidden.
+     *
+     * @returns         {boolean}   True if it's hidden, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonHidden = function() {
+        return ribbonState == ribbonStates.Hidden;
+    }
+
+    /**
+     * @type            Function
+     * @name            toggleRibbonState
+     *
+     * @description.
+     * Toggle the state of the ribbon to the next logical state.
+     * If the state of the ribbon is 'Showed' or 'Showed_Initialized', then the ribbon will become hidden.
+     * If the ribbon is visible, then rhe ribbon does become showed.
+     */
+    OfficeUIRibbonControlServiceObject.toggleRibbonState = function() {
+        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
+        if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
+    }
+
+    /**
+     * @type            Event Handler
+     * @name            N.A.
+     *
+     * @description
+     * Makes sure that when you click on the window and the state of the ribbon is set to 'Visible', that the ribbon
+     * becomes hidden again.
+     * This is done to mimic the same look-and-feel of a native Microsoft Office Application.
+     */
+    $(window).on('click', function(e) {
+        if (OfficeUIRibbonControlServiceObject.isRibbonVisible()) { ribbonState = ribbonStates.Hidden; }
+
+        $rootScope.$apply();
+    });
 
     // Return the service object itself.
     return OfficeUIRibbonControlServiceObject;

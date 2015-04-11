@@ -13,6 +13,7 @@
  * @depends             AngularJS/Directives/OfficeUIRibbonScroll.js
  * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
  * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
+ * @depends             AngularJS/Directives/StopPropagation.js
  *
  * @depends             AngularJS/Filters/ActionLegend.js
  *
@@ -712,6 +713,24 @@ OfficeUI.directive('cuToggleStyleAttributeOnHover', function() {
     }
 });
 /**
+ * @type            Directive
+ * @usage           Attribute
+ * @name            officeuiStopPropagation
+ *
+ * @description
+ * Defines the 'officeuiStopPropagation' directive. This directive allows us to stop propagating an event.
+ */
+OfficeUI.directive('officeuiStopPropagation', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            element.bind(attr.officeuiStopPropagation, function (e) {
+                e.stopPropagation();
+            });
+        }
+    };
+});
+/**
  * @type            Filter
  * @name            actionLegend
  *
@@ -742,10 +761,14 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
     // Defines the constants which are needed for this controller.
     const COOKIE_NAME_LATEST_SELECTED_TAB = 'OfficeUIRibbon_SelectedTab';
 
+    // Defines the various states that a ribbon can have.
+    var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3, Showed_Initialized: 99 }
+
     // Defines all the variables which are needed for this control.
     var preserveSelectedRibbonTab;
     var activeTab;
     var activeContextualGroups = [];
+    var ribbonState = ribbonStates.Showed_Initialized;
 
     /**
      * @type                Function
@@ -843,6 +866,9 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      * @param               tabId:      The id of the tab to set as active.
      */
     OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) {
+        // Set the ribbon state as being showed when it was hidden.
+        if (ribbonState == ribbonStates.Hidden) { ribbonState = ribbonStates.Visible; }
+
         // Get all the tabs, except the first one.
         // We use the JSON.parse method here to create a new deep-copy of the array, not related to the first one.
         var tabs = JSON.parse(JSON.stringify($rootScope.Tabs)).splice(1, $rootScope.Tabs.length - 1);
@@ -1044,60 +1070,88 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
         } else {
             if (currentActiveTabIndex > 1) { OfficeUIRibbonControlServiceObject.setActiveTab(availableTabs[currentActiveTabIndex - 1]); }
         }
-        // Provides some logic to check which item is the next tab.
-        //if (typeof currentActiveTabIndex === 'undefined' || currentActiveTabIndex == '') {
-        //    $.each($rootScope.ContextualGroups, function (contextualGroupIndex, contextualGroup) {
-
-                // Check if the contextual group is active.
-        //        if (OfficeUIRibbonControlServiceObject.isContextualGroupActive(contextualGroup.Id)) {
-        //            $.each(contextualGroup.Tabs, function (contextualTabIndex, contextualTab) {
-        //                if (contextualTab.Id == activeTab) {
-        //                    currentActiveContextualGroupIndex = contextualGroupIndex;
-        //                    currentActiveTabIndex = contextualTabIndex;
-        //                }
-        //            });
-        //        }
-        //    });
-
-        //    if (typeof currentActiveTabIndex !== 'undefined' && currentActiveTabIndex != '' && typeof currentActiveContextualGroupIndex !== 'undefined' && currentActiveContextualGroupIndex != '') {
-        //        // Based on scrolling up or down, select the next or the previous tab.
-        //        if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
-        //            if (currentActiveTabIndex < $rootScope.ContextualGroups[currentActiveContextualGroupIndex].Tabs.length - 1) { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.ContextualGroups[currentActiveContextualGroupIndex].Tabs[currentActiveTabIndex - 1].Id); }
-        //        } else {
-
-        //        }
-        //    }
-        //} else {
-        //    // Based on scrolling up or down, select the next or the previous tab.
-        //    if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
-        //        if (currentActiveTabIndex < $rootScope.Tabs.length - 1) { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[currentActiveTabIndex + 1].Id); }
-        //    }
-        //    else if (currentActiveTabIndex != 1 ) { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[currentActiveTabIndex - 1].Id); }
-        //}
-
-
-
-
-        //var activeTab = $('.ribbon .active');
-        //var tabToActivate = null;
-
-        // Scrolling forward, meaning that the next active tab should be activated.
-        //if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
-        //    if (activeTab.hasClass('contextual-tab') && activeTab.next().length > 0) { tabToActivate = activeTab.next(); }
-        //    else {
-        //        var closestTab = $(activeTab).parent().parent();
-        //        if ($(closestTab).next().length > 0) { tabToActivate = $('.tab', closestTab.next()); }
-        //    }
-        //} else { // Scrolling backward, meaning that the previous active tab should be activated.
-        //    if (activeTab.hasClass('contextual-tab') && activeTab.prev().length > 0) { tabToActivate = activeTab.prev(); }
-        //    else {
-        //        var closestTab = $(activeTab).parent().parent();
-        //        if ($(closestTab).prev().length > 0 && !$('.tab', closestTab.prev()).hasClass('application')) { tabToActivate = $('.tab', closestTab.prev()).last(); }
-        //    }
-        //}
-
-        //if (tabToActivate != null) { OfficeUIRibbonControlServiceObject.setActiveTab(tabToActivate.attr('id')); }
     }
+
+    /**
+     * @type            Function
+     * @name            isRibbonShowed
+     *
+     * @description.
+     * Check's if the ribbon is showed.
+     *
+     * @returns         {boolean}   True if it's showed, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonShowed = function() {
+        return ribbonState == ribbonStates.Showed;
+    }
+
+    /**
+     * @type            Function
+     * @name            isRibbonInitialized
+     *
+     * @description.
+     * Check's if the ribbon is initialized.
+     *
+     * @returns         {boolean}   True if it's initialized, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonInitialized = function() {
+        return ribbonState == ribbonStates.Showed_Initialized;
+    }
+
+    /**
+     * @type            Function
+     * @name            isRibbonVisible
+     *
+     * @description.
+     * Check's if the ribbon is visible.
+     *
+     * @returns         {boolean}   True if it's visible, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonVisible = function() {
+        return ribbonState == ribbonStates.Visible;
+    }
+
+    /**
+     * @type            Function
+     * @name            isRibbonHidden
+     *
+     * @description.
+     * Check's if the ribbon is hidden.
+     *
+     * @returns         {boolean}   True if it's hidden, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonHidden = function() {
+        return ribbonState == ribbonStates.Hidden;
+    }
+
+    /**
+     * @type            Function
+     * @name            toggleRibbonState
+     *
+     * @description.
+     * Toggle the state of the ribbon to the next logical state.
+     * If the state of the ribbon is 'Showed' or 'Showed_Initialized', then the ribbon will become hidden.
+     * If the ribbon is visible, then rhe ribbon does become showed.
+     */
+    OfficeUIRibbonControlServiceObject.toggleRibbonState = function() {
+        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
+        if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
+    }
+
+    /**
+     * @type            Event Handler
+     * @name            N.A.
+     *
+     * @description
+     * Makes sure that when you click on the window and the state of the ribbon is set to 'Visible', that the ribbon
+     * becomes hidden again.
+     * This is done to mimic the same look-and-feel of a native Microsoft Office Application.
+     */
+    $(window).on('click', function(e) {
+        if (OfficeUIRibbonControlServiceObject.isRibbonVisible()) { ribbonState = ribbonStates.Hidden; }
+
+        $rootScope.$apply();
+    });
 
     // Return the service object itself.
     return OfficeUIRibbonControlServiceObject;

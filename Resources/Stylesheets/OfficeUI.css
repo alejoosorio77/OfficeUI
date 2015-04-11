@@ -117,11 +117,14 @@ input[type="text"]:focus {
   src: local("Segoe UI Bold Italic"); }
 /* ---- Elements which covering the entire application, but which are needed to the OfficeUI to work. */
 html, body {
-  height: 100%; }
-
-body {
+  height: 100%;
   font-size: 1em; }
 
+/* ----- Classes which are set through AngularJS. */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important; }
+
+/* ---- Default HTML elements, such as input elements. ---- */
 #OfficeUI input {
   border-color: #d4d4d4; }
 
@@ -132,15 +135,10 @@ body {
   height: 22px;
   padding-left: 3px; }
 
-/* ----- Classes which are set through AngularJS. */
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important; }
-
-/* ---- General OfficeUI classes. ---- */
+/* ---- Usefull OfficeUI classes. Classes which can be placed on various elements. ---- */
 #OfficeUI {
   color: #444;
   font-family: 'Segoe UI', arial, sans-serif;
-  font-size: 1em;
   height: 100px; }
 
 #OfficeUI .no-select {
@@ -361,7 +359,10 @@ body {
 
 #OfficeUI .ribbon .tabs-content {
   border-bottom: 1px solid #d4d4d4;
-  height: 93px; }
+  height: 93px;
+  position: relative;
+  z-index: 10;
+  background-color: white; }
 
 /* -- Groups. --*/
 #OfficeUI .ribbon .group {
@@ -392,6 +393,15 @@ body {
   margin-left: 1px;
   margin-top: 4px;
   vertical-align: top; }
+
+#OfficeUI .ribbon .collapse {
+  bottom: 0;
+  height: 17px;
+  padding-top: 2px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 29px; }
 
 /* -- Areas -- */
 #OfficeUI .ribbon .group .area {
@@ -609,5 +619,161 @@ body {
     background-color: #fff; }
   100% {
     background-color: #fff; } }
+#OfficeUI .tabs-content-hidden {
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -moz-animation-name: hide-ribbon;
+  -ms-animation-name: hide-ribbon;
+  -o-animation-name: hide-ribbon;
+  -webkit-animation-name: hide-ribbon;
+  animation-name: hide-ribbon;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
+@-moz-keyframes hide-ribbon {
+  0% {
+    top: 0; }
+  100% {
+    top: -93px; } }
+@-ms-keyframes hide-ribbon {
+  0% {
+    top: 0; }
+  100% {
+    top: -93px; } }
+@-o-keyframes hide-ribbon {
+  0% {
+    top: 0; }
+  100% {
+    top: -93px; } }
+@-webkit-keyframes hide-ribbon {
+  0% {
+    top: 0; }
+  100% {
+    top: -93px; } }
+@keyframes hide-ribbon {
+  0% {
+    top: 0; }
+  100% {
+    top: -93px; } }
+#OfficeUI .tabs-content-visible {
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -moz-animation-name: show-ribbon;
+  -ms-animation-name: show-ribbon;
+  -o-animation-name: show-ribbon;
+  -webkit-animation-name: show-ribbon;
+  animation-name: show-ribbon;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
+@-moz-keyframes show-ribbon {
+  0% {
+    top: -93px; }
+  100% {
+    top: 0; } }
+@-ms-keyframes show-ribbon {
+  0% {
+    top: -93px; }
+  100% {
+    top: 0; } }
+@-o-keyframes show-ribbon {
+  0% {
+    top: -93px; }
+  100% {
+    top: 0; } }
+@-webkit-keyframes show-ribbon {
+  0% {
+    top: -93px; }
+  100% {
+    top: 0; } }
+@keyframes show-ribbon {
+  0% {
+    top: -93px; }
+  100% {
+    top: 0; } }
+#OfficeUI .ribbon-showed {
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -moz-animation-name: moveContentsDown;
+  -ms-animation-name: moveContentsDown;
+  -o-animation-name: moveContentsDown;
+  -webkit-animation-name: moveContentsDown;
+  animation-name: moveContentsDown;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
+@-moz-keyframes moveContentsDown {
+  0% {
+    top: 50px; }
+  100% {
+    top: 143px; } }
+@-ms-keyframes moveContentsDown {
+  0% {
+    top: 50px; }
+  100% {
+    top: 143px; } }
+@-o-keyframes moveContentsDown {
+  0% {
+    top: 50px; }
+  100% {
+    top: 143px; } }
+@-webkit-keyframes moveContentsDown {
+  0% {
+    top: 50px; }
+  100% {
+    top: 143px; } }
+@keyframes moveContentsDown {
+  0% {
+    top: 50px; }
+  100% {
+    top: 143px; } }
+#OfficeUI .ribbon-hidden {
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -moz-animation-name: moveContentsUp;
+  -ms-animation-name: moveContentsUp;
+  -o-animation-name: moveContentsUp;
+  -webkit-animation-name: moveContentsUp;
+  animation-name: moveContentsUp;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
+@-moz-keyframes moveContentsUp {
+  0% {
+    top: 143px; }
+  100% {
+    top: 50px; } }
+@-ms-keyframes moveContentsUp {
+  0% {
+    top: 143px; }
+  100% {
+    top: 50px; } }
+@-o-keyframes moveContentsUp {
+  0% {
+    top: 143px; }
+  100% {
+    top: 50px; } }
+@-webkit-keyframes moveContentsUp {
+  0% {
+    top: 143px; }
+  100% {
+    top: 50px; } }
+@keyframes moveContentsUp {
+  0% {
+    top: 143px; }
+  100% {
+    top: 50px; } }
 
 /*# sourceMappingURL=OfficeUI.css.map */

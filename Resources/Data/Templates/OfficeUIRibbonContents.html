@@ -70,3 +70,16 @@
 
 <!-- Defines the vertical 'pipe' sign. -->
 <div class="pipe" data-ng-repeat-end></div>
+
+<div class="icon collapse"
+     data-officeui-toggle-class-on-click="active"
+     data-ng-click="InitializeServiceCall('Ribbon', 'toggleRibbonState');">
+    <img alt="Toggle Ribbon State"
+         class="pin-icon"
+         src="/Resources/Images/Ribbon/Functionalities/Collapse.png"
+         data-ng-if="InitializeServiceCall('Ribbon', 'isRibbonShowed') || InitializeServiceCall('Ribbon', 'isRibbonInitialized')"/>
+    <img alt="Toggle Ribbon State"
+         class="pin-icon"
+         src="/Resources/Images/Ribbon/Functionalities/Pin.png"
+         data-ng-if="InitializeServiceCall('Ribbon', 'isRibbonVisible')"/>
+</div>

@@ -61,7 +61,7 @@
             <div class="area-application" data-ng-if="isInitialized">
                 <div data-ng-include="'/Resources/Data/Templates/OfficeUI.html'" ng-cloak></div>
 
-                <div class="site-container">
+                <div class="site-container" data-ng-class="{'ribbon-hidden': InitializeServiceCall('Ribbon', 'isRibbonHidden') || InitializeServiceCall('Ribbon', 'isRibbonVisible'), 'ribbon-showed': InitializeServiceCall('Ribbon', 'isRibbonShowed')}">
                     <p>
                         <h1>Activating Tabs</h1>
                         <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabHome')">Activate tab 'Home'</a></div>

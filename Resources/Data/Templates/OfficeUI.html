@@ -19,12 +19,12 @@
 
         <!-- Defines the ribbon element. -->
         <div class="ribbon no-select">
-            <ul class="tabs" data-officeui-ribbon-scroll>
+            <ul class="tabs" data-officeui-ribbon-scroll data-officeui-stop-propagation="click">
                 <li class="tab-group" data-ng-repeat="tab in Tabs">
                     <ul>
                         <li class="tab tab-label" id="{{tab.Id}}"
                             data-ng-click="!$first && InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)"
-                            data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}">
+                            data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden'), 'no-border': InitializeServiceCall('Ribbon', 'isRibbonHidden')}">
 
                             <span>{{tab.Label}}</span>
                         </li>
@@ -61,7 +61,7 @@
             </ul>
 
             <!-- Defines the content of the ribbon element. -->
-            <ul class="tabs-content" data-officeui-ribbon-scroll>
+            <ul class="tabs-content" data-officeui-ribbon-scroll data-ng-class="{'tabs-content-hidden': InitializeServiceCall('Ribbon', 'isRibbonHidden'), 'tabs-content-visible': InitializeServiceCall('Ribbon', 'isRibbonVisible')}" data-officeui-stop-propagation="click">
 
                 <!-- Defines the contents of the normal tabs. -->
                 <li data-ng-repeat="tab in Tabs"
