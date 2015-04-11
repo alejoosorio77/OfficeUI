@@ -78,6 +78,7 @@
                         <li data-ng-repeat="tab in contextualGroup.Tabs"
                             data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">
 
+                            <!-- Include the contents of the ribbon. -->
                             <div data-ng-include="'/Resources/Data/Templates/OfficeUIRibbonContents.html'" ng-cloak></div>
                         </li>
                     </ul>

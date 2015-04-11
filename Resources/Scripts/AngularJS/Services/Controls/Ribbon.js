@@ -297,25 +297,80 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      *                                          event.
      */
     OfficeUIRibbonControlServiceObject.ribbonScroll = function(scrollEvent) {
-        var activeTab = $('.ribbon .active');
-        var tabToActivate = null;
+        var availableTabs = [];
+        var currentActiveTabIndex;
+
+        // Push all the id's of the available tabs into an array, based on that array, the next tab element can be selected.
+        $.each($rootScope.Tabs, function(index, tabElement) { availableTabs.push(tabElement.Id); });
+
+        $.each($rootScope.ContextualGroups, function (contextualGroupIndex, contextualGroup) {
+            if (OfficeUIRibbonControlServiceObject.isContextualGroupActive(contextualGroup.Id)) {
+                $.each(contextualGroup.Tabs, function (contextualTabIndex, contextualTab) { availableTabs.push(contextualTab.Id); });
+            }
+        });
+
+        $.each(availableTabs, function(index, tab) {
+            if (tab == activeTab) { currentActiveTabIndex = index; }
+        });
+
+        if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
+            if (currentActiveTabIndex < availableTabs.length - 1) { OfficeUIRibbonControlServiceObject.setActiveTab(availableTabs[currentActiveTabIndex + 1]); }
+        } else {
+            if (currentActiveTabIndex > 1) { OfficeUIRibbonControlServiceObject.setActiveTab(availableTabs[currentActiveTabIndex - 1]); }
+        }
+        // Provides some logic to check which item is the next tab.
+        //if (typeof currentActiveTabIndex === 'undefined' || currentActiveTabIndex == '') {
+        //    $.each($rootScope.ContextualGroups, function (contextualGroupIndex, contextualGroup) {
+
+                // Check if the contextual group is active.
+        //        if (OfficeUIRibbonControlServiceObject.isContextualGroupActive(contextualGroup.Id)) {
+        //            $.each(contextualGroup.Tabs, function (contextualTabIndex, contextualTab) {
+        //                if (contextualTab.Id == activeTab) {
+        //                    currentActiveContextualGroupIndex = contextualGroupIndex;
+        //                    currentActiveTabIndex = contextualTabIndex;
+        //                }
+        //            });
+        //        }
+        //    });
+
+        //    if (typeof currentActiveTabIndex !== 'undefined' && currentActiveTabIndex != '' && typeof currentActiveContextualGroupIndex !== 'undefined' && currentActiveContextualGroupIndex != '') {
+        //        // Based on scrolling up or down, select the next or the previous tab.
+        //        if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
+        //            if (currentActiveTabIndex < $rootScope.ContextualGroups[currentActiveContextualGroupIndex].Tabs.length - 1) { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.ContextualGroups[currentActiveContextualGroupIndex].Tabs[currentActiveTabIndex - 1].Id); }
+        //        } else {
+
+        //        }
+        //    }
+        //} else {
+        //    // Based on scrolling up or down, select the next or the previous tab.
+        //    if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
+        //        if (currentActiveTabIndex < $rootScope.Tabs.length - 1) { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[currentActiveTabIndex + 1].Id); }
+        //    }
+        //    else if (currentActiveTabIndex != 1 ) { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[currentActiveTabIndex - 1].Id); }
+        //}
+
+
+
+
+        //var activeTab = $('.ribbon .active');
+        //var tabToActivate = null;
 
         // Scrolling forward, meaning that the next active tab should be activated.
-        if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
-            if (activeTab.hasClass('contextual-tab') && activeTab.next().length > 0) { tabToActivate = activeTab.next(); }
-            else {
-                var closestTab = $(activeTab).parent().parent();
-                if ($(closestTab).next().length > 0) { tabToActivate = $('.tab', closestTab.next()); }
-            }
-        } else { // Scrolling backward, meaning that the previous active tab should be activated.
-            if (activeTab.hasClass('contextual-tab') && activeTab.prev().length > 0) { tabToActivate = activeTab.prev(); }
-            else {
-                var closestTab = $(activeTab).parent().parent();
-                if ($(closestTab).prev().length > 0 && !$('.tab', closestTab.prev()).hasClass('application')) { tabToActivate = $('.tab', closestTab.prev()).last(); }
-            }
-        }
+        //if (scrollEvent.detail > 0 || scrollEvent.wheelDelta < 0) {
+        //    if (activeTab.hasClass('contextual-tab') && activeTab.next().length > 0) { tabToActivate = activeTab.next(); }
+        //    else {
+        //        var closestTab = $(activeTab).parent().parent();
+        //        if ($(closestTab).next().length > 0) { tabToActivate = $('.tab', closestTab.next()); }
+        //    }
+        //} else { // Scrolling backward, meaning that the previous active tab should be activated.
+        //    if (activeTab.hasClass('contextual-tab') && activeTab.prev().length > 0) { tabToActivate = activeTab.prev(); }
+        //    else {
+        //        var closestTab = $(activeTab).parent().parent();
+        //        if ($(closestTab).prev().length > 0 && !$('.tab', closestTab.prev()).hasClass('application')) { tabToActivate = $('.tab', closestTab.prev()).last(); }
+        //    }
+        //}
 
-        if (tabToActivate != null) { OfficeUIRibbonControlServiceObject.setActiveTab(tabToActivate.attr('id')); }
+        //if (tabToActivate != null) { OfficeUIRibbonControlServiceObject.setActiveTab(tabToActivate.attr('id')); }
     }
 
     // Return the service object itself.
