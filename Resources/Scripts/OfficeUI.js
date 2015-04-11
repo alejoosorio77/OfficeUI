@@ -10,11 +10,11 @@
  *
  * @depends             AngularJS/Controllers/OfficeUIController.js
  *
- * @depends             AngularJS/Directives/OfficeUIRibbonScroll.js
- * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
- * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
+ * @depends             AngularJS/Directives/RibbonScroll.js
+ * @depends             AngularJS/Directives/ToggleClassOnClick.js
+ * @depends             AngularJS/Directives/ToggleStyleOnHover.js
  * @depends             AngularJS/Directives/StopPropagation.js
- * @depends             AngularJS/Directives/OfficeUITooltip.js
+ * @depends             AngularJS/Directives/RibbonActionTooltip.js
  *
  * @depends             AngularJS/Filters/ActionLegend.js
  *

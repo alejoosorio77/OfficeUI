@@ -3,7 +3,7 @@
         <!-- The wrapper in which the application contents are being showed. -->
         <div>
             <div class="application-icons no-select">
-                <img class="icon" src="#" alt="{{icon.Alt}}" id="{{icon.Id}}" data-ng-src="{{icon.Icon}}" data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" data-officeui-toggle-class-on-click="active" />
+                <img class="icon" src="#" alt="{{icon.Alt}}" id="{{icon.Id}}" data-ng-src="{{icon.Icon}}" data-ng-class="{'application-icon': $first, 'disabled': icon.Disabled == 'True'}" data-ng-repeat="icon in Icons" toggle-class-on-click="active" />
             </div>
 
             <div class="application-title" data-ng-show="!InitializeServiceCall('Ribbon', 'areContextualGroupsActive', contextualGroup.Id)">
@@ -13,7 +13,7 @@
 
         <!-- Defines the ribbon element. -->
         <div class="ribbon no-select">
-            <ul class="tabs" data-officeui-ribbon-scroll data-officeui-stop-propagation="click">
+            <ul class="tabs" ribbon-scroll data-officeui-stop-propagation="click">
                 <li class="tab-group" data-ng-repeat="tab in Tabs">
                     <ul>
                         <li class="tab tab-label" id="{{tab.Id}}" data-ng-click="!$first && InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden')}">
@@ -29,7 +29,7 @@
                     </div>
 
                     <ul>
-                        <li class="tab tab-label" id="{{tab.Id}}" cu-toggle-style-attribute-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}" data-ng-repeat="tab in contextualGroup.Tabs">
+                        <li class="tab tab-label" id="{{tab.Id}}" toggle-style-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}' data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}" data-ng-repeat="tab in contextualGroup.Tabs">
                             <span>{{tab.Label}}</span>
                         </li>
                     </ul>
@@ -37,7 +37,7 @@
             </ul>
 
             <!-- Defines the content of the ribbon element. -->
-            <ul class="tabs-content" data-officeui-ribbon-scroll data-ng-class="{'tabs-content-hidden': InitializeServiceCall('Ribbon', 'isRibbonHidden'), 'tabs-content-visible': InitializeServiceCall('Ribbon', 'isRibbonVisible')}" data-officeui-stop-propagation="click">
+            <ul class="tabs-content" ribbon-scroll data-ng-class="{'tabs-content-hidden': InitializeServiceCall('Ribbon', 'isRibbonHidden'), 'tabs-content-visible': InitializeServiceCall('Ribbon', 'isRibbonVisible')}" data-officeui-stop-propagation="click">
 
                 <!-- Defines the contents of the normal tabs. -->
                 <li data-ng-repeat="tab in Tabs" data-ng-show="InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)">

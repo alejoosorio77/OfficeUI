@@ -10,11 +10,11 @@
  *
  * @depends             AngularJS/Controllers/OfficeUIController.js
  *
- * @depends             AngularJS/Directives/OfficeUIRibbonScroll.js
- * @depends             AngularJS/Directives/OfficeUIToggleClassOnClick.js
- * @depends             AngularJS/Directives/OfficeUIToggleStyleOnHover.js
+ * @depends             AngularJS/Directives/RibbonScroll.js
+ * @depends             AngularJS/Directives/ToggleClassOnClick.js
+ * @depends             AngularJS/Directives/ToggleStyleOnHover.js
  * @depends             AngularJS/Directives/StopPropagation.js
- * @depends             AngularJS/Directives/OfficeUITooltip.js
+ * @depends             AngularJS/Directives/RibbonActionTooltip.js
  *
  * @depends             AngularJS/Filters/ActionLegend.js
  *
@@ -580,23 +580,22 @@ OfficeUI.controller('OfficeUIController', function(CssInjectorService, ImagePrel
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            officeuiRibbonScroll
+ * @name            ribbonScroll
  *
  * @description
  * Defines the 'officeuiRibbonScroll' directive. This directive allows us to execute an AngularJS function when we're
  * scrolling on the element.
- *
  *
  * @remarks
  * This directive is implementing 'e.preventDefault()'. This does mean that default events are not executed anymore.
  * In this particular case, it's used to make sure that the page does not scroll when we scroll on the element which
  * has implemented this directive.
  */
-OfficeUI.directive('officeuiRibbonScroll', function() {
+OfficeUI.directive('ribbonScroll', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes){
-            var scrollAttribute = attributes['officeuiRibbonScroll'];
+            var scrollAttribute = attributes['ribbonScroll'];
 
             // Bind the mousewheel event handler.
             element.on('DOMMouseScroll mousewheel', function (e) {
@@ -613,38 +612,23 @@ OfficeUI.directive('officeuiRibbonScroll', function() {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            officeuiToggleClassOnClick
+ * @name            toggleClassOnClick
  *
  * @description
- * Defines the 'officeuiToggleClassOnClick' directive. This directive allows us to toggle a specific class when you click
+ * Defines the 'toggleClassOnClick' directive. This directive allows us to toggle a specific class when you click
  * on a certain element.
  * Whenever you click on the element, the class provided as an attribute will be added to the element.
- *
- * @example
- * Imagine that we have the following HTML code:
- *
- * <div class="icons no-select">
- *     <img class="application-icon" src="#" />
- * </div>
- *
- * Now, we want to add a class 'active', when you click on the icon. But when you leave the icon again, the class
- * 'active' should be removed.
- * Therefore, the following code van be used:
- *
- * <div class="icons no-select">
- *     <img class="application-icon" src="#" data-officeui-toggle-class-on-click="active" />
- * </div>
  *
  * @remarks
  * We're also binding the event handler 'mouseout' on the element. This is, because when you click on the element
  * and then you move away your mouse, the class 'active-ie-fix' doesn't get removed. It's only get removed if you
  * click on the element again. Now the class is also removed when your mouse leave the element.
  */
-OfficeUI.directive('officeuiToggleClassOnClick', function() {
+OfficeUI.directive('toggleClassOnClick', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes) {
-            var toggleClass = attributes['officeuiToggleClassOnClick'];
+            var toggleClass = attributes['toggleClassOnClick'];
 
             // Bind the mousedown and mouseup event handlers.
             element.bind('mousedown mouseup', function() {
@@ -661,10 +645,10 @@ OfficeUI.directive('officeuiToggleClassOnClick', function() {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            cuToggleStyleAttributeOnHover
+ * @name            toggleStyleOnHover
  *
  * @description
- * Defines the 'officeuiToggleStyleAttributeOnHover' directive. This directive allows us to add or remove a specific
+ * Defines the 'toggleStyleOnHover' directive. This directive allows us to add or remove a specific
  * style on an element when we hover on it.
  *
  * @example
@@ -688,11 +672,11 @@ OfficeUI.directive('officeuiToggleClassOnClick', function() {
  * If it isn't a valid Json string, an error will be throwed.
  * The added class will only be removed when the element doesn't have a class named 'active'.
  */
-OfficeUI.directive('cuToggleStyleAttributeOnHover', function() {
+OfficeUI.directive('toggleStyleOnHover', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes){
-            var toggleStyleAttribute = attributes['cuToggleStyleAttributeOnHover'];
+            var toggleStyleAttribute = attributes['toggleStyleOnHover'];
             var toggleStyleAttributes = JSON.parse(toggleStyleAttribute)
 
             // Bind the mouse leave event handler.
@@ -734,12 +718,12 @@ OfficeUI.directive('officeuiStopPropagation', function () {
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            officeuiTooltip
+ * @name            ribbonActionTooltip
  *
  * @description
  * Defines the 'officeuiTooltip' directive. This directive allows us to show a tooltip for a specific element.
  */
-OfficeUI.directive('officeuiTooltip', function () {
+OfficeUI.directive('ribbonActionTooltip', function () {
     return {
         restrict: 'A',
         link: function (scope, element, attributes) {

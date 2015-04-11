@@ -1,10 +1,10 @@
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            cuToggleStyleAttributeOnHover
+ * @name            toggleStyleOnHover
  *
  * @description
- * Defines the 'officeuiToggleStyleAttributeOnHover' directive. This directive allows us to add or remove a specific
+ * Defines the 'toggleStyleOnHover' directive. This directive allows us to add or remove a specific
  * style on an element when we hover on it.
  *
  * @example
@@ -28,11 +28,11 @@
  * If it isn't a valid Json string, an error will be throwed.
  * The added class will only be removed when the element doesn't have a class named 'active'.
  */
-OfficeUI.directive('cuToggleStyleAttributeOnHover', function() {
+OfficeUI.directive('toggleStyleOnHover', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attributes){
-            var toggleStyleAttribute = attributes['cuToggleStyleAttributeOnHover'];
+            var toggleStyleAttribute = attributes['toggleStyleOnHover'];
             var toggleStyleAttributes = JSON.parse(toggleStyleAttribute)
 
             // Bind the mouse leave event handler.

@@ -1,12 +1,12 @@
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            officeuiTooltip
+ * @name            ribbonActionTooltip
  *
  * @description
  * Defines the 'officeuiTooltip' directive. This directive allows us to show a tooltip for a specific element.
  */
-OfficeUI.directive('officeuiTooltip', function () {
+OfficeUI.directive('ribbonActionTooltip', function () {
     return {
         restrict: 'A',
         link: function (scope, element, attributes) {
