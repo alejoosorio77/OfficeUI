@@ -1,12 +1,12 @@
 /**
  * @type            Directive
  * @usage           Attribute
- * @name            officeuiStopPropagation
+ * @name            stopPropagation
  *
  * @description
- * Defines the 'officeuiStopPropagation' directive. This directive allows us to stop propagating an event.
+ * Defines the 'stopPropagation' directive. This directive allows us to stop propagating an event.
  */
-OfficeUI.directive('officeuiStopPropagation', function () {
+OfficeUI.directive('stopPropagation', function () {
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
