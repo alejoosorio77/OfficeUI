@@ -27,7 +27,7 @@
     { "name": "Tree Rings", "stylesheet": "/Resources/Stylesheets/Themes/Tree-Rings/OfficeUI.Themes.Tree-Rings.min.css" },
     { "name": "Underwater", "stylesheet": "/Resources/Stylesheets/Themes/Underwater/OfficeUI.Themes.Underwater.min.css" }
   ],
-  "DefaultTheme": "Geometry",
+  "DefaultTheme": "Circuit",
 
   "Configuration": "/Resources/Data/Application.json",
   "Controls":

@@ -67,8 +67,32 @@
   @media screen and (max-width: $width) { @content; }
 }
 
+/* ====================================================================================================
+ * Mixin:         Debugging
+ *
+ * Description:   This mixin allows us to provide debugging by adding a red border to the element on
+ *                which this mixin is applied.
+ * ==================================================================================================== */
+@mixin debug { border: 1px solid red !important; }
 
+/* ====================================================================================================
+ * Mixin:         Animation
+ *
+ * Description:   This mixin allows us to write animations in an easy way.
+ * ==================================================================================================== */
+@mixin animation($duration, $name, $delay, $repeation-mode) {
+  @if ($delay == "") {
+    -moz-animation-duration: $duration; -ms-animation-duration: $duration; -o-animation-duration: $duration; -webkit-animation-duration: $duration; animation-duration: $duration;
+    -moz-animation-name: $name; -ms-animation-name: $name; -o-animation-name: $name; -webkit-animation-name: $name; animation-name: $name;
 
+    @if ($repeation-mode == "NoRepeat") { -moz-animation-fill-mode: forwards; -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards; }
+    @if ($repeation-mode == "Infinite") { -moz-animation-iteration-count: infinite; -ms-animation-iteration-count: infinite; -o-animation-iteration-count: infinite; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; }
+  }
+}
+
+@mixin animation-delay($time) { -moz-animation-delay: $time; -ms-animation-delay: $time; -o-animation-delay: $time; -webkit-animation-delay: $time; animation-delay: $time; }
+@mixin animation-direction-normal { -moz-animation-direction: normal; -ms-animation-direction: normal; -o-animation-direction: normal; -webkit-animation-direction: normal; animation-direction: normal; }
+@mixin keyframes($name) { @-moz-keyframes #{$name} { @content; } @-ms-keyframes #{$name} { @content; } @-o-keyframes #{$name} { @content; } @-webkit-keyframes #{$name} { @content; } @keyframes #{$name} { @content; }}
 
 /* ---- Useful mixins. ---- */
 @mixin square-box($dimensions) { width: $dimensions; height: $dimensions; }
@@ -81,14 +105,6 @@
 /* -- Transformation mixins. -- */
 @mixin transform-scale($scale) { -moz-transform: scale($scale); -ms-transform: scale($scale); -o-transform: scale($scale); -webkit-transform: scale($scale); transform: scale($scale); }
 
-/* ---- Animation mixins. ---- */
-@mixin animation-duration($time) { -moz-animation-duration: $time; -ms-animation-duration: $time; -o-animation-duration: $time; -webkit-animation-duration: $time; animation-duration: $time; }
-@mixin animation-delay($time) { -moz-animation-delay: $time; -ms-animation-delay: $time; -o-animation-delay: $time; -webkit-animation-delay: $time; animation-delay: $time; }
-@mixin animation-name ($name) { -moz-animation-name: $name; -ms-animation-name: $name; -o-animation-name: $name; -webkit-animation-name: $name; animation-name: $name; }
-@mixin animation-iteration-infinite { -moz-animation-iteration-count: infinite; -ms-animation-iteration-count: infinite; -o-animation-iteration-count: infinite; -webkit-animation-iteration-count: infinite; animation-iteration-count: infinite; }
-@mixin animation-no-repeat { -webkit-animation-fill-mode: forwards; -moz-animation-fill-mode: forwards; animation-fill-mode: forwards; }
-@mixin animation-direction-normal { -moz-animation-direction: normal; -ms-animation-direction: normal; -o-animation-direction: normal; -webkit-animation-direction: normal; animation-direction: normal; }
-@mixin keyframes($name) { @-moz-keyframes #{$name} { @content; } @-ms-keyframes #{$name} { @content; } @-o-keyframes #{$name} { @content; } @-webkit-keyframes #{$name} { @content; } @keyframes #{$name} { @content; }}
 
 
 

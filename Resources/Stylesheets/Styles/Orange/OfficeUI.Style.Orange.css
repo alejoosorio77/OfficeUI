@@ -52,10 +52,20 @@
  *
  * Description:   This mixin allows us to add responsive design in an easy way.
  * ==================================================================================================== */
+/* ====================================================================================================
+ * Mixin:         Debugging
+ *
+ * Description:   This mixin allows us to provide debugging by adding a red border to the element on
+ *                which this mixin is applied.
+ * ==================================================================================================== */
+/* ====================================================================================================
+ * Mixin:         Animation
+ *
+ * Description:   This mixin allows us to write animations in an easy way.
+ * ==================================================================================================== */
 /* ---- Useful mixins. ---- */
 /* -- Positioning mixins. -- */
 /* -- Transformation mixins. -- */
-/* ---- Animation mixins. ---- */
 /* ====================================================================================================
  * Filename:      OfficeUI.Orange.Variables.scss
  * Author:        Kevin De Coninck
