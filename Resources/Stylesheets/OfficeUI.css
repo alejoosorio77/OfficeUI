@@ -124,6 +124,12 @@ html, body {
   height: 22px;
   padding-left: 3px; }
 
+.tabs-content-hidden-no-animation {
+  top: -93px; }
+
+.ribbon-hidden-no-animation {
+  top: 50px !important; }
+
 /* ---- Animations: Required to animate the various parts in an OfficeUI application. ---- */
 /* -- Spinning circle, used for the loading page. -- */
 #OfficeUI .spinner-circle {

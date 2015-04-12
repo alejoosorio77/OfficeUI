@@ -20,7 +20,7 @@
                 <li class="tab-group displayInlineBlock" data-ng-repeat="tab in Tabs">
                     <ul>
                         <li class="tab tab-label" id="{{tab.Id}}"
-                            data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden')}"
+                            data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden') && !InitializeServiceCall('Ribbon', 'isRibbonHiddenInitialized')}"
                             data-ng-click="!$first && InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)">
                             <span>{{tab.Label}}</span>
                         </li>
@@ -36,7 +36,7 @@
                     </div>
 
                     <ul>
-                        <li class="tab tab-label displayInlineBlock" id="{{tab.Id}}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden')}"
+                        <li class="tab tab-label displayInlineBlock" id="{{tab.Id}}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden') && !InitializeServiceCall('Ribbon', 'isRibbonHiddenInitialized')}"
                             data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-repeat="tab in contextualGroup.Tabs"
                             data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}"
                             data-toggle-style-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}'>
@@ -48,7 +48,7 @@
 
             <!-- Defines the content of the ribbon element. -->
             <ul class="tabs-content"
-                data-ng-class="{'tabs-content-hidden': InitializeServiceCall('Ribbon', 'isRibbonHidden'), 'tabs-content-visible': InitializeServiceCall('Ribbon', 'isRibbonVisible')}"
+                data-ng-class="{'tabs-content-hidden-no-animation': InitializeServiceCall('Ribbon', 'isRibbonHiddenInitialized'), 'tabs-content-hidden': InitializeServiceCall('Ribbon', 'isRibbonHidden'), 'tabs-content-visible': InitializeServiceCall('Ribbon', 'isRibbonVisible')}"
                 data-ribbon-scroll data-stop-propagation="click">
 
                 <!-- Defines the contents of the normal tabs. -->

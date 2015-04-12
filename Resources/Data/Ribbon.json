@@ -1,7 +1,8 @@
 {
   "Configuration": [
     {
-      "PreserveSelectedRibbonTab": "True"
+      "PreserveSelectedRibbonTab": "True",
+      "PreserveRibbonState": "True"
     }
   ],
   "Tabs":

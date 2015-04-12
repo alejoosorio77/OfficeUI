@@ -32,7 +32,7 @@
  * When you do change any of the dependent files, you should also touch this file to make sure that the combined version
  * is the latest version.
  */
-
+ 
 /**
  * @type            Module
  * @name            OfficeUI
@@ -777,15 +777,17 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
 
     // Defines the constants which are needed for this controller.
     const COOKIE_NAME_LATEST_SELECTED_TAB = 'OfficeUIRibbon_SelectedTab';
+    const COOKIE_NAME_RIBBON_STATE = 'OfficeUIRibbon_State';
 
     // Defines the various states that a ribbon can have.
-    var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3, Showed_Initialized: 99 }
+    var ribbonStates = { Hidden: 1, Visible: 2, Showed: 3, Hidden_Initialized: 98, Showed_Initialized: 99 }
 
     // Defines all the variables which are needed for this control.
     var preserveSelectedRibbonTab;
+    var preserveRibbonState;
     var activeTab;
     var activeContextualGroups = [];
-    var ribbonState = ribbonStates.Showed_Initialized;
+    var ribbonState;
 
     /**
      * @type                Function
@@ -821,6 +823,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
 
                 // Sets a boolean that indicates wether or not the latest selected tab should be preserved.
                 preserveSelectedRibbonTab = response.data.Configuration[0].PreserveSelectedRibbonTab == 'True';
+                preserveRibbonState = response.data.Configuration[0].PreserveRibbonState == 'True';
 
                 // Sets the correct properties to the scope.
                 $rootScope.Tabs = response.data.Tabs;
@@ -833,10 +836,17 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
 
                     // When the latest known tab is an empty string, meaning that the cookie didn't exist, then select
                     // the first non-application tab.
-                    if (latestKnownTab == '') {OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[1].Id); }
-                    else { OfficeUIRibbonControlServiceObject.setActiveTab(latestKnownTab); }
+                    if (latestKnownTab == '') {OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[1].Id, true); }
+                    else { OfficeUIRibbonControlServiceObject.setActiveTab(latestKnownTab, true); }
                 }
-                else { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[1].Id); }
+                else { OfficeUIRibbonControlServiceObject.setActiveTab($rootScope.Tabs[1].Id, true); }
+
+                // Based on the fact if the ribbon state should be preserved or not, initialize the ribbon correctly.
+                if (preserveRibbonState) {
+                    if (typeof OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_STATE) !== 'undefined' && OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_STATE) != '') {
+                        ribbonState = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_STATE);
+                    } else { ribbonState = ribbonStates.Showed_Initialized; }
+                }
 
                 // Gets all the images which are defined in the ribbon.
                 // Images can be stored in either a 'Tab' element of in a 'ContextualGroup' element.
@@ -880,11 +890,24 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      *
      * @description         Set a tab as the active tab.
      *
-     * @param               tabId:      The id of the tab to set as active.
+     * @param               tabId:          The id of the tab to set as active.
      */
-    OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) {
+    OfficeUIRibbonControlServiceObject.setActiveTab = function(tabId) { setActiveTab(tabId, false); }
+
+    /**
+     * @type                Function
+     * @name                setActiveTab
+     *
+     * @description         Set a tab as the active tab.
+     *
+     * @param               tabId:          The id of the tab to set as active.
+     * @param               initializing:   A boolean that indicates that the ribbon is being initialized.
+     */
+    setActiveTab = function(tabId, initializing) {
         // Set the ribbon state as being showed when it was hidden.
-        if (ribbonState == ribbonStates.Hidden) { ribbonState = ribbonStates.Visible; }
+        if (!initializing) {
+            if (ribbonState == ribbonStates.Hidden) { ribbonState = ribbonStates.Visible; }
+        }
 
         // Get all the tabs, except the first one.
         // We use the JSON.parse method here to create a new deep-copy of the array, not related to the first one.
@@ -1144,6 +1167,19 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
 
     /**
      * @type            Function
+     * @name            isRibbonHiddenInitialized
+     *
+     * @description.
+     * Check's if the ribbon is initialized.
+     *
+     * @returns         {boolean}   True if it's initialized, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.isRibbonHiddenInitialized = function() {
+        return ribbonState == ribbonStates.Hidden_Initialized;
+    }
+
+    /**
+     * @type            Function
      * @name            toggleRibbonState
      *
      * @description.
@@ -1152,8 +1188,15 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      * If the ribbon is visible, then rhe ribbon does become showed.
      */
     OfficeUIRibbonControlServiceObject.toggleRibbonState = function() {
-        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) { ribbonState = ribbonStates.Hidden; }
-        if (ribbonState == ribbonStates.Visible) { ribbonState = ribbonStates.Showed; }
+        if (ribbonState == ribbonStates.Showed || ribbonState == ribbonStates.Showed_Initialized) {
+            OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_STATE, ribbonStates.Hidden_Initialized, 365);
+            ribbonState = ribbonStates.Hidden;
+        }
+        if (ribbonState == ribbonStates.Visible)
+        {
+            OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_STATE, ribbonStates.Showed_Initialized, 365);
+            ribbonState = ribbonStates.Showed;
+        }
     }
 
     /**
