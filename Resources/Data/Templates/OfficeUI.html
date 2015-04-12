@@ -36,7 +36,7 @@
                     </div>
 
                     <ul>
-                        <li class="tab tab-label" id="{{tab.Id}}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id)}"
+                        <li class="tab tab-label" id="{{tab.Id}}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden')}"
                             data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-repeat="tab in contextualGroup.Tabs"
                             data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}"
                             data-toggle-style-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}'>
