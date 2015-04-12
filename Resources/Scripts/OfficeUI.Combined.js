@@ -785,6 +785,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
     // Defines all the variables which are needed for this control.
     var preserveSelectedRibbonTab;
     var preserveRibbonState;
+    var previousRibbonState = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_STATE) == ribbonStates.Hidden_Initialized;
     var activeTab;
     var activeContextualGroups = [];
     var ribbonState;
@@ -906,7 +907,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
     setActiveTab = function(tabId, initializing) {
         // Set the ribbon state as being showed when it was hidden.
         if (!initializing) {
-            if (ribbonState == ribbonStates.Hidden) { ribbonState = ribbonStates.Visible; }
+            if (ribbonState == ribbonStates.Hidden || ribbonState == ribbonStates.Hidden_Initialized) { ribbonState = ribbonStates.Visible; }
         }
 
         // Get all the tabs, except the first one.
@@ -1176,6 +1177,19 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
      */
     OfficeUIRibbonControlServiceObject.isRibbonHiddenInitialized = function() {
         return ribbonState == ribbonStates.Hidden_Initialized;
+    }
+
+    /**
+     * @type            Function
+     * @name            wasRibbonHiddenInitialized
+     *
+     * @description.
+     * Check's if the ribbon was initialized.
+     *
+     * @returns         {boolean}   True if it's initialized, false otherwise.
+     */
+    OfficeUIRibbonControlServiceObject.wasRibbonHiddenInitialized = function() {
+        return previousRibbonState;
     }
 
     /**
