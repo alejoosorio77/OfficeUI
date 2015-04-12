@@ -1,11 +1,11 @@
-<div class="group" data-ng-repeat-start="group in tab.Groups">
-    <div class="area" data-ng-repeat="area in group.Areas">
+<div class="group displayInlineBlock" data-ng-repeat-start="group in tab.Groups">
+    <div class="area displayInlineBlock" data-ng-repeat="area in group.Areas">
         <div class="actions-holder" data-ng-class="{'displayBlock': action.Type == 'sIcon', 'displayInlineBlock': action.Type == 'bIcon'}" data-ng-repeat="action in area.Actions">
 
             <!-- This is what is being rendered if it's a big icon. -->
             <div class="big-icon-holder" data-ng-class="{'disabled': action.Disabled == 'True'}" data-ng-if="action.Type == 'bIcon'" data-ribbon-action-tooltip="{'action': action.Id}">
 
-                <a data-ng-href="{{action.Uri}}">
+                <a data-ng-href="{{action.Uri}}" class="displayBlock">
                     <div class="icon big-icon" id="{{action.Id}}" data-ng-class="{'disabled': action.Disabled == 'True'}" toggle-class-on-click="active" >
                         <img data-ng-src="{{action.Resource}}" />
                         <div class="label" data-ng-bind-html="action |actionLegend"></div>
@@ -14,11 +14,11 @@
             </div>
 
             <!-- This is what is being rendered if it's a small icon. -->
-            <div class="small-icon-holder" data-ng-class="{'disabled': action.Disabled == 'True'}" data-ng-if="action.Type == 'sIcon'" data-ribbon-action-tooltip="{'action': action.Id}">
+            <div class="small-icon-holder displayBlock" data-ng-class="{'disabled': action.Disabled == 'True'}" data-ng-if="action.Type == 'sIcon'" data-ribbon-action-tooltip="{'action': action.Id}">
                 <a data-ng-href="{{action.Uri}}" >
-                    <div class="icon small-icon" id="{{action.Id}}" data-ng-class="{'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}" toggle-class-on-click="active">
+                    <div class="icon small-icon displayInlineBlock" id="{{action.Id}}" data-ng-class="{'disabled': action.Disabled == 'True', 'active': isMenuActive(action.Id)}" toggle-class-on-click="active">
                         <img data-ng-src="{{action.Resource}}" />
-                        <div class="label" data-ng-bind-html="action |actionLegend"></div>
+                        <div class="label displayInlineBlock" data-ng-bind-html="action |actionLegend"></div>
                     </div>
                 </a>
             </div>
@@ -46,7 +46,7 @@
 </div>
 
 <!-- Defines the vertical 'pipe' sign. -->
-<div class="pipe" data-ng-repeat-end></div>
+<div class="pipe displayInlineBlock" data-ng-repeat-end></div>
 
 <div class="icon collapse" toggle-class-on-click="active" data-ng-click="InitializeServiceCall('Ribbon', 'toggleRibbonState');">
     <img alt="Toggle Ribbon State" class="pin-icon" src="/Resources/Images/Ribbon/Functionalities/Collapse.png" data-ng-if="InitializeServiceCall('Ribbon', 'isRibbonShowed') || InitializeServiceCall('Ribbon', 'isRibbonInitialized')"/>

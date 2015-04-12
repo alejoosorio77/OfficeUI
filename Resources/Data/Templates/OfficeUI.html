@@ -17,7 +17,7 @@
         <!-- Defines the ribbon element. -->
         <div class="ribbon no-select">
             <ul class="tabs" data-stop-propagation="click" data-ribbon-scroll>
-                <li class="tab-group" data-ng-repeat="tab in Tabs">
+                <li class="tab-group displayInlineBlock" data-ng-repeat="tab in Tabs">
                     <ul>
                         <li class="tab tab-label" id="{{tab.Id}}"
                             data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden')}"
@@ -27,7 +27,7 @@
                     </ul>
                 </li>
 
-                <li class="contextual-tab-group" id="{{contextualGroup.Id}}"
+                <li class="contextual-tab-group displayInlineBlock" id="{{contextualGroup.Id}}"
                     data-ng-repeat="contextualGroup in ContextualGroups" data-ng-show="InitializeServiceCall('Ribbon', 'isContextualGroupActive', contextualGroup.Id)"
                     data-ng-style="{'background-color': contextualGroup.GroupColor}">
                     <div class="accent" data-ng-style="{'background-color': contextualGroup.AccentColor}" >&nbsp;</div>
@@ -36,7 +36,7 @@
                     </div>
 
                     <ul>
-                        <li class="tab tab-label" id="{{tab.Id}}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden')}"
+                        <li class="tab tab-label displayInlineBlock" id="{{tab.Id}}" data-ng-class="{active: InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden')}"
                             data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)" data-ng-repeat="tab in contextualGroup.Tabs"
                             data-ng-style="{'color' : InitializeServiceCall('Ribbon', 'setActiveTabColor', [ tab.Id, contextualGroup.GroupTextColor ])}"
                             data-toggle-style-on-hover='{"color": "{{contextualGroup.GroupTextColor}}"}'>

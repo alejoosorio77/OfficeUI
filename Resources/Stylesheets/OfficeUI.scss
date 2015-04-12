@@ -8,20 +8,6 @@
  *                This file will contain the styling for icons, actions, ribbon, buttons and a lot
  *                of other elements. However, there are references with other files to make sure that
  *                that we can use various styles and other elements.
- *
- * Remarks:       Some features have been included in order to help debugging stylesheets.
- *                The following 'debugging' features have been included:
- *                  - Css class (debug):  When you do apply this class on an element, the element
- *                                        itself will receive a dotted red border around it.
- *
- *                Some parts of the application does highly lean on the z-index property in order to
- *                show elements at the correct level. Therefore, all the elements which rely on a
- *                z-index property are showed below (highest z-index first, lowest latest).
- *                  - Application Icons (300) .
- *                  - Application Title (200).
- *                  - Ribbon Tabs (150).
- *                  - Header (100).
- *                  - Tabs Content (30).
 ======================================================================================================= */
 
 /* ---- Import Statements. ---- */
@@ -50,21 +36,65 @@ html, body { height: 100%; font-size: 1em; }
 #OfficeUI input { border-color: $color-default-gray; }
 #OfficeUI input[type="text"] { border: 1px solid $color-default-gray; font-family: 'Segoe UI', arial, sans-serif; font-size: 1em; height: 22px; padding-left: 3px; }
 
-/* ---- Usefull OfficeUI classes. Classes which can be placed on various elements. ---- */
-#OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; height: 100px; }
+/* ---- Animations: Required to animate the various parts in an OfficeUI application. ---- */
+
+  /* -- Spinning circle, used for the loading page. -- */
+  #OfficeUI .spinner-circle
+  {
+    @include transform-scale(0.5); @include square-box(70px); margin-left: auto; margin-right: auto; position: relative;
+
+    .animation-image { @include animation-duration(1.2s); @include animation-name(fade-circle); @include border-radius(5px); @include animation-iteration-infinite; @include animation-direction-normal; @include square-box(10px); background-color: #fff; position: absolute; }
+    .animate-step-01 { @include animation-delay(0.45s); @include top-left-position(0, 30px); }
+    .animate-step-02 { @include animation-delay(0.60s); @include top-left-position(10px, 50px); }
+    .animate-step-03 { @include animation-delay(0.75s); @include top-left-position(30px, 60px); }
+    .animate-step-04 { @include animation-delay(0.90s); @include top-left-position(50px, 50px); }
+    .animate-step-05 { @include animation-delay(1.05s); @include top-left-position(60px, 30px); }
+    .animate-step-06 { @include animation-delay(1.20s); @include top-left-position(50px, 10px); }
+    .animate-step-07 { @include animation-delay(1.35s); @include top-left-position(30px, 0px); }
+    .animate-step-08 { @include animation-delay(1.50s); @include top-left-position(10px, 10px); }
+
+    // Provides the animation itself.
+    @include keyframes(fade-circle) {
+      0% { background-color: #fff; }
+      100% { background-color: #fff; }
+    }
+  }
+
+  /* -- Hide the ribbon by moving it up. -- */
+  #OfficeUI .tabs-content-hidden { @include animation-duration(0.5s); @include animation-name(hide-ribbon); @include animation-no-repeat;
+    @include keyframes(hide-ribbon) { 0% { top: 0; } 100% { top: -93px; }}
+  }
+
+  /* -- Show the ribbon by moving it down. -- */
+  #OfficeUI .tabs-content-visible { @include animation-duration(0.5s); @include animation-name(show-ribbon); @include animation-no-repeat;
+    @include keyframes(show-ribbon) { 0% { top: -93px; } 100% { top: 0; }}
+  }
+
+  /* -- Move the contents of the website up, this is done when the ribbon is hidden. -- */
+  #OfficeUI .ribbon-showed { @include animation-duration(0.5s); @include animation-name(moveContentsDown); @include animation-no-repeat;
+    @include keyframes(moveContentsDown) { 0% { top: 50px; } 100% { top: 143px; }}
+  }
+
+  /* -- Move the contents of the website dwon, this is done when the ribbon is being showed. -- */
+  #OfficeUI .ribbon-hidden { @include animation-duration(0.5s); @include animation-name(moveContentsUp); @include animation-no-repeat;
+    @include keyframes(moveContentsUp) { 0% { top: 143px; } 100% { top: 50px; }}
+  }
+
+/* ---- General classes, classes which are being used on various elements. ---- */
 #OfficeUI .no-select { @include no-select }
 #OfficeUI .disabled { opacity: 0.5; pointer-events: none; }
 #OfficeUI .displayBlock { display: block; }
 #OfficeUI .displayInlineBlock { display: inline-block; }
-
-/* ---- General classes which are used to position elements. ----*/
 #OfficeUI .center-screen { left: 50%; position: fixed; top: 30%; transform: translate(-50%, -50%); }
+
+/* ---- Usefull OfficeUI classes. Classes which can be placed on various elements. ---- */
+#OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; height: 100px; }
 
 /* ---- Defines the 'loading' and displaying' area. ---- */
 #OfficeUI .loading-area { left: 50%; position: fixed; top: 30%; text-align: center; transform: translate(-50%, -30%); width: 100%; }
 #OfficeUI .loading-wrapper { margin: 20px 0 20px 0; }
 #OfficeUI .loading-area h1 { font-size: 3.0628em; font-weight: 200; line-height: 1em; }
-#OfficeUI .loading-area h1 .registered { display: inline-block; font-size: 0.25em; line-height: 1em; margin-top: 10px; vertical-align: top; }
+#OfficeUI .loading-area h1 .registered { font-size: 0.25em; line-height: 1em; margin-top: 10px; vertical-align: top; }
 #OfficeUI .loading-area .status-message { font-size: 0.75em; }
 #OfficeUI .loading-area .status-message span { @include animation-duration(1s); @include animation-name(animating-loading-text); @include animation-iteration-infinite; }
 #OfficeUI .loading-area .status-message span:nth-child(1) { @include animation-delay(100ms); }
@@ -87,7 +117,6 @@ html, body { height: 100%; font-size: 1em; }
 #OfficeUI .ribbon { position: absolute; top: 0; width: 100%; }
 #OfficeUI .ribbon a, #OfficeUI .ribbon a:hover, #OfficeUI .ribbon a:active { color: #444; }
 #OfficeUI .ribbon .tabs { border-bottom: 1px solid $color-default-gray; height: 50px; position: relative; z-index: 150; }
-#OfficeUI .ribbon .tabs li { display: inline-block; }
 #OfficeUI .ribbon .tabs .tab-group { position: relative; top: 25px; }
 #OfficeUI .ribbon .tabs .tab-label, #OfficeUI .ribbon .tabs .group-label { padding: 0 13px 0 12px; text-align: center; text-transform: uppercase; }
 #OfficeUI .ribbon .tab { height: 25px; line-height: 25px; }
@@ -105,26 +134,26 @@ html, body { height: 100%; font-size: 1em; }
 #OfficeUI .ribbon .tabs-content { border-bottom: 1px solid $color-default-gray; height: 93px; position: relative; z-index: 10; background-color: white; }
 
 /* -- Groups. --*/
-#OfficeUI .ribbon .group { display: inline-block; height: 85px; margin-left: 4px; margin-top: 3px; min-width: 30px; position: relative; vertical-align: top; }
+#OfficeUI .ribbon .group { height: 85px; margin-left: 4px; margin-top: 3px; min-width: 30px; position: relative; vertical-align: top; }
 #OfficeUI .ribbon .group .legend { height: 12px; bottom: 0; color: #666; font-size: 0.9em; overflow: hidden; position: absolute; text-align: center; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
-#OfficeUI .ribbon .pipe { border-right: 1px solid #d4d4d4; display: inline-block; height: 84px; margin-left: 1px; margin-top: 4px; vertical-align: top; }
+#OfficeUI .ribbon .pipe { border-right: 1px solid #d4d4d4; height: 84px; margin-left: 1px; margin-top: 4px; vertical-align: top; }
 #OfficeUI .ribbon .collapse { bottom: 0; height: 17px; padding-top: 2px; position: absolute; right: 0; text-align: center; width: 29px; }
 
 /* -- Areas -- */
-#OfficeUI .ribbon .group .area { display: inline-block; vertical-align: top; }
+#OfficeUI .ribbon .group .area { vertical-align: top; }
 #OfficeUI .ribbon .group .area .actions-holder { position: relative; }
 
 /* -- Actions. -- */
 #OfficeUI .ribbon .actions-holder { vertical-align: top; }
-#OfficeUI .ribbon .actions-holder .icon { display: inline-block; height: 69px; margin-right: 0; padding-top: 3px; vertical-align: top; }
+#OfficeUI .ribbon .actions-holder .icon { height: 69px; margin-right: 0; padding-top: 3px; vertical-align: top; }
 #OfficeUI .ribbon .actions-holder .icon img { padding: 0 5px 0 5px; }
 #OfficeUI .ribbon .actions-holder .big-icon-holder { height: 68px;}
-#OfficeUI .ribbon .actions-holder .big-icon-holder a { display: block; height: 100%; }
+#OfficeUI .ribbon .actions-holder .big-icon-holder a { height: 100%; }
 #OfficeUI .ribbon .actions-holder .big-icon { text-align: center; }
 #OfficeUI .ribbon .actions-holder .big-icon .label { line-height: 16px; padding-left: 2px; padding-right: 2px; padding-top: 1px; position: relative; text-align: center; top: 0px; }
-#OfficeUI .ribbon .actions-holder .small-icon-holder { display: block; height: 23px; }
+#OfficeUI .ribbon .actions-holder .small-icon-holder { height: 23px; }
 #OfficeUI .ribbon .actions-holder .small-icon { height: 100%; margin-right: 0; padding: 3px 7px 0 0; text-align: left; }
-#OfficeUI .ribbon .actions-holder .small-icon .label { display: inline-block; padding-top: 3px; text-align: left; vertical-align: top; }
+#OfficeUI .ribbon .actions-holder .small-icon .label { padding-top: 3px; text-align: left; vertical-align: top; }
 #OfficeUI .ribbon .actions-holder .small-icon img { padding: 0 0 0 3px; }
 #OfficeUI .ribbon .actions-holder .dropdown-holder { margin-bottom: 2px; }
 
@@ -137,58 +166,7 @@ html, body { height: 100%; font-size: 1em; }
 #OfficeUI .site-container { font-size: 0.75em; padding: 10px; padding-left: 50px; position: absolute; top: 143px; width: 100%; }
 #OfficeUI .site-container p { margin-bottom: 20px; }
 #OfficeUI .site-container h1 { font-size: 2.25em; line-height: normal; padding-bottom: 10px; }
-#OfficeUI .site-container .link { display: inline-block; margin-right: 40px; height: 20px; }
-
-/* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
-#OfficeUI .spinner-circle
-{
-  @include transform-scale(0.5); @include square-box(70px); margin-left: auto; margin-right: auto; position: relative;
-
-  .animation-image { @include animation-duration(1.2s); @include animation-name(fade-circle); @include border-radius(5px); @include animation-iteration-infinite; @include animation-direction-normal; @include square-box(10px); background-color: #fff; position: absolute; }
-  .animate-step-01 { @include animation-delay(0.45s); @include top-left-position(0, 30px); }
-  .animate-step-02 { @include animation-delay(0.60s); @include top-left-position(10px, 50px); }
-  .animate-step-03 { @include animation-delay(0.75s); @include top-left-position(30px, 60px); }
-  .animate-step-04 { @include animation-delay(0.90s); @include top-left-position(50px, 50px); }
-  .animate-step-05 { @include animation-delay(1.05s); @include top-left-position(60px, 30px); }
-  .animate-step-06 { @include animation-delay(1.20s); @include top-left-position(50px, 10px); }
-  .animate-step-07 { @include animation-delay(1.35s); @include top-left-position(30px, 0px); }
-  .animate-step-08 { @include animation-delay(1.50s); @include top-left-position(10px, 10px); }
-
-  // Provides the animation itself.
-  @include keyframes(fade-circle) {
-    0% { background-color: #fff; }
-    100% { background-color: #fff; }
-  }
-}
-
-#OfficeUI .tabs-content-hidden { @include animation-duration(0.5s); @include animation-name(hide-ribbon); @include animation-no-repeat;
-  @include keyframes(hide-ribbon) {
-    0% { top: 0; }
-    100% { top: -93px; }
-  }
-}
-
-#OfficeUI .tabs-content-visible { @include animation-duration(0.5s); @include animation-name(show-ribbon); @include animation-no-repeat;
-  @include keyframes(show-ribbon) {
-    0% { top: -93px; }
-    100% { top: 0; }
-  }
-}
-
-#OfficeUI .ribbon-showed { @include animation-duration(0.5s); @include animation-name(moveContentsDown); @include animation-no-repeat;
-  @include keyframes(moveContentsDown) {
-    0% { top: 50px; }
-    100% { top: 143px; }
-  }
-}
-
-#OfficeUI .ribbon-hidden { @include animation-duration(0.5s); @include animation-name(moveContentsUp); @include animation-no-repeat;
-  @include keyframes(moveContentsUp) {
-    0% { top: 143px; }
-    100% { top: 50px; }
-  }
-}
-
+#OfficeUI .site-container .link { margin-right: 40px; height: 20px; }
 
 
 

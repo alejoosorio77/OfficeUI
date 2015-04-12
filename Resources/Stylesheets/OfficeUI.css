@@ -8,20 +8,6 @@
  *                This file will contain the styling for icons, actions, ribbon, buttons and a lot
  *                of other elements. However, there are references with other files to make sure that
  *                that we can use various styles and other elements.
- *
- * Remarks:       Some features have been included in order to help debugging stylesheets.
- *                The following 'debugging' features have been included:
- *                  - Css class (debug):  When you do apply this class on an element, the element
- *                                        itself will receive a dotted red border around it.
- *
- *                Some parts of the application does highly lean on the z-index property in order to
- *                show elements at the correct level. Therefore, all the elements which rely on a
- *                z-index property are showed below (highest z-index first, lowest latest).
- *                  - Application Icons (300) .
- *                  - Application Title (200).
- *                  - Ribbon Tabs (150).
- *                  - Header (100).
- *                  - Tabs Content (30).
 ======================================================================================================= */
 /* ---- Import Statements. ---- */
 /* ====================================================================================================
@@ -83,6 +69,9 @@ input[type="text"]:focus {
  *                the scss syntax.
 ======================================================================================================= */
 /* ---- Useful mixins. ---- */
+/* -- Positioning mixins. -- */
+/* -- Transformation mixins. -- */
+/* ---- Animation mixins. ---- */
 /* ---- Variables. ---- */
 /* ---- Fonts (Hacks): Required to render the Segoe UI Font Family entirely (light, Semilight, UI, Semibold, Bold, Italic & Bold Italic). ---- */
 @font-face {
@@ -135,384 +124,8 @@ html, body {
   height: 22px;
   padding-left: 3px; }
 
-/* ---- Usefull OfficeUI classes. Classes which can be placed on various elements. ---- */
-#OfficeUI {
-  color: #444;
-  font-family: 'Segoe UI', arial, sans-serif;
-  height: 100px; }
-
-#OfficeUI .no-select {
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  cursor: default;
-  user-select: none; }
-
-#OfficeUI .disabled {
-  opacity: 0.5;
-  pointer-events: none; }
-
-#OfficeUI .displayBlock {
-  display: block; }
-
-#OfficeUI .displayInlineBlock {
-  display: inline-block; }
-
-/* ---- General classes which are used to position elements. ----*/
-#OfficeUI .center-screen {
-  left: 50%;
-  position: fixed;
-  top: 30%;
-  transform: translate(-50%, -50%); }
-
-/* ---- Defines the 'loading' and displaying' area. ---- */
-#OfficeUI .loading-area {
-  left: 50%;
-  position: fixed;
-  top: 30%;
-  text-align: center;
-  transform: translate(-50%, -30%);
-  width: 100%; }
-
-#OfficeUI .loading-wrapper {
-  margin: 20px 0 20px 0; }
-
-#OfficeUI .loading-area h1 {
-  font-size: 3.0628em;
-  font-weight: 200;
-  line-height: 1em; }
-
-#OfficeUI .loading-area h1 .registered {
-  display: inline-block;
-  font-size: 0.25em;
-  line-height: 1em;
-  margin-top: 10px;
-  vertical-align: top; }
-
-#OfficeUI .loading-area .status-message {
-  font-size: 0.75em; }
-
-#OfficeUI .loading-area .status-message span {
-  -moz-animation-duration: 1s;
-  -ms-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -moz-animation-name: animating-loading-text;
-  -ms-animation-name: animating-loading-text;
-  -o-animation-name: animating-loading-text;
-  -webkit-animation-name: animating-loading-text;
-  animation-name: animating-loading-text;
-  -moz-animation-iteration-count: infinite;
-  -ms-animation-iteration-count: infinite;
-  -o-animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite; }
-
-#OfficeUI .loading-area .status-message span:nth-child(1) {
-  -moz-animation-delay: 100ms;
-  -ms-animation-delay: 100ms;
-  -o-animation-delay: 100ms;
-  -webkit-animation-delay: 100ms;
-  animation-delay: 100ms; }
-
-#OfficeUI .loading-area .status-message span:nth-child(2) {
-  -moz-animation-delay: 300ms;
-  -ms-animation-delay: 300ms;
-  -o-animation-delay: 300ms;
-  -webkit-animation-delay: 300ms;
-  animation-delay: 300ms; }
-
-#OfficeUI .loading-area .status-message span:nth-child(3) {
-  -moz-animation-delay: 500ms;
-  -ms-animation-delay: 500ms;
-  -o-animation-delay: 500ms;
-  -webkit-animation-delay: 500ms;
-  animation-delay: 500ms; }
-
-@-moz-keyframes animating-loading-text {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 100; } }
-@-ms-keyframes animating-loading-text {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 100; } }
-@-o-keyframes animating-loading-text {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 100; } }
-@-webkit-keyframes animating-loading-text {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 100; } }
-@keyframes animating-loading-text {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 100; } }
-/* ---- Styling for the OfficeUI application. ---- */
-#OfficeUI .application {
-  font-size: 0.75em; }
-
-#OfficeUI .application header {
-  height: 142px;
-  z-index: 100; }
-
-#OfficeUI .application header .application-title {
-  height: 22px;
-  padding: 8px 2px 0 0;
-  position: relative;
-  text-align: center;
-  z-index: 200; }
-
-#OfficeUI .application header .application-icons {
-  margin-left: 5px;
-  position: absolute;
-  z-index: 300; }
-
-#OfficeUI .application header .application-icons .icon {
-  margin: 0 5px 0 2px; }
-
-#OfficeUI .application header .application-icons .icon:not(.application-icon) {
-  margin-right: 6px; }
-
-#OfficeUI .ribbon {
-  position: absolute;
-  top: 0;
-  width: 100%; }
-
-#OfficeUI .ribbon a, #OfficeUI .ribbon a:hover, #OfficeUI .ribbon a:active {
-  color: #444; }
-
-#OfficeUI .ribbon .tabs {
-  border-bottom: 1px solid #d4d4d4;
-  height: 50px;
-  position: relative;
-  z-index: 150; }
-
-#OfficeUI .ribbon .tabs li {
-  display: inline-block; }
-
-#OfficeUI .ribbon .tabs .tab-group {
-  position: relative;
-  top: 25px; }
-
-#OfficeUI .ribbon .tabs .tab-label, #OfficeUI .ribbon .tabs .group-label {
-  padding: 0 13px 0 12px;
-  text-align: center;
-  text-transform: uppercase; }
-
-#OfficeUI .ribbon .tab {
-  height: 25px;
-  line-height: 25px; }
-
-#OfficeUI .ribbon .tab-application {
-  background-image: none;
-  border: 1px solid transparent;
-  color: #fff;
-  margin-right: 4px;
-  min-width: 59px;
-  padding: 0 3px 0 2px; }
-
-#OfficeUI .ribbon .tab.active {
-  background: #fff;
-  border: 1px solid #d4d4d4;
-  border-bottom-color: #fff; }
-
-#OfficeUI .ribbon .tab:not(.active) {
-  border: 1px solid transparent;
-  border-bottom-color: #d4d4d4; }
-
-#OfficeUI .ribbon .tabs .accent {
-  height: 4px; }
-
-#OfficeUI .ribbon .tabs .contextual-tab-group {
-  height: 50px;
-  margin-right: 6px;
-  vertical-align: top; }
-
-#OfficeUI .ribbon .tabs .contextual-tab-group ul {
-  display: table;
-  position: relative;
-  width: 100%; }
-
-#OfficeUI .ribbon .tabs .contextual-tab-group ul li {
-  display: table-cell;
-  line-height: 23px; }
-
-#OfficeUI .ribbon .tabs .contextual-tab-group ul li span {
-  padding-right: 13px;
-  padding-left: 12px;
-  position: relative;
-  top: 1px; }
-
-#OfficeUI .ribbon .tabs .contextual-tab-group .group-label {
-  font-size: 0.9em;
-  height: 17px;
-  margin-top: 4px; }
-
-#OfficeUI .ribbon .tabs-content {
-  border-bottom: 1px solid #d4d4d4;
-  height: 93px;
-  position: relative;
-  z-index: 10;
-  background-color: white; }
-
-/* -- Groups. --*/
-#OfficeUI .ribbon .group {
-  display: inline-block;
-  height: 85px;
-  margin-left: 4px;
-  margin-top: 3px;
-  min-width: 30px;
-  position: relative;
-  vertical-align: top; }
-
-#OfficeUI .ribbon .group .legend {
-  height: 12px;
-  bottom: 0;
-  color: #666;
-  font-size: 0.9em;
-  overflow: hidden;
-  position: absolute;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%; }
-
-#OfficeUI .ribbon .pipe {
-  border-right: 1px solid #d4d4d4;
-  display: inline-block;
-  height: 84px;
-  margin-left: 1px;
-  margin-top: 4px;
-  vertical-align: top; }
-
-#OfficeUI .ribbon .collapse {
-  bottom: 0;
-  height: 17px;
-  padding-top: 2px;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  width: 29px; }
-
-/* -- Areas -- */
-#OfficeUI .ribbon .group .area {
-  display: inline-block;
-  vertical-align: top; }
-
-#OfficeUI .ribbon .group .area .actions-holder {
-  position: relative; }
-
-/* -- Actions. -- */
-#OfficeUI .ribbon .actions-holder {
-  vertical-align: top; }
-
-#OfficeUI .ribbon .actions-holder .icon {
-  display: inline-block;
-  height: 69px;
-  margin-right: 0;
-  padding-top: 3px;
-  vertical-align: top; }
-
-#OfficeUI .ribbon .actions-holder .icon img {
-  padding: 0 5px 0 5px; }
-
-#OfficeUI .ribbon .actions-holder .big-icon-holder {
-  height: 68px; }
-
-#OfficeUI .ribbon .actions-holder .big-icon-holder a {
-  display: block;
-  height: 100%; }
-
-#OfficeUI .ribbon .actions-holder .big-icon {
-  text-align: center; }
-
-#OfficeUI .ribbon .actions-holder .big-icon .label {
-  line-height: 16px;
-  padding-left: 2px;
-  padding-right: 2px;
-  padding-top: 1px;
-  position: relative;
-  text-align: center;
-  top: 0px; }
-
-#OfficeUI .ribbon .actions-holder .small-icon-holder {
-  display: block;
-  height: 23px; }
-
-#OfficeUI .ribbon .actions-holder .small-icon {
-  height: 100%;
-  margin-right: 0;
-  padding: 3px 7px 0 0;
-  text-align: left; }
-
-#OfficeUI .ribbon .actions-holder .small-icon .label {
-  display: inline-block;
-  padding-top: 3px;
-  text-align: left;
-  vertical-align: top; }
-
-#OfficeUI .ribbon .actions-holder .small-icon img {
-  padding: 0 0 0 3px; }
-
-#OfficeUI .ribbon .actions-holder .dropdown-holder {
-  margin-bottom: 2px; }
-
-/* -- Tooltips. -- */
-#OfficeUI .ribbon .tooltip {
-  background-color: white;
-  background-image: none, linear-gradient(#c6c6c6, #c6c6c6);
-  background-position: 0 0, 100% 0;
-  background-repeat: no-repeat;
-  background-size: 1px 100%;
-  border: 1px solid #d4d4d4;
-  box-shadow: 3px 3px 3px #e0e0e0;
-  display: none;
-  position: fixed;
-  padding: 5px 11px;
-  top: 143px;
-  width: 220px; }
-
-#OfficeUI .ribbon .tooltip strong {
-  color: #5d5d5d;
-  font-weight: bold; }
-
-#OfficeUI .ribbon .tooltip p {
-  line-height: 15px;
-  margin: 0;
-  padding: 5px 0; }
-
-/* ---- Styling for the website beneath the OfficeUI ribbon control. ---- */
-#OfficeUI .site-container {
-  font-size: 0.75em;
-  padding: 10px;
-  padding-left: 50px;
-  position: absolute;
-  top: 143px;
-  width: 100%; }
-
-#OfficeUI .site-container p {
-  margin-bottom: 20px; }
-
-#OfficeUI .site-container h1 {
-  font-size: 2.25em;
-  line-height: normal;
-  padding-bottom: 10px; }
-
-#OfficeUI .site-container .link {
-  display: inline-block;
-  margin-right: 40px;
-  height: 20px; }
-
-/* ---- Preloaders (CSS animations instead of a GIF image to indicate that something is loading. */
+/* ---- Animations: Required to animate the various parts in an OfficeUI application. ---- */
+/* -- Spinning circle, used for the loading page. -- */
 #OfficeUI .spinner-circle {
   -moz-transform: scale(0.5);
   -ms-transform: scale(0.5);
@@ -643,6 +256,7 @@ html, body {
     background-color: #fff; }
   100% {
     background-color: #fff; } }
+/* -- Hide the ribbon by moving it up. -- */
 #OfficeUI .tabs-content-hidden {
   -moz-animation-duration: 0.5s;
   -ms-animation-duration: 0.5s;
@@ -682,6 +296,7 @@ html, body {
     top: 0; }
   100% {
     top: -93px; } }
+/* -- Show the ribbon by moving it down. -- */
 #OfficeUI .tabs-content-visible {
   -moz-animation-duration: 0.5s;
   -ms-animation-duration: 0.5s;
@@ -721,6 +336,7 @@ html, body {
     top: -93px; }
   100% {
     top: 0; } }
+/* -- Move the contents of the website up, this is done when the ribbon is hidden. -- */
 #OfficeUI .ribbon-showed {
   -moz-animation-duration: 0.5s;
   -ms-animation-duration: 0.5s;
@@ -760,6 +376,7 @@ html, body {
     top: 50px; }
   100% {
     top: 143px; } }
+/* -- Move the contents of the website dwon, this is done when the ribbon is being showed. -- */
 #OfficeUI .ribbon-hidden {
   -moz-animation-duration: 0.5s;
   -ms-animation-duration: 0.5s;
@@ -799,5 +416,369 @@ html, body {
     top: 143px; }
   100% {
     top: 50px; } }
+/* ---- General classes, classes which are being used on various elements. ---- */
+#OfficeUI .no-select {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  cursor: default;
+  user-select: none; }
+
+#OfficeUI .disabled {
+  opacity: 0.5;
+  pointer-events: none; }
+
+#OfficeUI .displayBlock {
+  display: block; }
+
+#OfficeUI .displayInlineBlock {
+  display: inline-block; }
+
+#OfficeUI .center-screen {
+  left: 50%;
+  position: fixed;
+  top: 30%;
+  transform: translate(-50%, -50%); }
+
+/* ---- Usefull OfficeUI classes. Classes which can be placed on various elements. ---- */
+#OfficeUI {
+  color: #444;
+  font-family: 'Segoe UI', arial, sans-serif;
+  height: 100px; }
+
+/* ---- Defines the 'loading' and displaying' area. ---- */
+#OfficeUI .loading-area {
+  left: 50%;
+  position: fixed;
+  top: 30%;
+  text-align: center;
+  transform: translate(-50%, -30%);
+  width: 100%; }
+
+#OfficeUI .loading-wrapper {
+  margin: 20px 0 20px 0; }
+
+#OfficeUI .loading-area h1 {
+  font-size: 3.0628em;
+  font-weight: 200;
+  line-height: 1em; }
+
+#OfficeUI .loading-area h1 .registered {
+  font-size: 0.25em;
+  line-height: 1em;
+  margin-top: 10px;
+  vertical-align: top; }
+
+#OfficeUI .loading-area .status-message {
+  font-size: 0.75em; }
+
+#OfficeUI .loading-area .status-message span {
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -moz-animation-name: animating-loading-text;
+  -ms-animation-name: animating-loading-text;
+  -o-animation-name: animating-loading-text;
+  -webkit-animation-name: animating-loading-text;
+  animation-name: animating-loading-text;
+  -moz-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite; }
+
+#OfficeUI .loading-area .status-message span:nth-child(1) {
+  -moz-animation-delay: 100ms;
+  -ms-animation-delay: 100ms;
+  -o-animation-delay: 100ms;
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms; }
+
+#OfficeUI .loading-area .status-message span:nth-child(2) {
+  -moz-animation-delay: 300ms;
+  -ms-animation-delay: 300ms;
+  -o-animation-delay: 300ms;
+  -webkit-animation-delay: 300ms;
+  animation-delay: 300ms; }
+
+#OfficeUI .loading-area .status-message span:nth-child(3) {
+  -moz-animation-delay: 500ms;
+  -ms-animation-delay: 500ms;
+  -o-animation-delay: 500ms;
+  -webkit-animation-delay: 500ms;
+  animation-delay: 500ms; }
+
+@-moz-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@-ms-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@-o-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@-webkit-keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+@keyframes animating-loading-text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 100; } }
+/* ---- Styling for the OfficeUI application. ---- */
+#OfficeUI .application {
+  font-size: 0.75em; }
+
+#OfficeUI .application header {
+  height: 142px;
+  z-index: 100; }
+
+#OfficeUI .application header .application-title {
+  height: 22px;
+  padding: 8px 2px 0 0;
+  position: relative;
+  text-align: center;
+  z-index: 200; }
+
+#OfficeUI .application header .application-icons {
+  margin-left: 5px;
+  position: absolute;
+  z-index: 300; }
+
+#OfficeUI .application header .application-icons .icon {
+  margin: 0 5px 0 2px; }
+
+#OfficeUI .application header .application-icons .icon:not(.application-icon) {
+  margin-right: 6px; }
+
+#OfficeUI .ribbon {
+  position: absolute;
+  top: 0;
+  width: 100%; }
+
+#OfficeUI .ribbon a, #OfficeUI .ribbon a:hover, #OfficeUI .ribbon a:active {
+  color: #444; }
+
+#OfficeUI .ribbon .tabs {
+  border-bottom: 1px solid #d4d4d4;
+  height: 50px;
+  position: relative;
+  z-index: 150; }
+
+#OfficeUI .ribbon .tabs .tab-group {
+  position: relative;
+  top: 25px; }
+
+#OfficeUI .ribbon .tabs .tab-label, #OfficeUI .ribbon .tabs .group-label {
+  padding: 0 13px 0 12px;
+  text-align: center;
+  text-transform: uppercase; }
+
+#OfficeUI .ribbon .tab {
+  height: 25px;
+  line-height: 25px; }
+
+#OfficeUI .ribbon .tab-application {
+  background-image: none;
+  border: 1px solid transparent;
+  color: #fff;
+  margin-right: 4px;
+  min-width: 59px;
+  padding: 0 3px 0 2px; }
+
+#OfficeUI .ribbon .tab.active {
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-bottom-color: #fff; }
+
+#OfficeUI .ribbon .tab:not(.active) {
+  border: 1px solid transparent;
+  border-bottom-color: #d4d4d4; }
+
+#OfficeUI .ribbon .tabs .accent {
+  height: 4px; }
+
+#OfficeUI .ribbon .tabs .contextual-tab-group {
+  height: 50px;
+  margin-right: 6px;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .tabs .contextual-tab-group ul {
+  display: table;
+  position: relative;
+  width: 100%; }
+
+#OfficeUI .ribbon .tabs .contextual-tab-group ul li {
+  display: table-cell;
+  line-height: 23px; }
+
+#OfficeUI .ribbon .tabs .contextual-tab-group ul li span {
+  padding-right: 13px;
+  padding-left: 12px;
+  position: relative;
+  top: 1px; }
+
+#OfficeUI .ribbon .tabs .contextual-tab-group .group-label {
+  font-size: 0.9em;
+  height: 17px;
+  margin-top: 4px; }
+
+#OfficeUI .ribbon .tabs-content {
+  border-bottom: 1px solid #d4d4d4;
+  height: 93px;
+  position: relative;
+  z-index: 10;
+  background-color: white; }
+
+/* -- Groups. --*/
+#OfficeUI .ribbon .group {
+  height: 85px;
+  margin-left: 4px;
+  margin-top: 3px;
+  min-width: 30px;
+  position: relative;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .group .legend {
+  height: 12px;
+  bottom: 0;
+  color: #666;
+  font-size: 0.9em;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%; }
+
+#OfficeUI .ribbon .pipe {
+  border-right: 1px solid #d4d4d4;
+  height: 84px;
+  margin-left: 1px;
+  margin-top: 4px;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .collapse {
+  bottom: 0;
+  height: 17px;
+  padding-top: 2px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 29px; }
+
+/* -- Areas -- */
+#OfficeUI .ribbon .group .area {
+  vertical-align: top; }
+
+#OfficeUI .ribbon .group .area .actions-holder {
+  position: relative; }
+
+/* -- Actions. -- */
+#OfficeUI .ribbon .actions-holder {
+  vertical-align: top; }
+
+#OfficeUI .ribbon .actions-holder .icon {
+  height: 69px;
+  margin-right: 0;
+  padding-top: 3px;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .actions-holder .icon img {
+  padding: 0 5px 0 5px; }
+
+#OfficeUI .ribbon .actions-holder .big-icon-holder {
+  height: 68px; }
+
+#OfficeUI .ribbon .actions-holder .big-icon-holder a {
+  height: 100%; }
+
+#OfficeUI .ribbon .actions-holder .big-icon {
+  text-align: center; }
+
+#OfficeUI .ribbon .actions-holder .big-icon .label {
+  line-height: 16px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 1px;
+  position: relative;
+  text-align: center;
+  top: 0px; }
+
+#OfficeUI .ribbon .actions-holder .small-icon-holder {
+  height: 23px; }
+
+#OfficeUI .ribbon .actions-holder .small-icon {
+  height: 100%;
+  margin-right: 0;
+  padding: 3px 7px 0 0;
+  text-align: left; }
+
+#OfficeUI .ribbon .actions-holder .small-icon .label {
+  padding-top: 3px;
+  text-align: left;
+  vertical-align: top; }
+
+#OfficeUI .ribbon .actions-holder .small-icon img {
+  padding: 0 0 0 3px; }
+
+#OfficeUI .ribbon .actions-holder .dropdown-holder {
+  margin-bottom: 2px; }
+
+/* -- Tooltips. -- */
+#OfficeUI .ribbon .tooltip {
+  background-color: white;
+  background-image: none, linear-gradient(#c6c6c6, #c6c6c6);
+  background-position: 0 0, 100% 0;
+  background-repeat: no-repeat;
+  background-size: 1px 100%;
+  border: 1px solid #d4d4d4;
+  box-shadow: 3px 3px 3px #e0e0e0;
+  display: none;
+  position: fixed;
+  padding: 5px 11px;
+  top: 143px;
+  width: 220px; }
+
+#OfficeUI .ribbon .tooltip strong {
+  color: #5d5d5d;
+  font-weight: bold; }
+
+#OfficeUI .ribbon .tooltip p {
+  line-height: 15px;
+  margin: 0;
+  padding: 5px 0; }
+
+/* ---- Styling for the website beneath the OfficeUI ribbon control. ---- */
+#OfficeUI .site-container {
+  font-size: 0.75em;
+  padding: 10px;
+  padding-left: 50px;
+  position: absolute;
+  top: 143px;
+  width: 100%; }
+
+#OfficeUI .site-container p {
+  margin-bottom: 20px; }
+
+#OfficeUI .site-container h1 {
+  font-size: 2.25em;
+  line-height: normal;
+  padding-bottom: 10px; }
+
+#OfficeUI .site-container .link {
+  margin-right: 40px;
+  height: 20px; }
 
 /*# sourceMappingURL=OfficeUI.css.map */
