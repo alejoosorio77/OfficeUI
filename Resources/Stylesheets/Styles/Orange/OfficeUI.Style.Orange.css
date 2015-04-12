@@ -38,7 +38,7 @@
  *                the scss syntax.
 ======================================================================================================= */
 /* ====================================================================================================
- * Mixin:         Font-Size (REM) mixin).
+ * Mixin:         Font-Size (REM).
  *
  * Description:   REM is similar to the EM value, but instead of being relative to the parent element
  *                it's relative to the font-size set in the <HTML> tag.
@@ -46,13 +46,11 @@
  *                is only relative to the HTML element. The bad part is there's no support for REM
  *                units in Microsoft Internet Explorer 8 and below. But with this mixin we can create
  *                a fallback to pixels when rem isn't supported.
+ * ==================================================================================================== */
+/* ====================================================================================================
+ * Mixin:         Breakpoints - Responsive Design.
  *
- * Usage:         p { @include font-size(14px); }
- *
- * Output:        p {
- *                    font-size: 14px; //Will be overridden if browser supports rem
- *                    font-size: 0.8rem;
- *                  }
+ * Description:   This mixin allows us to add responsive design in an easy way.
  * ==================================================================================================== */
 /* ---- Useful mixins. ---- */
 /* -- Positioning mixins. -- */

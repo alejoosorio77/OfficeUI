@@ -7,4 +7,12 @@
  * Notes:         The OfficeUI.Themes.Doodle-Circles.scss file is a file is used to style an OfficeUI
  *                application to match a given theme. In this case, the 'Doodle Circles' theme.
 ======================================================================================================= */
-#OfficeUI .application, #OfficeUI .backstage, #OfficeUI .ribbon .tabs { background: url("/Resources/Images/Themes/Doodle Circles/Background.png") no-repeat scroll right top white; }
+
+/* ---- Import Statements. ---- */
+@import '../../OfficeUI.Mixins';
+
+/* ---- Theme style. --- */
+#OfficeUI .application, #OfficeUI .backstage, #OfficeUI .ribbon .tabs {
+  background: url("/Resources/Images/Themes/Doodle Circles/Background.png") no-repeat scroll right top white;
+  @include breakpoint(496px) { background: none white; }
+}

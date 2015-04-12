@@ -1,1 +1,1 @@
-#OfficeUI .application,#OfficeUI .backstage,#OfficeUI .ribbon .tabs{background:url("/Resources/Images/Themes/Straws/Background.png") no-repeat scroll right top white}
+#OfficeUI .application,#OfficeUI .backstage,#OfficeUI .ribbon .tabs{background:url("/Resources/Images/Themes/Straws/Background.png") no-repeat scroll right top white}@media screen and (max-width:485px){#OfficeUI .application,#OfficeUI .backstage,#OfficeUI .ribbon .tabs{background:none white}}

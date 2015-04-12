@@ -57,7 +57,7 @@
             <div data-ng-if="isInitialized">
                 <div data-ng-include="'/Resources/Data/Templates/OfficeUI.html'" ng-cloak></div>
 
-                <div class="site-container" data-ng-class="{'ribbon-hidden-no-animation': InitializeServiceCall('Ribbon', 'isRibbonHiddenInitialized') || InitializeServiceCall('Ribbon', 'wasRibbonHiddenInitialized'), 'ribbon-hidden': !InitializeServiceCall('Ribbon', 'wasRibbonHiddenInitialized') && (InitializeServiceCall('Ribbon', 'isRibbonHidden') || InitializeServiceCall('Ribbon', 'isRibbonVisible')), 'ribbon-showed': InitializeServiceCall('Ribbon', 'isRibbonShowed')}">
+                <!--<div class="site-container" data-ng-class="{'ribbon-hidden-no-animation': InitializeServiceCall('Ribbon', 'isRibbonHiddenInitialized') || InitializeServiceCall('Ribbon', 'wasRibbonHiddenInitialized'), 'ribbon-hidden': !InitializeServiceCall('Ribbon', 'wasRibbonHiddenInitialized') && (InitializeServiceCall('Ribbon', 'isRibbonHidden') || InitializeServiceCall('Ribbon', 'isRibbonVisible')), 'ribbon-showed': InitializeServiceCall('Ribbon', 'isRibbonShowed')}">
                     <p>
                         <h1>Activating Tabs</h1>
                         <div class="link displayInlineBlock"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'setActiveTab', 'tabHome')">Activate tab 'Home'</a></div>
@@ -91,7 +91,7 @@
                     <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'DisableIcon', 'icoNewEmail')">Disable icon 'New Email'</a></div>
                     <div class="link"><a href="#" data-ng-click="InitializeServiceCall('Ribbon', 'EnableIcon', 'icoNewEmail')">Enable icon 'New Email'</a></div>
                     </p>
-                </div>
+                </div>-->
             </div>
         </div>
     </body>

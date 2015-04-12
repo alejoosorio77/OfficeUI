@@ -7,7 +7,40 @@
  * Notes:         The OfficeUI.Themes.Lunchbox.scss file is a file is used to style an OfficeUI
  *                application to match a given theme. In this case, the 'Lunchbox' theme.
 ======================================================================================================= */
+/* ---- Import Statements. ---- */
+/* ====================================================================================================
+ * Filename:      OfficeUI.Mixins.scss
+ * Author:        Kevin De Coninck
+ * Date Created:  30/03/2015
+ * Media:         Screen
+ * ----------------------------------------------------------------------------------------------------
+ * Notes:         The OfficeUI.Mixins.scss file is a file contains various mixins that can be used with
+ *                the scss syntax.
+======================================================================================================= */
+/* ====================================================================================================
+ * Mixin:         Font-Size (REM).
+ *
+ * Description:   REM is similar to the EM value, but instead of being relative to the parent element
+ *                it's relative to the font-size set in the <HTML> tag.
+ *                It has all the benefits of EM, but you don't get issues e.g. (Compounding) since REM
+ *                is only relative to the HTML element. The bad part is there's no support for REM
+ *                units in Microsoft Internet Explorer 8 and below. But with this mixin we can create
+ *                a fallback to pixels when rem isn't supported.
+ * ==================================================================================================== */
+/* ====================================================================================================
+ * Mixin:         Breakpoints - Responsive Design.
+ *
+ * Description:   This mixin allows us to add responsive design in an easy way.
+ * ==================================================================================================== */
+/* ---- Useful mixins. ---- */
+/* -- Positioning mixins. -- */
+/* -- Transformation mixins. -- */
+/* ---- Animation mixins. ---- */
+/* ---- Theme style. --- */
 #OfficeUI .application, #OfficeUI .backstage, #OfficeUI .ribbon .tabs {
   background: url("/Resources/Images/Themes/Lunchbox/Background.png") no-repeat scroll right top white; }
+  @media screen and (max-width: 502px) {
+    #OfficeUI .application, #OfficeUI .backstage, #OfficeUI .ribbon .tabs {
+      background: none white; } }
 
 /*# sourceMappingURL=OfficeUI.Themes.Lunchbox.css.map */

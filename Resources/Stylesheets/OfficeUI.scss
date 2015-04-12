@@ -27,11 +27,15 @@ $color-default-gray: #d4d4d4;
 @font-face { font-family: "Segoe UI"; font-style: italic; font-weight: 700; src: local("Segoe UI Bold Italic"); }
 
 /* ---- Elements which covering the entire application, but which are needed to the OfficeUI to work. */
-html, body { height: 100%; font-size: 1em; }
+html { font-size: 62.5% } // This equals a font-size of 10px. (10 / 16 * 100) = 62.5
+html, body { height: 100%; }
 .debug { border: 1px solid red !important; }
 
 /* ----- Classes which are set through AngularJS. */
 [ng\:cloak], [ng-cloak], .ng-cloak { display: none !important; } // When AngularJS is being bootstrapped, make sure that the contents are hidden.
+
+/* ---- Default OfficeUI elements. ---- */
+#OfficeUI { @include rem(font-size, 1rem); }
 
 /* ---- Default HTML elements, such as input elements. ---- */
 #OfficeUI input { border-color: $color-default-gray; }
