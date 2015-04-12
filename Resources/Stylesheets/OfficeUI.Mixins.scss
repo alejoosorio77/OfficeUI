@@ -8,6 +8,34 @@
  *                the scss syntax.
 ======================================================================================================= */
 
+/* ====================================================================================================
+ * Mixin:         Font-Size (REM) mixin).
+ *
+ * Description:   REM is similar to the EM value, but instead of being relative to the parent element
+ *                it's relative to the font-size set in the <HTML> tag.
+ *                It has all the benefits of EM, but you don't get issues e.g. (Compounding) since REM
+ *                is only relative to the HTML element. The bad part is there's no support for REM
+ *                units in Microsoft Internet Explorer 8 and below. But with this mixin we can create
+ *                a fallback to pixels when rem isn't supported.
+ *
+ * Usage:         p { @include font-size(14px); }
+ *
+ * Output:        p {
+ *                    font-size: 14px; //Will be overridden if browser supports rem
+ *                    font-size: 0.8rem;
+ *                  }
+ * ==================================================================================================== */
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
 /* ---- Useful mixins. ---- */
 @mixin square-box($dimensions) { width: $dimensions; height: $dimensions; }
 @mixin border-radius($radius) { -moz-border-radius: $radius; -ms-border-radius: $radius; -o-border-radius: $radius; -webkit-border-radius: $radius; border-radius: $radius; }

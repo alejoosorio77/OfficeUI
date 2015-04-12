@@ -40,8 +40,6 @@ html, body { height: 100%; font-size: 1em; }
 /* ---- Main controller. The area in which all the other elements are being saved. ---- */
 #OfficeUI { color: #444; font-family: 'Segoe UI', arial, sans-serif; height: 100%; overflow: hidden; width: 100%; }
 
-.tabs-content-hidden-no-animation { top: -93px; }
-.ribbon-hidden-no-animation { top: 50px !important; }
 /* ---- Animations: Required to animate the various parts in an OfficeUI application. ---- */
 
   /* -- Spinning circle, used for the loading page. -- */
@@ -89,6 +87,7 @@ html, body { height: 100%; font-size: 1em; }
   /* -- 3 dots animation for indicating that something is loading. -- */
   @include keyframes(animating-loading-text) { 0% { opacity: 0; } 100% { opacity: 100; }}
 
+
 /* ---- General classes, classes which are being used on various elements. ---- */
 #OfficeUI .no-select { @include no-select }
 #OfficeUI .disabled { opacity: 0.5; pointer-events: none; }
@@ -99,7 +98,7 @@ html, body { height: 100%; font-size: 1em; }
 /* ---- Defines the 'loading' and displaying' area. ---- */
 #OfficeUI .loading-area
 {
-  left: 50%; position: fixed; top: 30%; text-align: center; transform: translate(-50%, -30%); width: 100%;
+  @extend .center-screen; text-align: center; width: 100%;
 
   h1 { font-size: 3.0628em; font-weight: 200; line-height: 1em; }
   h1 .registered { font-size: 0.25em; line-height: 1em; margin-top: 10px; vertical-align: top; }
@@ -213,4 +212,6 @@ html, body { height: 100%; font-size: 1em; }
 
 
 
-
+// ToDo: Move to another section.
+.tabs-content-hidden-no-animation { top: -93px; }
+.ribbon-hidden-no-animation { top: 50px !important; }

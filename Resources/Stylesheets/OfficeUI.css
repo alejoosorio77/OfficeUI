@@ -68,6 +68,23 @@ input[type="text"]:focus {
  * Notes:         The OfficeUI.Mixins.scss file is a file contains various mixins that can be used with
  *                the scss syntax.
 ======================================================================================================= */
+/* ====================================================================================================
+ * Mixin:         Font-Size (REM) mixin).
+ *
+ * Description:   REM is similar to the EM value, but instead of being relative to the parent element
+ *                it's relative to the font-size set in the <HTML> tag.
+ *                It has all the benefits of EM, but you don't get issues e.g. (Compounding) since REM
+ *                is only relative to the HTML element. The bad part is there's no support for REM
+ *                units in Microsoft Internet Explorer 8 and below. But with this mixin we can create
+ *                a fallback to pixels when rem isn't supported.
+ *
+ * Usage:         p { @include font-size(14px); }
+ *
+ * Output:        p {
+ *                    font-size: 14px; //Will be overridden if browser supports rem
+ *                    font-size: 0.8rem;
+ *                  }
+ * ==================================================================================================== */
 /* ---- Useful mixins. ---- */
 /* -- Positioning mixins. -- */
 /* -- Transformation mixins. -- */
@@ -134,12 +151,6 @@ html, body {
   height: 100%;
   overflow: hidden;
   width: 100%; }
-
-.tabs-content-hidden-no-animation {
-  top: -93px; }
-
-.ribbon-hidden-no-animation {
-  top: 50px !important; }
 
 /* ---- Animations: Required to animate the various parts in an OfficeUI application. ---- */
 /* -- Spinning circle, used for the loading page. -- */
@@ -478,7 +489,7 @@ html, body {
 #OfficeUI .displayInlineBlock {
   display: inline-block; }
 
-#OfficeUI .center-screen {
+#OfficeUI .center-screen, #OfficeUI .loading-area {
   left: 50%;
   position: fixed;
   top: 30%;
@@ -486,11 +497,7 @@ html, body {
 
 /* ---- Defines the 'loading' and displaying' area. ---- */
 #OfficeUI .loading-area {
-  left: 50%;
-  position: fixed;
-  top: 30%;
   text-align: center;
-  transform: translate(-50%, -30%);
   width: 100%; }
   #OfficeUI .loading-area h1 {
     font-size: 3.0628em;
@@ -790,5 +797,11 @@ html, body {
 #OfficeUI .site-container .link {
   margin-right: 40px;
   height: 20px; }
+
+.tabs-content-hidden-no-animation {
+  top: -93px; }
+
+.ribbon-hidden-no-animation {
+  top: 50px !important; }
 
 /*# sourceMappingURL=OfficeUI.css.map */
