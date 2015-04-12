@@ -84,7 +84,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
                     if (typeof OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_STATE) !== 'undefined' && OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_STATE) != '') {
                         ribbonState = OfficeUICore.StateManagement.GetCookie(COOKIE_NAME_RIBBON_STATE);
                     } else { ribbonState = ribbonStates.Showed_Initialized; }
-                }
+                } else { ribbonState = ribbonStates.Showed_Initialized; }
 
                 // Gets all the images which are defined in the ribbon.
                 // Images can be stored in either a 'Tab' element of in a 'ContextualGroup' element.
