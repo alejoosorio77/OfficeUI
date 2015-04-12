@@ -1,4 +1,16 @@
 <div class="application">
+    <div class="backstage" data-ng-show="InitializeServiceCall('Ribbon', 'isApplicationTabOpened')">
+        <header>
+            <div class="application-title"
+                 data-ng-show="!InitializeServiceCall('Ribbon', 'areContextualGroupsActive', contextualGroup.Id)">
+                <span>{{Title}}</span>
+            </div>
+        </header>
+
+        <div class="navigation">
+
+        </div>
+    </div>
     <header>
         <!-- The wrapper in which the application contents are being showed. -->
         <div>
@@ -21,7 +33,7 @@
                     <ul>
                         <li class="tab tab-label" id="{{tab.Id}}"
                             data-ng-class="{'tab-application': $first, 'active': InitializeServiceCall('Ribbon', 'isTabActive', tab.Id) && !InitializeServiceCall('Ribbon', 'isRibbonHidden') && !InitializeServiceCall('Ribbon', 'isRibbonHiddenInitialized')}"
-                            data-ng-click="!$first && InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)">
+                            data-ng-click="$first && InitializeServiceCall('Ribbon', 'toggleApplicationTab') || !$first && InitializeServiceCall('Ribbon', 'setActiveTab', tab.Id)">
                             <span>{{tab.Label}}</span>
                         </li>
                     </ul>

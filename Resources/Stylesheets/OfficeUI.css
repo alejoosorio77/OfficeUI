@@ -109,6 +109,9 @@ html, body {
   height: 100%;
   font-size: 1em; }
 
+.debug {
+  border: 1px solid red !important; }
+
 /* ----- Classes which are set through AngularJS. */
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
@@ -123,6 +126,14 @@ html, body {
   font-size: 1em;
   height: 22px;
   padding-left: 3px; }
+
+/* ---- Main controller. The area in which all the other elements are being saved. ---- */
+#OfficeUI {
+  color: #444;
+  font-family: 'Segoe UI', arial, sans-serif;
+  height: 100%;
+  overflow: hidden;
+  width: 100%; }
 
 .tabs-content-hidden-no-animation {
   top: -93px; }
@@ -473,12 +484,6 @@ html, body {
   top: 30%;
   transform: translate(-50%, -50%); }
 
-/* ---- Usefull OfficeUI classes. Classes which can be placed on various elements. ---- */
-#OfficeUI {
-  color: #444;
-  font-family: 'Segoe UI', arial, sans-serif;
-  height: 100px; }
-
 /* ---- Defines the 'loading' and displaying' area. ---- */
 #OfficeUI .loading-area {
   left: 50%;
@@ -553,6 +558,16 @@ html, body {
     margin: 0 5px 0 2px; }
   #OfficeUI .application header .application-icons .icon:not(.application-icon) {
     margin-right: 6px; }
+  #OfficeUI .application .backstage {
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0; }
 
 #OfficeUI .ribbon {
   position: absolute;
@@ -633,9 +648,12 @@ html, body {
   z-index: 10;
   background-color: white; }
 
+#OfficeUI .ribbon .tabs-content > li {
+  height: 100%; }
+
 /* -- Groups. --*/
 #OfficeUI .ribbon .group {
-  height: 85px;
+  height: 90px;
   margin-left: 4px;
   margin-top: 3px;
   min-width: 30px;
@@ -644,7 +662,7 @@ html, body {
 
 #OfficeUI .ribbon .group .legend {
   height: 12px;
-  bottom: 0;
+  bottom: 2px;
   color: #666;
   font-size: 0.9em;
   overflow: hidden;

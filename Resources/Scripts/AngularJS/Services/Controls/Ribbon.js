@@ -27,6 +27,7 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
     var activeTab;
     var activeContextualGroups = [];
     var ribbonState;
+    var applicationTabOpened = false;
 
     /**
      * @type                Function
@@ -449,6 +450,29 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
             OfficeUICore.StateManagement.SetCookie(COOKIE_NAME_RIBBON_STATE, ribbonStates.Showed_Initialized, 365);
             ribbonState = ribbonStates.Showed;
         }
+    }
+
+    /**
+     * @type            Function
+     * @name            isApplicationTabOpened
+     *
+     * @description.
+     * Checks if the application tab is opened or not.
+     */
+    OfficeUIRibbonControlServiceObject.isApplicationTabOpened = function() {
+        return applicationTabOpened;
+    }
+
+    /**
+     * @type            Function
+     * @name            toggleApplicationTab
+     *
+     * @description.
+     * Toggle the application tab.
+     */
+    OfficeUIRibbonControlServiceObject.toggleApplicationTab = function() {
+        if (applicationTabOpened) { applicationTabOpened = false; }
+        else { applicationTabOpened = true; }
     }
 
     /**
