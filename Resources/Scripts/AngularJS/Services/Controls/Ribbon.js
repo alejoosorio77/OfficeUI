@@ -179,7 +179,8 @@ OfficeUI.factory('OfficeUIRibbonControlService', ['$rootScope', '$http', '$q', '
         var tabId = tabSettings[0];
         var tabColor = tabSettings[1];
 
-        if (activeTab == tabId) { return tabColor; }
+        if (activeTab == tabId && !OfficeUIRibbonControlServiceObject.isRibbonHidden()) { return tabColor; }
+        else { return 'inherit'; }
     }
 
     /**
