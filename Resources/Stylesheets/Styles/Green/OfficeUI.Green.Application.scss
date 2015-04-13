@@ -23,7 +23,9 @@
 #OfficeUI .icon:not(.application-icon).active { background-color: $icon-active-color !important; }
 
 /* ---- OfficeUI ribbon styling. ---- */
-#OfficeUI .ribbon .tab-application { background-color: $primary-color; border-color: $primary-color !important; }
+#OfficeUI .backstage .navigation .back-arrow { @include square-box(35px); background-image: url('/Resources/Images/Ribbon/Backstage/Green/Green.png'); position: relative; top: 20px; left: 25px; }
+#OfficeUI .backstage .navigation .back-arrow:hover { background-image: url('/Resources/Images/Ribbon/Backstage/Green/Green-Hover.png'); }
+#OfficeUI .ribbon .tab-application, #OfficeUI .backstage .navigation { background-color: $primary-color; border-color: $primary-color !important; }
 #OfficeUI .ribbon .tab-application:hover { background-color: $link-active-color !important; border-color: $link-active-color !important; }
 #OfficeUI .ribbon .tab.active, #OfficeUI .ribbon .tab:not(.contextual-tab):not(.tab-application):hover { color: $link-active-color; }
 

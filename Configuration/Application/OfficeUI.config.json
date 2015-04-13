@@ -8,7 +8,7 @@
     { "name": "Red", "stylesheet": "/Resources/Stylesheets/Styles/Red/OfficeUI.Style.Red.min.css" },
     { "name": "Turquoise", "stylesheet": "/Resources/Stylesheets/Styles/Turquoise/OfficeUI.Style.Turquoise.min.css" }
   ],
-  "DefaultStyle": "LightBlue",
+  "DefaultStyle": "Turquoise",
 
   "Themes": [
     { "name": "No Background", "stylesheet": "/Resources/Stylesheets/Themes/No Background/OfficeUI.Themes.No-Background.min.css" },

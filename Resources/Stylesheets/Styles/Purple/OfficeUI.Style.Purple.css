@@ -102,7 +102,18 @@
   background-color: #c3a9d4 !important; }
 
 /* ---- OfficeUI ribbon styling. ---- */
-#OfficeUI .ribbon .tab-application {
+#OfficeUI .backstage .navigation .back-arrow {
+  width: 35px;
+  height: 35px;
+  background-image: url("/Resources/Images/Ribbon/Backstage/Purple/Purple.png");
+  position: relative;
+  top: 20px;
+  left: 25px; }
+
+#OfficeUI .backstage .navigation .back-arrow:hover {
+  background-image: url("/Resources/Images/Ribbon/Backstage/Purple/Purple-Hover.png"); }
+
+#OfficeUI .ribbon .tab-application, #OfficeUI .backstage .navigation {
   background-color: #6a3889;
   border-color: #6a3889 !important; }
 
