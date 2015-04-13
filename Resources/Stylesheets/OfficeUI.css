@@ -670,7 +670,9 @@ html, body {
   background-color: white; }
 
 #OfficeUI .ribbon .tabs-content > li {
-  height: 100%; }
+  height: 100%;
+  vertical-align: top;
+  display: inline-block; }
 
 /* -- Groups. --*/
 #OfficeUI .ribbon .group {
@@ -683,6 +685,7 @@ html, body {
 
 #OfficeUI .ribbon .group .legend {
   height: 15px;
+  bottom: 1px;
   color: #666;
   overflow: hidden;
   position: absolute;
