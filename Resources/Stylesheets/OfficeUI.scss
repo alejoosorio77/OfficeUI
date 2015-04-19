@@ -28,7 +28,7 @@ $color-default-gray: #d4d4d4;
 
 /* ---- Elements which covering the entire application, but which are needed to the OfficeUI to work. */
 html { font-size: 62.5% } // This equals a font-size of 10px. (10 / 16 * 100) = 62.5
-html, body { height: 100%; }
+html, body { height: 100%; } // Make sure that an OfficeUI website is exactly 100% height.
 
 /* ----- Classes which are set through AngularJS. */
 [ng\:cloak], [ng-cloak], .ng-cloak { display: none !important; } // When AngularJS is being bootstrapped, make sure that the contents are hidden.

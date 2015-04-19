@@ -13,3 +13,10 @@ $spinner-color: #2b5699;            // This color is used for the spinner on the
 $icon-hover-color: #d5e1ff;         // This color is used as the background color when hovering on an icon.
 $icon-active-color: #a3bde3;        // This color is used as the background color for an active icon, as well as the border color for an input element (hover or active).
 $link-active-color: #3e6db5;        // This color is used when you hover on a link, when you hover on the application tab and the text color when hovering on a tab element.
+
+$link-color: $primary-color;
+$loading-area-color: $primary-color;
+$backstage-navigation-background-color: $primary-color;
+$backstage-navigation-border-color: $primary-color;
+
+$spinner-animation-color: $spinner-color;

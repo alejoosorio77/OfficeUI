@@ -114,8 +114,7 @@
   background-image: url("/Resources/Images/Ribbon/Backstage/Blue/Blue-Hover.png"); }
 
 #OfficeUI .ribbon .tab-application, #OfficeUI .backstage .navigation {
-  background-color: #2b579a;
-  border-color: #2b579a !important; }
+  background-color: #2b579a; }
 
 #OfficeUI .ribbon .tab-application:hover {
   background-color: #3e6db5 !important;
